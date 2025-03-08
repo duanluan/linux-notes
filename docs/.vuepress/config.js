@@ -19,6 +19,9 @@ export default defineUserConfig({
         "/notes/system-configuration.md",
         "/notes/software-installation.md",
       ]
+    },{
+      text: 'GitHub',
+      link: 'https://github.com/duanluan/deepin-notes',
     }],
 
     sidebar: {
