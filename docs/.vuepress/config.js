@@ -1,6 +1,6 @@
-import { defaultTheme } from '@vuepress/theme-default'
-import { defineUserConfig } from 'vuepress/cli'
-import { viteBundler } from '@vuepress/bundler-vite'
+import {defaultTheme} from '@vuepress/theme-default'
+import {defineUserConfig} from 'vuepress/cli'
+import {viteBundler} from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
   base: '/deepin-notes/',
@@ -16,6 +16,8 @@ export default defineUserConfig({
       text: '笔记',
       children: [
         "/notes/deepin-installation.md",
+        "/notes/system-configuration.md",
+        "/notes/software-installation.md",
       ]
     }],
 
@@ -26,6 +28,8 @@ export default defineUserConfig({
           children: [
             '/notes/device.md',
             '/notes/deepin-installation.md',
+            "/notes/system-configuration.md",
+            "/notes/software-installation.md",
           ]
         }
       ]
