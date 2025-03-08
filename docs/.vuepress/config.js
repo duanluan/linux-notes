@@ -3,6 +3,7 @@ import { defineUserConfig } from 'vuepress/cli'
 import { viteBundler } from '@vuepress/bundler-vite'
 
 export default defineUserConfig({
+  base: '/deepin-notes/',
   lang: 'zh-CN',
 
   title: 'Deepin 使用笔记',
