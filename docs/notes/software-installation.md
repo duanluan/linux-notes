@@ -94,6 +94,10 @@ nrm ls
 nrm use cnpm
 ```
 
+## Synology Drive Client
+
+[下载中心 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/support/download) 下载 DEB 文件并打开安装。
+
 ## 软件问题
 
 ### 搜狗输入法 Deepin Next 版双拼时 v 模式无法关闭
