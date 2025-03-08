@@ -109,6 +109,50 @@ nrm ls
 nrm use cnpm
 ```
 
+## JDK
+
+[Java 8, 11, 17, 21, 23 Download for Linux, Windows and macOS](https://www.azul.com/downloads/?os=debian&architecture=x86-64-bit&package=jdk#zulu)
+
+```shell
+tar zxvf zulu21.40.17-ca-jdk21.0.6-linux_x64.tar.gz
+sudo mkdir /opt/java
+sudo mv zulu21.40.17-ca-jdk21.0.6-linux_x64 /opt/java/zulu21.40.17-ca-jdk21.0.6
+# 末尾追加环境变量
+$ vim ~/.bashrc
+# jdk
+export JAVA_HOME="/opt/java/zulu21.40.17-ca-jdk21.0.6"
+export PATH=$JAVA_HOME/bin:$PATH
+
+$ source ~/.bashrc
+$ java -version
+openjdk version "21.0.6" 2025-01-21 LTS
+OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)
+OpenJDK 64-Bit Server VM Zulu21.40+17-CA (build 21.0.6+7-LTS, mixed mode, sharing)
+
+```
+
+## Gradle
+
+[Gradle | Releases](https://gradle.org/releases/) 下载`binary-only`。
+
+```shell
+unzip gradle-7.6.4-bin.zip
+sudo mkdir /opt/gradle
+sudo mv gradle-7.6.4 /opt/gradle/
+# 末尾追加环境变量
+$ vim ~/.bashrc
+# gradle
+export GRADLE_HOME="/opt/gradle/gradle-7.6.4"
+export PATH=$GRADLE_HOME/bin:$PATH
+
+$ source ~/.bashrc
+$ gradle -v
+
+Welcome to Gradle 7.6.4!
+……
+
+```
+
 ## JetBrains IntelliJ IDEA
 
 [下载 IntelliJ IDEA](https://www.jetbrains.com/zh-cn/idea/download/?section=linux)
