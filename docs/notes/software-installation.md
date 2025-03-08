@@ -18,6 +18,16 @@ sudo apt update
 
 在[下载 - 星火应用商店](https://www.spark-app.store/download_latest)中下载软件本体，打开 DEB 文件安装。 
 
+## Geekbench 6 跑分
+
+[Downloading Geekbench 6 for Linux](https://www.geekbench.com/download/linux/) 下载
+
+```shell
+tar zxvf Geekbench-6.4.0-Linux.tar.gz
+cd Geekbench-6.4.0-Linux
+./geekbench6
+```
+
 ## Git
 
 ```shell
