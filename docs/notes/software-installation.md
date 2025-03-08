@@ -12,6 +12,7 @@ sudo apt update
 - QQ
 - 微信
 - WPS Office For Linux 个人版
+- KeePassXC
 
 ## Spark Store 星火应用商店
 
@@ -120,3 +121,9 @@ sudo apt install xdotool
 - 名称：微信
 - 命令：`xdotool search --name '微信' windowactivate`
 - 快捷键：`Ctrl` `Alt` `W`
+
+### KeePassXC 浏览器集成报错已安装到此位置的代理程序可执行文件丢失
+
+- [Linux/Deepin 23 Edge/Chrome 浏览器 KeePassXC 无法连接数据的问题](https://blog.zhjh.top/?p=hIsteIcAmfn66ZL1sC82u)
+
+`KeePassXC`-菜单栏`工具`-`设置`-`浏览器集成`-`高级`选项卡-`使用自定义代理位置`浏览：`/opt/apps/org.keepassxc.keepassxc/files/squashfs-root/usr/bin/keepassxc-proxy`
