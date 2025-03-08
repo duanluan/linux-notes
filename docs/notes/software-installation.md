@@ -96,3 +96,23 @@ nrm use cnpm
 
 ## 软件问题
 
+### 搜狗输入法 Deepin Next 版双拼时 v 模式无法关闭
+
+- [搜狗输入法deepin next选字序号有时候是字母，为啥？－论坛－深度科技](https://bbs.deepin.org.cn/zh/post/276993)
+- [搜狗输入法双拼问题－论坛－深度科技](https://bbs.deepin.org/post/281305)
+
+可以先用系统自带的双拼，参考第二个帖子 [14 楼](https://bbs.deepin.org/post/281305?postId=1675406)。
+
+### 微信 Linux 无法用 Ctrl + Alt + W 全局快捷键激活窗口
+
+- [【V23】微信Linux 版本快捷键聚焦窗口（等同windows 的 ctrl+alt+w)－论坛－深度科技](https://bbs.deepin.org/post/281125)
+
+```shell
+sudo apt install xdotool
+```
+
+`控制中心`-`键盘和语言`-`快捷键`，最下方新增。
+
+- 名称：微信
+- 命令：`xdotool search --name '微信' windowactivate`
+- 快捷键：`Ctrl` `Alt` `W`
