@@ -28,6 +28,10 @@ cd Geekbench-6.4.0-Linux
 ./geekbench6
 ```
 
+## Synology Drive Client
+
+[下载中心 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/support/download) 下载 DEB 文件并打开安装。
+
 ## Git
 
 ```shell
@@ -105,9 +109,63 @@ nrm ls
 nrm use cnpm
 ```
 
-## Synology Drive Client
+## JetBrains IntelliJ IDEA
 
-[下载中心 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/support/download) 下载 DEB 文件并打开安装。
+[下载 IntelliJ IDEA](https://www.jetbrains.com/zh-cn/idea/download/?section=linux)
+
+[MIME 类型（MIME Type）完整对照表](https://mime.wcode.net/zh-hans/)
+
+```shell
+# 解压并移动到 /opt 下
+tar zxvf ideaIU-2024.3.4.1.tar.gz
+sudo mkdir /opt/jetbrains
+sudo mv idea-IU-243.25659.59/ /opt/jetbrains/idea
+# 创建快捷方式
+sudo vim /usr/share/applications/idea.desktop
+
+[Desktop Entry]
+Name=IntelliJ IDEA Ultimate
+Comment=The IDE for Professional Development in Java and Kotlin
+GenericName=IDE
+Exec=/opt/jetbrains/idea/bin/idea %F
+Icon=/opt/jetbrains/idea/bin/idea.svg
+Type=Application
+# 禁用启动时进度通知
+StartupNotify=false
+# 与应用程序窗口关联的 WM_CLASS 属性
+StartupWMClass=jetbrains-idea
+Categories=TextEditor;Development;IDE;
+MimeType=application/java;application/java-archive;application/java-byte-code;application/java-vm;
+Keywords=idea;
+```
+
+## JetBrains WebStorm
+
+[下载 WebStorm](https://www.jetbrains.com/zh-cn/webstorm/download/#section=linux)
+
+```shell
+# 解压并移动到 /opt 下
+tar zxvf WebStorm-2024.3.4.tar.gz
+sudo mkdir /opt/jetbrains
+sudo mv WebStorm-243.25659.40/ /opt/jetbrains/webstorm
+# 创建快捷方式
+sudo vim /usr/share/applications/webstorm.desktop
+
+[Desktop Entry]
+Name=WebStorm
+Comment=The JavaScript and TypeScript IDE by JetBrains
+GenericName=IDE
+Exec=/opt/jetbrains/webstorm/bin/webstorm %F
+Icon=/opt/jetbrains/webstorm/bin/webstorm.svg
+Type=Application
+# 禁用启动时进度通知
+StartupNotify=false
+# 与应用程序窗口关联的 WM_CLASS 属性
+StartupWMClass=jetbrains-webstorm
+Categories=TextEditor;Development;IDE;
+MimeType=application/xhtml+xml;text/javascript;text/css;
+Keywords=webstorm;
+```
 
 ## 软件问题
 
