@@ -14,9 +14,11 @@ sudo apt update
 - WPS Office For Linux 个人版
 - KeePassXC
 
-## Spark Store 星火应用商店
+## Spark Store 星火应用商店安装
 
 在[下载 - 星火应用商店](https://www.spark-app.store/download_latest)中下载软件本体，打开 DEB 文件安装。 
+
+- Snipaste
 
 ## Geekbench 6 跑分
 
@@ -211,6 +213,37 @@ MimeType=application/xhtml+xml;text/javascript;text/css;
 Keywords=webstorm;
 ```
 
+## uTools
+
+应用商店安装的无法打开。
+
+[下载中心 - uTools 官网](https://www.u-tools.cn/download/)下载 DEB 文件并打开安装。
+
+## RustDesk
+
+[Releases · rustdesk/rustdesk](https://github.com/rustdesk/rustdesk/releases/)下载 DEB 文件并打开安装。
+
+## VMware Workstation Pro
+
+[如何在 Linux 上下载和安装 VMware Workstation Pro 免费版 - 系统极客](https://www.sysgeek.cn/install-vmware-workstation-pro-on-linux/)
+
+[注册 Broadcom](https://profile.broadcom.com/web/registration) 账号，用邮箱作用户名登录。
+
+[Free Downloads - Support Portal - Broadcom support portal](https://support.broadcom.com/group/ecx/free-downloads) 搜索“VMware Workstation Pro”后下载 Linux 版。
+
+```shell
+chmod +x VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
+sudo ./VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
+```
+
+安装过程中“VMware's Customer Experience Improvement Program ("CEIP")”可以选 No。
+
+安装 [open-vm-tools](https://github.com/vmware/open-vm-tools) 增强虚拟机：
+
+```shell
+sudo apt install open-vm-tools
+```
+
 ## 软件问题
 
 ### 搜狗输入法 Deepin Next 版双拼时 v 模式无法关闭
@@ -239,3 +272,7 @@ sudo apt install xdotool
 - [Linux/Deepin 23 Edge/Chrome 浏览器 KeePassXC 无法连接数据的问题](https://blog.zhjh.top/?p=hIsteIcAmfn66ZL1sC82u)
 
 `KeePassXC`-菜单栏`工具`-`设置`-`浏览器集成`-`高级`选项卡-`使用自定义代理位置`浏览：`/opt/apps/org.keepassxc.keepassxc/files/squashfs-root/usr/bin/keepassxc-proxy`
+
+### KeePassXC 最小化到托盘而不是关闭
+
+最小化窗口，双击托盘图标。
