@@ -14,6 +14,7 @@ sudo apt update
 - WPS Office For Linux 个人版
 - KeePassXC
 - 腾讯会议
+- Another Redis Desktop Manager
 
 ## Free Download Manager
 
@@ -329,16 +330,18 @@ sudo apt install fcitx
 
 [Navicat | 下载 Navicat Premium Windows](https://www.navicat.com.cn/download/navicat-premium#windows)
 
-Wine 运行器`程序`-`安装更多Wine`：
+Wine 运行器菜单栏`程序`-`安装更多Wine`：
 
 ![](assets/20250309230531.png)
+
+菜单栏`Wine`-`安装常见字体`，左下角`WINE配置`-`字体商店`安装 1~5 的字体。
 
 左下角`WINE配置`-`配置容器`，调整`应用程序`-`Windows 版本`为`Windows 11`，`显示`-`屏幕分辨率`调大以适应本机分辨率。
 
 ![](assets/20250309231350.png =300x)
 ![](assets/20250309231516.png =300x)
 
-选择下载的安装包，点击`运行程序`安装。
+选择下载的安装包，点击`运行程序`安装，安装前会提示先安装 mono。
 
 ![](assets/20250309231054.png)
 
@@ -358,37 +361,3 @@ Icon=D66E_navicat.0
 Type=Application
 StartupNotify=true
 ```
-
-
-## 软件问题
-
-### 搜狗输入法 Deepin Next 版双拼时 v 模式无法关闭
-
-- [搜狗输入法deepin next选字序号有时候是字母，为啥？－论坛－深度科技](https://bbs.deepin.org.cn/zh/post/276993)
-- [搜狗输入法双拼问题－论坛－深度科技](https://bbs.deepin.org/post/281305)
-
-可以先用系统自带的双拼，参考第二个帖子 [14 楼](https://bbs.deepin.org/post/281305?postId=1675406)，或者装搜狗输入法 Linux 版。
-
-### 微信 Linux 无法用 Ctrl + Alt + W 全局快捷键激活窗口
-
-- [【V23】微信Linux 版本快捷键聚焦窗口（等同windows 的 ctrl+alt+w)－论坛－深度科技](https://bbs.deepin.org/post/281125)
-
-```shell
-sudo apt install xdotool
-```
-
-`控制中心`-`键盘和语言`-`快捷键`，最下方新增。
-
-- 名称：微信
-- 命令：`xdotool search --name '微信' windowactivate`
-- 快捷键：`Ctrl` `Alt` `W`
-
-### KeePassXC 浏览器集成报错已安装到此位置的代理程序可执行文件丢失
-
-- [Linux/Deepin 23 Edge/Chrome 浏览器 KeePassXC 无法连接数据的问题](https://blog.zhjh.top/?p=hIsteIcAmfn66ZL1sC82u)
-
-`KeePassXC`-菜单栏`工具`-`设置`-`浏览器集成`-`高级`选项卡-`使用自定义代理位置`浏览：`/opt/apps/org.keepassxc.keepassxc/files/squashfs-root/usr/bin/keepassxc-proxy`
-
-### KeePassXC 最小化到托盘而不是关闭
-
-最小化窗口，双击托盘图标。

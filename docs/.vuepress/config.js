@@ -19,6 +19,8 @@ export default defineUserConfig({
         "/notes/deepin-installation.md",
         "/notes/system-configuration.md",
         "/notes/software-installation.md",
+        "/notes/fixable-bug.md",
+        "/notes/bug.md",
       ]
     },{
       text: 'GitHub',
@@ -34,6 +36,8 @@ export default defineUserConfig({
             '/notes/deepin-installation.md',
             "/notes/system-configuration.md",
             "/notes/software-installation.md",
+            "/notes/fixable-bug.md",
+            "/notes/bug.md",
           ]
         }
       ]
