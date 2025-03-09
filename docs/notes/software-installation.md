@@ -15,6 +15,10 @@ sudo apt update
 - KeePassXC
 - 腾讯会议
 
+## Free Download Manager
+
+[Free Download Manager for Linux | Download](https://www.freedownloadmanager.org/zh/download-fdm-for-linux.htm) 下载 DEB 文件打开并安装。
+
 ## Spark Store 星火应用商店安装
 
 在[下载 - 星火应用商店](https://www.spark-app.store/download_latest)中下载软件本体，打开 DEB 文件安装。 
@@ -293,6 +297,28 @@ sudo ./VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
 sudo apt install open-vm-tools
 ```
 
+## XMind
+
+[免费下载 Xmind 思维导图 | Xmind 中文官方网站](https://xmind.cn/download/) 下载 DEB 文件并打开安装。
+
+## 搜狗输入法
+
+fcitx5 和 fcitx 冲突，要先卸载 fcitx5。
+
+```shell
+# 卸载 fcitx5
+sudo apt purge fcitx5
+sudo apt purge fcitx5-chinese-addons-data
+
+# 安装 fcitx
+sudo apt install fcitx
+```
+
+[搜狗输入法 linux](https://shurufa.sogou.com/linux) 下载 DEB 文件并打开安装。
+
+注销或重启，`控制中心`-`键盘和语言`-`输入法`中就空了，只能通过开始菜单`输入法配置`管理。
+
+
 ## 软件问题
 
 ### 搜狗输入法 Deepin Next 版双拼时 v 模式无法关闭
@@ -300,7 +326,7 @@ sudo apt install open-vm-tools
 - [搜狗输入法deepin next选字序号有时候是字母，为啥？－论坛－深度科技](https://bbs.deepin.org.cn/zh/post/276993)
 - [搜狗输入法双拼问题－论坛－深度科技](https://bbs.deepin.org/post/281305)
 
-可以先用系统自带的双拼，参考第二个帖子 [14 楼](https://bbs.deepin.org/post/281305?postId=1675406)。
+可以先用系统自带的双拼，参考第二个帖子 [14 楼](https://bbs.deepin.org/post/281305?postId=1675406)，或者装搜狗输入法 Linux 版。
 
 ### 微信 Linux 无法用 Ctrl + Alt + W 全局快捷键激活窗口
 
