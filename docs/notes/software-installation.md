@@ -13,6 +13,7 @@ sudo apt update
 - 微信
 - WPS Office For Linux 个人版
 - KeePassXC
+- 腾讯会议
 
 ## Spark Store 星火应用商店安装
 
@@ -59,6 +60,54 @@ git config --global user.email "your_email@example.com"
 ## Clash Verge
 
 [Releases · clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev/releases) 下载 DEB 文件并打开安装。
+
+## Brook
+
+```shell
+$ export http_proxy=127.0.0.1:7897
+$ export https_proxy=127.0.0.1:7897
+$ bash <(curl https://bash.ooo/nami.sh)
+$ nami install brook
+
+# 创建 brook 脚本，自定义目录
+$ vim ~/workspaces/service/brook.service.sh
+
+#!/bin/bash
+# 查找包含 'brook wsclient' 的进程，并获取 PID
+pids=$(ps aux | grep '[b]rook wsclient' | awk '{print $2}')
+# 判断是否找到了 PID
+if [ -n "$pids" ]; then
+  for pid in $pids; do
+    echo "正在终止 brook wsclient 进程 (PID: $pid)"
+    kill "$pid"
+  done
+else
+  echo "没有找到 brook wsclient 进程"
+fi
+# 启动 brook，具体命令看官方文档
+/home/your_name/.nami/bin/brook client -s 1.2.3.4:9999 -p 123456 --socks5 127.0.0.1:1080
+
+
+# 将 brook 脚本创建为 systemd 服务
+$ sudo vim /etc/systemd/system/brook.service
+
+[Unit]
+Description=A cross-platform programmable network tool.
+After=network.target
+
+[Service]
+ExecStart=bash /home/your_name/workspaces/service/brook.service.sh
+Restart=always
+RestartSec=5
+StandardOutput=null
+StandardError=null
+#StandardError=file:/home/your_name/workspaces/service/brook_error.log
+User=your_name
+
+[Install]
+WantedBy=multi-user.target
+
+```
 
 ## proxychains4
 
