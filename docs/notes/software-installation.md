@@ -24,6 +24,7 @@ sudo apt update
 在[下载 - 星火应用商店](https://www.spark-app.store/download_latest)中下载软件本体，打开 DEB 文件安装。 
 
 - Snipaste
+- Wine 运行器
 
 ## Geekbench 6 跑分
 
@@ -317,6 +318,46 @@ sudo apt install fcitx
 [搜狗输入法 linux](https://shurufa.sogou.com/linux) 下载 DEB 文件并打开安装。
 
 注销或重启，`控制中心`-`键盘和语言`-`输入法`中就空了，只能通过开始菜单`输入法配置`管理。
+
+## Apifox
+
+[Apifox](https://apifox.com/) 下载 DEB 文件并打开安装。
+
+## Navicat Premium
+
+此处安装的是 Windows 版。
+
+[Navicat | 下载 Navicat Premium Windows](https://www.navicat.com.cn/download/navicat-premium#windows)
+
+Wine 运行器`程序`-`安装更多Wine`：
+
+![](assets/20250309230531.png)
+
+左下角`WINE配置`-`配置容器`，调整`应用程序`-`Windows 版本`为`Windows 11`，`显示`-`屏幕分辨率`调大以适应本机分辨率。
+
+![](assets/20250309231350.png =300x)
+![](assets/20250309231516.png =300x)
+
+选择下载的安装包，点击`运行程序`安装。
+
+![](assets/20250309231054.png)
+
+安装后会在启动器创建快捷方式但打不开。
+
+修改 Wine 运行器中执行程序为`/home/duanluan/.wine/drive_c/Program Files/PremiumSoft/Navicat Premium 17/navicat.exe`，名称随便，创建快捷方式到桌面，参考这个内容修改启动器中现有快捷方式的内容。
+
+![](assets/20250310001055.png)
+
+```shell
+$ vim ~/.local/share/applications/wine/Programs/PremiumSoft/Navicat\ Premium\ 17.desktop
+
+[Desktop Entry]
+Name=Navicat Premium 17
+Exec=env WINEPREFIX='/home/duanluan/.wine' WINEDEBUG=FIXME,ERR,WARN,TRACE,Message  /home/duanluan/.deepwinerunner/wine/wine-staging-wow64-10.2-debian10-amd64/bin/wine '/home/duanluan/.wine/drive_c/Program Files/PremiumSoft/Navicat Premium 17/navicat.exe'  
+Icon=D66E_navicat.0
+Type=Application
+StartupNotify=true
+```
 
 
 ## 软件问题
