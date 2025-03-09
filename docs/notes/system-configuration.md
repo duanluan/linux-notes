@@ -22,3 +22,8 @@
 - 五子棋
 - 连连看
 - 浏览器
+
+```shell
+# 卸载 UOS AI
+sudo apt purge uos-ai
+```
