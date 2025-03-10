@@ -35,7 +35,9 @@ sudo apt install xdotool
 
 换其他字体：[CodeWhisperer has issues with Chinese comments · Issue #3607 · aws/aws-toolkit-jetbrains](https://github.com/aws/aws-toolkit-jetbrains/issues/3607#issuecomment-1707522451)
 
-## 无法使用全局快捷键 Ctrl + Alt + F
+## 无法使用全局快捷键 Ctrl + Alt + F、Ctrl + Alt + B 等
 
 `输入法配置`-`附加组件`-`简繁转换`，配置中 ESC 去掉快捷键。
 ![](assets/20250310005928.png)
+
+同样有快捷键的还有`附加组件`-`输入法的 Unicode 输入支持`、`全局配置`-`显示高级选项`-`更多快捷键`-`切换符号键盘`。
