@@ -37,6 +37,10 @@ cd Geekbench-6.4.0-Linux
 ./geekbench6
 ```
 
+## flatpak
+
+[Linux Debian/Deepin flatpak 换源安装软件](https://blog.zhjh.top/?p=lyfHOgD0)
+
 ## Synology Drive Client
 
 [下载中心 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/support/download) 下载 DEB 文件并打开安装。
@@ -361,3 +365,7 @@ Icon=D66E_navicat.0
 Type=Application
 StartupNotify=true
 ```
+
+## Sunshine + Moonlight
+
+[Sunshine+Moonlight 低延迟远程串流和平板副屏](https://blog.zhjh.top/?p=uvdJRjuB)
