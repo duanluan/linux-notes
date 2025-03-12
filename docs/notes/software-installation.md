@@ -115,8 +115,7 @@ StandardError=null
 User=your_name
 
 [Install]
-WantedBy=multi-user.target
-
+WantedBy=default.target
 ```
 
 ## proxychains4
@@ -283,6 +282,8 @@ Keywords=webstorm;
 [Releases · rustdesk/rustdesk](https://github.com/rustdesk/rustdesk/releases/)下载 DEB 文件并打开安装。
 
 ## VMware Workstation Pro
+
+注意：在 Deepin 23 上可能出现键盘锁死 Ctrl 的问题
 
 [如何在 Linux 上下载和安装 VMware Workstation Pro 免费版 - 系统极客](https://www.sysgeek.cn/install-vmware-workstation-pro-on-linux/)
 
