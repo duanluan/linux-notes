@@ -42,40 +42,28 @@ sudo apt install xdotool
 
 同样有快捷键的还有`附加组件`-`输入法的 Unicode 输入支持`、`全局配置`-`显示高级选项`-`更多快捷键`-`切换符号键盘`。
 
-## 蓝牙
+## 控制中心找不到蓝牙
 
 - [V23 第二次出现丢失蓝牙了－论坛－深度科技](https://bbs.deepin.org/zh/post/261821)
 - [更新后，自带蓝牙模块没有了－论坛－深度科技](https://bbs.deepin.org.cn/zh/post/265877)
 - [如何手动升级内核？？？－论坛－深度科技](https://bbs.deepin.org.cn/zh/post/265618)
+- [蓝牙连不上，显示：bluez守护进程没有运行...－论坛－深度科技](https://bbs.deepin.org/post/284890)
+- [找不到蓝牙设置在哪，服务有驱动也有－论坛－深度科技](https://bbs.deepin.org/post/262909)
 
-尝试安装`bluetooth`无效。
+尝试了以下方案无效：
 ```shell
-$ systemctl status bluetooth
+# 显示 Running
+systemctl status bluetooth
+# 安装虽然显示“新安装了 1 个软件包”，但重启无效
+sudo apt install bluetooth
 
-● bluetooth.service - Bluetooth service
-     Loaded: loaded (/usr/lib/systemd/system/bluetooth.service; enabled; preset: enabled)
-     Active: active (running) since Wed 2025-03-12 21:56:09 CST; 1min 18s ago
-       Docs: man:bluetoothd(8)
-   Main PID: 1341 (bluetoothd)
-     Status: "Running"
-      Tasks: 1 (limit: 74291)
-     Memory: 2.3M (peak: 2.9M)
-        CPU: 26ms
-     CGroup: /system.slice/bluetooth.service
-             └─1341 /usr/libexec/bluetooth/bluetoothd
+# blueman 安装后打开配置后闪退
+sudo apt install blueman
 
-Warning: some journal files were not opened due to insufficient permissions.
-
-$ sudo apt install bluetooth
-
-建议安装：
-  bluez-cups bluez-meshd
-下列【新】软件包将被安装：
-  bluetooth
-升级了 0 个软件包，新安装了 1 个软件包，要卸载 0 个软件包，有 25 个软件包未被升级。
+# 搜索可用内核，发现已安装最新
+sudo apt search linux-image-*
 ```
-
-// TODO
+最终关机后断开电源一段时间后再开机，蓝牙又有了。
 
 ## 键盘突然失效，Ctrl 锁死，点击电源提示“锁屏失败”
 
