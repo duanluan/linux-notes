@@ -306,7 +306,9 @@ sudo apt install open-vm-tools
 
 ## VirtualBox
 
-[如何在v23上面安装vmbox虚拟机（run）－论坛－深度科技](https://bbs.deepin.org/post/254728)
+- [如何在v23上面安装vmbox虚拟机（run）－论坛－深度科技](https://bbs.deepin.org/post/254728)
+- [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
+- [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
 
 [Linux_Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Linux_Downloads) 中点击“All distributions”保存`VirtualBox-7.1.6-167084-Linux_amd64.run`文件。
 
@@ -314,6 +316,20 @@ sudo apt install open-vm-tools
 sudo chmod +x VirtualBox-7.1.6-167084-Linux_amd64.run
 
 ./VirtualBox-7.1.6-167084-Linux_amd64.run
+
+# 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
+sudo groupadd usbfs
+# 将用户添加到 vboxusers、usbfs 组
+sudo adduser your_name vboxusers
+sudo adduser your_name usbfs
+
+# 移除 KVM 模块
+sudo rmmod kvm_amd
+sudo rmmod kvm
+# 将 kvm 和 kvm_amt 加入黑名单模块列表
+echo "blacklist kvm" | sudo tee /etc/modprobe.d/blacklist.conf
+echo "blacklist kvm_amd" | sudo tee -a /etc/modprobe.d/blacklist.conf
+sudo update-initramfs -u
 ```
 
 [Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) 下载 Extension Pack，打开 VirtualBox，将下载的文件拖入窗口安装。
