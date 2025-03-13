@@ -304,6 +304,35 @@ sudo ./VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
 sudo apt install open-vm-tools
 ```
 
+## VirtualBox
+
+[如何在v23上面安装vmbox虚拟机（run）－论坛－深度科技](https://bbs.deepin.org/post/254728)
+
+[Linux_Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Linux_Downloads) 中点击“All distributions”保存`VirtualBox-7.1.6-167084-Linux_amd64.run`文件。
+
+```shell
+sudo chmod +x VirtualBox-7.1.6-167084-Linux_amd64.run
+
+./VirtualBox-7.1.6-167084-Linux_amd64.run
+```
+
+[Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) 下载 Extension Pack，打开 VirtualBox，将下载的文件拖入窗口安装。
+
+## ~~QEMU + Virtual Machine Manager~~
+
+- ~~[求助QEMU怎么安装－论坛－深度科技](https://bbs.deepin.org/zh/post/259084)~~
+
+~~Wine 运行器菜单栏`虚拟机`-`使用虚拟机运行Windows应用`。~~
+
+~~点击`安装Qemu`。~~
+
+```shell
+# 安装 Virtual Machine Manager
+sudo apt install virt-manager
+```
+
+**qemu-guest-agent 无法启动！**
+
 ## XMind
 
 [免费下载 Xmind 思维导图 | Xmind 中文官方网站](https://xmind.cn/download/) 下载 DEB 文件并打开安装。
