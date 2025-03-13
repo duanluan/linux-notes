@@ -16,11 +16,12 @@ export default defineUserConfig({
     navbar: [{
       text: '笔记',
       children: [
-        "/notes/deepin-installation.md",
-        "/notes/system-configuration.md",
-        "/notes/software-installation.md",
-        "/notes/fixable-bug.md",
-        "/notes/bug.md",
+        '/notes/deepin-installation.md',
+        '/notes/system-configuration.md',
+        '/notes/software-installation.md',
+        '/notes/software-uninstallation.md',
+        '/notes/fixable-bug.md',
+        '/notes/bug.md',
       ]
     },{
       text: 'GitHub',
@@ -34,10 +35,11 @@ export default defineUserConfig({
           children: [
             '/notes/device.md',
             '/notes/deepin-installation.md',
-            "/notes/system-configuration.md",
-            "/notes/software-installation.md",
-            "/notes/fixable-bug.md",
-            "/notes/bug.md",
+            '/notes/system-configuration.md',
+            '/notes/software-installation.md',
+            '/notes/software-uninstallation.md',
+            '/notes/fixable-bug.md',
+            '/notes/bug.md',
           ]
         }
       ]
