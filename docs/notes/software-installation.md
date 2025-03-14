@@ -43,7 +43,7 @@ cd Geekbench-6.4.0-Linux
 
 ## Synology Drive Client
 
-[下载中心 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/support/download) 下载 DEB 文件并打开安装。
+[下载中心 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/support/download) 下载 DEB 文件并安装。
 
 ## Git
 
@@ -69,7 +69,7 @@ git config --global user.email "your_email@example.com"
 
 ## Clash Verge
 
-[Releases · clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev/releases) 下载 DEB 文件并打开安装。
+[Releases · clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev/releases) 下载 DEB 文件并安装。
 
 ## Brook
 
@@ -275,11 +275,11 @@ Keywords=webstorm;
 
 应用商店安装的无法打开。
 
-[下载中心 - uTools 官网](https://www.u-tools.cn/download/)下载 DEB 文件并打开安装。
+[下载中心 - uTools 官网](https://www.u-tools.cn/download/)下载 DEB 文件并安装。
 
 ## RustDesk
 
-[Releases · rustdesk/rustdesk](https://github.com/rustdesk/rustdesk/releases/)下载 DEB 文件并打开安装。
+[Releases · rustdesk/rustdesk](https://github.com/rustdesk/rustdesk/releases/)下载 DEB 文件并安装。
 
 ## VMware Workstation Pro
 
@@ -351,7 +351,7 @@ sudo apt install virt-manager
 
 ## XMind
 
-[免费下载 Xmind 思维导图 | Xmind 中文官方网站](https://xmind.cn/download/) 下载 DEB 文件并打开安装。
+[免费下载 Xmind 思维导图 | Xmind 中文官方网站](https://xmind.cn/download/) 下载 DEB 文件并安装。
 
 ## 搜狗输入法
 
@@ -366,13 +366,13 @@ sudo apt purge fcitx5-chinese-addons-data
 sudo apt install fcitx
 ```
 
-[搜狗输入法 linux](https://shurufa.sogou.com/linux) 下载 DEB 文件并打开安装。
+[搜狗输入法 linux](https://shurufa.sogou.com/linux) 下载 DEB 文件并安装。
 
 注销或重启，`控制中心`-`键盘和语言`-`输入法`中就空了，只能通过开始菜单`输入法配置`管理。
 
 ## Apifox
 
-[Apifox](https://apifox.com/) 下载 DEB 文件并打开安装。
+[Apifox](https://apifox.com/) 下载 DEB 文件并安装。
 
 ## Navicat Premium
 
@@ -415,3 +415,54 @@ StartupNotify=true
 ## Sunshine + Moonlight
 
 [Sunshine+Moonlight 低延迟远程串流和平板副屏](https://blog.zhjh.top/?p=uvdJRjuB)
+
+## Sublime Text
+
+[Linux Package Manager Repositories - Sublime Text](https://www.sublimetext.com/docs/linux_repositories.html)
+
+```shell
+# 安装 GPG key
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
+# 选择稳定版
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+# 选择开发版
+echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+# 更新并安装
+sudo apt update
+sudo apt install sublime-text
+# 如果失败请确保已将 apt 设置为使用 https 源
+sudo apt-get install apt-transport-https
+```
+
+## Typora
+
+[Linux - Typora 官方中文站](https://typoraio.cn/#linux) 下载 DEB 文件并安装。
+
+如果需要开心版就下载 [1.9.3](https://download2.typoraio.cn/linux/typora_1.9.3_amd64.deb)。
+
+Typora 激活：
+```shell
+$ git clone https://github.com/hazukieq/Yporaject.git
+$ sudo apt install cargo
+$ cd Yporaject/
+$ cargo build & cargo run
+$ sudo cp target/debug/node_inject /usr/share/typora
+
+$ cd /usr/share/typora/
+$ sudo chmod +x node_inject
+$ sudo ./node_inject
+extracting node_modules.asar
+adding hook.js
+applying patch
+packing node_modules.asar
+done!
+
+$ cd -
+$ cd license-gen/
+$ cargo build & cargo run
+License for you: ……
+```
+
+打开 Typora，菜单栏`帮助`-`我的许可证`-`输入序列号`，邮箱随便，等待一段时间后提示“链接服务器失败，使用尝试访问国内域名进行激活？”，确认即可。
+
+鼓励大家支持正版软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
