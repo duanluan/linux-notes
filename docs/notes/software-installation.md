@@ -8,13 +8,21 @@ sudo apt update
 
 ## 应用商店安装
 
-- Microsoft Edge
-- QQ
-- 微信
-- WPS Office For Linux 个人版
-- KeePassXC
-- 腾讯会议
-- Another Redis Desktop Manager
+### Microsoft Edge
+
+### QQ
+
+### 微信
+
+### WPS Office For Linux 个人版
+
+### KeePassXC
+
+### 腾讯会议
+
+### Another Redis Desktop Manager
+
+---
 
 ## Free Download Manager
 
@@ -24,8 +32,13 @@ sudo apt update
 
 在[下载 - 星火应用商店](https://www.spark-app.store/download_latest)中下载软件本体，打开 DEB 文件安装。 
 
-- Snipaste
-- Wine 运行器
+### Snipaste
+
+### Wine 运行器
+
+### MobaXterm Pro
+
+---
 
 ## Geekbench 6 跑分
 
