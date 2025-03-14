@@ -22,6 +22,7 @@
 - 五子棋
 - 连连看
 - 浏览器
+- LibreOffice
 
 ```shell
 # 卸载 UOS AI

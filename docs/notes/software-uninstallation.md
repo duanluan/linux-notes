@@ -1,5 +1,13 @@
 # 软件卸载
 
+## LibreOffice
+
+```shell
+sudo apt purge libreoffice*
+sudo rm -rf /usr/lib/libreoffice
+sudo rm -rf /etc/libreoffice
+```
+
 ## VMware Workstation Pro
 
 ```shell
