@@ -491,3 +491,25 @@ License for you: ……
 打开 Typora，菜单栏`帮助`-`我的许可证`-`输入序列号`，邮箱随便，等待一段时间后提示“链接服务器失败，使用尝试访问国内域名进行激活？”，确认即可。
 
 鼓励大家支持正版软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
+
+## Docker + Docker Componse + Portainer
+
+```shell
+# 安装 Docker
+sudo apt install docker.io
+# 安装 Docker Componse
+sudo apt install docker-compose
+```
+
+[Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
+
+镜像加速请看：[Docker 使用笔记问题答疑及 WSL2 相关 - duanluan 的博客](https://blog.zhjh.top/?p=io0ETi1lKgEyKR0OcDZgS)
+
+```shell
+# 创建 Portainer 存储数据库的卷
+sudo docker volume create portainer_data
+# 启动 Portainer
+sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+```
+
+打开 https://localhost:9443/ 初始化管理员账号。
