@@ -14,6 +14,8 @@ sudo apt update
 
 ### 微信
 
+### 飞书
+
 ### WPS Office For Linux 个人版
 
 ### KeePassXC
@@ -21,6 +23,16 @@ sudo apt update
 ### 腾讯会议
 
 ### Another Redis Desktop Manager
+
+### Double Commander
+
+![](20250315191442.png)
+
+跨平台的开源文件管理器，采用双面板布局，支持多标签页浏览、批量重命名、内置文本编辑器和文件查看器等功能。
+
+`控制中心`-`键盘和语言`-`快捷键`新建，命令为`/opt/apps/com.doublecommander/files/squashfs-root/AppRun -C`。
+
+[DC - Command Line](https://doublecmd.github.io/doc/en/commandline.html)
 
 ---
 
