@@ -34,6 +34,8 @@ sudo apt update
 
 [DC - Command Line](https://doublecmd.github.io/doc/en/commandline.html)
 
+### FSearch：类 Everything
+
 ---
 
 ## Free Download Manager
@@ -512,4 +514,14 @@ sudo docker volume create portainer_data
 sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 ```
 
-打开 https://localhost:9443/ 初始化管理员账号。
+打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
+
+## OBS Studio
+
+```shell
+flatpak install flathub com.obsproject.Studio
+```
+
+## Remote Desktop Manager
+
+[Download - RDM - Devolutions](https://devolutions.net/remote-desktop-manager/download/) 下载 DEB 文件并安装。
