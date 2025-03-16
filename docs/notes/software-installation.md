@@ -288,7 +288,7 @@ tar zxvf WebStorm-2024.3.4.tar.gz
 sudo mkdir /opt/jetbrains
 sudo mv WebStorm-243.25659.40/ /opt/jetbrains/webstorm
 # 创建快捷方式
-sudo vim /usr/share/applications/webstorm.desktop
+$ sudo vim /usr/share/applications/webstorm.desktop
 
 [Desktop Entry]
 Name=WebStorm
@@ -583,4 +583,22 @@ $ systemctl daemon-reload
 $ systemctl enable unblock-netease-music
 $ systemctl start unblock-netease-music
 $ systemctl status unblock-netease-music
+```
+
+## qBittorrent Enhanced Edition
+
+[Releases · c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases) 下载 AppImage 文件。
+
+```shell
+# 移动到 /opt 下并赋予执行权限
+sudo mkdir /opt/qBittorrent
+sudo mv qBittorrent-Enhanced-Edition-x86_64.AppImage /opt/qBittorrent/
+chmod +x /opt/qBittorrent/qBittorrent-Enhanced-Edition-x86_64.AppImage
+# 运行
+/opt/qBittorrent/qBittorrent-Enhanced-Edition-x86_64.AppImage
+
+# 用 cat 读取快捷方式并输出到 /usr/share/applications
+cat /tmp/.mount_qBittoAKLIil/org.qbittorrent.qBittorrent.desktop | sudo tee /usr/share/applications/org.qbittorrent.qBittorrent.desktop
+# 修改快捷方式，将其中 Exec 修改为 /opt/qBittorrent/qBittorrent-Enhanced-Edition-x86_64.AppImage %U
+sudo vim /usr/share/applications/org.qbittorrent.qBittorrent.desktop 
 ```
