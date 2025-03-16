@@ -143,6 +143,11 @@ User=your_name
 
 [Install]
 WantedBy=default.target
+
+$ systemctl daemon-reload
+$ systemctl enable brook
+$ systemctl start brook
+$ systemctl status brook
 ```
 
 ## proxychains4
@@ -163,7 +168,8 @@ socks5 127.0.0.1 7897
 
 ## nvm + Node.js + pnpm + nrm
 
-[脚本安装 nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)
+- [脚本安装 nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)
+- [Node.js — Download Node.js®](https://nodejs.org/zh-cn/download)
 
 ```shell
 # 代理下载安装脚本
@@ -176,7 +182,9 @@ bash install.sh
 source ~/.bashrc
 # 安装 Node.js
 nvm install 18
-# 安装 pnpm
+# 安装 pnpm 方法一
+corepack enable pnpm
+# 安装 pnpm 方法二
 npm install -g pnpm
 # 自动安装配置 pnpm
 pnpm setup
@@ -525,3 +533,42 @@ flatpak install flathub com.obsproject.Studio
 ## Remote Desktop Manager
 
 [Download - RDM - Devolutions](https://devolutions.net/remote-desktop-manager/download/) 下载 DEB 文件并安装。
+
+## 网易云 + UnblockNeteaseMusic
+
+星火应用商店下载[网易云音乐（wine）](spk://store/music/com.163.music.spark)。
+
+先按照上文安装 Node.js。
+
+```shell
+git clone git@github.com:UnblockNeteaseMusic/server.git
+mv server/ UnblockNeteaseMusic
+cd UnblockNeteaseMusic
+# 启用 yarn
+corepack enable yarn
+# 使用 repo 的最新开发内容
+yarn
+yarn build
+# 使用 52100:52101 端口启动
+$ node app.js -p 52100:52101
+INFO: (app) HTTP Server running @ http://0.0.0.0:52100
+INFO: (app) HTTPS Server running @ http://0.0.0.0:52101
+```
+
+网易云音乐`设置`-`工具`-`http代理`-`自定义代理`：
+- 类型：HTTP代理
+- 服务器：`127.0.0.1`
+- 端口：`52100`
+
+点击“测试”按钮提示“该代理可使用”，点击“确定”按钮“现在重启”。
+
+可用后将启动命令添加到服务：
+
+```shell
+$ sudo vim /etc/systemd/system/unblock-netease-music.service
+
+$ systemctl daemon-reload
+$ systemctl enable unblock-netease-music
+$ systemctl start unblock-netease-music
+$ systemctl status unblock-netease-music
+```
