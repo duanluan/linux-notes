@@ -31,14 +31,28 @@
 
 ## IDEA 代码提示插件中文乱码
 
-换其他字体：[CodeWhisperer has issues with Chinese comments · Issue #3607 · aws/aws-toolkit-jetbrains](https://github.com/aws/aws-toolkit-jetbrains/issues/3607#issuecomment-1707522451)
+- [CodeWhisperer has issues with Chinese comments · Issue #3607 · aws/aws-toolkit-jetbrains](https://github.com/aws/aws-toolkit-jetbrains/issues/3607#issuecomment-1707522451)
 
-## 无法使用全局快捷键 Ctrl + Alt + F、Ctrl + Alt + B 等
+换其他字体。
 
-`输入法配置`-`附加组件`-`简繁转换`，配置中 ESC 去掉快捷键。
+## IDEA 中无法在调试时按住 Alt 鼠标左键点击表达式查看值
+
+- [Intellij Idea alt + click to evaluate debugger code not working in Mint - Stack Overflow](https://stackoverflow.com/a/47958926)
+
+IDEA`设置`-`按键映射`中将`XWin`修改为`Windows`。
+
+## 无法使用全局快捷键 Ctrl + Alt + F、Ctrl + Alt + B、Ctrl + Space 等
+
+启动器打开“输入法配置”。
+
+`附加组件`-`简繁转换`，配置中 ESC 去掉快捷键。
 ![](assets/20250310005928.png)
 
-同样有快捷键的还有`附加组件`-`输入法的 Unicode 输入支持`、`全局配置`-`显示高级选项`-`更多快捷键`-`切换符号键盘`。
+同样有快捷键的还有：
+
+- `附加组件`-`输入法的 Unicode 输入支持`
+- `全局配置`-`更多快捷键`-`切换激活/非激活输入法`
+- `全局配置`-`显示高级选项`-`更多快捷键`-`切换符号键盘`
 
 ## 控制中心找不到蓝牙
 
