@@ -566,6 +566,18 @@ INFO: (app) HTTPS Server running @ http://0.0.0.0:52101
 
 ```shell
 $ sudo vim /etc/systemd/system/unblock-netease-music.service
+[Unit]
+Description=Revive unavailable songs for Netease Cloud Music (Refactored & Enhanced version)
+After=network.target
+
+[Service]
+ExecStart=/home/duanluan/.config/nvm/versions/node/v18.20.7/bin/node /home/duanluan/workspaces/third-party/UnblockNeteaseMusic/app.js -p 52100:52101
+Restart=always
+User=duanluan
+Group=duanluan
+
+[Install]
+WantedBy=multi-user.target
 
 $ systemctl daemon-reload
 $ systemctl enable unblock-netease-music
