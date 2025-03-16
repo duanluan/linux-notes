@@ -602,3 +602,54 @@ cat /tmp/.mount_qBittoAKLIil/org.qbittorrent.qBittorrent.desktop | sudo tee /usr
 # 修改快捷方式，将其中 Exec 修改为 /opt/qBittorrent/qBittorrent-Enhanced-Edition-x86_64.AppImage %U
 sudo vim /usr/share/applications/org.qbittorrent.qBittorrent.desktop 
 ```
+
+## DBeaver Ultimate
+
+[Download DBeaver Ultimate](https://dbeaver.com/download/ultimate/) 下载 DEB 文件并安装。
+
+1. 安装 DBeaver Agent：
+
+    [Releases · wgzhao/dbeaver-agent](https://github.com/wgzhao/dbeaver-agent/releases) 下载压缩包。
+    ```shell
+    unzip dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar.zip
+    sudo mv dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar /usr/share/dbeaver-ue/dbeaver-agent.jar
+    ```
+
+2. 配置 DBeaver：
+    ```shell
+    # 在文件末尾添加內容，保持在 -vmargs 后
+    $ sudo vim /usr/share/dbeaver-ue/dbeaver.ini
+    -javaagent:/usr/share/dbeaver-ue/dbeaver-agent.jar
+    -Xbootclasspath/a:/usr/share/dbeaver-ue/dbeaver-agent.jar
+    ```
+
+3. 处理 JRE 依赖：
+
+    [Azul Zulu](https://www.azul.com/downloads/#downloads-table-zulu) 下载 JRE 21。
+    ```shell
+    unzip zulu21.40.17-ca-jre21.0.6-linux_x64.zip
+    sudo mv /usr/share/dbeaver-ue/jre /usr/share/dbeaver-ue/jre.bak
+    sudo mv zulu21.40.17-ca-jre21.0.6-linux_x64 /usr/share/dbeaver-ue/jre
+    ```
+
+4. 屏蔽 stats.dbeaver.com 域名：
+    ```shell
+    # 将以下内容追加到 /etc/hosts
+    $ sudo vim /etc/hosts
+    127.0.0.1 stats.dbeaver.com
+    ```
+
+5. 生成许可证密钥：
+    ```shell
+    $ /usr/share/dbeaver-ue/jre/bin/java -cp /usr/share/dbeaver-ue/plugins/\*:/usr/share/dbeaver-ue/dbeaver-agent.jar com.dbeaver.agent.License -t ue
+    --- dbeaver-ue(v25) LICENSE ---
+    ……
+    --- 请复制上一行 ---
+    ```
+
+6. 命令行启动 DBeaver：
+    ```shell
+    # 命令行启动方便查看日志
+    /usr/share/dbeaver-ue/dbeaver
+    ```
+   点击“Import License”，粘贴上一步生成的许可证密钥并确定。
