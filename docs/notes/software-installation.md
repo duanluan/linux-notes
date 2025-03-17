@@ -653,3 +653,9 @@ sudo vim /usr/share/applications/org.qbittorrent.qBittorrent.desktop
     /usr/share/dbeaver-ue/dbeaver
     ```
    点击“Import License”，粘贴上一步生成的许可证密钥并确定。
+
+## VLC Media Player
+
+```shell
+sudo apt install vlc
+```
