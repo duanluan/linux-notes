@@ -278,6 +278,26 @@ MimeType=application/java;application/java-archive;application/java-byte-code;ap
 Keywords=idea;
 ```
 
+## Maven
+
+此处用的是 IDEA 自带的。也可以自己下载：[Download Apache Maven – Maven](https://maven.apache.org/download.cgi)
+
+```shell
+# 末尾追加环境变量
+$ vim ~/.bashrc
+# maven
+export MAVEN_HOME="/opt/jetbrains/idea/plugins/maven/lib/maven3/"
+export PATH=$MAVEN_HOME/bin:$PATH
+
+$ source ~/.bashrc
+$ mvn -v
+Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+Maven home: /opt/jetbrains/idea/plugins/maven/lib/maven3
+Java version: 21.0.6, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.40.17-ca-jdk21.0.6
+Default locale: zh_CN, platform encoding: UTF-8
+OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family: "unix"
+```
+
 ## JetBrains WebStorm
 
 [下载 WebStorm](https://www.jetbrains.com/zh-cn/webstorm/download/#section=linux)
