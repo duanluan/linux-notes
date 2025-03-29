@@ -298,6 +298,30 @@ Default locale: zh_CN, platform encoding: UTF-8
 OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family: "unix"
 ```
 
+## GPG + GpgFrontend
+
+```shell
+# 安装 GPG
+sudo apt install gpg
+```
+
+- [GnuPG - Frontends](https://www.gnupg.org/software/frontends.html)
+- [Releases · saturneric/GpgFrontend](https://github.com/saturneric/GpgFrontend/releases)
+
+```shell
+sudo mkdir /opt/GpgFrontend
+# 解压 AppImage 复制图标和快捷方式
+./GpgFrontend-2.1.7-qt6-linux-x86_64.AppImag --appimage-extract
+sudo cp squashfs-root/com.bktus.gpgfrontend.desktop /usr/share/applications/
+sudo cp squashfs-root/com.bktus.gpgfrontend.png /opt/GpgFrontend/
+# 移动到 /opt 下并赋予执行权限
+sudo mv GpgFrontend-2.1.7-qt6-linux-x86_64.AppImage /opt/GpgFrontend/GpgFrontend-qt6-x86_64.AppImage
+chmod +x /opt/GpgFrontend/GpgFrontend-qt6-x86_64.AppImage
+
+# 修改快捷方式，Exec 修改为 /opt/GpgFrontend/GpgFrontend-qt6-x86_64.AppImage，Icon 修改为 /opt/GpgFrontend/com.bktus.gpgfrontend.png
+sudo vim /usr/share/applications/com.bktus.gpgfrontend.desktop
+```
+
 ## JetBrains WebStorm
 
 [下载 WebStorm](https://www.jetbrains.com/zh-cn/webstorm/download/#section=linux)
@@ -610,16 +634,16 @@ $ systemctl status unblock-netease-music
 [Releases · c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases) 下载 AppImage 文件。
 
 ```shell
-# 移动到 /opt 下并赋予执行权限
 sudo mkdir /opt/qBittorrent
+# 解压 AppImage 复制图标和快捷方式
+./qBittorrent-Enhanced-Edition-x86_64.AppImage --appimage-extract
+sudo cp squashfs-root/org.qbittorrent.qBittorrent.desktop /usr/share/applications/
+sudo cp squashfs-root/qbittorrent.svg /opt/qBittorrent/
+# 移动到 /opt 下并赋予执行权限
 sudo mv qBittorrent-Enhanced-Edition-x86_64.AppImage /opt/qBittorrent/
 chmod +x /opt/qBittorrent/qBittorrent-Enhanced-Edition-x86_64.AppImage
-# 运行
-/opt/qBittorrent/qBittorrent-Enhanced-Edition-x86_64.AppImage
 
-# 用 cat 读取快捷方式并输出到 /usr/share/applications
-cat /tmp/.mount_qBittoAKLIil/org.qbittorrent.qBittorrent.desktop | sudo tee /usr/share/applications/org.qbittorrent.qBittorrent.desktop
-# 修改快捷方式，将其中 Exec 修改为 /opt/qBittorrent/qBittorrent-Enhanced-Edition-x86_64.AppImage %U
+# 修改快捷方式，Exec 修改为 /opt/qBittorrent/qBittorrent-Enhanced-Edition-x86_64.AppImage %U，Icon 修改为 /opt/qBittorrent/qbittorrent.svg
 sudo vim /usr/share/applications/org.qbittorrent.qBittorrent.desktop 
 ```
 
