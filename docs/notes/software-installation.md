@@ -16,6 +16,8 @@ sudo apt update
 
 ### 飞书
 
+### 钉钉
+
 ### WPS Office For Linux 个人版
 
 ### KeePassXC
@@ -703,3 +705,12 @@ sudo vim /usr/share/applications/org.qbittorrent.qBittorrent.desktop
 ```shell
 sudo apt install vlc
 ```
+
+## GIMP + PhotoGIMP
+
+```shell
+# flatpak 安装 GIMP
+flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
+```
+
+[Releases · Diolinux/PhotoGIMP](https://github.com/Diolinux/PhotoGIMP/releases) 下载`PhotoGIMP-linux.zip`，将压缩包中的`.conf`、`.local`覆盖到 home 下。
