@@ -714,3 +714,7 @@ flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
 ```
 
 [Releases · Diolinux/PhotoGIMP](https://github.com/Diolinux/PhotoGIMP/releases) 下载`PhotoGIMP-linux.zip`，将压缩包中的`.conf`、`.local`覆盖到 home 下。
+
+## TeamViewer
+
+[下載 Linux | TeamViewer](https://www.teamviewer.cn/cn/download/linux/) 下载 DEB 文件并安装。
