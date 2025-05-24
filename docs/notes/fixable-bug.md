@@ -86,3 +86,7 @@ sudo apt search linux-image-*
 ```shell
 sudo vmware-installer -u vmware-workstation
 ```
+
+## TeamViewer 在用户登录界面可以远程，登录后无法远程
+
+除了在 TeamViewer 选项中勾选“随系统一同启动 TeamViewer”外，还需在开始菜单 TeamViewer 图标右键勾选“开机自动启动”。
