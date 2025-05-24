@@ -46,9 +46,7 @@ sudo apt update
 
 ## Spark Store 星火应用商店安装
 
-在[下载 - 星火应用商店](https://www.spark-app.store/download_latest)中下载软件本体，打开 DEB 文件安装。 
-
-### Snipaste
+在[下载 - 星火应用商店](https://www.spark-app.store/download_latest)中下载软件本体，打开 DEB 文件安装。
 
 ### Wine 运行器
 
@@ -350,6 +348,26 @@ StartupWMClass=jetbrains-webstorm
 Categories=TextEditor;Development;IDE;
 MimeType=application/xhtml+xml;text/javascript;text/css;
 Keywords=webstorm;
+```
+
+## Snipaste
+
+[Snipaste 下载](https://zh.snipaste.com/download.html)桌面版 Linux AppImage。
+
+```shell
+sudo mikdir /opt/snipaste
+# 赋予执行权限
+chmod +x ./Snipaste-2.10.6-x86_64.AppImage
+# 解压 AppImage 复制图标和快捷方式
+./Snipaste-2.10.6-x86_64.AppImage --appimage-extract
+sudo cp squashfs-root/Snipaste.desktop /usr/share/applications/
+sudo cp squashfs-root/Snipaste.png /opt/snipaste/
+# 移动到 /opt 下并赋予执行权限
+sudo mv Snipaste-2.10.6-x86_64.AppImage /opt/snipaste/Snipaste-x86_64.AppImage
+chmod +x /opt/snipaste/Snipaste-x86_64.AppImage
+
+# 修改快捷方式，Exec 修改为 /opt/snipaste/Snipaste-x86_64.AppImage，Icon 修改为 /opt/snipaste/Snipaste.png
+sudo vim /usr/share/applications/Snipaste.desktop
 ```
 
 ## uTools
