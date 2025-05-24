@@ -124,32 +124,32 @@ else
   echo "没有找到 brook wsclient 进程"
 fi
 # 启动 brook，具体命令看官方文档
-/home/your_name/.nami/bin/brook client -s 1.2.3.4:9999 -p 123456 --socks5 127.0.0.1:1080
+/home/duanluan/.nami/bin/brook client -s 1.2.3.4:9999 -p 123456 --socks5 127.0.0.1:1080
 
 
 # 将 brook 脚本创建为 systemd 服务
-$ sudo vim /etc/systemd/system/brook.service
+$ sudo vim ~/.config/systemd/user/brook.service
 
 [Unit]
 Description=A cross-platform programmable network tool.
 After=network.target
 
 [Service]
-ExecStart=bash /home/your_name/workspaces/service/brook.service.sh
+ExecStart=bash /home/duanluan/workspaces/service/brook.service.sh
 Restart=always
 RestartSec=5
+#StandardOutput=file:/home/duanluan/workspaces/service/brook.log
+#StandardError=file:/home/duanluan/workspaces/service/brook_error.log
 StandardOutput=null
 StandardError=null
-#StandardError=file:/home/your_name/workspaces/service/brook_error.log
-User=your_name
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
 
-$ systemctl daemon-reload
-$ systemctl enable brook
-$ systemctl start brook
-$ systemctl status brook
+$ systemctl --user daemon-reload
+$ systemctl --user enable brook
+$ systemctl --user start brook
+$ systemctl --user status brook
 ```
 
 ## proxychains4
@@ -401,8 +401,8 @@ sudo chmod +x VirtualBox-7.1.6-167084-Linux_amd64.run
 # 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
 sudo groupadd usbfs
 # 将用户添加到 vboxusers、usbfs 组
-sudo adduser your_name vboxusers
-sudo adduser your_name usbfs
+sudo adduser duanluan vboxusers
+sudo adduser duanluan usbfs
 
 # 移除 KVM 模块
 sudo rmmod kvm_amd
@@ -608,10 +608,11 @@ INFO: (app) HTTPS Server running @ http://0.0.0.0:52101
 
 点击“测试”按钮提示“该代理可使用”，点击“确定”按钮“现在重启”。
 
-可用后将启动命令添加到服务：
+可用后将启动命令添加到服务，此服务只需要桌面用户登录后启动。
 
 ```shell
-$ sudo vim /etc/systemd/system/unblock-netease-music.service
+$ sudo vim ~/.config/systemd/user/unblock-netease-music.service
+
 [Unit]
 Description=Revive unavailable songs for Netease Cloud Music (Refactored & Enhanced version)
 After=network.target
@@ -619,16 +620,14 @@ After=network.target
 [Service]
 ExecStart=/home/duanluan/.config/nvm/versions/node/v18.20.7/bin/node /home/duanluan/workspaces/third-party/UnblockNeteaseMusic/app.js -p 52100:52101
 Restart=always
-User=duanluan
-Group=duanluan
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=graphical-session.target
 
-$ systemctl daemon-reload
-$ systemctl enable unblock-netease-music
-$ systemctl start unblock-netease-music
-$ systemctl status unblock-netease-music
+$ systemctl --user daemon-reload
+$ systemctl --user enable unblock-netease-music
+$ systemctl --user start unblock-netease-music
+$ systemctl --user status unblock-netease-music
 ```
 
 ## qBittorrent Enhanced Edition
