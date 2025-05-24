@@ -744,7 +744,7 @@ flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
 
 ```shell
 # 脚本安装
-$ wget -O /tmp/easytier.sh "https://raw.githubusercontent.com/EasyTier/EasyTier/main/script/install.sh" && bash /tmp/easytier.sh install
+$ wget -O /tmp/easytier.sh "https://raw.githubusercontent.com/EasyTier/EasyTier/main/script/install.sh" && sudo bash /tmp/easytier.sh install
  Install EasyTier successfully!
 
 Default Port: 11010(UDP+TCP), Notice allowing in firewall!
