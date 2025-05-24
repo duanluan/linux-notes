@@ -126,7 +126,7 @@ fi
 
 
 # 将 brook 脚本创建为 systemd 服务
-$ sudo vim ~/.config/systemd/user/brook.service
+$ vim ~/.config/systemd/user/brook.service
 
 [Unit]
 Description=A cross-platform programmable network tool.
@@ -629,7 +629,7 @@ INFO: (app) HTTPS Server running @ http://0.0.0.0:52101
 可用后将启动命令添加到服务，此服务只需要桌面用户登录后启动。
 
 ```shell
-$ sudo vim ~/.config/systemd/user/unblock-netease-music.service
+$ vim ~/.config/systemd/user/unblock-netease-music.service
 
 [Unit]
 Description=Revive unavailable songs for Netease Cloud Music (Refactored & Enhanced version)
@@ -735,3 +735,40 @@ flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
 ## TeamViewer
 
 [下載 Linux | TeamViewer](https://www.teamviewer.cn/cn/download/linux/) 下载 DEB 文件并安装。
+
+## EasyTier
+
+[Releases · EasyTier/EasyTier](https://github.com/EasyTier/EasyTier/releases) 下载`easytier-gui_x.x.x_xxx.deb`使用 GUI。
+
+或者使用脚本安装 service：
+
+```shell
+# 脚本安装
+$ wget -O /tmp/easytier.sh "https://raw.githubusercontent.com/EasyTier/EasyTier/main/script/install.sh" && bash /tmp/easytier.sh install
+ Install EasyTier successfully!
+
+Default Port: 11010(UDP+TCP), Notice allowing in firewall!
+
+Default Network Name: default, Please change it to your own network name!
+
+Now EasyTier supports multiple config files. You can create config files in the /opt/easytier/config/ folder
+For more information, please check the documents in official site
+The management example of a single configuration file is as follows
+
+Status: systemctl status easytier@default
+Start: systemctl start easytier@default
+Restart: systemctl restart easytier@default
+Stop: systemctl stop easytier@default
+
+# 停用服务
+$ systemctl stop easytier@default
+# 可以先用 easytier-core 命令生成参考 TOML，参数可用 /opt/easytier/easytier-core -h 查看
+sudo /opt/easytier/easytier-core -i 192.168.x.x -p udp://example.com:11010 --network-name cloud --network-secret your_password --latency-first --use-smoltcp --enable-kcp-proxy --bind-device true --relay-all-peer-rpc --multi-thread
+# 参考上条命令生成的 TOML 修改配置文件，参考下文注意事项
+$ sudo vim /opt/easytier/config/default.conf
+# 启动服务
+$ systemctl start easytier@default
+```
+
+注意事项：
+- easytier-core 命令输出的 TOML 中`rpc_portal = "0.0.0.0:15888"`，本机在`/opt/easytier/config/default.conf`保持为`rpc_portal = "0.0.0.0:0`不变才正常连通网络。
