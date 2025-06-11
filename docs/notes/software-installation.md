@@ -459,7 +459,7 @@ fcitx5 和 fcitx 冲突，要先卸载 fcitx5。
 ```shell
 # 卸载 fcitx5
 sudo apt purge fcitx5
-sudo apt purge fcitx5-chinese-addons-data
+sudo apt autoremove
 
 # 安装 fcitx
 sudo apt install fcitx
