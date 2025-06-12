@@ -732,10 +732,6 @@ flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
 
 [Releases · Diolinux/PhotoGIMP](https://github.com/Diolinux/PhotoGIMP/releases) 下载`PhotoGIMP-linux.zip`，将压缩包中的`.conf`、`.local`覆盖到 home 下。
 
-## TeamViewer
-
-[下載 Linux | TeamViewer](https://www.teamviewer.cn/cn/download/linux/) 下载 DEB 文件并安装。
-
 ## EasyTier
 
 [Releases · EasyTier/EasyTier](https://github.com/EasyTier/EasyTier/releases) 下载`easytier-gui_x.x.x_xxx.deb`使用 GUI。
@@ -772,3 +768,11 @@ $ systemctl start easytier@default
 
 注意事项：
 - easytier-core 命令输出的 TOML 中`rpc_portal = "0.0.0.0:15888"`，本机在`/opt/easytier/config/default.conf`保持为`rpc_portal = "0.0.0.0:0`不变才正常连通网络。
+
+## TeamViewer
+
+[下載 Linux | TeamViewer](https://www.teamviewer.cn/cn/download/linux/) 下载 DEB 文件并安装。
+
+## AnyDesk
+
+[Remote Desktop Software for Ubuntu and Linux | AnyDesk](https://anydesk.com.cn/en/downloads/linux) 下载 DEB 文件并安装。
