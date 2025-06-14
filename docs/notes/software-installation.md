@@ -350,6 +350,34 @@ MimeType=application/xhtml+xml;text/javascript;text/css;
 Keywords=webstorm;
 ```
 
+## JetBrains PyCharm
+
+[下载 PyCharm](https://www.jetbrains.com/zh-cn/pycharm/download/?section=linux)
+
+```shell
+# 解压并移动到 /opt 下
+tar zxvf pycharm-2025.1.2.tar.gz
+sudo mkdir /opt/jetbrains
+sudo mv pycharm-2025.1.2 /opt/jetbrains/pycharm
+# 创建快捷方式
+$ sudo vim /usr/share/applications/pycharm.desktop
+
+[Desktop Entry]
+Name=PyCharm
+Comment=Pycharm is a Python IDE for professional developers by JetBrains.
+GenericName=IDE
+Exec=/opt/jetbrains/pycharm/bin/pycharm %F
+Icon=/opt/jetbrains/pycharm/bin/pycharm.svg
+Type=Application
+# 禁用启动时进度通知
+StartupNotify=false
+# 与应用程序窗口关联的 WM_CLASS 属性
+StartupWMClass=jetbrains-webstorm
+Categories=TextEditor;Development;IDE;
+MimeType=application/xhtml+xml;text/javascript;text/css;
+Keywords=pycharm;
+```
+
 ## Snipaste
 
 [Snipaste 下载](https://zh.snipaste.com/download.html)桌面版 Linux AppImage。
