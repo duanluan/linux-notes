@@ -776,3 +776,11 @@ $ systemctl start easytier@default
 ## AnyDesk
 
 [Remote Desktop Software for Ubuntu and Linux | AnyDesk](https://anydesk.com.cn/en/downloads/linux) 下载 DEB 文件并安装。
+
+## CopyQ
+
+[Releases · hluk/CopyQ](https://github.com/hluk/CopyQ/releases) 下载 DEB 文件并安装。
+
+`控制中心`-`键盘和语言`-`快捷键`，删除剪切板的快捷键。
+
+打开 CopyQ，`文件`-`首选项`-`快捷键`-`全局`-`显示/隐藏主窗口`设置为`Meta/Super` `V`。
