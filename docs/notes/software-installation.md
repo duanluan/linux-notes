@@ -618,7 +618,17 @@ sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -
 
 ## OBS Studio
 
+[下载 | OBS](https://obsproject.com/zh-cn/download)
+
 ```shell
+# 查看 ffmpeg 是否已存在
+$ ffmpeg
+ffmpeg version 6.1.1-2deepin0 Copyright (c) 2000-2023 the FFmpeg developers
+
+# ffmpeg 不存在就先安装 ffmpeg
+sudo apt-get install ffmpeg
+
+# 安装 OBS Studio
 flatpak install flathub com.obsproject.Studio
 ```
 
@@ -812,3 +822,7 @@ $ systemctl start easytier@default
 `控制中心`-`键盘和语言`-`快捷键`，删除剪切板的快捷键。
 
 打开 CopyQ，`文件`-`首选项`-`快捷键`-`全局`-`显示/隐藏主窗口`设置为`Meta/Super` `V`。
+
+## 闪电藤/LocalSend
+
+[下载 | 闪电藤](https://lightningvine.zishu.life/download.html) 下载 DEB 文件并安装。
