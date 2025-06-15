@@ -480,6 +480,19 @@ sudo apt install virt-manager
 
 [免费下载 Xmind 思维导图 | Xmind 中文官方网站](https://xmind.cn/download/) 下载 DEB 文件并安装。
 
+[Releases · henryau53/xmind-crack-patch](https://github.com/henryau53/xmind-crack-patch/releases)
+
+```shell
+pnpm add -g asar
+
+git clone https://github.com/henryau53/xmind-crack-patch.git
+cd xmind-crack-patch
+
+asar pack ./app.asar.non-windows app.asar
+
+sudo cp app.asar /opt/Xmind/resources/app.asar
+```
+
 ## 搜狗输入法
 
 fcitx5 和 fcitx 冲突，要先卸载 fcitx5。
