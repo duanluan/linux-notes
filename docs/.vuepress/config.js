@@ -1,6 +1,6 @@
-import {defaultTheme} from '@vuepress/theme-default'
-import {defineUserConfig} from 'vuepress/cli'
-import {viteBundler} from '@vuepress/bundler-vite'
+import { defaultTheme } from '@vuepress/theme-default'
+import { defineUserConfig } from 'vuepress/cli'
+import { viteBundler } from '@vuepress/bundler-vite'
 import { markdownImagePlugin } from '@vuepress/plugin-markdown-image'
 
 export default defineUserConfig({
@@ -18,12 +18,21 @@ export default defineUserConfig({
       children: [
         '/notes/deepin-installation.md',
         '/notes/system-configuration.md',
-        '/notes/software-installation.md',
+        {
+          text: '软件安装',
+          children: [
+            '/notes/software-installation/system.md',
+            '/notes/software-installation/tool.md',
+            '/notes/software-installation/standard.md',
+            '/notes/software-installation/img-video-audio-edit.md',
+            '/notes/software-installation/development.md',
+          ]
+        },
         '/notes/software-uninstallation.md',
         '/notes/fixable-bug.md',
         '/notes/bug.md',
       ]
-    },{
+    }, {
       text: 'GitHub',
       link: 'https://github.com/duanluan/deepin-notes',
     }],
@@ -36,7 +45,16 @@ export default defineUserConfig({
             '/notes/device.md',
             '/notes/deepin-installation.md',
             '/notes/system-configuration.md',
-            '/notes/software-installation.md',
+            {
+              text: '软件安装',
+              children: [
+                '/notes/software-installation/system.md',
+                '/notes/software-installation/tool.md',
+                '/notes/software-installation/standard.md',
+                '/notes/software-installation/img-video-audio-edit.md',
+                '/notes/software-installation/development.md',
+              ]
+            },
             '/notes/software-uninstallation.md',
             '/notes/fixable-bug.md',
             '/notes/bug.md',
