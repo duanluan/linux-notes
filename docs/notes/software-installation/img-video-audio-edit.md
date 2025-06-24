@@ -2,6 +2,10 @@
 
 ## GIMP + PhotoGIMP
 
+GIMP 是一款跨平台图像编辑器。
+
+![](https://github.com/Diolinux/PhotoGIMP/raw/master/screenshots/photogimp_3_-_diolinux.png)
+
 ```shell
 # flatpak 安装 GIMP
 flatpak install https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
