@@ -6,6 +6,14 @@
 
 ### FSearch：类 Everything
 
+### SimpleScreenRecorder
+
+[Main page - SimpleScreenRecorder - Maarten Baert's website](https://www.maartenbaert.be/simplescreenrecorder/)
+
+SimpleScreenRecorder是一款屏幕录制软件，它具有录制整个桌面、应用窗口、指定窗口大小以及音/视频同步，视频缩放等功能。
+
+![](https://files.maartenbaert.be/simplescreenrecorder/screenshot.png)
+
 ## Spark Store 星火应用商店安装
 
 ### Wine 运行器
