@@ -1,12 +1,20 @@
 # 开发类
 
-## 应用商店安装
+## Another Redis Desktop Manager
 
-### Another Redis Desktop Manager
+更快、更好、更稳定的Redis桌面(GUI)管理客户端，兼容Windows、Mac、Linux，性能出众，轻松加载海量键值
 
-## Spark Store 星火应用商店安装
+![](https://cdn.jsdelivr.net/gh/qishibo/img/ardm/202411081318491.png)
 
-### MobaXterm Pro
+[下载 - Another Redis Desktop Manager](https://goanother.com/cn/#download)
+
+```shell
+sudo snap install another-redis-desktop-manager
+```
+
+## MobaXterm Pro
+
+星火应用商店下载并安装 [MobaXterm Pro（汉化版）](spk://store/development/net.mobatek.mobaxterm-pro-chs)。
 
 ## Git
 
@@ -73,13 +81,13 @@ nrm use cnpm
 [Java 8, 11, 17, 21, 23 Download for Linux, Windows and macOS](https://www.azul.com/downloads/?os=debian&architecture=x86-64-bit&package=jdk#zulu)
 
 ```shell
-tar zxvf zulu21.40.17-ca-jdk21.0.6-linux_x64.tar.gz
+tar zxvf zulu21.42.19-ca-jdk21.0.7-linux_x64.tar.gz
 sudo mkdir /opt/java
-sudo mv zulu21.40.17-ca-jdk21.0.6-linux_x64 /opt/java/zulu21.40.17-ca-jdk21.0.6
+sudo mv zulu21.42.19-ca-jdk21.0.7-linux_x64 /opt/java/zulu21.42.19-ca-jdk21.0.6
 # 末尾追加环境变量
 $ vim ~/.bashrc
 # jdk
-export JAVA_HOME="/opt/java/zulu21.40.17-ca-jdk21.0.6"
+export JAVA_HOME="/opt/java/zulu21.42.19-ca-jdk21.0.6"
 export PATH=$JAVA_HOME/bin:$PATH
 
 $ source ~/.bashrc
@@ -87,7 +95,6 @@ $ java -version
 openjdk version "21.0.6" 2025-01-21 LTS
 OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)
 OpenJDK 64-Bit Server VM Zulu21.40+17-CA (build 21.0.6+7-LTS, mixed mode, sharing)
-
 ```
 
 ## Gradle
@@ -95,19 +102,19 @@ OpenJDK 64-Bit Server VM Zulu21.40+17-CA (build 21.0.6+7-LTS, mixed mode, sharin
 [Gradle | Releases](https://gradle.org/releases/) 下载`binary-only`。
 
 ```shell
-unzip gradle-7.6.4-bin.zip
+unzip gradle-7.6.5-bin.zip
 sudo mkdir /opt/gradle
-sudo mv gradle-7.6.4 /opt/gradle/
+sudo mv gradle-7.6.5 /opt/gradle/
 # 末尾追加环境变量
 $ vim ~/.bashrc
 # gradle
-export GRADLE_HOME="/opt/gradle/gradle-7.6.4"
+export GRADLE_HOME="/opt/gradle/gradle-7.6.5"
 export PATH=$GRADLE_HOME/bin:$PATH
 
 $ source ~/.bashrc
 $ gradle -v
 
-Welcome to Gradle 7.6.4!
+Welcome to Gradle 7.6.5!
 ……
 
 ```
@@ -157,7 +164,7 @@ $ source ~/.bashrc
 $ mvn -v
 Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
 Maven home: /opt/jetbrains/idea/plugins/maven/lib/maven3
-Java version: 21.0.6, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.40.17-ca-jdk21.0.6
+Java version: 21.0.6, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.42.19-ca-jdk21.0.6
 Default locale: zh_CN, platform encoding: UTF-8
 OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family: "unix"
 ```
@@ -220,9 +227,17 @@ Keywords=pycharm;
 
 ## Apifox
 
+API 设计、开发、测试一体化协作平台
+
+![](https://cdn.apifox.com/www/assets/image/index/main-interface.webp)
+
 [Apifox](https://apifox.com/) 下载 DEB 文件并安装。
 
 ## Navicat Premium
+
+Navicat Premium 是强大的一体化数据库开发解决方案，可从单一应用程序无缝连接多个数据库，包括 MySQL、PostgreSQL、MongoDB、MariaDB、SQL Server、Oracle、SQLite、Redis 和 Snowflake。同时，它与 GaussDB 、OceanBase、TiDB、PolarDB 数据库及阿里云、腾讯云和华为云等主流云数据库兼容。
+
+![](https://www.navicat.com.cn/images/product_screenshot/Screenshot_Navicat_17_Premium_Linux_Main_screen_CN.png)
 
 此处安装的是 Windows 版。
 
@@ -262,6 +277,10 @@ StartupNotify=true
 
 ## DBeaver Ultimate
 
+功能齐全的数据库管理工具。
+
+![](https://dbeaver.com/wp-content/uploads/2023/06/Screen-Shot-2022-08-11-at-11.18.51-AM-1024x659-1.png)
+
 [Download DBeaver Ultimate](https://dbeaver.com/download/ultimate/) 下载 DEB 文件并安装。
 
 1. 安装 DBeaver Agent：
@@ -284,9 +303,9 @@ StartupNotify=true
 
    [Azul Zulu](https://www.azul.com/downloads/#downloads-table-zulu) 下载 JRE 21。
     ```shell
-    unzip zulu21.40.17-ca-jre21.0.6-linux_x64.zip
+    tar zxvf zulu21.42.19-ca-jre21.0.7-linux_x64.tar.gz
     sudo mv /usr/share/dbeaver-ue/jre /usr/share/dbeaver-ue/jre.bak
-    sudo mv zulu21.40.17-ca-jre21.0.6-linux_x64 /usr/share/dbeaver-ue/jre
+    sudo mv zulu21.42.19-ca-jre21.0.7-linux_x64 /usr/share/dbeaver-ue/jre
     ```
 
 4. 屏蔽 stats.dbeaver.com 域名：
