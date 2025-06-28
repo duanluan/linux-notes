@@ -1,5 +1,17 @@
 # 系统类
 
+## Brightness Controller
+
+亮度控制器。
+
+![](https://github.com/LordAmit/Brightness/raw/master/img/BrightnessController.gif)
+
+```shell
+sudo add-apt-repository ppa:apandada1/brightness-controller
+sudo apt update
+sudo apt install brightness-controller
+```
+
 ## Microsoft Edge
 
 ![](https://edgestatic.azureedge.net/shared/cms/lrs1c69a1j/section-images/b0ec664721b948bdb4de34621ba1ce25-png-w1920.avif)
