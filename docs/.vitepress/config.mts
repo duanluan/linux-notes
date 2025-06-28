@@ -4,6 +4,9 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Linux 使用笔记",
   description: "从系统安装到环境配置再到日常使用",
+  lang: 'zh-CN',
+  // 应使用仓库名：https://vitepress.dev/reference/site-config#base
+  base: '/linux-notes/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     // nav: [
