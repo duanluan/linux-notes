@@ -26,8 +26,6 @@ sudo apt install brightness-controller
 
 ## 讯飞输入法
 
-[讯飞输入法官网](https://srf.xunfei.cn/#/) 下载 DEB 文件。
-
 fcitx5 和 fcitx 冲突，要先卸载 fcitx5。
 
 ```shell
