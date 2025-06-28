@@ -36,5 +36,7 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/duanluan/linux-notes' }
     ]
-  }
+  },
+  // 忽略死链接：https://vitepress.dev/reference/site-config#ignoredeadlinks
+  ignoreDeadLinks: true
 })
