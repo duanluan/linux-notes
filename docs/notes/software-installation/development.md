@@ -351,3 +351,28 @@ sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -
 ```
 
 打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
+
+## act
+
+本地运行 GitHub Actions。
+
+[Releases · nektos/act](https://github.com/nektos/act/releases) 下载压缩包。
+
+```shell
+$ tar zxvf act_Linux_x86_64.tar.gz
+$ sudo mkdir /opt/act
+$ sudo mv act /opt/act/
+
+# 可执行文件链接到系统路径
+$ sudo ln -s /opt/act/act /usr/local/bin/act
+
+# 用本项目做测试
+# 查看任务
+$ act --list
+INFO[0000] Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock' 
+Stage  Job ID           Job name         Workflow name  Workflow file    Events
+0      deploy-gh-pages  deploy-gh-pages  docs           deploy-docs.yml  pus
+
+# 测试
+$ sudo act -j deploy-gh-pages
+```
