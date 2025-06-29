@@ -257,7 +257,7 @@ VMware Workstation Pro 是一款功能强大的虚拟化软件，允许用户在
 [Free Downloads - Support Portal - Broadcom support portal](https://support.broadcom.com/group/ecx/free-downloads) 搜索“VMware Workstation Pro”后下载 Linux 版。
 
 ```shell
-chmod +x VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
+chmod u+x VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
 sudo ./VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
 ```
 
@@ -273,32 +273,47 @@ sudo apt install open-vm-tools
 
 VirtualBox 是一款开源的虚拟化软件，允许用户在不同操作系统上创建和运行虚拟机，支持跨平台使用，适用于开发、测试和学习。
 
-- [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
-- [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
-
-[Linux_Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Linux_Downloads) 中点击“All distributions”保存`VirtualBox-7.1.6-167084-Linux_amd64.run`文件。
+[Linux_Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Linux_Downloads) 中选择对应 Ubuntu 版本下载 DEB 文件并安装。
 
 ```shell
-sudo chmod +x VirtualBox-7.1.6-167084-Linux_amd64.run
-
-./VirtualBox-7.1.6-167084-Linux_amd64.run
-
-# 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
-sudo groupadd usbfs
-# 将用户添加到 vboxusers、usbfs 组
-sudo adduser duanluan vboxusers
-sudo adduser duanluan usbfs
-
-# 移除 KVM 模块
-sudo rmmod kvm_amd
-sudo rmmod kvm
-# 将 kvm 和 kvm_amt 加入黑名单模块列表
-echo "blacklist kvm" | sudo tee /etc/modprobe.d/blacklist.conf
-echo "blacklist kvm_amd" | sudo tee -a /etc/modprobe.d/blacklist.conf
-sudo update-initramfs -u
+sudo dpkg -i virtualbox-7.1_7.1.10-169112~Ubuntu~noble_amd64.deb
+sudo apt install -fy
+sudo dpkg -i virtualbox-7.1_7.1.10-169112~Ubuntu~noble_amd64.deb
 ```
 
-[Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) 下载 Extension Pack，打开 VirtualBox，将下载的文件拖入窗口安装。
+[Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) 下载 Extension Pack，打开 VirtualBox，将下载的文件拖入 VirtualBox 窗口安装。
+
+- 不能枚举 USB 设备：
+
+    ```shell
+    sudo usermod -aG vboxusers $USER
+    ```
+    [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
+
+
+- 不显示 USB 设备：
+
+    ```shell
+    # 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
+    sudo groupadd usbfs
+    # 将用户添加到 vboxusers、usbfs 组
+    sudo adduser $USER vboxusers
+    sudo adduser $USER usbfs
+    ```
+    [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
+
+
+- VirtualBox can't enable the AMD-V extension：
+
+    ```shell
+    # 移除 KVM 模块
+    sudo rmmod kvm_amd
+    sudo rmmod kvm
+    # 将 kvm 和 kvm_amt 加入黑名单模块列表
+    echo "blacklist kvm" | sudo tee /etc/modprobe.d/blacklist.conf
+    echo "blacklist kvm_amd" | sudo tee -a /etc/modprobe.d/blacklist.conf
+    sudo update-initramfs -u
+    ```
 
 ## XMind
 
