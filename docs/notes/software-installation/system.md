@@ -12,6 +12,10 @@ sudo apt update
 sudo apt install brightness-controller
 ```
 
+`开始菜单`-`会话和启动`-`应用程序自启动`，添加，所需名称、描述、命令可以`开始菜单`-`Brightness Controller`，右键`编辑应用程序`查看。
+
+之后其他软件添加自启动也按此操作。
+
 ## Microsoft Edge
 
 ![](https://edgestatic.azureedge.net/shared/cms/lrs1c69a1j/section-images/b0ec664721b948bdb4de34621ba1ce25-png-w1920.avif)
@@ -73,8 +77,8 @@ sudo apt install fcitx
 
 ![](https://doublecmd.sourceforge.io/gallery/images/MainWindow.png)
 
-星火应用商店下载并安装[DoubleCommander](spk://store/tools/doublecmd-spark)。
+星火应用商店下载并安装 [DoubleCommander](spk://store/tools/doublecmd-spark)。
 
-`控制中心`-`键盘和语言`-`快捷键`新建，命令为`/opt/apps/com.doublecommander/files/squashfs-root/AppRun -C`。
+`开始菜单`-`键盘`-`应用程序快捷键`新建，命令为`/opt/apps/com.doublecommander/files/squashfs-root/AppRun -C`。
 
 [DC - Command Line](https://doublecmd.github.io/doc/en/commandline.html)
