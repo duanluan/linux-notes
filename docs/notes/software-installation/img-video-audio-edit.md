@@ -7,8 +7,7 @@ GIMP 是一款跨平台图像编辑器。
 ![](https://github.com/Diolinux/PhotoGIMP/raw/master/screenshots/photogimp_3_-_diolinux.png)
 
 ```shell
-# flatpak 安装 GIMP
-flatpak install --user https://flathub.org/repo/appstream/org.gimp.GIMP.flatpakref
+sudo pacman -S gimp
 ```
 
 [Releases · Diolinux/PhotoGIMP](https://github.com/Diolinux/PhotoGIMP/releases) 下载`PhotoGIMP-linux.zip`，将压缩包中的`.conf`、`.local`覆盖到 home 下。
@@ -24,6 +23,5 @@ Kdenlive 是 KDE 非线性视频编辑器 (Non-Linear Video Editor) 的缩写。
 [下载 - Kdenlive](https://kdenlive.org/zh-cn/download/)
 
 ```shell
-# flatpak 安装 Kdenlive
-flatpak install --user https://flathub.org/repo/appstream/org.kde.kdenlive.flatpakref
+sudo pacman -S kdenlive
 ```

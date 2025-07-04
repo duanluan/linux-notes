@@ -9,7 +9,7 @@
 [下载 - Another Redis Desktop Manager](https://goanother.com/cn/#download)
 
 ```shell
-sudo snap install another-redis-desktop-manager
+paru another-redis-desktop-manager
 ```
 
 ## MobaXterm Pro
@@ -17,10 +17,6 @@ sudo snap install another-redis-desktop-manager
 星火应用商店下载并安装 [MobaXterm Pro（汉化版）](spk://store/development/net.mobatek.mobaxterm-pro-chs)。
 
 ## Git
-
-```shell
-sudo apt install git
-```
 
 创建 SSH Key：
 
@@ -45,13 +41,13 @@ git config --global user.email "your_email@example.com"
 
 ```shell
 # 代理下载安装脚本
-proxychains4 wget https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh
-# 替换安装脚本中 git clone 为 proxychains4 git clone
-sed -i 's/command git clone/command proxychains4 git clone/g' install.sh
+proxychains wget https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
+# 替换安装脚本中 git clone 为 proxychains git clone
+sed -i 's/command git clone/command proxychains git clone/g' install.sh
 # 执行脚本
 bash install.sh
 # 生效新环境变量
-source ~/.bashrc
+source ~/.zshrc
 # 安装 Node.js
 nvm install 18
 # 安装 pnpm 方法一
@@ -60,7 +56,7 @@ corepack enable pnpm
 npm install -g pnpm
 # 自动安装配置 pnpm
 pnpm setup
-source ~/.bashrc
+source ~/.zshrc
 # 安装 nrm
 pnpm add -g nrm
 # 查看所有镜像源
@@ -73,7 +69,7 @@ nrm ls
   npmMirror ---- https://skimdb.npmjs.com/registry/
   huawei ------- https://repo.huaweicloud.com/repository/npm/
 # 使用镜像源
-nrm use cnpm
+nrm use xxx
 ```
 
 ## JDK
@@ -85,12 +81,12 @@ tar zxvf zulu21.42.19-ca-jdk21.0.7-linux_x64.tar.gz
 sudo mkdir /opt/java
 sudo mv zulu21.42.19-ca-jdk21.0.7-linux_x64 /opt/java/zulu21.42.19-ca-jdk21.0.6
 # 末尾追加环境变量
-$ vim ~/.bashrc
+$ nano ~/.zshrc
 # jdk
 export JAVA_HOME="/opt/java/zulu21.42.19-ca-jdk21.0.6"
 export PATH=$JAVA_HOME/bin:$PATH
 
-$ source ~/.bashrc
+$ source ~/.zshrc
 $ java -version
 openjdk version "21.0.6" 2025-01-21 LTS
 OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)
@@ -106,12 +102,12 @@ unzip gradle-7.6.5-bin.zip
 sudo mkdir /opt/gradle
 sudo mv gradle-7.6.5 /opt/gradle/
 # 末尾追加环境变量
-$ vim ~/.bashrc
+$ nano ~/.zshrc
 # gradle
 export GRADLE_HOME="/opt/gradle/gradle-7.6.5"
 export PATH=$GRADLE_HOME/bin:$PATH
 
-$ source ~/.bashrc
+$ source ~/.zshrc
 $ gradle -v
 
 Welcome to Gradle 7.6.5!
@@ -131,7 +127,7 @@ tar zxvf ideaIU-2024.3.4.1.tar.gz
 sudo mkdir /opt/jetbrains
 sudo mv idea-IU-243.25659.59/ /opt/jetbrains/idea
 # 创建快捷方式
-sudo vim /usr/share/applications/idea.desktop
+sudo nano /usr/share/applications/idea.desktop
 
 [Desktop Entry]
 Name=IntelliJ IDEA Ultimate
@@ -155,12 +151,12 @@ Keywords=idea;
 
 ```shell
 # 末尾追加环境变量
-$ vim ~/.bashrc
+$ nano ~/.zshrc
 # maven
 export MAVEN_HOME="/opt/jetbrains/idea/plugins/maven/lib/maven3/"
 export PATH=$MAVEN_HOME/bin:$PATH
 
-$ source ~/.bashrc
+$ source ~/.zshrc
 $ mvn -v
 Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
 Maven home: /opt/jetbrains/idea/plugins/maven/lib/maven3
@@ -231,7 +227,21 @@ API 设计、开发、测试一体化协作平台
 
 ![](https://cdn.apifox.com/www/assets/image/index/main-interface.webp)
 
-[Apifox](https://apifox.com/) 下载 DEB 文件并安装。
+[下载 Apifox - Apifox 帮助文档](https://docs.apifox.com/download)
+
+```shell
+paru apifox
+```
+
+## Apipost
+
+![](https://img.cdn.apipost.cn/company_logo/banner_content.svg)
+
+[下载中心-Apipost-中文版接口调试与文档管理工具](https://www.apipost.cn/download.html)
+
+```shell
+paru apipost-bin
+```
 
 ## Navicat Premium
 
@@ -281,22 +291,34 @@ StartupNotify=true
 
 ![](https://dbeaver.com/wp-content/uploads/2023/06/Screen-Shot-2022-08-11-at-11.18.51-AM-1024x659-1.png)
 
-[Download DBeaver Ultimate](https://dbeaver.com/download/ultimate/) 下载 DEB 文件并安装。
+[Download DBeaver Ultimate](https://dbeaver.com/download/ultimate/)
+
+```shell
+# 安装 25.0 版本
+git clone https://aur.archlinux.org/dbeaver-ee.git
+cd dbeaver-ee
+git checkout 18d7fe23f27e70c2db8ec413d3fdafa3ca355a34
+makepkg -si
+```
+
+[AUR : dbeaver-ee.git 25.0 版本 - AUR Package Repositories](https://aur.archlinux.org/cgit/aur.git/commit/PKGBUILD?h=dbeaver-ee&id=18d7fe23f27e70c2db8ec413d3fdafa3ca355a34)
+
+DBeaver Agent：
 
 1. 安装 DBeaver Agent：
 
    [Releases · wgzhao/dbeaver-agent](https://github.com/wgzhao/dbeaver-agent/releases) 下载压缩包。
     ```shell
     unzip dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar.zip
-    sudo mv dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar /usr/share/dbeaver-ue/dbeaver-agent.jar
+    sudo mv dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar /opt/dbeaver-ee/dbeaver-agent.jar
     ```
 
 2. 配置 DBeaver：
     ```shell
     # 在文件末尾添加內容，保持在 -vmargs 后
-    $ sudo vim /usr/share/dbeaver-ue/dbeaver.ini
-    -javaagent:/usr/share/dbeaver-ue/dbeaver-agent.jar
-    -Xbootclasspath/a:/usr/share/dbeaver-ue/dbeaver-agent.jar
+    $ sudo nano /opt/dbeaver-ee/dbeaver.ini
+    -javaagent:/opt/dbeaver-ee/dbeaver-agent.jar
+    -Xbootclasspath/a:/opt/dbeaver-ee/dbeaver-agent.jar
     ```
 
 3. 处理 JRE 依赖：
@@ -304,21 +326,21 @@ StartupNotify=true
    [Azul Zulu](https://www.azul.com/downloads/#downloads-table-zulu) 下载 JRE 21。
     ```shell
     tar zxvf zulu21.42.19-ca-jre21.0.7-linux_x64.tar.gz
-    sudo mv /usr/share/dbeaver-ue/jre /usr/share/dbeaver-ue/jre.bak
-    sudo mv zulu21.42.19-ca-jre21.0.7-linux_x64 /usr/share/dbeaver-ue/jre
+    sudo mv /opt/dbeaver-ee/jre /opt/dbeaver-ee/jre.bak
+    sudo mv zulu21.42.19-ca-jre21.0.7-linux_x64 /opt/dbeaver-ee/jre
     ```
 
 4. 屏蔽 stats.dbeaver.com 域名：
     ```shell
     # 将以下内容追加到 /etc/hosts
-    $ sudo vim /etc/hosts
+    $ sudo nano /etc/hosts
     127.0.0.1 stats.dbeaver.com
     ```
 
 5. 生成许可证密钥：
     ```shell
-    $ /usr/share/dbeaver-ue/jre/bin/java -cp /usr/share/dbeaver-ue/plugins/\*:/usr/share/dbeaver-ue/dbeaver-agent.jar com.dbeaver.agent.License -t ue
-    --- dbeaver-ue(v25) LICENSE ---
+    $ /opt/dbeaver-ee/jre/bin/java -cp /opt/dbeaver-ee/plugins/\*:/opt/dbeaver-ee/dbeaver-agent.jar com.dbeaver.agent.License -t ee
+    --- dbeaver-ee(v25) LICENSE ---
     ……
     --- 请复制上一行 ---
     ```
@@ -326,17 +348,21 @@ StartupNotify=true
 6. 命令行启动 DBeaver：
     ```shell
     # 命令行启动方便查看日志
-    /usr/share/dbeaver-ue/dbeaver
+    /opt/dbeaver-ee/dbeaver
     ```
    点击“Import License”，粘贴上一步生成的许可证密钥并确定。
+
+鼓励大家支持正版软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
 
 ## Docker + Docker Componse + Portainer
 
 ```shell
-# 安装 Docker
-sudo apt install docker.io
-# 安装 Docker Componse
-sudo apt install docker-compose
+# 安装 Docker + Docker Componse
+sudo pacman -S docker docker-compose
+# 启动 Docker 服务
+sudo systemctl start docker
+# 开机启动 Docker 服务
+sudo systemctl enable docker
 ```
 
 [Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
@@ -347,7 +373,7 @@ sudo apt install docker-compose
 # 创建 Portainer 存储数据库的卷
 sudo docker volume create portainer_data
 # 启动 Portainer
-sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+proxychains sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
 ```
 
 打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。

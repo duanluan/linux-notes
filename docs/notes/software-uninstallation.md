@@ -1,39 +1,22 @@
 # 软件卸载
 
-## Firefox
+## 包管理
 
 ```shell
-sudo apt purge firefox* -y
-rm -rf ~/.mozilla/
-```
-
-## LibreOffice
-
-```shell
-sudo apt purge libreoffice* -y
-sudo rm -rf /usr/lib/libreoffice
-sudo rm -rf /etc/libreoffice
-sudo apt autoremove
+# pacman 卸载软件
+sudo pacman -Rns xxx
+# yay 卸载软件
+yay -Rns xxx
+# yaru 卸载软件
+paru -Rns xxx
 ```
 
 ## VMware Workstation Pro
 
 ```shell
+# 方法一
 sudo vmware-installer -u vmware-workstation
-```
 
-## VirtualBox
-
-```shell
-sudo sh /opt/VirtualBox/uninstall.sh
-```
-
-## QEMU + Virtual Machine Manager
-
-在 Virtual Machine Manager 中停止并删除所有虚拟机。
-
-```shell
-sudo apt remove qemu-* virt-manager
-sudo apt autoremove
-sudo rm -rf /var/lib/libvirt
+# 方法二
+paru -Rns vmware-keymaps vmware-workstation
 ```

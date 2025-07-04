@@ -4,57 +4,77 @@
 
 ![](https://im.qq.com/linuxqq/images/new/linux-chat-desk.png)
 
-[QQ Linux 版 - 轻松做自己](https://im.qq.com/linuxqq/index.shtml) 下载 DEB 文件并安装。
+[QQ Linux 版 - 轻松做自己](https://im.qq.com/linuxqq/index.shtml)
+
+```shell
+paru linuxqq
+```
 
 ## 微信
 
-[微信 Linux 版](https://linux.weixin.qq.com/) 下载 DEB 文件并安装。
+[微信 Linux 版](https://linux.weixin.qq.com/)
+
+```shell
+paru wechat-appimage
+```
 
 下载 [activate-wechat.sh](https://github.com/duanluan/shell-scripts/blob/main/activate-wechat.sh)。
 
-`开始菜单`-`键盘`-`应用程序快捷键`，添加。
+开始菜单搜索`快捷键`-`新增`-`命令或脚本`。
 
 - 命令：`上面脚本存放的目录/activate-wechat.sh`
-- 快捷键：`Ctrl` `Alt` `W`
+
+右侧`添加`，输入快捷键`Ctrl` `Alt` `W`，右下角`应用`。
+
+![](../assets/20250704230110.png)
 
 ## 飞书
 
 ![](https://p1-hera.feishucdn.com/tos-cn-i-jbbdkfciu3/5a438f8caf964e3592452138ac2c1189~tplv-jbbdkfciu3-image:0:0.image)
 
-[下载飞书 App 及桌面客户端 - 飞书官网](https://www.feishu.cn/download) 下载 DEB 文件并安装。
+[下载飞书 App 及桌面客户端 - 飞书官网](https://www.feishu.cn/download)
+
+```shell
+paru feishu-bin
+```
 
 ## 钉钉
 
-[钉钉官网下载页面 - 钉钉，让进步发生](https://www.dingtalk.com/download) 下载 DEB 文件并安装。
+[钉钉官网下载页面 - 钉钉，让进步发生](https://www.dingtalk.com/download)
+
+```shell
+paru dingtalk-bin
+```
 
 ## WPS Office For Linux 个人版
 
 ![](https://ee.wpscdn.cn/wpscn/custom/image/index_bg2.png)
 
-[WPS Office for Linux-支持多版本下载_WPS官方网站](https://www.wps.cn/product/wpslinux) 下载 DEB 文件并安装。
+[WPS Office for Linux-支持多版本下载_WPS官方网站](https://www.wps.cn/product/wpslinux)
+
+```shell
+paru -S wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts freetype2-wps
+```
+
+- ttf-wps-fonts：wps-office 所需符号字体。
+- freetype2-wps：解决字体太粗。
 
 ## 腾讯会议
 
 ![](https://cdn.meeting.tencent.com/assets/next-website/_next/static/images/feature3-1-79a7d46ff4fa27eb.png)
 
-[下载中心 - 腾讯会议](https://meeting.tencent.com/download/index.html) 下载 DEB 文件并安装。
+[下载中心 - 腾讯会议](https://meeting.tencent.com/download/index.html)
+
+```shell
+paru wemeet-bin
+```
 
 ## Sublime Text
 
 [Linux Package Manager Repositories - Sublime Text](https://www.sublimetext.com/docs/linux_repositories.html)
 
 ```shell
-# 安装 GPG key
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
-# 选择稳定版
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-# 选择开发版
-echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-# 更新并安装
-sudo apt update
-sudo apt install sublime-text
-# 如果失败请确保已将 apt 设置为使用 https 源
-sudo apt-get install apt-transport-https
+paru sublime-text-4
 ```
 
 - [Sublime Text 使用记录](https://blog.zhjh.top/?p=d42feMmERGrK8UUTXUWqu)
@@ -63,11 +83,15 @@ sudo apt-get install apt-transport-https
 
 ![](https://typoraio.cn/img/screen/Group-screen.png)
 
-[Linux - Typora 官方中文站](https://typoraio.cn/#linux) 下载 DEB 文件并安装。
+[Linux - Typora 官方中文站](https://typoraio.cn/#linux)
 
-如果需要开心版就下载 [1.9.3](https://download2.typoraio.cn/linux/typora_1.9.3_amd64.deb)。
+```shell
+paru typora-free-with-plugin
+```
 
-Typora 激活：
+下文可忽略。
+
+[Typora 1.9.3](https://download2.typoraio.cn/linux/typora_1.9.3_amd64.deb) 激活：
 ```shell
 $ git clone https://github.com/hazukieq/Yporaject.git
 $ sudo apt install cargo
@@ -94,9 +118,22 @@ License for you: ……
 
 鼓励大家支持正版软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
 
+## electron-netease-cloud-music
+
+![](https://user-images.githubusercontent.com/13914967/52464615-8cee9900-2bb6-11e9-8aa3-a74d8cf7bea5.png)
+
+自带 UnblockNeteaseMusic 的第三方网易云音乐客户端。
+
+```shell
+paru electron-netease-cloud-music-bin
+```
+
+
 ## 网易云 + UnblockNeteaseMusic
 
-星火应用商店下载并安装[网易云音乐（wine）](spk://store/music/com.163.music.spark)。
+```shell
+paru com.163.music.spark
+```
 
 先按照开发类中安装 nvm + Node.js。
 

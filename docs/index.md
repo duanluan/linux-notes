@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 开始
-      link: /notes/xubuntu-installation.md
+      link: /notes/system-installation.md
     - theme: alt
       text: 源码
       link: https://github.com/duanluan/linux-notes
