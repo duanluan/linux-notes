@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Linux 使用笔记"
-  text: "duanluan"
+  text: "Manjaro"
   tagline: 从系统安装到环境配置再到日常使用
   actions:
     - theme: brand
