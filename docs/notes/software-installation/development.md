@@ -175,7 +175,7 @@ tar zxvf WebStorm-2024.3.4.tar.gz
 sudo mkdir /opt/jetbrains
 sudo mv WebStorm-243.25659.40/ /opt/jetbrains/webstorm
 # 创建快捷方式
-$ sudo vim /usr/share/applications/webstorm.desktop
+$ sudo nano /usr/share/applications/webstorm.desktop
 
 [Desktop Entry]
 Name=WebStorm
@@ -203,7 +203,7 @@ tar zxvf pycharm-2025.1.2.tar.gz
 sudo mkdir /opt/jetbrains
 sudo mv pycharm-2025.1.2 /opt/jetbrains/pycharm
 # 创建快捷方式
-$ sudo vim /usr/share/applications/pycharm.desktop
+$ sudo nano /usr/share/applications/pycharm.desktop
 
 [Desktop Entry]
 Name=PyCharm
