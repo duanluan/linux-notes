@@ -16,6 +16,18 @@ paru another-redis-desktop-manager
 
 星火应用商店下载并安装 [MobaXterm Pro（汉化版）](spk://store/development/net.mobatek.mobaxterm-pro-chs)。
 
+## WindTerm
+
+一个更快更好的 DevOps SSH/Telnet/Serial/Shell/Sftp 客户端。
+
+![](https://github.com/kingToolbox/WindTerm/raw/master/images/screenshots/WindTerm.png)
+
+[Releases · kingToolbox/WindTerm](https://github.com/kingToolbox/WindTerm/releases)
+
+```shell
+paru windterm-bin
+```
+
 ## Git
 
 创建 SSH Key：
