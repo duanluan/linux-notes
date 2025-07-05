@@ -120,9 +120,9 @@ License for you: ……
 
 ## electron-netease-cloud-music
 
-![](https://user-images.githubusercontent.com/13914967/52464615-8cee9900-2bb6-11e9-8aa3-a74d8cf7bea5.png)
-
 自带 UnblockNeteaseMusic 的第三方网易云音乐客户端。
+
+![](https://user-images.githubusercontent.com/13914967/52464615-8cee9900-2bb6-11e9-8aa3-a74d8cf7bea5.png)
 
 ```shell
 paru electron-netease-cloud-music-bin
