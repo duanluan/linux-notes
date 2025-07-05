@@ -28,6 +28,12 @@ paru another-redis-desktop-manager
 paru windterm-bin
 ```
 
+解决文件管理器打开文件报错无法创建临时文件：
+```shell
+sudo mkdir -p /usr/lib/windterm/temp
+sudo chmod 1777 /usr/lib/windterm/temp
+```
+
 ## Git
 
 创建 SSH Key：
