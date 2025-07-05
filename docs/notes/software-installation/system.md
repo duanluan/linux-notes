@@ -73,7 +73,7 @@ paru rime-ice
 
 托盘区输入法图标，右键`重新启动`，再右键`配置`。
 
-点击`添加输入法`按钮，添加`中州韵`。
+点击`添加输入法`按钮，添加`中州韵`，删除`键盘-汉语`。
 
 ![](../assets/20250702021910.png)
 
@@ -86,6 +86,15 @@ $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
 patch:
   # 仅使用「雾凇拼音」的默认配置，配置此行即可
   __include: rime_ice_suggestion:/
+  # 候选词数量
+  menu/page_size: 10
+  # 快捷键绑定
+  key_binder:
+    bindings:
+      # , 键切换候选词到上页
+      - { when: composing, accept: comma, send: Page_Up }
+      # . 键切换候选词到下页
+      - { when: composing, accept: period, send: Page_Down }
 ```
 
 ## Spark Store 星火应用商店
