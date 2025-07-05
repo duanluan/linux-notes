@@ -349,6 +349,15 @@ VirtualBox 是一款开源的虚拟化软件，允许用户在不同操作系统
     sudo update-initramfs -u
     ```
 
+## 安卓模拟器 麟卓卓懿
+
+[下载 | 北京麟卓信息科技有限公司](https://www.linzhuotech.com/Product/download) 下载。
+
+```shell
+tar xvf xDroidInstall-x86_64-v13.2.380-20250306.tar.xz
+./xDroidInstall-x86_64-v13.2.380-20250306.run
+```
+
 ## XMind
 
 思维导图与头脑风暴工具。
