@@ -97,6 +97,8 @@ patch:
       - { when: composing, accept: period, send: Page_Down }
 ```
 
+修改配置后需在托盘区键盘图标右键`重新启动`。
+
 ## Spark Store 星火应用商店
 
 ```shell
