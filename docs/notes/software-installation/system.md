@@ -99,6 +99,17 @@ patch:
 
 ## Spark Store 星火应用商店
 
-[下载星火应用商店 - Spark Store](https://www.spark-app.store/download/)
+```shell
+$ yay -S amber-ce-bookworm
+```
 
-暂略
+无 N 卡报错“无法获取 NVIDIA 驱动版本 Can not determine NVIDIA Driver version”可以忽略，安装后需重启。
+
+[下载星火应用商店 - Spark Store](https://www.spark-app.store/download/) 下载 DEB 文件。
+
+开始菜单搜索`ACE Bookworm兼容环境`并打开：
+```shell
+sudo PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin dpkg -i spark-store_4.8.0_amd64.deb
+sudo apt update
+sudo apt install -f
+```
