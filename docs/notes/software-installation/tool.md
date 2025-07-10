@@ -53,6 +53,18 @@ paru fsearch
 
 打开后`选项`-`数据库`，添加路径`/`。
 
+### AnyTXT Searcher
+
+免费桌面全文搜索工具
+
+![](https://anytxt.net/wp-content/uploads/2021/05/2021-5-29-2-768x461.png)
+
+[下载最佳免费桌面全文搜索工具 | Anytxt](https://anytxt.net/download/)
+
+```shell
+paru anytxt-bin
+```
+
 ### SimpleScreenRecorder
 
 SimpleScreenRecorder是一款屏幕录制软件，它具有录制整个桌面、应用窗口、指定窗口大小以及音/视频同步，视频缩放等功能。
