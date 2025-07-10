@@ -154,6 +154,21 @@ Synology Drive Client 是一款桌面实用程序，可在多台客户端计算�
 paru synology-drive
 ```
 
+## Syncthing + Syncthing Tray
+
+Syncthing 是开源的、跨设备实时文件同步工具。
+
+Syncthing Tray 是 Syncthing 的托盘图标工具。
+
+```shell
+paru syncthing-bin
+paru syncthingtray
+```
+
+Syncthing Tray 设置向导中选择`通过 Syncthing Tray 启动已安装的 Syncthing 应用程序`。
+
+![](../assets/20250710232739.png)
+
 ## Clash Verge
 
 A Clash Meta GUI based on Tauri.
@@ -551,3 +566,16 @@ sudo pacman -S copyq
 [下载 | 闪电藤](https://lightningvine.zishu.life/download.html)
 
 还没上 AUR，暂略。
+
+## Calibre
+
+全能电子书管理阅读编辑转换。
+
+![]()
+
+[calibre - 下载 Linux版](https://calibre-ebook.com/zh_CN/download_linux)
+
+```shell
+paru calibre-bin
+```
+
