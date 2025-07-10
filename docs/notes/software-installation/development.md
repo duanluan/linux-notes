@@ -52,6 +52,15 @@ git config --global user.name "your_name"
 git config --global user.email "your_email@example.com"
 ```
 
+其他一些忽略：
+
+```shell
+# 忽略换行分隔符差异
+git config --global core.autocrlf input
+# 忽略文件权限修改
+git config --global core.fileMode false
+```
+
 ## nvm + Node.js + pnpm + nrm
 
 - [脚本安装 nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)
