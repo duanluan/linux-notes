@@ -62,6 +62,16 @@ paru microsoft-edge-stable-bin
 
 开始菜单搜索`默认应用程序`可以修改默认网页浏览器。
 
+## Tor Browser
+
+Tor 浏览器是一款基于隐私保护的开源浏览器，通过多层加密和中继网络匿名访问互联网，隐藏用户的身份和位置。
+
+```shell
+# paru tor-browser-bin 时导入报错“gpg: 从公钥服务器接收失败：无数据 错误： 未能运行： gpg --recv-keys EF6E286DDA85EA2A4BA7DE684E2C6E8793298290”，所以手动导入
+curl -s https://keys.openpgp.org/vks/v1/by-fingerprint/EF6E286DDA85EA2A4BA7DE684E2C6E8793298290 | gpg --import
+paru tor-browser-bin
+```
+
 ## Rime 雾凇拼音
 
 ```shell
