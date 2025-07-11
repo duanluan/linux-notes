@@ -576,6 +576,6 @@ sudo pacman -S copyq
 [calibre - 下载 Linux版](https://calibre-ebook.com/zh_CN/download_linux)
 
 ```shell
-paru calibre-bin
+# 不用 AUR 中的 calibre-bin，会无法切换中文
+sudo pacman -S calibre
 ```
-
