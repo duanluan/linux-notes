@@ -330,11 +330,23 @@ paru -S vmware-keymaps vmware-workstation
 
 安装过程中“VMware's Customer Experience Improvement Program ("CEIP")”可以选 No。
 
-安装 [open-vm-tools](https://github.com/vmware/open-vm-tools) 增强虚拟机：
+---
 
-```shell
-sudo pacman -S open-vm-tools
-```
+- 安装 [open-vm-tools](https://github.com/vmware/open-vm-tools) 增强虚拟机：
+  ```shell
+  sudo pacman -S open-vm-tools
+  ```
+
+- Could not connect 'Ethernet0' to virtual network '/dev/vmnet8'
+
+  ```shell
+  sudo systemctl enable --now vmware-networks
+  ```
+
+- Fail Network configuration is missing. Ensure that /etc/vmware/networking exists
+  ```shell                                                      INT ✘ 
+  systemctl enable --now vmware-networks-configuration.service
+  ```
 
 ## VirtualBox
 
