@@ -583,11 +583,15 @@ sudo pacman -S copyq
 
 ## 闪电藤/LocalSend
 
-闪电藤是基于LocalSend的二次开发产品，在原有局域网文件传输基础上，增加了webdav传输和云传输的能力，是一个万能的文件传输助手。
+闪电藤是基于 LocalSend 的二次开发产品，在原有局域网文件传输基础上，增加了 webdav 传输和云传输的能力，是一个万能的文件传输助手。
 
 [下载 | 闪电藤](https://lightningvine.zishu.life/download.html)
 
-还没上 AUR，暂略。
+闪电藤还没上 AUR，先用 LocalSend：
+
+```shell
+paru localsend-bin 
+```
 
 ## Calibre
 
