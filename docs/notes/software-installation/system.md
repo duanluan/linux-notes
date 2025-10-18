@@ -1,6 +1,6 @@
 # 系统类
 
-## base-devel + cmake + unzip
+## base-devel + cmake + unzip（必须）
 
 ````shell
 sudo pacman -S base-devel cmake unzip
@@ -10,7 +10,7 @@ sudo pacman -S base-devel cmake unzip
 - cmake：跨平台的构建系统工具，用于自动化编译过程，通常与源代码编译相关。
 - unzip：解压缩 zip 格式文件。
 
-## yay + paru
+## yay + paru（必须）
 
 Arch 用户软件仓库（AUR）助手工具。
 
