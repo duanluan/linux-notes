@@ -29,7 +29,7 @@ export default defineConfig({
             ]
           },
           { text: '软件卸载', link: '/notes/software-uninstallation.md' },
-          { text: '疑问解决', link: '/notes/questions.md' },
+          { text: '问题解决', link: '/notes/questions.md' },
           { text: '未解决 BUG', link: '/notes/bug.md' },
           { text: '使用技巧', link: '/notes/tips-tricks.md' }
         ]
