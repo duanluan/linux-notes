@@ -60,13 +60,14 @@ sudo pacman-mirrors -c china
 sudo nano /etc/pacman.conf
 ```
 
-## 加速 AUR 的 GitHub 下载和 Clone
+## 加速 AUR 的 GitHub 下载 + git 全局配置 GitHub 镜像
 
 安装 axel 多线程下载工具，创建替换 github 下载的脚本：
 
 ```shell
+# 安装 axel
 $ sudo pacman -S axel
-
+# 创建脚本文件
 $ sudo nano /home/duanluan/workspaces/bin/github-mirror-axel.sh
 
 #! /bin/bash
@@ -82,6 +83,9 @@ case "$domin" in
         ;;
 esac
 /usr/bin/axel -n 2 -a -o $1 $url
+
+# 保存退出后赋予可执行权限
+$ sudo chmod +x /home/duanluan/workspaces/bin/github-mirror-axel.sh
 ```
 
 修改`makepkg.conf`：
@@ -94,15 +98,26 @@ nano ~/.makepkg.conf
 
 # 找到 DLAGENTS 部分，修改为如下内容
 DLAGENTS=('file::/usr/bin/curl -qgC - -o %o %u'
-          'ftp::/usr/bin/curl -qgfC - --ftp-pasv --retry 3 --retry-delay 3 -o %o %u'
-          'http::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u'
-          #'https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u'\
+          #'ftp::/usr/bin/curl -qgfC - --ftp-pasv --retry 3 --retry-delay 3 -o %o %u'
+          #'http::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u'
+          #'https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u'
+          'ftp::/usr/bin/axel -n 10 -a -o %o %u'
+          'http::/usr/bin/axel -n 10 -a -o %o %u'
           'https::/home/duanluan/workspaces/bin/github-mirror-axel.sh %o %u'
           'rsync::/usr/bin/rsync --no-motd -z %u %o'
           'scp::/usr/bin/scp -C %u %o')
 ```
 
-测试生效：
+遇到“没有状态文件，无法恢复下载！”提示，是因为之前使用 curl 下载到一半，现在又用 axel 下载。
+
+删除缓存后重新下载，例如：
+
+```shell
+rm -rf ~/.cache/paru/clone/geekbench
+paru geekbench
+```
+
+github 下载生效：
 
 ```shell
 $ paru clash-verge-rev-bin
@@ -127,7 +142,7 @@ File size: 47.8972 兆字节 (50223894 bytes)
 git config --global url.https://download.fastgit.org/https://github.com/.insteadof=https://github.com/
 ```
 
-测试生效：
+克隆 github 仓库生效：
 
 ```shell
 $ paru rime-ice
@@ -143,6 +158,22 @@ remote: Total 11879 (delta 24), reused 9 (delta 9), pack-reused 11835 (from 3)
 ```
 
 参考 [Archlinux AUR 加速完整设置 – 平凡生活小记](https://caveallegory.cn/2024/03/archlinux-aur%E5%8A%A0%E9%80%9F%E5%AE%8C%E6%95%B4%E8%AE%BE%E7%BD%AE/)
+
+## 临时 GitHub 加速
+
+```shell
+# 备份 hosts 文件
+sudo cp /etc/hosts /etc/hosts.bak
+```
+
+访问 [https://github-hosts.tinsfox.com/hosts](https://github-hosts.tinsfox.com/hosts)，复制内容
+
+```shell
+# 内容追加到 /etc/hosts 末尾
+nano /etc/hosts
+```
+
+参考：[GitHub Host - 加速访问 GitHub | 自动更新的 Hosts 工具](https://github-hosts.tinsfox.com/)
 
 ## 安装 Fcitx5
 
@@ -219,19 +250,3 @@ xdg-user-dirs-gtk-update
 Dolphin 中左侧常用位置项右键`编辑`，修改位置。
 
 ![](assets/20250702012916.png)
-
-## 临时 GitHub 加速
-
-```shell
-# 备份 hosts 文件
-sudo cp /etc/hosts /etc/hosts.bak
-```
-
-访问 [https://github-hosts.tinsfox.com/hosts](https://github-hosts.tinsfox.com/hosts)，复制内容
-
-```shell
-# 内容追加到 /etc/hosts 末尾
-nano /etc/hosts
-```
-
-更多参考：[GitHub Host - 加速访问 GitHub | 自动更新的 Hosts 工具](https://github-hosts.tinsfox.com/)
