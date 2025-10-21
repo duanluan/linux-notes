@@ -22,9 +22,15 @@ sudo pacman -S yay
 
 - paru：默认配置下，paru 会在每次检查更新时重新评估 pkgver。这意味着当 AUR 包有新提交时，paru 会自动检测到版本变化并提示更新。
   ```shell
+  # 克隆 paru 源码仓库
   git clone https://aur.archlinux.org/paru.git
   cd paru
+  # 构建并安装 paru
   makepkg -si
+  
+  # 安装完成后返回上级目录并删除源码文件夹
+  cd ..
+  rm -rf paru
   ```
 - yay：默认未开启此功能，需要手动配置。可以通过以下命令启用对开发包（含 VCS 包）的自动版本检查：
   ```shell
