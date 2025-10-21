@@ -60,6 +60,90 @@ sudo pacman-mirrors -c china
 sudo nano /etc/pacman.conf
 ```
 
+## 加速 AUR 的 GitHub 下载和 Clone
+
+安装 axel 多线程下载工具，创建替换 github 下载的脚本：
+
+```shell
+$ sudo pacman -S axel
+
+$ sudo nano /home/duanluan/workspaces/bin/github-mirror-axel.sh
+
+#! /bin/bash
+echo "github-mirror-axel.sh 生效"
+domin=`echo $2 | cut -f3 -d'/'`;
+others=`echo $2 | cut -f4- -d'/'`;
+case "$domin" in
+    *github.com*)
+        url="https://gh-proxy.com/https://github.com/"$others;
+        ;;
+    *)
+        url=$2;
+        ;;
+esac
+/usr/bin/axel -n 2 -a -o $1 $url
+```
+
+修改`makepkg.conf`：
+```shell
+# 复制 /etc/pacman.conf 到个人目录，避免系统更新 pacman 包时覆盖
+cp /etc/makepkg.conf ~/.makepkg.conf
+
+# 修改 ~/.makepkg.conf
+nano ~/.makepkg.conf
+
+# 找到 DLAGENTS 部分，修改为如下内容
+DLAGENTS=('file::/usr/bin/curl -qgC - -o %o %u'
+          'ftp::/usr/bin/curl -qgfC - --ftp-pasv --retry 3 --retry-delay 3 -o %o %u'
+          'http::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u'
+          #'https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u'\
+          'https::/home/duanluan/workspaces/bin/github-mirror-axel.sh %o %u'
+          'rsync::/usr/bin/rsync --no-motd -z %u %o'
+          'scp::/usr/bin/scp -C %u %o')
+```
+
+测试生效：
+
+```shell
+$ paru clash-verge-rev-bin
+
+==> 获取源代码...
+  -> 正在下载 clash-verge-rev-2.4.2-x86_64.deb...
+github-mirror-axel.sh 生效
+正在初始化下载：https://gh-proxy.com/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.4.2/Clash.Verge_2.4.2_amd64.deb
+File size: 47.8972 兆字节 (50223894 bytes)
+正在打开输出文件 clash-verge-rev-2.4.2-x86_64.deb.part
+正在开始下载
+
+连接 0 完成下载
+连接 1 完成下载
+[100%] [.....................................................................................] [   2.7MB/s] [00:00]
+
+已下载 47.8972 兆字节，用时 17 秒。（2766.17 KB/s）
+```
+
+配置 URL 重写，加速 GitHub Clone：
+```shell
+git config --global url.https://download.fastgit.org/https://github.com/.insteadof=https://github.com/
+```
+
+测试生效：
+
+```shell
+$ paru rime-ice
+
+==> 获取源代码...
+  -> 正在克隆 rime-ice git 仓库...
+克隆到纯仓库 '/home/njcm/.cache/paru/clone/rime-ice-git/rime-ice'...
+remote: Enumerating objects: 11879, done.
+remote: Counting objects: 100% (44/44), done.
+remote: Compressing objects: 100% (35/35), done.
+remote: Total 11879 (delta 24), reused 9 (delta 9), pack-reused 11835 (from 3)
+接收对象中: 100% (11879/11879), 232.18 MiB | 7.03 MiB/s, 完成.
+```
+
+参考 [Archlinux AUR 加速完整设置 – 平凡生活小记](https://caveallegory.cn/2024/03/archlinux-aur%E5%8A%A0%E9%80%9F%E5%AE%8C%E6%95%B4%E8%AE%BE%E7%BD%AE/)
+
 ## 安装 Fcitx5
 
 进入系统后，Manjaro Hello 弹窗中点击`Applications`按钮，勾选`Extended language support`-`Manjaro Asian Input Support Fcitx5`，点击`UPDATE SYSTEM`按钮。
