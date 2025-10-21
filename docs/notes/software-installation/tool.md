@@ -195,7 +195,7 @@ $ bash <(curl https://bash.ooo/nami.sh)
 $ nami install brook
 
 # 创建 brook 脚本，自定义目录
-$ nano ~/workspaces/service/brook.service.sh
+$ nano ~/workspaces/bin/brook.service.sh
 
 #!/bin/bash
 # 查找包含 'brook wsclient' 的进程，并获取 PID
@@ -222,11 +222,11 @@ Description=A cross-platform programmable network tool.
 After=network.target
 
 [Service]
-ExecStart=bash /home/duanluan/workspaces/service/brook.service.sh
+ExecStart=bash /home/duanluan/workspaces/bin/brook.service.sh
 Restart=always
 RestartSec=5
-#StandardOutput=file:/home/duanluan/workspaces/service/brook.log
-#StandardError=file:/home/duanluan/workspaces/service/brook_error.log
+#StandardOutput=file:/home/duanluan/workspaces/bin/brook.log
+#StandardError=file:/home/duanluan/workspaces/bin/brook_error.log
 StandardOutput=null
 StandardError=null
 
