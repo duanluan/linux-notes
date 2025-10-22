@@ -139,7 +139,12 @@ File size: 47.8972 兆字节 (50223894 bytes)
 
 配置 URL 重写，加速 GitHub Clone：
 ```shell
-git config --global url.https://download.fastgit.org/https://github.com/.insteadof=https://github.com/
+# 删除旧规则（如果配置过）
+git config --global --unset-all url."https://download.fastgit.org/https://github.com/".insteadof
+# 设置新规则
+git config --global url."https://gh-proxy.com/https://github.com/".insteadof "https://github.com/"
+# 查看所有规则
+git config --global --get-regexp url
 ```
 
 克隆 github 仓库生效：
