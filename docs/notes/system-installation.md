@@ -36,7 +36,7 @@ Ventoy 界面选择 Manjaro 镜像 - `Boot in normal mode`，如遇启动问题�
   - 键盘布局设置为 Chinese/Default。
 - 分区（Partitions）
   - 抹除磁盘
-  - 交换分区(无休眠) + ext4
+  - 交换分区(无休眠)/交换分区(有休眠) + ext4，笔记本建议选有休眠的。
 - Office 套件（Office Suite）
   - No Office Suite
 
