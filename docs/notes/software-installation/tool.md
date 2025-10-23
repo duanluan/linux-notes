@@ -369,10 +369,7 @@ VirtualBox 是一款开源的虚拟化软件，允许用户在不同操作系统
     ```shell
     sudo usermod -aG vboxusers $USER
     ```
-    运行后需要重启。
-
-    [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
-
+    运行后需要重启电脑生效。
 
 - 不显示 USB 设备：
 
@@ -383,11 +380,11 @@ VirtualBox 是一款开源的虚拟化软件，允许用户在不同操作系统
     sudo adduser $USER vboxusers
     sudo adduser $USER usbfs
     ```
-    [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
-
+    [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
 
 - VirtualBox can't enable the AMD-V extension：
 
+    
     ```shell
     # 移除 KVM 模块
     sudo rmmod kvm_amd
@@ -397,6 +394,7 @@ VirtualBox 是一款开源的虚拟化软件，允许用户在不同操作系统
     echo "blacklist kvm_amd" | sudo tee -a /etc/modprobe.d/blacklist.conf
     sudo update-initramfs -u
     ```
+    [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
 
 ## 安卓模拟器 麟卓卓懿
 
