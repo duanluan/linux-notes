@@ -70,3 +70,25 @@ $ makepkg -si
     dingtalk.sh ... 通过
     com.alibabainc.dingtalk.svg ... 通过
 ```
+
+## 托盘区蓝牙不显示+设置中蓝牙开启无效
+
+```shell
+$ lsusb | grep -i bluetooth
+Bus 001 Device 004: ID 8087:0029 Intel Corp. AX200 Bluetooth
+
+$ sudo dmesg|grep Bluetooth
+[ 4.165699] Bluetooth: Core ver 2.22
+[ 4.165722] Bluetooth: HCI device and connection manager initialized
+[ 4.165727] Bluetooth: HCI socket layer initialized
+[ 4.165730] Bluetooth: L2CAP socket layer initialized
+[ 4.165734] Bluetooth: SCO socket layer initialized
+[ 5.168658] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[ 5.168661] Bluetooth: BNEP filters: protocol multicast
+[ 5.168667] Bluetooth: BNEP socket layer initialized
+[ 6.355936] Bluetooth: hci0: Reading Intel version command failed (-110)
+[ 6.355940] Bluetooth: hci0: command 0xfc05 tx timeout
+```
+最后两句有问题，需要将`AX200/AX201`缺少的`ibt-0040-0041.ddc`、`ibt-0040-0041.sfi`固件从 [Intel linux-firmware](https://anduin.linuxfromscratch.org/sources/linux-firmware/intel/) 下载并移动到`/lib/firmware/intel`目录中，再重启电脑就正常了。
+
+参考：[Manjaro蓝牙BUG：Bluetooth: hci0: Failed to load Intel firmware file intel/ibt-0040-1050.sfi (-2) - CY BLOG](https://cy.terase.cn/2024/12/24/bluetooth-bug/)
