@@ -53,12 +53,15 @@ Server = https://bd.mirror.vanehost.com/Manjaro/stable/$repo/$arch
 sudo pacman-mirrors -c china
 ```
 
-## 启用 Pacman 颜色
+## Pacman 配置
 
 ```shell
-# 取消注释 /etc/pacman.conf 中的 #Color 为 Color
+# 修改 Pacman 配置文件
 sudo nano /etc/pacman.conf
 ```
+
+- **启用 Pacman 颜色**：取消注释`#Color`为`Color`
+- **调整并行下载线程数**：修改`ParallelDownloads = 4`的值
 
 ## 加速 AUR 的 GitHub 下载 + git 全局配置 GitHub 镜像
 
