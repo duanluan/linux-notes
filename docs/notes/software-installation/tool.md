@@ -356,12 +356,25 @@ VirtualBox 是一款开源的虚拟化软件，允许用户在不同操作系统
 [Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
 ```shell
- $ paru virtualbox-ext-oracle
- 
-:: 软件包 VIRTUALBOX-HOST-MODULES 有 15 个提供者：
-:: 软件库 extra:
-    1) linux510-virtualbox-host-modules  2) linux515-virtualbox-host-modules  3) linux54-virtualbox-host-modules  4) linux61-rt-virtualbox-host-modules  5) linux61-virtualbox-host-modules  6) linux612-rt-virtualbox-host-modules  7) linux612-virtualbox-host-modules  8) linux613-rt-virtualbox-host-modules  9) linux614-rt-virtualbox-host-modules  10) linux615-rt-virtualbox-host-modules  11) linux615-virtualbox-host-modules  12) linux616-virtualbox-host-modules  13) linux66-rt-virtualbox-host-modules  14) linux66-virtualbox-host-modules  15) virtualbox-host-dkms  
-输入一个数字（默认=1）：15
+# 查看内核版本
+$ uname -r
+6.12.48-1-MANJARO
+
+# 安装 VirtualBox，选择指定内核版本的 extra，此处为 linux612-virtualbox-host-modules
+$ sudo pacman -S virtualbox
+:: 有 14 个软件包可提供 VIRTUALBOX-HOST-MODULES ：
+:: 软件仓库 extra
+   1) linux510-virtualbox-host-modules  2) linux515-virtualbox-host-modules
+   3) linux54-virtualbox-host-modules  4) linux61-rt-virtualbox-host-modules
+   5) linux61-virtualbox-host-modules  6) linux612-rt-virtualbox-host-modules
+   7) linux612-virtualbox-host-modules  8) linux615-rt-virtualbox-host-modules
+   9) linux616-rt-virtualbox-host-modules  10) linux616-virtualbox-host-modules
+   11) linux617-virtualbox-host-modules  12) linux66-rt-virtualbox-host-modules
+   13) linux66-virtualbox-host-modules  14) virtualbox-host-dkms
+输入某个数字 ( 默认=1 ): 7
+
+# 加载到内核，否则会报错“Kernel driver not installed (rc=-1908)”
+$ sudo modprobe vboxdrv
 ```
 
 - 不能枚举 USB 设备：
