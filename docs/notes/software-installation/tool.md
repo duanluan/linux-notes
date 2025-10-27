@@ -409,6 +409,14 @@ $ sudo modprobe vboxdrv
     ```
     [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
 
+- Cannot register the hard disk 'xxx.vdi' {new_uuid} because a hard disk 'xxx.vid' with UUID {old_uuid} already exists.
+
+    ```shell
+    # 释放硬盘介质
+    vboxmanage closemedium disk old_uuid
+    ```
+    [修复 VirtualBox 中 “UUID 的硬盘已存在” 问题 - Linux-Terminal.com](https://cn.linux-terminal.com/?p=4755)
+
 ## 安卓模拟器 麟卓卓懿
 
 [下载 | 北京麟卓信息科技有限公司](https://www.linzhuotech.com/Product/download) 下载。
