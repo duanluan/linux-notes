@@ -445,7 +445,7 @@ paru xmind
 ```shell
 pnpm add -g asar
 
-proxychains git clone https://github.com/henryau53/xmind-crack-patch.git
+git clone https://github.com/henryau53/xmind-crack-patch.git
 cd xmind-crack-patch
 
 asar pack ./app.asar.non-windows app.asar

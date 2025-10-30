@@ -69,7 +69,7 @@ git config --global core.fileMode false
 ```shell
 # 代理下载安装脚本
 proxychains wget https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
-# 替换安装脚本中 git clone 为 proxychains git clone
+# 替换安装脚本中 git clone 为 proxychains git clone（可选）
 sed -i 's/command git clone/command proxychains git clone/g' install.sh
 # 执行脚本
 bash install.sh
