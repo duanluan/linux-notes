@@ -63,7 +63,7 @@ sudo nano /etc/pacman.conf
 - **启用 Pacman 颜色**：取消注释`#Color`为`Color`
 - **调整并行下载线程数**：修改`ParallelDownloads = 4`的值
 
-## 加速 AUR 的 GitHub 下载 + git 全局配置 GitHub 镜像
+## 加速 AUR 的 GitHub 下载和 git clone GitHub 仓库
 
 安装 axel 多线程下载工具，创建替换 github 下载的脚本：
 
@@ -167,7 +167,131 @@ remote: Total 11879 (delta 24), reused 9 (delta 9), pack-reused 11835 (from 3)
 
 参考 [Archlinux AUR 加速完整设置 – 平凡生活小记](https://caveallegory.cn/2024/03/archlinux-aur%E5%8A%A0%E9%80%9F%E5%AE%8C%E6%95%B4%E8%AE%BE%E7%BD%AE/)
 
-## 临时 GitHub 加速
+## 加速 curl / wget GitHub 下载
+
+```shell
+# 创建脚本文件
+$ nano /home/duanluan/workspaces/bin/github-wrappers.sh
+```
+`github-wrappers.sh`：
+```shell
+#!/bin/zsh
+#
+# Shell 包装器 (wrappers), 用于拦截 curl 和 wget
+# 并自动将 GitHub URL 替换为镜像 URL
+#
+# 由 'source' 命令从 .zshrc 加载
+#
+
+# ================================================================
+# == ♻️ GitHub 镜像加速包装器 (wget) ♻️ ==
+# ================================================================
+#
+# 此函数会拦截 'wget' 命令, 检查参数中是否有 GitHub URL,
+# 如果有, 则自动替换为 'gh-proxy.com' 镜像地址。
+
+wget() {
+    # 用于存放最终参数的数组
+    local args=()
+    # 标记是否找到了 GitHub URL
+    local original_url=""
+    local mirrored_url=""
+    
+    # 你的镜像前缀
+    # (注意: 这里的格式是 https://gh-proxy.com/https:// )
+    local mirror_prefix="https://gh-proxy.com/https://"
+
+    # 遍历所有传入的参数
+    for arg in "$@"; do
+        # 检查参数是否是 GitHub URL (同时匹配 http 和 https)
+        if [[ "$arg" == *github.com/* ]]; then
+            # 提取 github.com/ 之后的部分
+            # 使用 sed 提取 (s|...|...|p):
+            # 1. 匹配 'http://github.com/' 或 'https://github.com/'
+            # 2. 捕获 (.*) 之后的所有内容
+            # 3. 替换为捕获的内容并打印
+            local others=$(echo "$arg" | sed -n -E 's|https?://github.com/(.*)|\1|p')
+            
+            if [[ -n "$others" ]]; then
+                # 构筑镜像 URL
+                mirrored_url="${mirror_prefix}github.com/${others}"
+                # 将替换后的 URL 添加到参数数组
+                args+=("$mirrored_url")
+                original_url="$arg"
+            else
+                # 匹配失败或 URL 不完整 (例如只输入了 github.com), 保留原样
+                args+=("$arg")
+            fi
+        else
+            # 其他参数（如 -O, -c, -q 等）原样保留
+            args+=("$arg")
+        fi
+    done
+
+    # 如果替换了 URL, 打印提示信息到 stderr
+    if [[ -n "$mirrored_url" ]]; then
+        echo "♻️  wget 包装器生效: $original_url -> $mirrored_url" >&2
+    fi
+
+    # 使用 'command' 关键字来调用原始的 /usr/bin/wget 程序
+    # 并传入修改后的参数数组 ("${args[@]}")
+    command wget "${args[@]}"
+}
+
+# ================================================================
+# == ♻️ GitHub 镜像加速包装器 (curl) ♻️ ==
+# ================================================================
+#
+# 此函数会拦截 'curl' 命令, 逻辑与 wget 包装器相同。
+
+curl() {
+    local args=()
+    local original_url=""
+    local mirrored_url=""
+    local mirror_prefix="https://gh-proxy.com/https://"
+
+    for arg in "$@"; do
+        if [[ "$arg" == *github.com/* ]]; then
+            local others=$(echo "$arg" | sed -n -E 's|https?://github.com/(.*)|\1|p')
+            
+            if [[ -n "$others" ]]; then
+                mirrored_url="${mirror_prefix}github.com/${others}"
+                args+=("$mirrored_url")
+                original_url="$arg"
+            else
+                args+=("$arg")
+            fi
+        else
+            # 其他参数 (-L, -o, -s, -f, 等) 原样保留
+            args+=("$arg")
+        fi
+    done
+
+    if [[ -n "$mirrored_url" ]]; then
+        echo "♻️  curl 包装器生效: $original_url -> $mirrored_url" >&2
+    fi
+    
+    # 调用原始的 /usr/bin/curl 程序
+    command curl "${args[@]}"
+}
+```
+
+```shell
+# 授予可执行权限
+$ chmod +x /home/duanluan/workspaces/bin/github-wrappers.sh
+# 编辑 zsh 配置文件，在文件末尾添加
+$ nano ~/.zshrc
+
+#  加载 GitHub 镜像加速的 Shell 包装器
+if [ -f /home/duanluan/workspaces/bin/github-wrappers.sh ]; then
+    source /home/duanluan/workspaces/bin/github-wrappers.sh
+fi
+
+# 保存退出后使配置生效
+$ source ~/.zshrc
+```
+
+## 修改 GitHub Host 加速
 
 ```shell
 # 备份 hosts 文件
