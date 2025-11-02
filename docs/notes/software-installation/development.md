@@ -248,6 +248,44 @@ MimeType=application/xhtml+xml;text/javascript;text/css;
 Keywords=pycharm;
 ```
 
+## 微信开发者工具
+
+[msojocs/wechat-web-devtools-linux: 适用于微信小程序的微信开发者工具 Linux 移植版](https://github.com/msojocs/wechat-web-devtools-linux)
+
+```shell
+$ cd /opt
+$ sudo git clone --recurse-submodules https://github.com/msojocs/wechat-web-devtools-linux.git
+$ cd wechat-web-devtools-linux
+$ sudo tools/build-with-docker.sh
+
+Unable to find image 'jiyecafe/wechat-devtools-build:v1.0.4' locally
+docker: Error response from daemon: Get "https://registry-1.docker.io/v2/": context deadline exceeded
+
+# 方式一：代理运行
+$ sudo proxychains tools/build-with-docker.sh
+# 方式二：替换镜像源
+$ sudo sed -i 's|jiyecafe/wechat-devtools-build:v1.0.4|swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/jiyecafe/wechat-devtools-build:v1.0.4|g' tools/build-with-docker.sh
+
+# 构建开发者工具
+$ sudo tools/build-with-docker.sh
+# 创建快捷方式
+$ sudo nano /usr/share/applications/wechat-web-devtools.desktop
+
+[Desktop Entry]
+Name=WeChat Dev Tools
+Name[zh_CN]=微信开发者工具
+Comment=The development tools for wechat projects
+Comment[zh_CN]=提供微信开发相关项目的开发IDE支持
+Categories=Development;WebDevelopment;IDE;
+Exec=/opt/wechat-web-devtools-linux/bin/wechat-devtools
+Icon=/opt/wechat-web-devtools-linux/res/icons/wechat-devtools.svg
+Type=Application
+Terminal=false
+StartupWMClass=wechat-devtools
+Actions=
+MimeType=x-scheme-handler/wechatide
+```
+
 ## Apifox
 
 API 设计、开发、测试一体化协作平台
