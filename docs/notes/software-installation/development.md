@@ -76,7 +76,7 @@ bash install.sh
 # 生效新环境变量
 source ~/.zshrc
 # 安装 Node.js
-nvm install 18
+nvm install 24
 # 安装 pnpm 方法一
 corepack enable pnpm
 # 安装 pnpm 方法二
