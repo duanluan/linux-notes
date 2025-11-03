@@ -59,6 +59,12 @@ paru -S wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts freetype2-wps
 - ttf-wps-fonts：wps-office 所需符号字体。
 - freetype2-wps：解决字体太粗。
 
+解决**无法通过文件打开软件**的问题：
+
+开始菜单手动打开`WPS Office`，在右上角`全局设置` `设置` `其他`中`切换窗口管理模式`为`多组件模式`即可。
+
+![](../assets/20251103223224.png)
+
 ## 腾讯会议
 
 ![](https://cdn.meeting.tencent.com/assets/next-website/_next/static/images/feature3-1-79a7d46ff4fa27eb.png)
