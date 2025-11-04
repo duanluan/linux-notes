@@ -134,7 +134,6 @@ License for you: ……
 paru electron-netease-cloud-music-bin
 ```
 
-
 ## 网易云 + UnblockNeteaseMusic
 
 ```shell
@@ -190,3 +189,15 @@ $ systemctl --user enable unblock-netease-music
 $ systemctl --user start unblock-netease-music
 $ systemctl --user status unblock-netease-music
 ```
+
+## LX Music 洛雪音乐播放器
+
+![](https://github.com/lyswhut/lx-music-desktop/raw/master/doc/images/app.png)
+
+```shell
+paru lx-music-desktop-bin
+```
+
+[洛雪音乐源](https://github.com/pdone/lx-music-source)
+
+自定义源： 在`设置` `自定义源` `自定义源管理`中`在线导入`，导入后关闭导入窗口，在`自定义源`中勾选导入的源。
