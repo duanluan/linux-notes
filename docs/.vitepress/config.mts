@@ -24,7 +24,7 @@ export default defineConfig({
               { text: '系统类（必看）', link: '/notes/software-installation/system' },
               { text: '工具类', link: '/notes/software-installation/tool' },
               { text: '普通类', link: '/notes/software-installation/standard' },
-              { text: '图影音类', link: '/notes/software-installation/img-video-audio-edit' },
+              { text: '图影音编辑类', link: '/notes/software-installation/img-video-audio-edit' },
               { text: '开发类', link: '/notes/software-installation/development' }
             ]
           },
