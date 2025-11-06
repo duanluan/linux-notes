@@ -382,3 +382,24 @@ xdg-user-dirs-gtk-update
 Dolphin 中左侧常用位置项右键`编辑`，修改位置。
 
 ![](assets/20250702012916.png)
+
+## 取消 KRunner、KWin、plasmashell 的全局快捷键
+
+取消勾选`系统设置` `键盘` `快捷键`中的活动快捷键后`应用`。
+
+`KRunner`：
+- `启动`：Alt+F2
+
+`KWin`：
+- 切换到桌面1：Ctrl+F1
+- 切换到桌面2：Ctrl+F2
+- 切换到桌面3：Ctrl+F3
+- 切换到桌面4：Ctrl+F4
+- 显示隐藏窗口平铺(窗口类)：Ctrl+F7
+- 显示隐藏窗口平铺(当前桌面)：Ctrl+F9
+- 显示隐藏窗口平铺(全部桌面)：Ctrl+F10
+- 暂停显示特效合成：Alt+Shift+F12
+
+`plasmashell`：
+- 激活应用程序启动器：Alt+F1
+- 显示桌面：Ctrl+F12
