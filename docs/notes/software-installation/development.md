@@ -172,6 +172,9 @@ MimeType=application/java;application/java-archive;application/java-byte-code;ap
 Keywords=idea;
 ```
 
+快捷键调整：
+`设置`-`按键映射`-`主菜单`-`导航`-`通过引用转到`-`选择位置…`在`KDE`按键方案中不是`Alt+F1`而是`Alt+Shift+1`，因为`Alt+F1`是`plasmashell`的快捷键。我们之前在系统配置中已经取消了`plasmashell`的这个快捷键，所以可以修改一下，或者直接将按键方案修改为`Windows`。
+
 ## Maven
 
 此处用的是 IDEA 自带的。也可以自己下载：[Download Apache Maven – Maven](https://maven.apache.org/download.cgi)
