@@ -54,6 +54,22 @@ yay -Ss xxx
 
 [解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
 
+## Nushell
+
+[Nushell](https://www.nushell.sh/zh-CN/) 是一种新的 Shell。
+
+- 利用管道控制任意系统：Nu 可以在 Linux、macOS、BSD 和 Windows 上运行。一次学习，处处可用。
+- 一切皆数据：Nu 管道使用结构化数据，你可以用同样的方式安全地选择，过滤和排序。停止解析字符串，开始解决问题。
+- 强大的插件系统：具备强大的插件系统，Nu 可以轻松扩展。
+
+![](https://www.nushell.sh/frontpage/ls-example.png)
+![](https://www.nushell.sh/frontpage/fetch-example.png)
+![](https://www.nushell.sh/frontpage/miette-example.png)
+
+```shell
+sudo pacman -S nushell
+```
+
 ## Microsoft Edge
 
 微软基于 Chromium 开发的浏览器。
