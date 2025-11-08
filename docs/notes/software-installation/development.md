@@ -286,6 +286,60 @@ pipx install cnpip
 cnpip set
 ```
 
+## Android Studio
+
+[下载 Android Studio 和应用工具 - Android 开发者 | Android Developers](https://developer.android.google.cn/studio?hl=zh-cn)
+
+```shell
+# 解压并移动到 /opt 下
+tar zxvf android-studio-2025.2.1.7-linux.tar.gz
+sudo mv android-studio /opt/android-studio
+# 创建快捷方式
+$ sudo nano /usr/share/applications/android-studio.desktop
+
+[Desktop Entry]
+Name=Android Studio
+Comment=Android Studio is the official IDE for Android development, and includes everything you need to build Android apps.
+GenericName=IDE
+Exec=/opt/android-studio/bin/studio %F
+Icon=/opt/android-studio/bin/studio.png
+Type=Application
+# 禁用启动时进度通知
+StartupNotify=false
+# 与应用程序窗口关联的 WM_CLASS 属性
+StartupWMClass=jetbrains-studio
+Categories=TextEditor;Development;IDE;
+MimeType=text/x-java;text/x-kotlin;text/x-groovy;application/xml;text/xml;application/vnd.android.package-archive;inode/directory;
+Keywords=android;studio;
+```
+
+### 安装 IDEA 的中文插件
+
+此处修改是最新版 IDEA 安装目录下的`plugins/localization-zh/lib/localization-zh.jar`，使用 [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/13710/versions) 下载的 [v242.152](https://plugins.jetbrains.com/plugin/download?rel=true&updateId=557305) 来修改也是差不多的。
+
+```shell
+# 查看 Android Studio 版本
+$ cat /opt/android-studio/build.txt 
+AI-252.25557.131.2521.14344949% 
+
+# 复制 IDEA 安装目录下的中文插件到下载目录
+sudo cp /opt/jetbrains/idea/plugins/localization-zh/lib/localization-zh.jar ~/Downloads/
+cd ~/Downloads/
+# 解压出 META-INF/plugin.xml
+unzip localization-zh.jar META-INF/plugin.xml
+```
+
+编辑`META-INF/plugin.xml`：
+- `<version>252.27397.103</version>`修改为`<version>AI-252.25557.131</version>`。
+- `<idea-version since-build="252.27397.103" until-build="252.27397.103"/>`修改为`<idea-version since-build="AI-252.25557.131" until-build="252.*"/>`。
+
+```shell
+# 将修改后的 plugin.xml 更新回 jar 包
+zip localization-zh.jar META-INF/plugin.xml
+```
+
+打开 Android Studio，`Settings`-`Plugins`-右上角齿轮图标-`Install Plugin from Disk...`，选择修改后的`localization-zh.jar`安装。`Settings`-`Appearance & Behavior`-`System Settings`-`Language and Region`中`Language`选择`Chinese (Simplified) 简体中文`。
+
 ## 微信开发者工具
 
 [msojocs/wechat-web-devtools-linux: 适用于微信小程序的微信开发者工具 Linux 移植版](https://github.com/msojocs/wechat-web-devtools-linux)
