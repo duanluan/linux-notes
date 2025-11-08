@@ -154,7 +154,7 @@ tar zxvf ideaIU-2024.3.4.1.tar.gz
 sudo mkdir /opt/jetbrains
 sudo mv idea-IU-243.25659.59/ /opt/jetbrains/idea
 # 创建快捷方式
-sudo nano /usr/share/applications/idea.desktop
+$ sudo nano /usr/share/applications/idea.desktop
 
 [Desktop Entry]
 Name=IntelliJ IDEA Ultimate
