@@ -288,6 +288,10 @@ cnpip set
 
 ## Android Studio
 
+Android Studio 是开发 Android 应用的官方 IDE，包含构建 Android 应用所需的所有功能。
+
+![](https://developer.android.google.cn/static/images/studio/studio-hero-image_1440.png)
+
 [下载 Android Studio 和应用工具 - Android 开发者 | Android Developers](https://developer.android.google.cn/studio?hl=zh-cn)
 
 ```shell
