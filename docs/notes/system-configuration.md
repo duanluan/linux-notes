@@ -72,21 +72,9 @@ sudo nano /etc/pacman.conf
 $ sudo pacman -S axel
 # 创建脚本文件
 $ sudo nano /home/duanluan/workspaces/bin/github-mirror-axel.sh
-
-#! /bin/bash
-echo "github-mirror-axel.sh 生效"
-domin=`echo $2 | cut -f3 -d'/'`;
-others=`echo $2 | cut -f4- -d'/'`;
-case "$domin" in
-    *github.com*)
-        url="https://gh-proxy.com/https://github.com/"$others;
-        ;;
-    *)
-        url=$2;
-        ;;
-esac
-/usr/bin/axel -n 2 -a -o $1 $url
-
+```
+`github-mirror-axel.sh`：[shell-scripts/github-mirror-axel.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-mirror-axel.sh)
+```shell
 # 保存退出后赋予可执行权限
 $ sudo chmod +x /home/duanluan/workspaces/bin/github-mirror-axel.sh
 ```
