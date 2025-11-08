@@ -25,7 +25,8 @@ export default defineConfig({
               { text: '工具类', link: '/notes/software-installation/tool' },
               { text: '普通类', link: '/notes/software-installation/standard' },
               { text: '图影音编辑类', link: '/notes/software-installation/img-video-audio-edit' },
-              { text: '开发类', link: '/notes/software-installation/development' }
+              { text: '开发类', link: '/notes/software-installation/development' },
+              { text:'游戏类', link: '/notes/software-installation/game' }
             ]
           },
           { text: '软件卸载', link: '/notes/software-uninstallation.md' },
