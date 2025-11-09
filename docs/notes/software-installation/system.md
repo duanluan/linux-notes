@@ -84,6 +84,14 @@ paru microsoft-edge-stable-bin
 
 开始菜单搜索`默认应用程序`可以修改默认网页浏览器。
 
+## Google Chrome
+
+[Google Chrome 网络浏览器](https://www.google.com/chrome/)
+
+```shell
+paru google-chrome
+```
+
 ## Tor Browser
 
 Tor 浏览器是一款基于隐私保护的开源浏览器，通过多层加密和中继网络匿名访问互联网，隐藏用户的身份和位置。
