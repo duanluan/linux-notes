@@ -344,7 +344,7 @@ zip localization-zh.jar META-INF/plugin.xml
 
 打开 Android Studio，`Settings`-`Plugins`-右上角齿轮图标-`Install Plugin from Disk...`，选择修改后的`localization-zh.jar`安装。`Settings`-`Appearance & Behavior`-`System Settings`-`Language and Region`中`Language`选择`Chinese (Simplified) 简体中文`。
 
-## FVM + Flutter + Dart
+## FVM + Flutter 换源 + Dart
 
 ```shell
 # 代理安装 FVM
@@ -449,6 +449,24 @@ $ proxychains -q fvm flutter doctor -v
 
 ! Doctor found issues in 3 categories.
 ```
+
+- Flutter SDK 换源：
+
+  ```shell
+  cd /home/duanluan/fvm/versions/stable
+  git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git
+  
+  # 末尾追加环境变量
+  $ nano ~/.zshrc
+  
+  # flutter
+  export PUB_HOSTED_URL="https://mirrors.tuna.tsinghua.edu.cn/dart-pub"
+  export FLUTTER_STORAGE_BASE_URL="https://mirrors.tuna.tsinghua.edu.cn/flutter"
+  export FLUTTER_GIT_URL="https://mirrors.tuna.tsinghua.edu.cn/git/flutter-sdk.git"
+  
+  # 生效环境变量
+  $ source ~/.zshrc
+  ```
 
 - 解决`cmdline-tools component is missing`：
   
