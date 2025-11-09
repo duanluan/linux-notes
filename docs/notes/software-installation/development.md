@@ -344,6 +344,132 @@ zip localization-zh.jar META-INF/plugin.xml
 
 打开 Android Studio，`Settings`-`Plugins`-右上角齿轮图标-`Install Plugin from Disk...`，选择修改后的`localization-zh.jar`安装。`Settings`-`Appearance & Behavior`-`System Settings`-`Language and Region`中`Language`选择`Chinese (Simplified) 简体中文`。
 
+## FVM + Flutter + Dart
+
+```shell
+# 代理安装 FVM
+proxychains curl -fsSL https://fvm.app/install.sh | bash
+source ~/.zshrc
+
+# 代理安装 Flutter SDK 稳定版
+proxychains fvm install stable
+
+# 将 stable 设为全局默认的 Flutter 版本
+$ fvm global stable 
+Flutter SDK: Channel: Stable is now global
+
+# 查看 FVM 缓存
+$ fvm list
+Cache directory:  /home/duanluan/fvm/versions
+Directory Size: 758.62 MB
+
+# 通过 FVM 检查当前 Flutter 版本
+$ fvm flutter --version
+Flutter 3.35.7 • channel stable • https://gh-proxy.com/https://github.com/flutter/flutter.git
+Framework • revision adc9010625 (3 周前) • 2025-10-21 14:16:03 -0400
+Engine • hash 6b24e1b529bc46df7ff397667502719a2a8b6b72 (revision 035316565a) (18 days ago) • 2025-10-21 14:28:01.000Z
+Tools • Dart 3.9.2 • DevTools 2.48.0
+
+# 通过 FVM 检查当前 Dart SDK 版本
+$ fvm dart --version
+Dart SDK version: 3.9.2 (stable) (Wed Aug 27 03:49:40 2025 -0700) on "linux_x64"
+```
+
+- Flutter SDK 路径：`/home/duanluan/fvm/versions/stable`
+- Dart SDK 路径：`/home/duanluan/fvm/versions/stable/bin/cache/dart-sdk`
+
+查看并解决环境问题：
+```shell
+# 查看环境问题
+$ proxychains -q fvm flutter doctor -v
+
+[!] Flutter (Channel stable, 3.35.7, on Manjaro Linux 6.12.48-1-MANJARO, locale zh_CN.UTF-8) [29ms]
+    • Flutter version 3.35.7 on channel stable at /home/duanluan/fvm/versions/stable
+    ! Upstream repository https://gh-proxy.com/https://github.com/flutter/flutter.git is not a standard remote.
+      Set environment variable "FLUTTER_GIT_URL" to https://gh-proxy.com/https://github.com/flutter/flutter.git to dismiss this
+      error.
+    • Framework revision adc9010625 (3 周前), 2025-10-21 14:16:03 -0400
+    • Engine revision 035316565a
+    • Dart version 3.9.2
+    • DevTools version 2.48.0
+    • Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android,
+      enable-ios, cli-animations, enable-lldb-debugging
+    • If those were intentional, you can disregard the above warnings; however it is recommended to use "git" directly to
+      perform update checks and upgrades.
+
+[!] Android toolchain - develop for Android devices (Android SDK version 36.1.0) [193ms]
+    • Android SDK at /home/duanluan/Android/Sdk
+    • Emulator version 36.2.12.0 (build_id 14214601) (CL:N/A)
+    ✗ cmdline-tools component is missing.
+      Try installing or updating Android Studio.
+      Alternatively, download the tools from https://developer.android.com/studio#command-line-tools-only and make sure to set
+      the ANDROID_HOME environment variable.
+      See https://developer.android.com/studio/command-line for more details.
+    ✗ Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/to/linux-android-setup for more details.
+
+[✗] Chrome - develop for the web (Cannot find Chrome executable at google-chrome) [9ms]
+    ! Cannot find Chrome. Try setting CHROME_EXECUTABLE to a Chrome executable.
+
+[✓] Linux toolchain - develop for Linux desktop [257ms]
+    • clang version 20.1.8
+    • cmake version 4.1.1
+    • ninja version 1.12.1
+    • pkg-config version 2.5.1
+    • OpenGL core renderer: AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.8, DRM 3.61, 6.12.48-1-MANJARO) (X11)
+    • OpenGL core version: 4.6 (Core Profile) Mesa 25.2.3-arch1.2 (X11)
+    • OpenGL core shading language version: 4.60 (X11)
+    • OpenGL ES renderer: AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.8, DRM 3.61, 6.12.48-1-MANJARO) (X11)
+    • OpenGL ES version: OpenGL ES 3.2 Mesa 25.2.3-arch1.2 (X11)
+    • OpenGL ES shading language version: OpenGL ES GLSL ES 3.20 (X11)
+    • GL_EXT_framebuffer_blit: yes (X11)
+    • GL_EXT_texture_format_BGRA8888: yes (X11)
+
+[✓] Android Studio (version 2025.2.1) [8ms]
+    • Android Studio at /opt/android-studio
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 21.0.8+-14196175-b1038.72)
+
+[✓] IntelliJ IDEA Ultimate Edition (version 2025.2) [7ms]
+    • IntelliJ at /opt/jetbrains/idea
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+
+[✓] Connected device (1 available) [56ms]
+    • Linux (desktop) • linux • linux-x64 • Manjaro Linux 6.12.48-1-MANJARO
+
+[✓] Network resources [1,696ms]
+    • All expected network resources are available.
+
+! Doctor found issues in 3 categories.
+```
+
+- 解决`cmdline-tools component is missing`：
+  
+  在 Android Studio `Settings`-`Language & Frameworks`-`Android SDK`-`SDK Tools`中勾选`Android SDK Command-line Tools (latest)`安装。
+  ![](../assets/20251109203812.png)
+  再运行`fvm flutter doctor --android-licenses`，全部选`y`。
+
+- 解决`Cannot find Chrome executable at google-chrome`：
+
+  先根据之前的笔记安装 Google Chrome，然后设置环境变量：
+  ```shell
+  # 末尾追加环境变量
+  $ nano ~/.zshrc
+  
+  # chrome
+  export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
+  
+  # 生效环境变量
+  $ source ~/.zshrc
+  ```
+
 ## 微信开发者工具
 
 [msojocs/wechat-web-devtools-linux: 适用于微信小程序的微信开发者工具 Linux 移植版](https://github.com/msojocs/wechat-web-devtools-linux)
