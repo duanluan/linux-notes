@@ -550,47 +550,53 @@ API 开发管理工具
 paru apipost-bin
 ```
 
-## Navicat Premium
+## Navicat Premium (Lite)
 
 Navicat Premium 是强大的一体化数据库开发解决方案，可从单一应用程序无缝连接多个数据库，包括 MySQL、PostgreSQL、MongoDB、MariaDB、SQL Server、Oracle、SQLite、Redis 和 Snowflake。同时，它与 GaussDB 、OceanBase、TiDB、PolarDB 数据库及阿里云、腾讯云和华为云等主流云数据库兼容。
 
 ![](https://www.navicat.com.cn/images/product_screenshot/Screenshot_Navicat_17_Premium_Linux_Main_screen_CN.png)
 
-此处安装的是 Windows 版。
+- AUR
 
-[Navicat | 下载 Navicat Premium Windows](https://www.navicat.com.cn/download/navicat-premium#windows)
+  ```shell
+  paru navicat-premium-lite-zh-cn
+  ```
 
-Wine 运行器菜单栏`程序`-`安装更多Wine`：
+- Wine
 
-![](../assets/20250309230531.png)
+  [Navicat | 下载 Navicat Premium Windows](https://www.navicat.com.cn/download/navicat-premium#windows)
 
-菜单栏`Wine`-`安装常见字体`，左下角`WINE配置`-`字体商店`安装 1~5 的字体。
+  Wine 运行器菜单栏`程序`-`安装更多Wine`：
 
-左下角`WINE配置`-`配置容器`，调整`应用程序`-`Windows 版本`为`Windows 11`，`显示`-`屏幕分辨率`调大以适应本机分辨率。
+  ![](../assets/20250309230531.png)
 
-![](../assets/20250309231350.png =300x)
-![](../assets/20250309231516.png =300x)
+  菜单栏`Wine`-`安装常见字体`，左下角`WINE配置`-`字体商店`安装 1~5 的字体。
 
-选择下载的安装包，点击`运行程序`安装，安装前会提示先安装 mono。
+  左下角`WINE配置`-`配置容器`，调整`应用程序`-`Windows 版本`为`Windows 11`，`显示`-`屏幕分辨率`调大以适应本机分辨率。
 
-![](../assets/20250309231054.png)
+  ![](../assets/20250309231350.png =300x)
+  ![](../assets/20250309231516.png =300x)
 
-安装后会在启动器创建快捷方式但打不开。
+  选择下载的安装包，点击`运行程序`安装，安装前会提示先安装 mono。
 
-修改 Wine 运行器中执行程序为`/home/duanluan/.wine/drive_c/Program Files/PremiumSoft/Navicat Premium 17/navicat.exe`，名称随便，创建快捷方式到桌面，参考这个内容修改启动器中现有快捷方式的内容。
+  ![](../assets/20250309231054.png)
 
-![](../assets/20250310001055.png)
+  安装后会在启动器创建快捷方式但打不开。
 
-```shell
-$ vim ~/.local/share/applications/wine/Programs/PremiumSoft/Navicat\ Premium\ 17.desktop
+  修改 Wine 运行器中执行程序为`/home/duanluan/.wine/drive_c/Program Files/PremiumSoft/Navicat Premium 17/navicat.exe`，名称随便，创建快捷方式到桌面，参考这个内容修改启动器中现有快捷方式的内容。
 
-[Desktop Entry]
-Name=Navicat Premium 17
-Exec=env WINEPREFIX='/home/duanluan/.wine' WINEDEBUG=FIXME,ERR,WARN,TRACE,Message  /home/duanluan/.deepwinerunner/wine/wine-staging-wow64-10.2-debian10-amd64/bin/wine '/home/duanluan/.wine/drive_c/Program Files/PremiumSoft/Navicat Premium 17/navicat.exe'  
-Icon=D66E_navicat.0
-Type=Application
-StartupNotify=true
-```
+  ![](../assets/20250310001055.png)
+
+  ```shell
+  $ vim ~/.local/share/applications/wine/Programs/PremiumSoft/Navicat\ Premium\ 17.desktop
+
+  [Desktop Entry]
+  Name=Navicat Premium 17
+  Exec=env WINEPREFIX='/home/duanluan/.wine' WINEDEBUG=FIXME,ERR,WARN,TRACE,Message  /home/duanluan/.deepwinerunner/wine/wine-staging-wow64-10.2-debian10-amd64/bin/wine '/home/duanluan/.wine/drive_c/Program Files/PremiumSoft/Navicat Premium 17/navicat.exe'  
+  Icon=D66E_navicat.0
+  Type=Application
+  StartupNotify=true
+  ```
 
 ## DBeaver Ultimate
 
