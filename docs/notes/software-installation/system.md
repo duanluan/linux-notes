@@ -139,6 +139,30 @@ patch:
 
 修改配置后需在托盘区键盘图标右键`重新启动`。
 
+## debtap
+
+一个用于将 .deb 软件包转换为 Arch Linux 软件包的脚本，专注于准确性。
+
+[helixarch/debtap: A script for converting .deb packages into Arch Linux packages, focused on accuracy](https://github.com/helixarch/debtap)
+
+```shell
+# 安装 debtap
+$ paru debtap
+
+# 初始化 debtap 数据库
+$ sudo debtap -u
+
+cat: /var/cache/debtap/base-packages: 没有那个文件或目录
+sort: 无法读取: /var/cache/debtap/extended-base-packages-list-temp: 没有那个文件或目录
+
+# 因为用的是 Manjaro，所以需要预创建 debtap 需要的缓存目录与临时文件
+$ sudo install -d -m755 /var/cache/debtap
+$ sudo touch /var/cache/debtap/base-packages /var/cache/debtap/extended-base-packages-list-temp
+
+# 重新初始化 debtap 数据库
+$ sudo debtap -u
+```
+
 ## Spark Store 星火应用商店
 
 ```shell
