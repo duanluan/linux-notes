@@ -257,6 +257,31 @@ sudo nano /etc/proxychains.conf
 socks5 127.0.0.1 7897
 ```
 
+## Wine
+
+Wine 不进行模拟、转译或虚拟化，而是通过直接提供一组 Win32 API 的对应实现来运行 Windows 应用程序。
+
+```shell
+sudo pacman -Syu wine wine-mono wine-gecko winetricks
+```
+- wine-mono：Wine 的 Mono 组件，允许在 Wine 环境中运行基于 .NET 的应用程序。
+- wine_gecko：Wine 的 Gecko 组件，提供对基于 HTML 的应用程序
+- winetricks：Wine 的辅助脚本，简化了安装和配置 Windows 应用程序和组件的过程。
+
+```shell
+# 指定 Wine 前缀目录，否则默认为 ~/.wine
+export WINEPREFIX=~/.wine-xxx
+# 初始化 Wine 容器并设置
+winecfg
+# 安装中文字体支持
+proxychains -q winetricks cjkfonts
+```
+
+Wine 设置，`应用程序`可以切换`Windows 版本`，`显示`-`屏幕分辨率`调大以适应本机分辨率。
+
+![](../assets/20250309231350.png)
+![](../assets/20250309231516.png)
+
 ## GnuPG + GpgFrontend
 
 ```shell
