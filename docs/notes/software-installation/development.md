@@ -598,7 +598,7 @@ Navicat Premium 是强大的一体化数据库开发解决方案，可从单一�
   StartupNotify=true
   ```
 
-## DBeaver Ultimate
+## DBeaver Enterprise Edition
 
 功能齐全的数据库管理工具。
 
