@@ -166,7 +166,27 @@ $ sudo debtap -u
 ## Spark Store 星火应用商店
 
 ```shell
-$ yay -S amber-ce-bookworm
+$ paru amber-ce-bookworm
+
+==> 获取源代码...
+  -> 找到 amber-ce-bookworm-12.7.5.tar.gz
+==> 正在验证 source 文件，使用sha256sums...
+    amber-ce-bookworm-12.7.5.tar.gz ... 失败
+==> 错误： 一个或多个文件没有通过有效性检查！
+错误： 未能下载 'amber-ce-bookworm-12.7.5-1' 的源: 
+错误： 未能构建的软件包：amber-ce-bookworm-12.7.5-1
+
+```
+
+因为 gitee 下载增加了机器验证，所以需要手动下载 [下载仓库 · Amber CE/amber-ce-bookworm - Gitee.com](https://gitee.com/amber-ce/amber-ce-bookworm/repository/archive/12.7.5.tar.gz)
+
+```shell
+# 将下载的文件放到 AUR 构建目录
+cd ~/.cache/paru/clone/amber-ce-bookworm
+mv -f ~/Downloads/.hmcl/amber-ce-bookworm-12.7.5.tar.gz ./
+
+# 重新构建并安装
+makepkg -si
 ```
 
 无 N 卡报错“无法获取 NVIDIA 驱动版本 Can not determine NVIDIA Driver version”可以忽略，安装后需重启。
@@ -175,7 +195,6 @@ $ yay -S amber-ce-bookworm
 
 开始菜单搜索`ACE Bookworm兼容环境`并打开：
 ```shell
-sudo PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin dpkg -i spark-store_4.8.0_amd64.deb
 sudo apt update
-sudo apt install -f
+sudo apt install ./spark-store_4.8.2_amd64.deb
 ```
