@@ -9,166 +9,6 @@ paru geekbench
 geekbench6
 ```
 
-## uTools
-
-![](https://www.u-tools.cn/assets/feat/main.png)
-
-[下载中心 - uTools 官网](https://www.u-tools.cn/download/)
-
-```shell
-paru utools
-```
-
-注意默认安装的 KRunner 快捷键为`Alt` `Space`。
-
-## Rubick
-
-![](https://pic1.zhimg.com/80/v2-359c03a47d128e72a01a51e1d824741e_720w.png)
-
-[Releases · rubickCenter/rubick](https://github.com/rubickCenter/rubick/releases)
-
-```shell
-paru rubick
-```
-
-## KeePassXC
-
-![](https://keepassxc.org/assets/img/screenshots/database_view.png)
-
-```shell
-paru keepassxc-git
-```
-
-`KeePassXC`-菜单栏`工具`-`设置`-`浏览器集成`-`高级`选项卡-`使用自定义代理位置`浏览：`/usr/bin/keepassxc-proxy`
-
-### FSearch
-
-全局搜索文件工具。
-
-![](https://flathub.org/_next/image?url=https%3A%2F%2Fdl.flathub.org%2Fmedia%2Fio%2Fgithub%2Fcboxdoerfer.FSearch%2F5dfcd05a3d0147745dccd8477b238210%2Fscreenshots%2Fimage-1_orig.webp&w=1080&q=75)
-
-```shell
-paru fsearch
-```
-
-打开后`选项`-`数据库`，添加路径`/`。
-
-### AnyTXT Searcher
-
-免费桌面全文搜索工具
-
-![](https://anytxt.net/wp-content/uploads/2021/05/2021-5-29-2-768x461.png)
-
-[下载最佳免费桌面全文搜索工具 | Anytxt](https://anytxt.net/download/)
-
-```shell
-paru anytxt-bin
-```
-
-### SimpleScreenRecorder
-
-SimpleScreenRecorder是一款屏幕录制软件，它具有录制整个桌面、应用窗口、指定窗口大小以及音/视频同步，视频缩放等功能。
-
-![](https://files.maartenbaert.be/simplescreenrecorder/screenshot.png)
-
-[Download - SimpleScreenRecorder - Maarten Baert's website](https://www.maartenbaert.be/simplescreenrecorder/#download)
-
-```shell
-# 直接安装会报错
-$ paru simplescreenrecorder
-……
-==> 正在开始 build()...
-CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-  Compatibility with CMake < 3.5 has been removed from CMake.
-
-  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-  to tell CMake that the project requires at least <min> but has been updated
-  to work with policies introduced by <max> or earlier.
-
-  Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
-
--- Configuring incomplete, errors occurred!
-==> 错误： 在 build() 中发生一个错误。
-    正在放弃...
-错误： 未能构建 'simplescreenrecorder-0.4.4-3': 
-错误： 未能构建的软件包：simplescreenrecorder-0.4.4-3
-```
-
-按照它提示的做。
-
-```shell
-# 下载源码
-$ git clone https://aur.archlinux.org/simplescreenrecorder.git
-# 在 cmake 命令后加上 -DCMAKE_POLICY_VERSION_MINIMUM=3.5
-$ nano PKGBUILD
-……
-  cmake -DCMAKE_INSTALL_PREFIX="/usr" -DCMAKE_BUILD_TYPE=Release \
-    -DWITH_QT5=on \
-    -DCMAKE_INSTALL_LIBDIR='lib' -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ../
-……
-# 构建安装
-$ makepkg -si
-```
-
-## Wine 运行器
-
-Wine运行器是一个能让Linux用户更加方便地运行Windows应用的程序。原版的 Wine 只能使用命令操作，且安装过程较为繁琐，对小白不友好。于是该运行器为了解决该痛点，内置了对Wine图形化的支持、Wine 安装器、微型应用商店、各种Wine工具、自制的Wine程序打包器、运行库安装工具等。
-
-![](https://storage.deepin.org/thread/202210022215217037_%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20221002221112.png)
-
-星火应用商店下载并安装[Wine运行器](spk://store/tools/spark-deepin-wine-runner)。
-
-## Free Download Manager
-
-強大又现代的下载管理器。
-
-![](https://www.freedownloadmanager.org/public/img/v2/screen_linux.png)
-
-[Free Download Manager for Linux | Download](https://www.freedownloadmanager.org/zh/download-fdm-for-linux.htm)
-
-```shell
-paru freedownloadmanager
-```
-
-安装扩展：
-- [Free Download Manager - Chrome 应用商店](https://chromewebstore.google.com/detail/free-download-manager/ahmpjcflkgiildlgicmcieglgoilbfdp?hl=zh-CN)
-- [Free Download Manager official extension – Get this Extension for 🦊 Firefox](https://addons.mozilla.org/en-US/firefox/addon/free-download-manager-addon/)
-
-## qBittorrent Enhanced Edition
-
-基于 qBittorrent 的增强版 BT 下载工具。
-
-[Releases · c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
-
-```shell
-paru qbittorrent-enhanced
-```
-
-## Synology Drive Client
-
-Synology Drive Client 是一款桌面实用程序，可在多台客户端计算机上提供面向集中化服务器 Synology Drive Server 的文件同步和个人计算机备份服务。
-
-[下载中心 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/support/download)
-
-```shell
-paru synology-drive
-```
-
-## Syncthing + Syncthing Tray
-
-Syncthing 是开源的、跨设备实时文件同步工具。
-
-Syncthing Tray 是 Syncthing 的托盘图标工具。
-
-```shell
-paru syncthing-bin
-paru syncthingtray
-```
-
-Syncthing Tray 设置向导中选择`通过 Syncthing Tray 启动已安装的 Syncthing 应用程序`。
-
-![](../assets/20250710232739.png)
-
 ## Clash Verge
 
 A Clash Meta GUI based on Tauri.
@@ -281,6 +121,166 @@ Wine 设置，`应用程序`可以切换`Windows 版本`，`显示`-`屏幕分�
 
 ![](../assets/20250309231350.png)
 ![](../assets/20250309231516.png)
+
+## Wine 运行器
+
+Wine运行器是一个能让Linux用户更加方便地运行Windows应用的程序。原版的 Wine 只能使用命令操作，且安装过程较为繁琐，对小白不友好。于是该运行器为了解决该痛点，内置了对Wine图形化的支持、Wine 安装器、微型应用商店、各种Wine工具、自制的Wine程序打包器、运行库安装工具等。
+
+![](https://storage.deepin.org/thread/202210022215217037_%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20221002221112.png)
+
+星火应用商店下载并安装[Wine运行器](spk://store/tools/spark-deepin-wine-runner)。
+
+## uTools
+
+![](https://www.u-tools.cn/assets/feat/main.png)
+
+[下载中心 - uTools 官网](https://www.u-tools.cn/download/)
+
+```shell
+paru utools
+```
+
+注意默认安装的 KRunner 快捷键为`Alt` `Space`。
+
+## Rubick
+
+![](https://pic1.zhimg.com/80/v2-359c03a47d128e72a01a51e1d824741e_720w.png)
+
+[Releases · rubickCenter/rubick](https://github.com/rubickCenter/rubick/releases)
+
+```shell
+paru rubick
+```
+
+## KeePassXC
+
+![](https://keepassxc.org/assets/img/screenshots/database_view.png)
+
+```shell
+paru keepassxc-git
+```
+
+`KeePassXC`-菜单栏`工具`-`设置`-`浏览器集成`-`高级`选项卡-`使用自定义代理位置`浏览：`/usr/bin/keepassxc-proxy`
+
+### FSearch
+
+全局搜索文件工具。
+
+![](https://flathub.org/_next/image?url=https%3A%2F%2Fdl.flathub.org%2Fmedia%2Fio%2Fgithub%2Fcboxdoerfer.FSearch%2F5dfcd05a3d0147745dccd8477b238210%2Fscreenshots%2Fimage-1_orig.webp&w=1080&q=75)
+
+```shell
+paru fsearch
+```
+
+打开后`选项`-`数据库`，添加路径`/`。
+
+### AnyTXT Searcher
+
+免费桌面全文搜索工具
+
+![](https://anytxt.net/wp-content/uploads/2021/05/2021-5-29-2-768x461.png)
+
+[下载最佳免费桌面全文搜索工具 | Anytxt](https://anytxt.net/download/)
+
+```shell
+paru anytxt-bin
+```
+
+### SimpleScreenRecorder
+
+SimpleScreenRecorder是一款屏幕录制软件，它具有录制整个桌面、应用窗口、指定窗口大小以及音/视频同步，视频缩放等功能。
+
+![](https://files.maartenbaert.be/simplescreenrecorder/screenshot.png)
+
+[Download - SimpleScreenRecorder - Maarten Baert's website](https://www.maartenbaert.be/simplescreenrecorder/#download)
+
+```shell
+# 直接安装会报错
+$ paru simplescreenrecorder
+……
+==> 正在开始 build()...
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 has been removed from CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+  Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+
+-- Configuring incomplete, errors occurred!
+==> 错误： 在 build() 中发生一个错误。
+    正在放弃...
+错误： 未能构建 'simplescreenrecorder-0.4.4-3': 
+错误： 未能构建的软件包：simplescreenrecorder-0.4.4-3
+```
+
+按照它提示的做。
+
+```shell
+# 下载源码
+$ git clone https://aur.archlinux.org/simplescreenrecorder.git
+# 在 cmake 命令后加上 -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+$ nano PKGBUILD
+……
+  cmake -DCMAKE_INSTALL_PREFIX="/usr" -DCMAKE_BUILD_TYPE=Release \
+    -DWITH_QT5=on \
+    -DCMAKE_INSTALL_LIBDIR='lib' -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ../
+……
+# 构建安装
+$ makepkg -si
+```
+
+## Free Download Manager
+
+強大又现代的下载管理器。
+
+![](https://www.freedownloadmanager.org/public/img/v2/screen_linux.png)
+
+[Free Download Manager for Linux | Download](https://www.freedownloadmanager.org/zh/download-fdm-for-linux.htm)
+
+```shell
+paru freedownloadmanager
+```
+
+安装扩展：
+- [Free Download Manager - Chrome 应用商店](https://chromewebstore.google.com/detail/free-download-manager/ahmpjcflkgiildlgicmcieglgoilbfdp?hl=zh-CN)
+- [Free Download Manager official extension – Get this Extension for 🦊 Firefox](https://addons.mozilla.org/en-US/firefox/addon/free-download-manager-addon/)
+
+## qBittorrent Enhanced Edition
+
+基于 qBittorrent 的增强版 BT 下载工具。
+
+[Releases · c0re100/qBittorrent-Enhanced-Edition](https://github.com/c0re100/qBittorrent-Enhanced-Edition/releases)
+
+```shell
+paru qbittorrent-enhanced
+```
+
+## Synology Drive Client
+
+Synology Drive Client 是一款桌面实用程序，可在多台客户端计算机上提供面向集中化服务器 Synology Drive Server 的文件同步和个人计算机备份服务。
+
+[下载中心 | 群晖科技 Synology Inc.](https://www.synology.cn/zh-cn/support/download)
+
+```shell
+paru synology-drive
+```
+
+## Syncthing + Syncthing Tray
+
+Syncthing 是开源的、跨设备实时文件同步工具。
+
+Syncthing Tray 是 Syncthing 的托盘图标工具。
+
+```shell
+paru syncthing-bin
+paru syncthingtray
+```
+
+Syncthing Tray 设置向导中选择`通过 Syncthing Tray 启动已安装的 Syncthing 应用程序`。
+
+![](../assets/20250710232739.png)
 
 ## GnuPG + GpgFrontend
 
