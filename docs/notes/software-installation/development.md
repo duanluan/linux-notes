@@ -607,23 +607,28 @@ Navicat Premium 是强大的一体化数据库开发解决方案，可从单一�
 [Download DBeaver Ultimate](https://dbeaver.com/download/ultimate/)
 
 ```shell
-# 安装 25.0 版本
+# 方式一：直接安装（如果 dbeaver-agent 支持的版本和 dbeaver-ee 一致）
+paru dbeaver-ee
+
+# 方式二：安装指定版本（主要看 dbeaver-agent 能支持什么版本）
 git clone https://aur.archlinux.org/dbeaver-ee.git
 cd dbeaver-ee
+# 切换到指定版本，以 25.0 举例
 git checkout 18d7fe23f27e70c2db8ec413d3fdafa3ca355a34
 makepkg -si
 ```
-
-[AUR : dbeaver-ee.git 25.0 版本 - AUR Package Repositories](https://aur.archlinux.org/cgit/aur.git/commit/PKGBUILD?h=dbeaver-ee&id=18d7fe23f27e70c2db8ec413d3fdafa3ca355a34)
 
 DBeaver Agent：
 
 1. 安装 DBeaver Agent：
 
-   [Releases · wgzhao/dbeaver-agent](https://github.com/wgzhao/dbeaver-agent/releases) 下载压缩包。
+    [Releases · wgzhao/dbeaver-agent](https://github.com/wgzhao/dbeaver-agent/releases) 下载压缩包。
     ```shell
-    unzip dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar.zip
-    sudo mv dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar /opt/dbeaver-ee/dbeaver-agent.jar
+    sudo mv dbeaver-agent.jar /opt/dbeaver-ee/dbeaver-agent.jar
+    
+    # v25.0
+    # unzip dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar.zip
+    # sudo mv dbeaver-agent-25.0-SNAPSHOT-jar-with-dependencies.jar /opt/dbeaver-ee/dbeaver-agent.jar
     ```
 
 2. 配置 DBeaver：
@@ -635,10 +640,13 @@ DBeaver Agent：
     ```
 
 3. 处理 JRE 依赖：
-
-   [Azul Zulu](https://www.azul.com/downloads/#downloads-table-zulu) 下载 JRE 21。
+  
+    如果已经安装过 JDK/JRE 21+，可以省略此步。
+    
+    [Azul Zulu](https://www.azul.com/downloads/#downloads-table-zulu) 下载 JRE 21。
     ```shell
     tar zxvf zulu21.42.19-ca-jre21.0.7-linux_x64.tar.gz
+    # 可能没有
     sudo mv /opt/dbeaver-ee/jre /opt/dbeaver-ee/jre.bak
     sudo mv zulu21.42.19-ca-jre21.0.7-linux_x64 /opt/dbeaver-ee/jre
     ```
@@ -658,12 +666,12 @@ DBeaver Agent：
     --- 请复制上一行 ---
     ```
 
-6. 命令行启动 DBeaver：
+6. 命令行启动 DBeaver 并导入许可证：
     ```shell
     # 命令行启动方便查看日志
     /opt/dbeaver-ee/dbeaver
     ```
-   点击“Import License”，粘贴上一步生成的许可证密钥并确定。
+    点击“Import License”，粘贴上一步生成的许可证密钥并确定。
 
 鼓励大家支持正版软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
 
