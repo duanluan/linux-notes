@@ -460,7 +460,11 @@ tar xvf xDroidInstall-x86_64-v13.2.380-20250306.tar.xz
 [免费下载 Xmind 思维导图 | Xmind 中文官方网站](https://xmind.cn/download/)
 
 ```shell
-paru xmind
+# 克隆并编译安装 v23.08
+git clone https://aur.archlinux.org/xmind.git
+cd xmind
+git checkout f9f4f8
+makepkg -si
 ```
 
 [Releases · henryau53/xmind-crack-patch](https://github.com/henryau53/xmind-crack-patch/releases)
