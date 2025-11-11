@@ -73,9 +73,9 @@ proxychains wget https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
 sed -i 's/command git clone/command proxychains git clone/g' install.sh
 # 执行脚本
 bash install.sh
-# 生效新环境变量
-source ~/.zshrc
-# 安装 Node.js
+# 代替重启 shell
+\. "$HOME/.nvm/nvm.sh"
+# 下载并安装 Node.js
 nvm install 24
 # 安装 pnpm 方法一
 corepack enable pnpm
