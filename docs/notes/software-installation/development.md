@@ -125,13 +125,16 @@ OpenJDK 64-Bit Server VM Zulu21.40+17-CA (build 21.0.6+7-LTS, mixed mode, sharin
 [Gradle | Releases](https://gradle.org/releases/) 下载`binary-only`。
 
 ```shell
-unzip gradle-7.6.5-bin.zip
+# 代理下载压缩包（可选）
+proxychains axel -n 10 -o gradle-7.6.6-bin.zip 'https://services.gradle.org/distributions/gradle-7.6.6-bin.zip'
+
+unzip gradle-7.6.6-bin.zip
 sudo mkdir /opt/gradle
-sudo mv gradle-7.6.5 /opt/gradle/
+sudo mv gradle-7.6.6 /opt/gradle/
 # 末尾追加环境变量
 $ nano ~/.zshrc
 # gradle
-export GRADLE_HOME="/opt/gradle/gradle-7.6.5"
+export GRADLE_HOME="/opt/gradle/gradle-7.6.6"
 export PATH=$GRADLE_HOME/bin:$PATH
 
 $ source ~/.zshrc
