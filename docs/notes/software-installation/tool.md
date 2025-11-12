@@ -521,7 +521,7 @@ VLC 是一款自由、开源的跨平台多媒体播放器及框架，可播放�
 sudo pacman -S vlc
 ```
 
-## Remote Desktop Manager
+## Remote Desktop Manager + FreeRDP
 
 Remote Desktop Manager（RDM）将所有远程连接集中到一个平台上，用户之间以及整个团队都可以安全地共享该平台。RDM 支持数百种集成技术（包括多种协议和 VPN），内置企业级密码管理工具、全局和细粒度访问控制，以及强大的移动应用程序，是 Windows 和 Mac 桌面客户端的补充，是远程访问的 IT 工具箱。
 
@@ -530,6 +530,9 @@ Remote Desktop Manager（RDM）将所有远程连接集中到一个平台上，�
 [Download - RDM - Devolutions](https://devolutions.net/remote-desktop-manager/download/)
 
 ```shell
+# 安装 FreeRDP
+sudo pacman -S freerdp
+# 安装 Remote Desktop Manager
 paru remote-desktop-manager
 ```
 
