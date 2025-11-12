@@ -34,8 +34,34 @@ paru wechat-appimage
 
 [下载飞书 App 及桌面客户端 - 飞书官网](https://www.feishu.cn/download)
 
+AUR：
 ```shell
 paru feishu-bin
+```
+
+最新版：
+
+下载[获取飞书 Linux 最新版信息](https://gist.github.com/BoringCat/36288b399faff696d95a59dfe6476912?permalink_comment_id=5859554#gistcomment-5859554)脚本。
+
+```shell
+# 获取最新版本信息
+$ python getFeishuLatestInfo.py 
+
+pkgver=7.50.14
+_pkghash_x64=e91d15e2
+md5sums_x86_64=('3660717a2e15ba21867d9a21b966acf9')
+pkgver=7.50.14
+_pkghash_arm64=f247fca9
+md5sums_aarch64=('ba0ad73b8a4bffbb1a4344b423bfbe42')
+
+# 克隆 AUR 仓库
+$ git clone https://aur.archlinux.org/feishu-bin.git
+$ cd feishu-bin
+# 修改 pkgver、_pkghash_x64、_pkghash_arm64 的行为上面输出的行
+# 替换 sha256sums_x86_64、sha256sums_aarch64 的行为 md5sums_x86_64、md5sums_aarch64 的行
+$ nano PKGBUILD
+# 构建安装
+$ makepkg -si
 ```
 
 ## 钉钉
