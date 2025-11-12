@@ -92,3 +92,73 @@ $ sudo dmesg|grep Bluetooth
 最后两句有问题，需要将`AX200/AX201`缺少的`ibt-0040-0041.ddc`、`ibt-0040-0041.sfi`固件从 [Intel linux-firmware](https://anduin.linuxfromscratch.org/sources/linux-firmware/intel/) 下载并移动到`/lib/firmware/intel`目录中，再重启电脑就正常了。
 
 参考：[Manjaro蓝牙BUG：Bluetooth: hci0: Failed to load Intel firmware file intel/ibt-0040-1050.sfi (-2) - CY BLOG](https://cy.terase.cn/2024/12/24/bluetooth-bug/)
+
+## X11 切换到 Wayland 问题
+
+- 提示“`检测到设置了 GTK_IM_MODULE 和 QT_IM_MODULE 而且 Wayland 输入法前端正在正常工作。推荐使用 Wayland 输入法前端。更多信息请参见 https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma `”
+
+  - `系统设置`-`键盘`-`虚拟键盘`，从`Fcitx 5 Wayland 启动器 (实验性)`切换到`Fcitx 5`。
+  - 设置环境变量
+  
+  ```shell
+  # 查看环境变量
+  $ printenv | grep -E '^(GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS|SDL_IM_MODULE|GLFW_IM_MODULE)='
+  GTK_IM_MODULE=fcitx
+  QT_IM_MODULE=fcitx
+  SDL_IM_MODULE=fcitx
+  XMODIFIERS=@im=fcitx
+  
+  # 查找环境变量位置
+  $ grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null 
+  /home/njcm/.zhistory:415:echo $GTK_IM_MODULE
+  /home/njcm/.zhistory:416:env | grep -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS'
+  /home/njcm/.zhistory:422:printenv | grep -E '^(GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS|SDL_IM_MODULE|GLFW_IM_MODULE)='
+  /home/njcm/.zhistory:423:grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null
+  /etc/profile.d/input-support.sh:6:    export GTK_IM_MODULE=$im
+  /etc/profile.d/input-support.sh:7:    export QT_IM_MODULE=$im
+  /etc/profile.d/input-support.sh:8:    export XMODIFIERS=@im=$im
+  /etc/profile.d/input-support.sh:16:    export XMODIFIERS=@im=$im
+  /etc/profile.d/input-support.sh:17:    export QT_IM_MODULE=$im
+  /etc/profile.d/input-support.sh:22:    export XMODIFIERS=@im=$im
+  /etc/profile.d/input-support.sh:26:    export QT_IM_MODULE=$im
+  /etc/profile.d/input-support.sh:27:    export GTK_IM_MODULE=$im
+  
+  $ nano ~/.config/plasma-workspace/env/99-immodule-bridge.sh
+  ```
+  `99-immodule-bridge.sh`是 KDE 的环境初始化脚本，目的是让系统在登录时自动检测当前是 Wayland 还是 X11，并据此动态清除（Wayland 下）或设置（X11 下）输入法环境变量，解决 Fcitx 5 的冲突警告：
+  ```shell
+  #!/usr/bin/env bash
+  # KDE Plasma 会在用户会话启动时 source 这个目录下的脚本。
+  
+  # 调试日志：这一行可以确认脚本是否真的被执行了 (查看 /tmp/fcitx-bridge.log)
+  echo "$(date): 脚本开始执行，当前 Session 类型: $XDG_SESSION_TYPE" > /tmp/fcitx-bridge.log
+  
+  case "${XDG_SESSION_TYPE}" in
+    wayland)
+      # Wayland：使用 Wayland text-input 前端，不再强制 GTK/Qt/SDL 使用旧式 immodule
+      # 这里的 unset 对去除警告至关重要
+      unset GTK_IM_MODULE
+      unset QT_IM_MODULE
+      unset SDL_IM_MODULE
+  
+      # 显式置空，防止 unset 在某些 shell 继承机制下失效
+      export GTK_IM_MODULE=""
+      export QT_IM_MODULE=""
+      export SDL_IM_MODULE=""
+  
+      # 可选：为 XWayland 老应用保留 XIM（不影响原生 Wayland 应用）
+      export XMODIFIERS="@im=fcitx"
+      ;;
+    x11|tty|'')
+      # X11（或未知时按 X11 兜底）：使用 fcitx 的 immodule，保证兼容性
+      export GTK_IM_MODULE="fcitx"
+      export QT_IM_MODULE="fcitx"
+      export SDL_IM_MODULE="fcitx"
+      export XMODIFIERS="@im=fcitx"
+      ;;
+  esac
+  ```
+
+- 微信、钉钉没有缩放
+  
+  开始菜单搜索软件名，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_SCALE_FACTOR=1.5`（1.5 为缩放比例），如果环境变量已经有值，添加` QT_SCALE_FACTOR=1.5`，再保存后重启软件。
