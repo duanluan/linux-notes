@@ -254,7 +254,7 @@ MimeType=application/xhtml+xml;text/javascript;text/css;
 Keywords=pycharm;
 ```
 
-## Python + pipx + cnpip 切换最快 pip 镜像源
+## Python + pipx + cnpip 切换最快 pip 镜像源 + uv
 
 自带 Python，但当你想全局安装依赖时会报错：
 ```shell
@@ -287,6 +287,8 @@ sudo pacman -S python-pipx
 pipx install cnpip
 # cnpip 切换最快镜像源
 cnpip set
+# pipx 安装 uv
+pipx install uv
 ```
 
 ## Android Studio
