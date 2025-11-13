@@ -145,12 +145,42 @@ Welcome to Gradle 7.6.5!
 
 ```
 
+## JetBrains Toolbox APP
+
+![](https://www.jetbrains.com/toolbox-app/img/1_zh-cn.png)
+
+[JetBrains Toolbox App：轻松管理您的工具](https://www.jetbrains.com/zh-cn/toolbox-app/)
+
+```shell
+# 安装 Toolbox
+paru jetbrains-toolbox
+
+# 创建 Shell 脚本位置
+mkdir -p /opt/jetbrains/scripts
+
+# 更改想要安装的目录所有者为当前用户
+sudo chown -R $USER:$USER /opt/jetbrains
+
+# 将想要设置的 Shell 脚本目录添加到环境变量
+$ nano ~/.zshrc
+# jetbrains toolbox scripts
+export PATH="/opt/jetbrains/scripts:$PATH"
+
+# 生效环境变量
+$ source ~/.zshrc
+```
+
+在 Toolbox APP 右上角齿轮图表-`设置`-`工具`中修改`工具安装位置`为`/opt/jetbrains`，`Shell 脚本位置`为`/opt/jetbrains/scripts`并应用。
+
 ## JetBrains IntelliJ IDEA
 
 [下载 IntelliJ IDEA](https://www.jetbrains.com/zh-cn/idea/download/?section=linux)
 
 [MIME 类型（MIME Type）完整对照表](https://mime.wcode.net/zh-hans/)
 
+方式一：通过 JetBrains Toolbox 安装。
+
+方式二：手动安装。
 ```shell
 # 解压并移动到 /opt 下
 tar zxvf ideaIU-2024.3.4.1.tar.gz
@@ -202,6 +232,9 @@ OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family
 
 [下载 WebStorm](https://www.jetbrains.com/zh-cn/webstorm/download/#section=linux)
 
+方式一：通过 JetBrains Toolbox 安装。
+
+方式二：手动安装。
 ```shell
 # 解压并移动到 /opt 下
 tar zxvf WebStorm-2024.3.4.tar.gz
@@ -230,6 +263,9 @@ Keywords=webstorm;
 
 [下载 PyCharm](https://www.jetbrains.com/zh-cn/pycharm/download/?section=linux)
 
+方式一：通过 JetBrains Toolbox 安装。
+
+方式二：手动安装。
 ```shell
 # 解压并移动到 /opt 下
 tar zxvf pycharm-2025.1.2.tar.gz
@@ -299,6 +335,9 @@ Android Studio 是开发 Android 应用的官方 IDE，包含构建 Android 应�
 
 [下载 Android Studio 和应用工具 - Android 开发者 | Android Developers](https://developer.android.google.cn/studio?hl=zh-cn)
 
+方式一：通过 JetBrains Toolbox 安装。
+
+方式二：手动安装。
 ```shell
 # 解压并移动到 /opt 下
 tar zxvf android-studio-2025.2.1.7-linux.tar.gz
