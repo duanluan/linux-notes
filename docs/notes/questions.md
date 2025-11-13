@@ -96,9 +96,6 @@ $ sudo dmesg|grep Bluetooth
 ## X11 切换到 Wayland 问题
 
 - 提示“`检测到设置了 GTK_IM_MODULE 和 QT_IM_MODULE 而且 Wayland 输入法前端正在正常工作。推荐使用 Wayland 输入法前端。更多信息请参见 https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma `”
-
-  - `系统设置`-`键盘`-`虚拟键盘`，从`Fcitx 5 Wayland 启动器 (实验性)`切换到`Fcitx 5`。
-  - 设置环境变量
   
   ```shell
   # 查看环境变量
@@ -162,3 +159,7 @@ $ sudo dmesg|grep Bluetooth
 - 微信、钉钉没有缩放
   
   开始菜单搜索软件名，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_SCALE_FACTOR=1.5`（1.5 为缩放比例），如果环境变量已经有值，添加` QT_SCALE_FACTOR=1.5`，再保存后重启软件。
+
+- QQ 输入法候选栏闪退
+
+  开始菜单搜索`QQ`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_IM_MODULE=fcitx XMODIFIERS="@im=fcitx" GTK_IM_MODULE=fcitx SDL_IM_MODULE=fcitx QT_QPA_PLATFORM=xcb`，再保存后重启软件。
