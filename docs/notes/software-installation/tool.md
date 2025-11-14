@@ -21,6 +21,28 @@ A Clash Meta GUI based on Tauri.
 paru clash-verge-rev-bin
 ```
 
+配置全局规则：
+
+[Loyalsoldier/clash-rules: Clash Premium 规则集 (RULE-SET)](https://github.com/Loyalsoldier/clash-rules)
+
+在`订阅`-`全局扩展覆写配置`中追加：
+
+```yaml
+rule-providers:
+  # 直连
+  direct: 
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    interval: 86400
+  # 代理
+  private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+    interval: 86400
+```
+
 ## Brook
 
 跨平台可编程网络工具。
