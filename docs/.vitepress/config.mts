@@ -19,7 +19,7 @@ export default defineConfig({
         text: '笔记',
         items: [
           { text: '系统安装', link: '/notes/system-installation.md' },
-          { text: '系统配置', link: '/notes/system-configuration.md' },
+          { text: '系统配置（必看）', link: '/notes/system-configuration.md' },
           { text: '软件安装', items: [
               { text: '系统类（必看）', link: '/notes/software-installation/system' },
               { text: '工具类', link: '/notes/software-installation/tool' },

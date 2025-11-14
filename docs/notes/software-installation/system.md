@@ -54,54 +54,6 @@ yay -Ss xxx
 
 [解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
 
-## Nushell
-
-[Nushell](https://www.nushell.sh/zh-CN/) 是一种新的 Shell。
-
-- 利用管道控制任意系统：Nu 可以在 Linux、macOS、BSD 和 Windows 上运行。一次学习，处处可用。
-- 一切皆数据：Nu 管道使用结构化数据，你可以用同样的方式安全地选择，过滤和排序。停止解析字符串，开始解决问题。
-- 强大的插件系统：具备强大的插件系统，Nu 可以轻松扩展。
-
-![](https://www.nushell.sh/frontpage/ls-example.png)
-![](https://www.nushell.sh/frontpage/fetch-example.png)
-![](https://www.nushell.sh/frontpage/miette-example.png)
-
-```shell
-sudo pacman -S nushell
-```
-
-## Microsoft Edge
-
-微软基于 Chromium 开发的浏览器。
-
-![](https://edgestatic.azureedge.net/shared/cms/lrs1c69a1j/section-images/b0ec664721b948bdb4de34621ba1ce25-png-w1920.avif)
-
-[官方下载 Microsoft Edge](https://www.microsoft.com/zh-cn/edge/download)
-
-```shell
-paru microsoft-edge-stable-bin
-```
-
-开始菜单搜索`默认应用程序`可以修改默认网页浏览器。
-
-## Google Chrome
-
-[Google Chrome 网络浏览器](https://www.google.com/chrome/)
-
-```shell
-paru google-chrome
-```
-
-## Tor Browser
-
-Tor 浏览器是一款基于隐私保护的开源浏览器，通过多层加密和中继网络匿名访问互联网，隐藏用户的身份和位置。
-
-```shell
-# paru tor-browser-bin 时导入报错“gpg: 从公钥服务器接收失败：无数据 错误： 未能运行： gpg --recv-keys EF6E286DDA85EA2A4BA7DE684E2C6E8793298290”，所以手动导入
-curl -s https://keys.openpgp.org/vks/v1/by-fingerprint/EF6E286DDA85EA2A4BA7DE684E2C6E8793298290 | gpg --import
-paru tor-browser-bin
-```
-
 ## Rime 雾凇拼音
 
 ```shell
@@ -138,6 +90,22 @@ patch:
 ```
 
 修改配置后需在托盘区键盘图标右键`重新启动`。
+
+## Nushell
+
+[Nushell](https://www.nushell.sh/zh-CN/) 是一种新的 Shell。
+
+- 利用管道控制任意系统：Nu 可以在 Linux、macOS、BSD 和 Windows 上运行。一次学习，处处可用。
+- 一切皆数据：Nu 管道使用结构化数据，你可以用同样的方式安全地选择，过滤和排序。停止解析字符串，开始解决问题。
+- 强大的插件系统：具备强大的插件系统，Nu 可以轻松扩展。
+
+![](https://www.nushell.sh/frontpage/ls-example.png)
+![](https://www.nushell.sh/frontpage/fetch-example.png)
+![](https://www.nushell.sh/frontpage/miette-example.png)
+
+```shell
+sudo pacman -S nushell
+```
 
 ## debtap
 
@@ -197,4 +165,36 @@ makepkg -si
 ```shell
 sudo apt update
 sudo apt install ./spark-store_4.8.2_amd64.deb
+```
+
+## Microsoft Edge
+
+微软基于 Chromium 开发的浏览器。
+
+![](https://edgestatic.azureedge.net/shared/cms/lrs1c69a1j/section-images/b0ec664721b948bdb4de34621ba1ce25-png-w1920.avif)
+
+[官方下载 Microsoft Edge](https://www.microsoft.com/zh-cn/edge/download)
+
+```shell
+paru microsoft-edge-stable-bin
+```
+
+开始菜单搜索`默认应用程序`可以修改默认网页浏览器。
+
+## Google Chrome
+
+[Google Chrome 网络浏览器](https://www.google.com/chrome/)
+
+```shell
+paru google-chrome
+```
+
+## Tor Browser
+
+Tor 浏览器是一款基于隐私保护的开源浏览器，通过多层加密和中继网络匿名访问互联网，隐藏用户的身份和位置。
+
+```shell
+# paru tor-browser-bin 时导入报错“gpg: 从公钥服务器接收失败：无数据 错误： 未能运行： gpg --recv-keys EF6E286DDA85EA2A4BA7DE684E2C6E8793298290”，所以手动导入
+curl -s https://keys.openpgp.org/vks/v1/by-fingerprint/EF6E286DDA85EA2A4BA7DE684E2C6E8793298290 | gpg --import
+paru tor-browser-bin
 ```

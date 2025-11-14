@@ -195,7 +195,7 @@ nano /etc/hosts
 
 或者使用脚本：[shell-scripts/update-github-hosts.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/update-github-hosts.sh)
 
-## 安装 Fcitx5
+## 安装 Fcitx5（必看）
 
 进入系统后，Manjaro Hello 弹窗中点击`Applications`按钮，勾选`Extended language support`-`Manjaro Asian Input Support Fcitx5`，点击`UPDATE SYSTEM`按钮。
 
