@@ -1,39 +1,5 @@
 # 开发类
 
-## Another Redis Desktop Manager
-
-更快、更好、更稳定的Redis桌面(GUI)管理客户端，兼容Windows、Mac、Linux，性能出众，轻松加载海量键值
-
-![](https://cdn.jsdelivr.net/gh/qishibo/img/ardm/202411081318491.png)
-
-[下载 - Another Redis Desktop Manager](https://goanother.com/cn/#download)
-
-```shell
-paru another-redis-desktop-manager
-```
-
-## MobaXterm Pro
-
-星火应用商店下载并安装 [MobaXterm Pro（汉化版）](spk://store/development/net.mobatek.mobaxterm-pro-chs)。
-
-## WindTerm
-
-一个更快更好的 DevOps SSH/Telnet/Serial/Shell/Sftp 客户端。
-
-![](https://github.com/kingToolbox/WindTerm/raw/master/images/screenshots/WindTerm.png)
-
-[Releases · kingToolbox/WindTerm](https://github.com/kingToolbox/WindTerm/releases)
-
-```shell
-paru windterm-bin
-```
-
-解决文件管理器打开文件报错无法创建临时文件：
-```shell
-sudo mkdir -p /usr/lib/windterm/temp
-sudo chmod 1777 /usr/lib/windterm/temp
-```
-
 ## Git
 
 创建 SSH Key：
@@ -60,6 +26,55 @@ git config --global core.autocrlf input
 # 忽略文件权限修改
 git config --global core.fileMode false
 ```
+
+## act
+
+本地运行 GitHub Actions。
+
+[Releases · nektos/act](https://github.com/nektos/act/releases) 下载压缩包。
+
+```shell
+$ tar zxvf act_Linux_x86_64.tar.gz
+$ sudo mkdir /opt/act
+$ sudo mv act /opt/act/
+
+# 可执行文件链接到系统路径
+$ sudo ln -s /opt/act/act /usr/local/bin/act
+
+# 用本项目做测试
+# 查看任务
+$ act --list
+INFO[0000] Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock' 
+Stage  Job ID           Job name         Workflow name  Workflow file    Events
+0      deploy-gh-pages  deploy-gh-pages  docs           deploy-docs.yml  pus
+
+# 测试
+$ sudo act -j deploy-gh-pages
+```
+
+## Docker + Docker Componse + Portainer
+
+```shell
+# 安装 Docker + Docker Componse
+sudo pacman -S docker docker-compose
+# 启动 Docker 服务
+sudo systemctl start docker
+# 开机启动 Docker 服务
+sudo systemctl enable docker
+```
+
+[Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
+
+镜像加速请看：[Docker 使用笔记问题答疑及 WSL2 相关 - duanluan 的博客](https://blog.zhjh.top/?p=io0ETi1lKgEyKR0OcDZgS)
+
+```shell
+# 创建 Portainer 存储数据库的卷
+sudo docker volume create portainer_data
+# 启动 Portainer
+proxychains sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+```
+
+打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
 
 ## nvm + Node.js + pnpm + nrm
 
@@ -146,8 +161,6 @@ Welcome to Gradle 7.6.5!
 ```
 
 ## JetBrains Toolbox APP
-
-![](https://www.jetbrains.com/toolbox-app/img/1_zh-cn.png)
 
 [JetBrains Toolbox App：轻松管理您的工具](https://www.jetbrains.com/zh-cn/toolbox-app/)
 
@@ -632,8 +645,6 @@ Navicat Premium 是强大的一体化数据库开发解决方案，可从单一�
 
   同样的 Linux 版 Navicat 就下载`Instant Client for Linux`。
 
-  
-
 ## DBeaver Enterprise Edition
 
 功能齐全的数据库管理工具。
@@ -711,51 +722,36 @@ DBeaver Agent：
 
 鼓励大家支持正版软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
 
-## Docker + Docker Componse + Portainer
+## Another Redis Desktop Manager
+
+更快、更好、更稳定的Redis桌面(GUI)管理客户端，兼容Windows、Mac、Linux，性能出众，轻松加载海量键值
+
+![](https://cdn.jsdelivr.net/gh/qishibo/img/ardm/202411081318491.png)
+
+[下载 - Another Redis Desktop Manager](https://goanother.com/cn/#download)
 
 ```shell
-# 安装 Docker + Docker Componse
-sudo pacman -S docker docker-compose
-# 启动 Docker 服务
-sudo systemctl start docker
-# 开机启动 Docker 服务
-sudo systemctl enable docker
+paru another-redis-desktop-manager
 ```
 
-[Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
+## MobaXterm Pro
 
-镜像加速请看：[Docker 使用笔记问题答疑及 WSL2 相关 - duanluan 的博客](https://blog.zhjh.top/?p=io0ETi1lKgEyKR0OcDZgS)
+星火应用商店下载并安装 [MobaXterm Pro（汉化版）](spk://store/development/net.mobatek.mobaxterm-pro-chs)。
+
+## WindTerm
+
+一个更快更好的 DevOps SSH/Telnet/Serial/Shell/Sftp 客户端。
+
+![](https://github.com/kingToolbox/WindTerm/raw/master/images/screenshots/WindTerm.png)
+
+[Releases · kingToolbox/WindTerm](https://github.com/kingToolbox/WindTerm/releases)
 
 ```shell
-# 创建 Portainer 存储数据库的卷
-sudo docker volume create portainer_data
-# 启动 Portainer
-proxychains sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+paru windterm-bin
 ```
 
-打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
-
-## act
-
-本地运行 GitHub Actions。
-
-[Releases · nektos/act](https://github.com/nektos/act/releases) 下载压缩包。
-
+解决文件管理器打开文件报错无法创建临时文件：
 ```shell
-$ tar zxvf act_Linux_x86_64.tar.gz
-$ sudo mkdir /opt/act
-$ sudo mv act /opt/act/
-
-# 可执行文件链接到系统路径
-$ sudo ln -s /opt/act/act /usr/local/bin/act
-
-# 用本项目做测试
-# 查看任务
-$ act --list
-INFO[0000] Using docker host 'unix:///var/run/docker.sock', and daemon socket 'unix:///var/run/docker.sock' 
-Stage  Job ID           Job name         Workflow name  Workflow file    Events
-0      deploy-gh-pages  deploy-gh-pages  docs           deploy-docs.yml  pus
-
-# 测试
-$ sudo act -j deploy-gh-pages
+sudo mkdir -p /usr/lib/windterm/temp
+sudo chmod 1777 /usr/lib/windterm/temp
 ```
