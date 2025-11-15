@@ -734,6 +734,21 @@ DBeaver Agent：
 paru another-redis-desktop-manager
 ```
 
+## Offset Explorer
+
+Offset Explorer（前身为 Kafka Tool）是一款用于管理和使用 Apache Kafka®集群的 GUI 应用程序。它提供了一个直观的用户界面，使用户能够快速查看 Kafka 集群中的对象以及集群主题中存储的消息。
+
+[Download - Offset Explorer](https://www.kafkatool.com/download.html)
+
+```shell
+proxychains -q paru offsetexplorer
+
+# 解决未缩放，追加配置
+$ sudo nano offsetexplorer.vmoptions
+
+-Dsun.java2d.uiScale=2.0
+```
+
 ## MobaXterm Pro
 
 星火应用商店下载并安装 [MobaXterm Pro（汉化版）](spk://store/development/net.mobatek.mobaxterm-pro-chs)。
