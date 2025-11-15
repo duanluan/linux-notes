@@ -741,10 +741,10 @@ Offset Explorer（前身为 Kafka Tool）是一款用于管理和使用 Apache K
 [Download - Offset Explorer](https://www.kafkatool.com/download.html)
 
 ```shell
-proxychains -q paru offsetexplorer
-
+# 安装
+$ proxychains -q paru offsetexplorer
 # 解决未缩放，追加配置
-$ sudo nano offsetexplorer.vmoptions
+$ sudo nano /opt/offsetexplorer/offsetexplorer.vmoptions
 
 -Dsun.java2d.uiScale=2.0
 ```
