@@ -110,7 +110,7 @@ $ systemctl --user status brook
 sudo pacman -S proxychains
 ```
 
-在配置文件`/etc/proxychain4.conf`末尾 [ProxyList] 后注释默认代理并添加新代理。
+在配置文件`/etc/proxychain.conf`末尾 [ProxyList] 后注释默认代理并添加新代理。
 ```shell
 sudo nano /etc/proxychains.conf
 ```
@@ -511,7 +511,7 @@ Sunshine + Moonlight 是一套自托管的游戏串流解决方案，其中 Suns
 [Sunshine+Moonlight 低延迟远程串流和平板副屏](https://blog.zhjh.top/?p=uvdJRjuB)
 
 ```shell
-paru sunshine
+paru sunshine-bin
 paru moonlight-qt-bin
 ```
 
