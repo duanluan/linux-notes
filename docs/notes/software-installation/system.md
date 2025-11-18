@@ -54,6 +54,30 @@ yay -Ss xxx
 
 [解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
 
+## Zram 内存压缩
+
+```shell
+# 安装 zram-generator
+$ sudo pacman -S zram-generator
+# 创建配置文件
+$ sudo nano /etc/systemd/zram-generator.conf
+
+[zram0]
+# 压缩算法，zstd 是性能和压缩率的最佳平衡
+compression-algorithm = zstd
+# 1.0 表示分配动态内存大小的 100% 作为 zram 设备
+zram-size-ram-max = 1.0
+
+# 启动 zram 服务，它是一个 systemd 生成器所以不需要 enable
+$ sudo systemctl daemon-reload
+$ sudo systemctl start systemd-zram-setup@zram0.service
+# 查看 zram 设备信息
+$ zramctl
+
+NAME       ALGORITHM DISKSIZE  DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 zstd            4G  3.8G  1.1G  1.1G      16 [SWAP]
+```
+
 ## Rime 雾凇拼音
 
 ```shell
