@@ -353,7 +353,14 @@ paru e-search
 [Releases · rustdesk/rustdesk](https://github.com/rustdesk/rustdesk/releases/)
 
 ```shell
-paru rustdesk-bin
+# 安装
+$ paru rustdesk-bin
+
+==> NOTE: The RustDesk daemon must be started for RustDesk to work.
+==> NOTE: To start it automatically on boot, run 'sudo systemctl enable --now rustdesk' in a terminal.
+
+# 启动 RustDesk 服务并设置为开机自启
+$ sudo systemctl enable --now rustdesk
 ```
 
 ## VMware Workstation Pro
