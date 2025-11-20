@@ -619,6 +619,18 @@ API 开发管理工具
 paru apipost-bin
 ```
 
+## Postman
+
+Postman 是全球领先的 API 平台，将 API 开发从一个分散的、多工具的挑战转变为一个统一的、协作的过程，涵盖设计、测试、文档和监控。
+
+![](https://voyager.postman.com/illustration/response-screenshot.svg)
+
+[Download Postman | Get Started for Free](https://www.postman.com/downloads/)
+
+```shell
+paru postman-bin
+```
+
 ## JetBrains DataGrip
 
 适用于关系型和 NoSQL 数据库的强大跨平台 IDE。
