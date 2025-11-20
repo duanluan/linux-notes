@@ -619,6 +619,16 @@ API 开发管理工具
 paru apipost-bin
 ```
 
+## JetBrains DataGrip
+
+适用于关系型和 NoSQL 数据库的强大跨平台 IDE。
+
+![](https://www.jetbrains.com/datagrip/inc/overview-content/parts/features-section/img/code-of-console.png)
+
+[下载 DataGrip](https://www.jetbrains.com/zh-cn/datagrip/download/?section=linux)
+
+通过 JetBrains Toolbox 安装。
+
 ## Navicat Premium (Lite)
 
 Navicat Premium 是强大的一体化数据库开发解决方案，可从单一应用程序无缝连接多个数据库，包括 MySQL、PostgreSQL、MongoDB、MariaDB、SQL Server、Oracle、SQLite、Redis 和 Snowflake。同时，它与 GaussDB 、OceanBase、TiDB、PolarDB 数据库及阿里云、腾讯云和华为云等主流云数据库兼容。
