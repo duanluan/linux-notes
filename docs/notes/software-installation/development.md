@@ -187,6 +187,10 @@ $ source ~/.zshrc
 
 ## JetBrains IntelliJ IDEA
 
+适用于专业开发的卓越 IDE，适用于 Java 和 Kotlin。
+
+![](https://www.jetbrains.com/idea/download/screenshots/download.png)
+
 [下载 IntelliJ IDEA](https://www.jetbrains.com/zh-cn/idea/download/?section=linux)
 
 [MIME 类型（MIME Type）完整对照表](https://mime.wcode.net/zh-hans/)
@@ -243,6 +247,10 @@ OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family
 
 ## JetBrains WebStorm
 
+JavaScript 和 TypeScript IDE。
+
+![](https://www.jetbrains.com/webstorm/inc/overview/junie-section/img/junie.png)
+
 [下载 WebStorm](https://www.jetbrains.com/zh-cn/webstorm/download/#section=linux)
 
 方式一：通过 JetBrains Toolbox 安装。
@@ -273,6 +281,10 @@ Keywords=webstorm;
 ```
 
 ## JetBrains PyCharm
+
+用于数据科学和 Web 开发的 Python IDE。
+
+![](https://www.jetbrains.com/pycharm/download/img/download.png)
 
 [下载 PyCharm](https://www.jetbrains.com/zh-cn/pycharm/download/?section=linux)
 
