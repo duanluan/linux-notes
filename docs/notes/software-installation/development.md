@@ -124,7 +124,7 @@ sudo mkdir /opt/java
 sudo mv zulu21.42.19-ca-jdk21.0.7-linux_x64 /opt/java/zulu21.42.19-ca-jdk21.0.6
 # 末尾追加环境变量
 $ nano ~/.zshrc
-# jdk
+# JDK
 export JAVA_HOME="/opt/java/zulu21.42.19-ca-jdk21.0.6"
 export PATH=$JAVA_HOME/bin:$PATH
 
@@ -141,21 +141,21 @@ OpenJDK 64-Bit Server VM Zulu21.40+17-CA (build 21.0.6+7-LTS, mixed mode, sharin
 
 ```shell
 # 代理下载压缩包（可选）
-proxychains axel -n 10 -o gradle-7.6.6-bin.zip 'https://services.gradle.org/distributions/gradle-7.6.6-bin.zip'
+proxychains axel -n 10 -o gradle-8.14.3-bin.zip 'https://services.gradle.org/distributions/gradle-8.14.3-bin.zip'
 
-unzip gradle-7.6.6-bin.zip
+unzip gradle-8.14.3-bin.zip
 sudo mkdir /opt/gradle
-sudo mv gradle-7.6.6 /opt/gradle/
+sudo mv gradle-8.14.3 /opt/gradle/
 # 末尾追加环境变量
 $ nano ~/.zshrc
-# gradle
-export GRADLE_HOME="/opt/gradle/gradle-7.6.6"
+# Gradle
+export GRADLE_HOME="/opt/gradle/gradle-8.14.3"
 export PATH=$GRADLE_HOME/bin:$PATH
 
 $ source ~/.zshrc
 $ gradle -v
 
-Welcome to Gradle 7.6.5!
+Welcome to Gradle 8.14.3!
 ……
 
 ```
@@ -169,7 +169,7 @@ Welcome to Gradle 7.6.5!
 paru jetbrains-toolbox
 
 # 创建 Shell 脚本位置
-mkdir -p /opt/jetbrains/scripts
+sudo mkdir -p /opt/jetbrains/scripts
 
 # 更改想要安装的目录所有者为当前用户
 sudo chown -R $USER:$USER /opt/jetbrains
@@ -232,7 +232,7 @@ Keywords=idea;
 ```shell
 # 末尾追加环境变量
 $ nano ~/.zshrc
-# maven
+# Maven
 export MAVEN_HOME="/opt/jetbrains/idea/plugins/maven/lib/maven3/"
 export PATH=$MAVEN_HOME/bin:$PATH
 
