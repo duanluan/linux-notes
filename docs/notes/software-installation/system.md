@@ -10,6 +10,28 @@ sudo pacman -S base-devel cmake unzip
 - cmake：跨平台的构建系统工具，用于自动化编译过程，通常与源代码编译相关。
 - unzip：解压缩 zip 格式文件。
 
+## 显卡驱动
+
+没有正确安装显卡驱动可能会导致睡眠后无法唤醒等问题。
+
+RTX 全系列（40系, 30系, 20系）、GTX 16/10 系列（1660, 1080, 1060 等）、GTX 900 系列（Maxwell 架构）：
+```shell
+# 更新系统数据库
+sudo pacman -Syyu
+# 安装闭源驱动 nonfree，自动屏蔽开源驱动 nouveau
+# 0300 的含义：这是 PCI 设备分类代码（Class ID），03 代表 显示控制器 (Display Controller)，00 代表 VGA 兼容控制器（也就是我们常说的显卡）。
+sudo mhwd -a pci nonfree 0300
+# 重启后运行，应该能看到 video-nvidia
+mhwd -li
+```
+
+其他显卡参考：
+- [archlinux 显卡驱动 | archlinux 简明指南](https://arch.icekylin.online/guide/rookie/graphic-driver)
+- [Intel 图形处理器 - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/Intel_%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E5%99%A8)
+- [ATI - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/ATI)
+- [NVIDIA - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/NVIDIA)
+- [PRIME - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/PRIME)
+
 ## 📦 AUR 助手：Yay & Paru (必装)
 
 Arch 用户软件仓库 (AUR) 的辅助工具，用于方便地安装社区包。
