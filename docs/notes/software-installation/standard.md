@@ -101,55 +101,6 @@ paru -S wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts freetype2-wps
 paru wemeet-bin
 ```
 
-## Sublime Text
-
-[Linux Package Manager Repositories - Sublime Text](https://www.sublimetext.com/docs/linux_repositories.html)
-
-```shell
-paru sublime-text-4
-```
-
-- [Sublime Text 使用记录](https://blog.zhjh.top/?p=d42feMmERGrK8UUTXUWqu)
-
-## Typora
-
-![](https://typoraio.cn/img/screen/Group-screen.png)
-
-[Linux - Typora 官方中文站](https://typoraio.cn/#linux)
-
-```shell
-paru typora-free-with-plugin
-```
-
-下文可忽略。
-
-[Typora 1.9.3](https://download2.typoraio.cn/linux/typora_1.9.3_amd64.deb) 激活：
-```shell
-$ git clone https://github.com/hazukieq/Yporaject.git
-$ sudo apt install cargo
-$ cd Yporaject/
-$ cargo build & cargo run
-$ sudo cp target/debug/node_inject /usr/share/typora
-
-$ cd /usr/share/typora/
-$ sudo chmod +x node_inject
-$ sudo ./node_inject
-extracting node_modules.asar
-adding hook.js
-applying patch
-packing node_modules.asar
-done!
-
-$ cd -
-$ cd license-gen/
-$ cargo build & cargo run
-License for you: ……
-```
-
-打开 Typora，菜单栏`帮助`-`我的许可证`-`输入序列号`，邮箱随便，等待一段时间后提示“链接服务器失败，使用尝试访问国内域名进行激活？”，确认即可。
-
-鼓励大家支持正版软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
-
 ## electron-netease-cloud-music
 
 自带 UnblockNeteaseMusic 的第三方网易云音乐客户端。
