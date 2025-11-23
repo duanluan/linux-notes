@@ -10,38 +10,36 @@ sudo pacman -S base-devel cmake unzip
 - cmake：跨平台的构建系统工具，用于自动化编译过程，通常与源代码编译相关。
 - unzip：解压缩 zip 格式文件。
 
-## yay + paru（必须）
+## AUR 助手：Yay & Paru (必装)
 
-Arch 用户软件仓库（AUR）助手工具。
+Arch 用户软件仓库 (AUR) 的辅助工具，用于方便地安装社区包。
 
 ```shell
+# 安装 yay
 sudo pacman -S yay
+# 配置 yay：启用开发版(如 -git)包更新检查，并保存到配置文件 ~/.config/yay/config.json 使其永久生效
+yay -Y --devel --save
 ```
 
-也可以使用 [paru](https://github.com/Morganamilo/paru)：
+也可以使用 [paru](https://github.com/Morganamilo/paru)（功能更强，编译稍慢）：
 
-- paru：默认配置下，paru 会在每次检查更新时重新评估 pkgver。这意味着当 AUR 包有新提交时，paru 会自动检测到版本变化并提示更新。
-  ```shell
-  # 克隆 paru 源码仓库
-  git clone https://aur.archlinux.org/paru.git
-  cd paru
-  # 构建并安装 paru
-  makepkg -si
-  
-  # 安装完成后返回上级目录并删除源码文件夹
-  cd ..
-  rm -rf paru
-  ```
-- yay：默认未开启此功能，需要手动配置。可以通过以下命令启用对开发包（含 VCS 包）的自动版本检查：
-  ```shell
-  yay -Y --devel --save
-  ```
-  - devel：启用开发包模式，每次检查更新时重新评估 pkgver。
-  - save：将此设置保存到 ~/.config/yay/config.json，使其永久生效。
-
-下载的软件可以在 [AUR - Packages](https://aur.archlinux.org/packages) 搜索，或使用命令搜索：
 ```shell
-yay -Ss xxx
+# 克隆 paru 源码仓库
+git clone https://aur.archlinux.org/paru.git
+cd paru
+# 构建并安装 paru
+makepkg -si
+
+# 安装完成后返回上级目录并删除源码文件夹
+cd ..
+rm -rf paru
+```
+
+核心区别：Yay 默认只比对 AUR 页面上的静态版本号，而 Paru 能主动运行脚本计算 源码的实时版本号。
+
+下载的软件可以在 [AUR - Packages](https://aur.archlinux.org/packages) 搜索，或使用命令行：
+```shell
+yay -Ss 软件名
 ```
 
 也可以在开始菜单搜索`添加/删除软件`窗体中搜索软件名安装。
@@ -50,9 +48,9 @@ yay -Ss xxx
 
 ![](../assets/20250704220323.png)
 
-注意：paru 审阅时按`q`退出。
+Paru 技巧：在代码审阅界面，按`q`可直接退出审阅并继续安装。
 
-[解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
+常见问题：[解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
 
 ## Zram 内存压缩
 
