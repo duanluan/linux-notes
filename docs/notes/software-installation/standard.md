@@ -15,7 +15,7 @@ paru linuxqq
 [微信 Linux 版](https://linux.weixin.qq.com/)
 
 ```shell
-paru wechat-appimage
+paru wechat-bin
 ```
 
 下载 [activate-wechat.sh](https://github.com/duanluan/shell-scripts/blob/main/activate-wechat.sh)。
