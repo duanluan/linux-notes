@@ -444,8 +444,8 @@ $ sudo modprobe vboxdrv
     # 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
     sudo groupadd usbfs
     # 将用户添加到 vboxusers、usbfs 组
-    sudo adduser $USER vboxusers
-    sudo adduser $USER usbfs
+    sudo usermod -aG vboxusers $USER
+    sudo usermod -aG usbfs $USER
     ```
     [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
 
