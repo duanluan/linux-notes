@@ -95,6 +95,7 @@ paru rime-ice
 
 ```shell
 # 创建 Rime 配置
+$ mkdir -p ~/.local/share/fcitx5/rime
 $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
 
 patch:
