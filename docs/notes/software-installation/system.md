@@ -1,6 +1,6 @@
 # 系统类
 
-## base-devel + cmake + unzip（必须）
+## 🏗️ base-devel + cmake + unzip（必须）
 
 ````shell
 sudo pacman -S base-devel cmake unzip
@@ -10,7 +10,7 @@ sudo pacman -S base-devel cmake unzip
 - cmake：跨平台的构建系统工具，用于自动化编译过程，通常与源代码编译相关。
 - unzip：解压缩 zip 格式文件。
 
-## AUR 助手：Yay & Paru (必装)
+## 📦 AUR 助手：Yay & Paru (必装)
 
 Arch 用户软件仓库 (AUR) 的辅助工具，用于方便地安装社区包。
 
@@ -52,7 +52,7 @@ Paru 技巧：在代码审阅界面，按`q`可直接退出审阅并继续安装
 
 常见问题：[解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
 
-## Zram 内存压缩
+## 🗜️ Zram 内存压缩
 
 ```shell
 # 安装 zram-generator
@@ -76,7 +76,7 @@ NAME       ALGORITHM DISKSIZE  DATA COMPR TOTAL STREAMS MOUNTPOINT
 /dev/zram0 zstd            4G  3.8G  1.1G  1.1G      16 [SWAP]
 ```
 
-## Rime 雾凇拼音
+## ⌨️ Rime 雾凇拼音
 
 ```shell
 # 搜索并安装 Rime 拼音
@@ -114,7 +114,7 @@ patch:
 
 修改配置后需在托盘区键盘图标右键`重新启动`。
 
-## Nushell
+## 🐚 Nushell
 
 [Nushell](https://www.nushell.sh/zh-CN/) 是一种新的 Shell。
 
@@ -130,7 +130,7 @@ patch:
 sudo pacman -S nushell
 ```
 
-## debtap
+## 🔄 debtap
 
 一个用于将 .deb 软件包转换为 Arch Linux 软件包的脚本，专注于准确性。
 
@@ -154,7 +154,7 @@ $ sudo touch /var/cache/debtap/base-packages /var/cache/debtap/extended-base-pac
 $ sudo debtap -u
 ```
 
-## Spark Store 星火应用商店
+## 🔥 Spark Store 星火应用商店
 
 ```shell
 $ paru amber-ce-bookworm
@@ -190,7 +190,7 @@ sudo apt update
 sudo apt install ./spark-store_4.8.2_amd64.deb
 ```
 
-## Microsoft Edge
+## 🌊 Microsoft Edge
 
 微软基于 Chromium 开发的浏览器。
 
@@ -204,7 +204,7 @@ paru microsoft-edge-stable-bin
 
 开始菜单搜索`默认应用程序`可以修改默认网页浏览器。
 
-## Google Chrome
+## 🌐 Google Chrome
 
 [Google Chrome 网络浏览器](https://www.google.com/chrome/)
 
@@ -212,7 +212,7 @@ paru microsoft-edge-stable-bin
 paru google-chrome
 ```
 
-## Tor Browser
+## 🧅 Tor Browser
 
 Tor 浏览器是一款基于隐私保护的开源浏览器，通过多层加密和中继网络匿名访问互联网，隐藏用户的身份和位置。
 
