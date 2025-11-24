@@ -72,24 +72,38 @@ $ makepkg -si
 paru dingtalk-bin
 ```
 
-## WPS Office For Linux 个人版
+## WPS Office (365)
 
 ![](https://ee.wpscdn.cn/wpscn/custom/image/index_bg2.png)
 
 [WPS Office for Linux-支持多版本下载_WPS官方网站](https://www.wps.cn/product/wpslinux)
 
-```shell
-paru -S wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts freetype2-wps
-```
+- WPS Office 365：
 
-- ttf-wps-fonts：wps-office 所需符号字体。
-- freetype2-wps：解决字体太粗。
+  ```shell
+  paru -S wps-office-365 wps-office-365-fonts
+  ```
+  如果安装后打不开，需要创建或编辑 WPS 解析配置文件：
+  ```ini
+  $ mkdir -p ~/.config/Kingsoft/
+  $ nano ~/.config/Kingsoft/Office.conf
+  
+  [6.0]
+  wpsoffice\Application%20Settings\AppComponentMode=prome_independ
+  ```
 
-解决**无法通过文件打开软件**的问题：
+- WPS Office：
 
-开始菜单手动打开`WPS Office`，在右上角`全局设置` `设置` `其他`中`切换窗口管理模式`为`多组件模式`即可。
-
-![](../assets/20251103223224.png)
+  ```shell
+  # ttf-wps-fonts 为 wps-office 所需符号字体。freetype2-wps 解决字体太粗。
+  paru -S wps-office-cn wps-office-mui-zh-cn ttf-wps-fonts freetype2-wps
+  ```
+  
+  解决**无法通过文件打开软件**的问题：
+  
+  开始菜单手动打开`WPS Office`，在右上角`全局设置` `设置` `其他`中`切换窗口管理模式`为`多组件模式`即可。
+  
+  ![](../assets/20251103223224.png)
 
 ## 腾讯会议
 
