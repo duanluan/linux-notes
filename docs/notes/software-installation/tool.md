@@ -30,7 +30,7 @@ paru clash-verge-rev-bin
 ```yaml
 rule-providers:
   # 直连
-  direct: 
+  direct:
     type: http
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
@@ -397,25 +397,6 @@ paru snipaste
 paru e-search
 ```
 
-## RustDesk
-
-快速开源远程访问和支持软件
-
-![](https://rustdesk.com/main.png)
-
-[Releases · rustdesk/rustdesk](https://github.com/rustdesk/rustdesk/releases/)
-
-```shell
-# 安装
-$ paru rustdesk-bin
-
-==> NOTE: The RustDesk daemon must be started for RustDesk to work.
-==> NOTE: To start it automatically on boot, run 'sudo systemctl enable --now rustdesk' in a terminal.
-
-# 启动 RustDesk 服务并设置为开机自启
-$ sudo systemctl enable --now rustdesk
-```
-
 ## VMware Workstation Pro
 
 VMware Workstation Pro 是一款功能强大的虚拟化软件，允许用户在单一物理机上创建和运行多个虚拟机，支持多种操作系统，适用于开发、测试和生产环境。
@@ -659,6 +640,25 @@ wget -O /tmp/easytier.sh "https://raw.githubusercontent.com/EasyTier/EasyTier/ma
 注意事项：
 - easytier-core 命令输出的 TOML 中`rpc_portal = "0.0.0.0:15888"`，本机在`/opt/easytier/config/default.conf`保持为`rpc_portal = "0.0.0.0:0`不变才正常连通网络。
 
+## RustDesk
+
+快速开源远程访问和支持软件
+
+![](https://rustdesk.com/main.png)
+
+[Releases · rustdesk/rustdesk](https://github.com/rustdesk/rustdesk/releases/)
+
+```shell
+# 安装
+$ paru rustdesk-bin
+
+==> NOTE: The RustDesk daemon must be started for RustDesk to work.
+==> NOTE: To start it automatically on boot, run 'sudo systemctl enable --now rustdesk' in a terminal.
+
+# 启动 RustDesk 服务并设置为开机自启
+$ sudo systemctl enable --now rustdesk
+```
+
 ## TeamViewer
 
 ![](https://teamviewer.scene7.com/is/image/teamviewergmbh/product-teamviewer-remote-support-banner?fmt=png-alpha&dpr=off)
@@ -697,6 +697,47 @@ sudo systemctl start runsunloginclient.service
 # 开机启动
 sudo systemctl enable runsunloginclient.service
 ```
+
+## ToDesk
+
+![](https://www.todesk1.com/images/dl-bg.png)
+
+[ToDesk下载 - ToDesk官网_Todesk下载](https://www.todesk1.com/download)
+
+```shell
+# 安装 ToDesk
+paru todesk-bin
+```
+
+安装后网络连接不上，需要启动服务。
+
+- 方式一：开机启动
+  
+  ```shell
+  $ sudo systemctl enable --now todeskd.service
+  ```
+
+- 方式二：随软件启动
+  ```shell
+  $ sudo nano /opt/todesk/bin/start-todesk.sh
+  
+  #!/bin/bash
+  # 检查服务是否运行，如果未运行则请求提权启动
+  # quiet 模式下，如果服务未运行返回非 0 状态
+  if ! systemctl is-active --quiet todeskd.service; then
+      # 使用 pkexec 弹出 GUI 密码输入框
+      pkexec systemctl start todeskd.service
+  fi
+  # 设置环境变量
+  export LIBVA_DRIVER_NAME=iHD
+  export LIBVA_DRIVERS_PATH=/opt/todesk/bin
+  # 启动主程序
+  exec /opt/todesk/bin/ToDesk
+  
+  # 赋予运行权限
+  $ sudo chmod +x /opt/todesk/bin/start-todesk.sh
+  ```
+  开始菜单搜索`ToDesk`，右键`编辑应用程序...`，清空`环境变量`，`程序`修改为`/opt/todesk/bin/start-todesk.sh`后保存。
 
 ## CopyQ
 
