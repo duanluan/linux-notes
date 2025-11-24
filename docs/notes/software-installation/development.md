@@ -595,6 +595,45 @@ Actions=
 MimeType=x-scheme-handler/wechatide
 ```
 
+## Rust + Cargo 换源
+
+```shell
+# 安装基础开发包和 rustup
+$ sudo pacman -S base-devel rustup                                                                                                                                         1 ✘ 
+
+:: rustup-1.28.2-3 与 rust-1:1.89.0-1 有冲突。删除 rust 吗？ [y/N] y
+
+# 长期启用镜像源加速 rustup 下载
+$ echo 'export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup' >> ~/.zshrc
+$ echo 'export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup' >> ~/.zshrc
+$ source ~/.zshrc
+
+# 安装 Stable 工具链
+$ rustup default stable
+
+  stable-x86_64-unknown-linux-gnu installed - rustc 1.91.1 (ed61e7d7e 2025-11-07)
+```
+配置 Cargo 镜像源：
+```shell
+mkdir -vp ${CARGO_HOME:-$HOME/.cargo}
+
+cat << EOF | tee -a ${CARGO_HOME:-$HOME/.cargo}/config.toml
+[source.crates-io]
+replace-with = 'mirror'
+
+[source.mirror]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+EOF
+```
+验证安装：
+```shell
+$ rustc --version                                                                                                                                                            ✔ 
+rustc 1.91.1 (ed61e7d7e 2025-11-07)
+```
+
+- [rustup | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/rustup/)
+- [crates.io-index.git | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index.git/)
+
 ## Apifox
 
 API 设计、开发、测试一体化协作平台
