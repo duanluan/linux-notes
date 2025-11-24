@@ -172,6 +172,20 @@ License for you: ……
 paru obsidian-bin
 ```
 
+## XnView MP
+
+XnView MP/Classic 是一款免费的图像查看器，可轻松打开和编辑您的照片文件。这款图像查看器支持所有主流图像格式（JPEG、TIFF、PNG、GIF、WEBP、JPEG-XL、AVIF、HEIC、PSD、JPEG2000、OpenEXR、相机 RAW、PDF、DNG、CR2）。
+
+作为图像查看器，它拥有颜色调整、图像大小调整、裁剪、屏幕捕获、元数据编辑（IPTC、XMP）等众多功能。凭借其易于使用的类似资源管理器的界面，XnView MP 允许您快速查看图像和照片，同时也能进行图像管理。它提供了批量重命名、批量转换、查找重复图像、图像比较等功能，您还可以创建联系表和幻灯片。
+
+![](https://www.xnview.com/img/screenshots/xnviewmp-win-01.webp)
+
+[XnView MP · Download | Free | XnView.com](https://www.xnview.com/en/xnview-mp/)
+
+```shell
+paru xnviewmp
+```
+
 ## Wine
 
 Wine 不进行模拟、转译或虚拟化，而是通过直接提供一组 Win32 API 的对应实现来运行 Windows 应用程序。
