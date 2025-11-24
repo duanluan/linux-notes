@@ -16,7 +16,7 @@ export default defineConfig({
 
     sidebar: [
       {
-        text: '笔记',
+        text: '目录',
         items: [
           { text: '系统安装', link: '/notes/system-installation.md' },
           { text: '系统配置（必看）', link: '/notes/system-configuration.md' },
