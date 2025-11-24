@@ -659,6 +659,8 @@ $ paru rustdesk-bin
 $ sudo systemctl enable --now rustdesk
 ```
 
+修改缩放：开始菜单搜索`RustDesk`，右键`编辑应用程序`，在`常规`-`环境变量`中添加`GDK_SCALE=2`（2 为缩放比例），保存后重启软件。
+
 ## TeamViewer
 
 ![](https://teamviewer.scene7.com/is/image/teamviewergmbh/product-teamviewer-remote-support-banner?fmt=png-alpha&dpr=off)
