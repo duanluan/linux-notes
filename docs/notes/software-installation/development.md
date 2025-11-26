@@ -225,25 +225,61 @@ Keywords=idea;
 快捷键调整：
 `设置`-`按键映射`-`主菜单`-`导航`-`通过引用转到`-`选择位置…`在`KDE`按键方案中不是`Alt+F1`而是`Alt+Shift+1`，因为`Alt+F1`是`plasmashell`的快捷键。我们之前在系统配置中已经取消了`plasmashell`的这个快捷键，所以可以修改一下，或者直接将按键方案修改为`Windows`。
 
-## Maven
+## Maven (Daemon)
 
-此处用的是 IDEA 自带的。也可以自己下载：[Download Apache Maven – Maven](https://maven.apache.org/download.cgi)
+- Maven
 
-```shell
-# 末尾追加环境变量
-$ nano ~/.zshrc
-# Maven
-export MAVEN_HOME="/opt/jetbrains/idea/plugins/maven/lib/maven3/"
-export PATH=$MAVEN_HOME/bin:$PATH
+  此处用的是 IDEA 自带的。也可以自己下载：[Download Apache Maven – Maven](https://maven.apache.org/download.cgi)
+  
+  ```shell
+  # 末尾追加环境变量
+  $ nano ~/.zshrc
+  # Maven
+  export MAVEN_HOME="/opt/jetbrains/idea/plugins/maven/lib/maven3/"
+  export PATH=$MAVEN_HOME/bin:$PATH
+  
+  $ source ~/.zshrc
+  $ mvn -v
+  Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
+  Maven home: /opt/jetbrains/idea/plugins/maven/lib/maven3
+  Java version: 21.0.6, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.42.19-ca-jdk21.0.6
+  Default locale: zh_CN, platform encoding: UTF-8
+  OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family: "unix"
+  ```
 
-$ source ~/.zshrc
-$ mvn -v
-Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
-Maven home: /opt/jetbrains/idea/plugins/maven/lib/maven3
-Java version: 21.0.6, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.42.19-ca-jdk21.0.6
-Default locale: zh_CN, platform encoding: UTF-8
-OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family: "unix"
-```
+- Maven Daemon
+
+  [Maven Daemon](https://maven.apache.org/tools/mvnd.html)（mvnd）是一个用于 Maven 的守护进程基础设施。
+
+  它通过这些方式帮助减少构建时间：**在构建之间保持 JVM 运行**、**管理 Maven 进程池**、**跨构建重用 JVM 和 Maven 进程**。
+  
+  功能：**构建速度显著更快**、**兼容现有的 Maven 插件和扩展**、**守护进程管理**、**智能内存管理**、**原生可执行文件可用**。
+  
+  [Download Apache Maven Daemon – Maven](https://maven.apache.org/download.cgi#Maven_Daemon)
+  
+  ```shell
+  $ tar zxvf maven-mvnd-1.0.3-linux-amd64.tar.gz
+  $ sudo mv maven-mvnd-1.0.3-linux-amd64 /opt/maven-mvnd
+  
+  # 末尾追加环境变量
+  $ nano ~/.zshrc
+  # Maven Daemon
+  export MVND_HOME="/opt/maven-mvnd"
+  export MAVEN_HOME=$MVND_HOME/mvn
+  export PATH=$MVND_HOME/bin:$MAVEN_HOME/bin:$PATH
+  
+  $ source ~/.zshrc
+  $ mvnd -v
+  Apache Maven Daemon (mvnd) 1.0.3 linux-amd64 native client (824a1fd42088e27dec6cc7cc392b9122379e7bf0)
+  Terminal: org.jline.terminal.impl.PosixSysTerminal with pty org.jline.terminal.impl.jni.linux.LinuxNativePty
+  Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+  Maven home: /opt/maven-mvnd/mvn
+  Java version: 21.0.9, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.46.19-ca-jdk21.0.9
+  Default locale: zh_CN, platform encoding: UTF-8
+  OS name: "linux", version: "6.12.48-1-manjaro", arch: "amd64", family: "unix"
+  
+  $ mvn -v
+  ```
 
 ## JetBrains WebStorm
 
