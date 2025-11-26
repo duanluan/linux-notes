@@ -7,7 +7,7 @@
 Geekbench 6 跑分结果：
 - Deepin 23.1：[Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/10922940)
 - Xubuntu 24.04.2：[Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/12633571)
-- Manjaro KDE Plasma 25.0.3：[Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/12680900)
+- Manjaro KDE Plasma 25.0.3：[Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/12680900)、[Micro-Star International Co., Ltd. MS-7D48 - Geekbench](https://browser.geekbench.com/v6/cpu/15240569)
 
 # 备份旧发行版
 
