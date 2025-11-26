@@ -6,7 +6,7 @@
 
 ```shell
 paru geekbench
-geekbench
+geekbench6
 ```
 
 ## Clash Verge
