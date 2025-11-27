@@ -81,3 +81,15 @@ DaVinci Resolve 汇集剪辑、调色、视觉特效、动态图形和音频后�
   $ cd ~/.cache/paru/clone/davinci-resolve-studio/
   $ makepkg -si
   ```
+
+## Blender
+
+Blender 是免费且开源的 3D 创作套件。它支持整个 3D 流程——建模、绑定、动画、模拟、渲染、合成和运动追踪，甚至视频编辑和游戏资源创建。高级用户利用 Blender 的 Python 脚本 API 来自定义应用程序并编写专用工具；这些工具通常会被包含在 Blender 的未来版本中。
+
+![](https://docs.blender.org/manual/en/2.80/_images/interface_window-system_introduction_default-startup.png)
+
+[Download — Blender](https://www.blender.org/download/)
+
+```shell
+sudo pacman -S blender
+```
