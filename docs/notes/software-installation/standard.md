@@ -192,3 +192,11 @@ paru lx-music-desktop-bin
 [洛雪音乐源](https://github.com/pdone/lx-music-source)
 
 自定义源： 在`设置` `自定义源` `自定义源管理`中`在线导入`，导入后关闭导入窗口，在`自定义源`中勾选导入的源。
+
+## 百度网盘
+
+[百度网盘 客户端下载](https://pan.baidu.com/download#pan)
+
+```shell
+paru baidunetdisk-bin
+```
