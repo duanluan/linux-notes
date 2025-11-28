@@ -136,6 +136,18 @@ patch:
 
 修改配置后需在托盘区键盘图标右键`重新启动`。
 
+## Tmux
+
+tmux 是一个终端复用器。它让你可以轻松地在同一个终端中切换多个程序，将它们分离（它们会在后台继续运行），并将它们重新附加到不同的终端。
+
+![](https://github.com/tmux/tmux/wiki/images/tmux_with_panes.png)
+
+[Home · tmux/tmux Wiki](https://github.com/tmux/tmux/wiki)
+
+```shell
+sudo pacman -S tmux
+```
+
 ## 🐚 Nushell
 
 [Nushell](https://www.nushell.sh/zh-CN/) 是一种新的 Shell。
