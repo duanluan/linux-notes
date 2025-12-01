@@ -98,7 +98,25 @@ $ sudo dmesg|grep Bluetooth
 [ 6.355936] Bluetooth: hci0: Reading Intel version command failed (-110)
 [ 6.355940] Bluetooth: hci0: command 0xfc05 tx timeout
 ```
-最后两句有问题，需要将`AX200/AX201`缺少的`ibt-0040-0041.ddc`、`ibt-0040-0041.sfi`固件从 [Intel linux-firmware](https://anduin.linuxfromscratch.org/sources/linux-firmware/intel/) 下载并移动到`/lib/firmware/intel`目录中，再重启电脑就正常了。
+最后两句有问题，需要将`AX200/AX201`缺少的`ibt-0040-0041.ddc`、`ibt-0040-0041.sfi`固件从 [Intel linux-firmware](https://anduin.linuxfromscratch.org/sources/linux-firmware/intel/) 下载并移动到`/lib/firmware/intel`目录中
+
+Linux 内核通常会优先加载 .xz 压缩格式的固件。如果系统更新后恢复了损坏或不兼容的 .xz 版本，就会导致你手动下载的未压缩版本失效。我们需要重命名那些 .xz 文件，强制内核使用你手动下载的那个版本。
+
+```shell
+sudo mv ibt-0040-0041.ddc /lib/firmware/intel/
+sudo mv ibt-0040-0041.sfi /lib/firmware/intel/
+
+# 备份并重命名系统自带的压缩版本，防止冲突
+cd /lib/firmware/intel
+sudo mv ibt-0040-0041.ddc.xz ibt-0040-0041.ddc.xz.bak
+sudo mv ibt-0040-0041.sfi.xz ibt-0040-0041.sfi.xz.bak
+
+# 刷新并重新加载蓝牙模块
+sudo rmmod btusb
+sudo modprobe btusb
+```
+
+如果仍无效尝试关机并断电一段时间后再开机。
 
 参考：[Manjaro蓝牙BUG：Bluetooth: hci0: Failed to load Intel firmware file intel/ibt-0040-1050.sfi (-2) - CY BLOG](https://cy.terase.cn/2024/12/24/bluetooth-bug/)
 
