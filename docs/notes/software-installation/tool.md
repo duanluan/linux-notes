@@ -178,6 +178,16 @@ License for you: ……
 paru obsidian-bin
 ```
 
+## Pandoc
+
+Pandoc 是一个开源的文档转换工具，支持多种文档格式之间的转换，如 Markdown、HTML、LaTeX、Word 等，广泛应用于学术写作和技术文档编写。
+
+[Pandoc - Installing pandoc](https://pandoc.org/installing.html)
+
+```shell
+proxychains -q sudo paru pandoc-bin
+```
+
 ## XnView MP
 
 XnView MP/Classic 是一款免费的图像查看器，可轻松打开和编辑您的照片文件。这款图像查看器支持所有主流图像格式（JPEG、TIFF、PNG、GIF、WEBP、JPEG-XL、AVIF、HEIC、PSD、JPEG2000、OpenEXR、相机 RAW、PDF、DNG、CR2）。
