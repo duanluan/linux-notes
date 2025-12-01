@@ -168,6 +168,12 @@ License for you: ……
 
 ## Obsidian
 
+从个人笔记到日记、知识库和项目管理，Obsidian 为你提供工具来产生想法并组织它们。
+
+![](https://obsidian.md/images/screenshot-1.0-hero-combo.png)
+
+[Download - Obsidian](https://obsidian.md/download)
+
 ```shell
 paru obsidian-bin
 ```
