@@ -575,6 +575,18 @@ asar pack ./app.asar.non-windows app.asar
 sudo cp app.asar /opt/Xmind/resources/app.asar
 ```
 
+## Draw.io Desktop
+
+免费开源的流程图绘制工具。
+
+![](https://www.drawio.com/assets/svg/home-dia1.svg)
+
+[Releases · jgraph/drawio-desktop](https://github.com/jgraph/drawio-desktop/releases)
+
+```shell
+sudo pacman -S drawio-desktop
+```
+
 ## Sunshine + Moonlight
 
 Sunshine + Moonlight 是一套自托管的游戏串流解决方案，其中 Sunshine 作为服务端，Moonlight 作为客户端，使用户可以将 PC 游戏串流到其他设备上，提供低延迟和高质量的游戏体验。
