@@ -449,6 +449,18 @@ zip localization-zh.jar META-INF/plugin.xml
 
 打开 Android Studio，`Settings`-`Plugins`-右上角齿轮图标-`Install Plugin from Disk...`，选择修改后的`localization-zh.jar`安装。`Settings`-`Appearance & Behavior`-`System Settings`-`Language and Region`中`Language`选择`Chinese (Simplified) 简体中文`。
 
+## Visual Studio Code
+
+开源轻量代码编辑器。
+
+![](https://code.visualstudio.com/assets/docs/getstarted/userinterface/hero.png)
+
+[Download Visual Studio Code - Mac, Linux, Windows](https://code.visualstudio.com/download)
+
+```shell
+paru visual-studio-code-bin
+```
+
 ## FVM + Flutter 换源 + Dart
 
 ```shell
