@@ -352,6 +352,27 @@ paru freedownloadmanager
 - [Free Download Manager - Chrome 应用商店](https://chromewebstore.google.com/detail/free-download-manager/ahmpjcflkgiildlgicmcieglgoilbfdp?hl=zh-CN)
 - [Free Download Manager official extension – Get this Extension for 🦊 Firefox](https://addons.mozilla.org/en-US/firefox/addon/free-download-manager-addon/)
 
+## Gopeed
+
+一款现代化的下载器。开源、轻量、原生，支持（HTTP、BitTorrent、Magnet 等）协议下载。
+
+![](https://www.gopeed.com/_next/image?url=%2Fimages%2Fui.png&w=3840&q=75)
+
+[Gopeed - 一款现代化的下载器](https://www.gopeed.com/zh-CN)
+
+```shell
+paru gopeed-bin
+```
+
+扩展：
+
+- [Bilibili 视频下载](https://github.com/monkeyWie/gopeed-extension-bilibili)
+  ![](https://github.com/monkeyWie/gopeed-extension-bilibili/raw/main/image/demo.gif)
+- [Youtube 视频下载](https://github.com/monkeyWie/gopeed-extension-youtube)
+  ![](https://github.com/monkeyWie/gopeed-extension-youtube/raw/main/image/create.gif)
+- [百度网盘下载](https://github.com/monkeyWie/gopeed-extension-baiduwp)
+  ![](https://github.com/monkeyWie/gopeed-extension-baiduwp/raw/main/image/install.gif)
+
 ## qBittorrent Enhanced Edition
 
 基于 qBittorrent 的增强版 BT 下载工具。
