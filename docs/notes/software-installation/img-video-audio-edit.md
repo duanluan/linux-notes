@@ -105,3 +105,15 @@ Blender 是免费且开源的 3D 创作套件。它支持整个 3D 流程——�
 ```shell
 sudo pacman -S blender
 ```
+
+## Audacity
+
+![](https://www.audacityteam.org/_astro/HeroBannerImage.BT1jp_L7_AJsjM.webp)
+
+Audacity 是一款易于使用的多轨音频编辑器和录音机，适用于 Windows、macOS、GNU/Linux 及其他操作系统。Audacity 是免费的开源软件。
+
+[Audacity ® | Downloads](https://www.audacityteam.org/download/)
+
+```shell
+sudo pacman -S audacity
+```
