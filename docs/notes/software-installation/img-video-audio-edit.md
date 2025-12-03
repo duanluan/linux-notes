@@ -108,12 +108,24 @@ sudo pacman -S blender
 
 ## Audacity
 
-![](https://www.audacityteam.org/_astro/HeroBannerImage.BT1jp_L7_AJsjM.webp)
-
 Audacity 是一款易于使用的多轨音频编辑器和录音机，适用于 Windows、macOS、GNU/Linux 及其他操作系统。Audacity 是免费的开源软件。
+
+![](https://www.audacityteam.org/_astro/HeroBannerImage.BT1jp_L7_AJsjM.webp)
 
 [Audacity ® | Downloads](https://www.audacityteam.org/download/)
 
 ```shell
 sudo pacman -S audacity
+```
+
+## HandBrake
+
+HandBrake 是一个由志愿者构建的开源工具，用于将视频从几乎所有格式转换为多种现代且广泛支持的编解码器。
+
+![](https://handbrake.fr/img/slides/slide1_lin.jpg)
+
+[HandBrake: Downloads](https://handbrake.fr/downloads.php)
+
+```shell
+sudo pacman -S handbrake
 ```
