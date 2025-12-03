@@ -12,6 +12,18 @@ sudo pacman -S gimp
 
 [Releases · Diolinux/PhotoGIMP](https://github.com/Diolinux/PhotoGIMP/releases) 下载`PhotoGIMP-linux.zip`，将压缩包中的`.conf`、`.local`覆盖到 home 下。
 
+## Krita
+
+Krita 致力于提供一流的绘画工具，不设任何门槛，为任何人、为任何目的所用。GNU GPL 自由软件许可证确保 Krita 将一直保持自由、开源、免费的本色。
+
+![](https://krita.org/images/pages/application-screenshot.webp)
+
+[下载软件 | Krita](https://krita.org/zh-cn/download/)
+
+```shell
+sudo pacman -S krita
+```
+
 ## Kdenlive
 
 Kdenlive 是 KDE 非线性视频编辑器 (Non-Linear Video Editor) 的缩写。
