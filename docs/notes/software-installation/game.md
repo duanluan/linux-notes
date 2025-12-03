@@ -1,5 +1,15 @@
 # 游戏类
 
+## Steam
+
+Steam 是一个数字发行平台，提供数千款游戏的购买、下载和管理服务。它支持多人联机、社区交流、成就系统等功能，是全球最大的 PC 游戏平台之一。
+
+[Steam — 高质量游戏平台](https://store.steampowered.com/about/)
+
+```shell
+sudo pacman -S steam
+```
+
 ## HMCL - Minecraft 启动器
 
 HMCL 是一款开源、跨平台的 Minecraft 启动器，支持模组管理、游戏自定义、游戏自动安装 (Forge、NeoForge、Cleanroom、Fabric、Quilt、LiteLoader 和 OptiFine)、整合包创建、界面自定义等功能。
