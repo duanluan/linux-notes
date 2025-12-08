@@ -136,6 +136,73 @@ patch:
 
 修改配置后需在托盘区键盘图标右键`重新启动`。
 
+## 字体
+
+- [LXGW WenKai / 霞鹜文楷](https://github.com/lxgw/LxgwWenKai)
+  ```shell
+  $ paru ttf-lxgw-wenkai
+  
+  1 aur/ttf-lxgw-wenkai 1.521-1 [+9 ~0.16]
+      An open-source Chinese font derived from Fontworks' Klee One.
+  2 aur/ttf-lxgw-wenkai-screen 1.520-1 [+3 ~0.00]
+      本字体是霞鹜文楷的屏幕舒适阅读版本,增强了字重，包括LXGWWenKaiScreen（使用文楷完整版字库，不以其他任何字体打底）和LXGWWenKaiScreenR（在文楷完整版字库基础上，使用Roboto补全缺失字符，可能有文字形态不统一）。另外带
+      GB 的表示 GB 2312、通用规范汉字表范围内汉字为陆标字形，不带 GB 的为原版文楷的半陆标字形。
+  3 aur/ttf-lxgw-wenkai-mono-nerd 1.521-1 [+1 ~0.16]
+      LXGW WenKai Mono patched with Nerd Font glyphs
+  4 aur/ttf-lxgw-wenkai-nerd 1.521-1 [+1 ~0.16]
+      LXGW WenKai patched with Nerd Font glyphs
+  5 aur/ttf-lxgw-wenkai-tc 1.520-1 [+1 ~0.00]
+      The Traditional Chinese Version of LXGW WenKai
+  6 aur/ttf-lxgw-wenkai-tc-mono 1.520-1 [+1 ~0.00]
+      The traditional chinese mono version of LXGW WenKai.
+  7 aur/ttf-lxgw-wenkai-gb 1.520-1 [+0 ~0.00]
+      An open-source Chinese font derived from Klee One, modified to conform to GB2312 standard.
+  8 aur/ttf-lxgw-wenkai-lite 1.521-1 [+0 ~0.00]
+      LXGW WenKai Lite / 霞鹜文楷轻便版 An open-source Chinese font derived from Fontworks' Klee One. 一款基于 FONTWORKS 出品字体 Klee One 
+      改造的开源中文字体。
+  9 aur/ttf-lxgw-wenkai-mono-lite 1.521-1 [+0 ~0.00]
+      LXGW WenKai Mono Lite / 霞鹜文楷等宽轻便版 An open-source Chinese font derived from Fontworks' Klee One. 一款基于 FONTWORKS 出品字体 Klee 
+      One 改造的开源中文字体。
+  :: 要安装的软件包（例如：1 2 3, 1-3）：
+  :: 2
+  ```
+
+- [LXGW Neo XiHei / 霞鹜新晰黑](https://github.com/lxgw/LxgwNeoXiHei)
+  ```shell
+  $ paru ttf-lxgw-neo-xihei
+  
+  1 aur/ttf-lxgw-neo-xihei 1.225-1 [+3 ~0.00]
+      霞鹜新晰黑。一款衍生于「IPAexゴシック」的中文黑体字型。A Simplified Chinese sans-serif font derived from IPAex Gothic.
+  2 aur/ttf-lxgw-neo-xihei-screen 25.10.22-1 [+3 ~0.00]
+      霞鹜新晰黑屏幕阅读版。霞鹜新晰黑 的屏幕阅读版本，将原版 霞鹜新晰黑 加粗 6 个单位后，调整度量数据与 Android 默认字体 Roboto 相同。
+  3 aur/ttf-lxgw-neo-xihei-plus 1.225-1 [+2 ~0.03]
+      「霞鹜新晰黑＋ / LXGW Neo XiHei Plus」，在「霞鹜新晰黑」基础上补全扩展 A 区所有汉字，以使字库达到 GB 18030-2022 实现级别 2 的收字范围。
+  4 aur/ttf-lxgw-neo-xihei-screen-full 25.12.07-1 [+2 ~0.00]
+      霞鹜新晰黑屏幕阅读版Droid Sans Fallback打底补全版，更适合 PC 及 Android 手机屏幕显示。
+  :: 要安装的软件包（例如：1 2 3, 1-3）：
+  :: 4
+  ```
+
+- [LXGW Neo ZhiSong / 霞鹜新致宋 / 霞鶩新緻宋](https://github.com/lxgw/LxgwNeoZhiSong)
+  ```shell
+  $ paru ttf-lxgw-neo-zhisong
+  
+  1 aur/ttf-lxgw-neo-zhisong 1.050-1 [+0 ~0.00]
+      霞鹜新致宋。一款衍生于「IPAmj明朝」的中文宋体字型。A Chinese serif font derived from IPAmj Mincho.
+  2 aur/ttf-lxgw-neo-zhisong-screen 25.12.07-1 [+0 ~0.00]
+      霞鹜新致宋屏幕阅读版。
+  3 aur/ttf-lxgw-neo-zhisong-screen-full 25.12.07-1 [+0 ~0.00]
+      霞鹜新致宋屏幕阅读版。
+  :: 要安装的软件包（例如：1 2 3, 1-3）：
+  :: 3
+  ```
+  
+- [Maple Mono](https://github.com/subframe7536/Maple-font)
+  ```shell
+  # 通过 ArchLinuxCN 安装
+  sudo pacman -S ttf-maplemono-nf-cn-unhinted
+  ```
+
 ## Tmux
 
 tmux 是一个终端复用器。它让你可以轻松地在同一个终端中切换多个程序，将它们分离（它们会在后台继续运行），并将它们重新附加到不同的终端。
