@@ -63,6 +63,21 @@ sudo nano /etc/pacman.conf
 - **启用 Pacman 颜色**：取消注释`#Color`为`Color`
 - **调整并行下载线程数**：修改`ParallelDownloads = 4`的值
 
+## ArchLinuxCN 源
+
+```shell
+# 在末尾添加 ArchLinuxCN 源
+$ sudo nano /etc/pacman.conf
+
+[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+
+# 导入 ArchLinuxCN 的 GPG 密钥
+$ sudo pacman -Sy archlinuxcn-keyring
+# 更新软件源数据库
+$ sudo pacman -Sy
+```
+
 ## 加速 AUR 的 GitHub 下载和 git clone GitHub 仓库
 
 安装 axel 多线程下载工具，创建替换 github 下载的脚本：
