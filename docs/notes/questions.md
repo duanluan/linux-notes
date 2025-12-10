@@ -159,11 +159,12 @@ sudo modprobe btusb
   /etc/profile.d/input-support.sh:22:    export XMODIFIERS=@im=$im
   /etc/profile.d/input-support.sh:26:    export QT_IM_MODULE=$im
   /etc/profile.d/input-support.sh:27:    export GTK_IM_MODULE=$im
-  
-  $ nano ~/.config/plasma-workspace/env/99-immodule-bridge.sh
   ```
+
   `99-immodule-bridge.sh`是 KDE 的环境初始化脚本，目的是让系统在登录时自动检测当前是 Wayland 还是 X11，并据此动态清除（Wayland 下）或设置（X11 下）输入法环境变量，解决 Fcitx 5 的冲突警告：
   ```shell
+  $ nano ~/.config/plasma-workspace/env/99-immodule-bridge.sh
+  
   #!/usr/bin/env bash
   # KDE Plasma 会在用户会话启动时 source 这个目录下的脚本。
   
