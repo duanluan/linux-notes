@@ -66,16 +66,25 @@ sudo nano /etc/pacman.conf
 ## ArchLinuxCN 源
 
 ```shell
-# 在末尾添加 ArchLinuxCN 源
-$ sudo nano /etc/pacman.conf
+# 在末尾添加 ArchLinuxCN 源并注释
+sudo nano /etc/pacman.conf
 
-[archlinuxcn]
-Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+# [archlinuxcn]
+# Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 
-# 导入 ArchLinuxCN 的 GPG 密钥
-$ sudo pacman -Sy archlinuxcn-keyring
-# 更新软件源数据库
-$ sudo pacman -Sy
+# 1. 首次使用时，刷新数据库并安装 ArchLinuxCN 的 GPG 密钥
+sudo pacman -Sy archlinuxcn-keyring
+# 2. 刷新数据库
+sudo pacman -Sy
+
+# 启用源 (使用 sed 去掉行首的 #)
+sudo sed -i 's/^# *\[\(archlinuxcn\)\]/[\1]/; s/^# *\(Server.*archlinuxcn\)/\1/' /etc/pacman.conf
+# 刷新数据库 (仅同步数据库，不要进行全局更新 -Su)
+sudo pacman -Sy
+# 安装需要的软件
+sudo pacman -S ttf-maplemono-nf-cn-unhinted
+# 禁用源 (安装完成后立即恢复注释，防止系统更新时混用)
+sudo sed -i 's/^\[\(archlinuxcn\)\]/# [\1]/; s/^\(Server.*archlinuxcn\)/# \1/' /etc/pacman.conf
 ```
 
 ## 加速 AUR 的 GitHub 下载和 git clone GitHub 仓库
