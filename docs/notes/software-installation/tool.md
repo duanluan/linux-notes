@@ -446,6 +446,8 @@ paru snipaste
 
 `系统设置`-`键盘`-`快捷键`-`新增`-`命令或脚本`，命令为`Snipaste snip`，添加后新增快捷键为`F1`并应用。
 
+但截图后`Ctrl`+`T`贴图快捷键仍然会触发其他软件快捷键。
+
 更多参考：[命令行选项 - Snipaste](https://docs.snipaste.com/zh-cn/command-line-options)
 
 
