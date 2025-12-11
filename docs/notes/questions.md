@@ -163,7 +163,7 @@ sudo modprobe btusb
 
   `99-immodule-bridge.sh`是 KDE 的环境初始化脚本，目的是让系统在登录时自动检测当前是 Wayland 还是 X11，并据此动态清除（Wayland 下）或设置（X11 下）输入法环境变量，解决 Fcitx 5 的冲突警告：
   ```shell
-  $ nano ~/.config/plasma-workspace/env/99-immodule-bridge.sh
+  $ kate ~/.config/plasma-workspace/env/99-immodule-bridge.sh
   
   #!/usr/bin/env bash
   # KDE Plasma 会在用户会话启动时 source 这个目录下的脚本。
@@ -172,23 +172,18 @@ sudo modprobe btusb
   echo "$(date): 脚本开始执行，当前 Session 类型: $XDG_SESSION_TYPE" > /tmp/fcitx-bridge.log
   
   case "${XDG_SESSION_TYPE}" in
+    # Wayland：使用 Wayland text-input 前端，不再强制 GTK/Qt/SDL 使用旧式 immodule
     wayland)
-      # Wayland：使用 Wayland text-input 前端，不再强制 GTK/Qt/SDL 使用旧式 immodule
       # 这里的 unset 对去除警告至关重要
       unset GTK_IM_MODULE
       unset QT_IM_MODULE
       unset SDL_IM_MODULE
   
-      # 显式置空，防止 unset 在某些 shell 继承机制下失效
-      export GTK_IM_MODULE=""
-      export QT_IM_MODULE=""
-      export SDL_IM_MODULE=""
-  
       # 可选：为 XWayland 老应用保留 XIM（不影响原生 Wayland 应用）
       export XMODIFIERS="@im=fcitx"
       ;;
+    # X11（或未知时按 X11 兜底）：使用 fcitx 的 immodule，保证兼容性
     x11|tty|'')
-      # X11（或未知时按 X11 兜底）：使用 fcitx 的 immodule，保证兼容性
       export GTK_IM_MODULE="fcitx"
       export QT_IM_MODULE="fcitx"
       export SDL_IM_MODULE="fcitx"
