@@ -450,6 +450,29 @@ paru snipaste
 
 更多参考：[命令行选项 - Snipaste](https://docs.snipaste.com/zh-cn/command-line-options)
 
+## 🔥 Flameshot 火焰截图
+
+Flameshot 是一款免费且开源的跨平台工具，用于进行截图，具有许多内置功能，可为您节省时间。
+
+![](https://flameshot.org/img/flameshot-demo.gif)
+
+- [Download Flameshot | Open Source Screenshot Software](https://flameshot.org/#download)
+- [解决 Wayland 上的 Flameshot 问题](https://flameshot.org/docs/guide/wayland-help/)
+- [Flameshot 命令行选项](https://flameshot.org/docs/advanced/commandline-options/)
+
+```shell
+# 安装 Flameshot
+sudo pacman -S flameshot
+```
+
+`系统设置`-`键盘`-`快捷键`-`新增`-`命令或脚本`。
+
+| 功能                | 命令                                  | 参考快捷键                |
+|-------------------|-------------------------------------|----------------------|
+| Flameshot 区域截图    | `flameshot gui`                     | Print                |
+| Flameshot 延时区域截图  | `flameshot gui -d 3000`             | Ctrl + Print         |
+| Flameshot 区域截图并贴图 | `flameshot gui --pin`               | Shift + Print        |
+| Flameshot 全屏截图    | `flameshot full -p ~/Pictures/屏幕截图` | Ctrl + Shift + Print |
 
 ## eSearch
 
