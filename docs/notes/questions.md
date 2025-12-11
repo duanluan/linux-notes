@@ -194,8 +194,12 @@ sudo modprobe btusb
 
 - 微信、钉钉没有缩放
   
-  开始菜单搜索软件名，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_SCALE_FACTOR=1.5`（1.5 为缩放比例），如果环境变量已经有值，添加` QT_SCALE_FACTOR=1.5`，再保存后重启软件。
+  开始菜单搜索软件名，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_SCALE_FACTOR=1.5`（1.5 为缩放比例），如果环境变量已经有值，添加` QT_SCALE_FACTOR=1.5`，保存后重启软件。
 
 - QQ 中输入法打字候选栏闪退、钉钉无法输入
 
-  开始菜单搜索`QQ`/`钉钉`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_IM_MODULE=fcitx XMODIFIERS="@im=fcitx" GTK_IM_MODULE=fcitx SDL_IM_MODULE=fcitx QT_QPA_PLATFORM=xcb`，再保存后重启软件。
+  开始菜单搜索`QQ`/`钉钉`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_IM_MODULE=fcitx XMODIFIERS="@im=fcitx" GTK_IM_MODULE=fcitx SDL_IM_MODULE=fcitx QT_QPA_PLATFORM=xcb`，保存后重启软件。
+
+- 微信无法输入中文
+
+  开始菜单搜索`微信`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx`，保存后重启软件。
