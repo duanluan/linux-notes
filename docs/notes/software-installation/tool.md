@@ -474,6 +474,17 @@ sudo pacman -S flameshot
 | Flameshot 区域截图并贴图 | `flameshot gui --pin`               | Shift + Print        |
 | Flameshot 全屏截图    | `flameshot full -p ~/Pictures/屏幕截图` | Ctrl + Shift + Print |
 
+解决 Wayland 下贴图没有置顶的问题：
+
+`系统设置`-`窗口管理`-`窗口规则`-`新增`。先贴图，`检测窗口属性`，点击贴的图窗口，添加`窗口标题`。`添加属性`，添加`窗口置顶`。
+
+- 描述：Flameshot Pin Top
+- 窗口类（应用程序）：`完全匹配` `flameshot flameshot`
+- 窗口标题：`完全匹配` `flameshot pin`
+- 窗口置顶：`强制` `是`
+
+![](../assets/20251212101310.png)
+
 ## eSearch
 
 截屏+OCR+搜索+翻译+贴图+屏幕翻译+以图搜图+滚动截屏+录屏
