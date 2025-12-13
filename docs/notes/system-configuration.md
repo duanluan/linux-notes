@@ -72,13 +72,10 @@ sudo nano /etc/pacman.conf
 # [archlinuxcn]
 # Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 
-# 1. 首次使用时，刷新数据库并安装 ArchLinuxCN 的 GPG 密钥
-sudo pacman -Sy archlinuxcn-keyring
-# 2. 刷新数据库
-sudo pacman -Sy
-
 # 启用源 (使用 sed 去掉行首的 #)
 sudo sed -i 's/^# *\[\(archlinuxcn\)\]/[\1]/; s/^# *\(Server.*archlinuxcn\)/\1/' /etc/pacman.conf
+# 首次使用时安装 ArchLinuxCN 的 GPG 密钥
+sudo pacman -Sy archlinuxcn-keyring
 # 刷新数据库 (仅同步数据库，不要进行全局更新 -Su)
 sudo pacman -Sy
 # 安装需要的软件
