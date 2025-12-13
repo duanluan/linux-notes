@@ -8,6 +8,9 @@ Steam 是一个数字发行平台，提供数千款游戏的购买、下载和�
 
 ```shell
 sudo pacman -S steam
+
+# 第一次使用代理或 TUN 启动，会下载更新
+proxychains -q steam
 ```
 
 ## HMCL - Minecraft 启动器
