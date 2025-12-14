@@ -141,3 +141,23 @@ Figma 是基于浏览器的界面设计工具，让团队更轻松地创建软�
 ```shell
 paru figma-linux-bin
 ```
+
+## Aseprite
+
+Aseprite 是一款用于创建和动画化像素艺术及精灵的软件。它提供图层、帧、标签、洋葱皮、调色板、自定义画笔、混合模式等功能。
+
+![](https://www.aseprite.org/assets/images/layers.gif)
+![](https://www.aseprite.org/assets/images/control-alpha.gif)
+![](https://www.aseprite.org/assets/images/color-wheel.gif)
+![](https://www.aseprite.org/assets/images/shading-mode.gif)
+![](https://www.aseprite.org/assets/images/pixel-perfect.gif)
+![](https://www.aseprite.org/assets/images/rotsprite.gif)
+![](https://www.aseprite.org/assets/images/tiled-mode.gif)
+![](https://www.aseprite.org/assets/images/custom-brush.gif)
+![](https://www.aseprite.org/assets/images/blend-modes.gif)
+
+[Aseprite - Trial](https://www.aseprite.org/trial/)
+
+```shell
+paru aseprite
+```
