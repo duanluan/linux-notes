@@ -52,29 +52,41 @@ Stage  Job ID           Job name         Workflow name  Workflow file    Events
 $ sudo act -j deploy-gh-pages
 ```
 
-## Docker + Docker Componse + Portainer
+## Docker + Docker Componse + lazydocker + Portainer
 
-```shell
-# 安装 Docker + Docker Componse
-sudo pacman -S docker docker-compose
-# 启动 Docker 服务
-sudo systemctl start docker
-# 开机启动 Docker 服务
-sudo systemctl enable docker
-```
+- Docker + Docker Componse
+  ```shell
+  # 安装 Docker + Docker Componse
+  sudo pacman -S docker docker-compose
+  # 启动 Docker 服务
+  sudo systemctl start docker
+  # 开机启动 Docker 服务
+  sudo systemctl enable docker
+  ```
+  
+  [Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
+  
+  镜像加速请看：[Docker 使用笔记问题答疑及 WSL2 相关 - duanluan 的博客](https://blog.zhjh.top/?p=io0ETi1lKgEyKR0OcDZgS)
 
-[Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
+- lazydocker
 
-镜像加速请看：[Docker 使用笔记问题答疑及 WSL2 相关 - duanluan 的博客](https://blog.zhjh.top/?p=io0ETi1lKgEyKR0OcDZgS)
+  [jesseduffield/lazydocker: The lazier way to manage everything docker](https://github.com/jesseduffield/lazydocker)
+  
+  ![](https://raw.githubusercontent.com/jesseduffield/lazydocker/master/docs/resources/demo3.gif)
 
-```shell
-# 创建 Portainer 存储数据库的卷
-sudo docker volume create portainer_data
-# 启动 Portainer
-proxychains sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
-```
+  ```shell
+  paru lazydocker-bin
+  ```
 
-打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
+- Portainer
+  ```shell
+  # 创建 Portainer 存储数据库的卷
+  sudo docker volume create portainer_data
+  # 启动 Portainer
+  proxychains sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+  ```
+
+  打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
 
 ## nvm + Node.js + pnpm + nrm
 
