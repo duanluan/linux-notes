@@ -242,6 +242,46 @@ sudo pacman -S tmux
 sudo pacman -S nushell
 ```
 
+## zoxide + fzf
+
+zoxide 是一个 更智能的 cd 命令，灵感来自 z 和 autojump。它记住你最常用的目录，因此只需几个按键就能“跳”到这些目录。
+zoxide 支持所有主要 shell。
+
+![](https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/tutorial.webp)
+
+[Installation - ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
+
+```shell
+# 安装 zoxide
+sudo pacman -S zoxide
+# 安装 fzf（模糊查找工具，Manjaro 已经预装）
+sudo pacman -S fzf
+```
+
+- Zsh 初始化
+  ```shell
+  $ kate ~/.zshrc
+  eval "$(zoxide init zsh)"
+  
+  $ source ~/.zshrc
+  ```
+- Nushell 初始化
+  ```shell
+  zoxide init nushell | save -f ~/.zoxide.nu
+  source ~/.zoxide.nu
+  ```
+
+使用示例：
+```shell
+# 第一次精确跳转
+z ~/workspaces/my
+
+# 之后模糊跳转
+z work
+z my
+z wo my
+```
+
 ## 🔄 debtap
 
 一个用于将 .deb 软件包转换为 Arch Linux 软件包的脚本，专注于准确性。
