@@ -196,6 +196,12 @@ patch:
   :: 要安装的软件包（例如：1 2 3, 1-3）：
   :: 3
   ```
+- [Sarasa Gothic (更纱黑体 / 更紗黑體 / 更紗ゴシック / 사라사고딕)](https://github.com/be5invis/Sarasa-Gothic)
+  
+  注意：此软件包体积巨大，因为它完整包含了简繁日韩全语言字符、所有字重与风格以及打入的 Nerd Font 全套图标。
+  ```shell
+  paru ttf-sarasa-gothic-nerd-fonts
+  ```
   
 - [Maple Mono](https://github.com/subframe7536/Maple-font)
   ```shell
