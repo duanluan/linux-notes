@@ -129,3 +129,15 @@ HandBrake 是一个由志愿者构建的开源工具，用于将视频从几乎�
 ```shell
 sudo pacman -S handbrake
 ```
+
+## Figma Linux
+
+Figma 是基于浏览器的界面设计工具，让团队更轻松地创建软件。
+
+![](https://raw.githubusercontent.com/ChugunovRoman/figma-linux/master/images/screenshot1.jpg)
+
+[Releases · Figma-Linux/figma-linux](https://github.com/Figma-Linux/figma-linux/releases)
+
+```shell
+paru figma-linux-bin
+```
