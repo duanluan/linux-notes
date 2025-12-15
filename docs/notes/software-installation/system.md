@@ -10,6 +10,15 @@ sudo pacman -S base-devel cmake unzip
 - cmake：跨平台的构建系统工具，用于自动化编译过程，通常与源代码编译相关。
 - unzip：解压缩 zip 格式文件。
 
+## 恢复 X11 登录选项
+
+```shell
+# 安装 X11 会话支持及必要的窗口管理器组件
+sudo pacman -S plasma-x11-session kwin-x11
+```
+
+注销到登录界面，左下角选择`Plasma (X11)`会话后登录。
+
 ## 📺 显卡驱动
 
 没有正确安装显卡驱动可能会导致睡眠后无法唤醒等问题。
