@@ -688,6 +688,51 @@ paru obs-studio-tytan652
 paru obs-studio-liberty
 ```
 
+## StartLive 开播器
+
+B 站推流开播。
+
+![](https://private-user-images.githubusercontent.com/93813543/445881146-974b0dbb-fcd5-4b26-be76-42db728b8942.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjYxNDY4NTAsIm5iZiI6MTc2NjE0NjU1MCwicGF0aCI6Ii85MzgxMzU0My80NDU4ODExNDYtOTc0YjBkYmItZmNkNS00YjI2LWJlNzYtNDJkYjcyOGI4OTQyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEyMTklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMjE5VDEyMTU1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk1ZWIwMWIxOTQ5MjgyYjA5YzMwYWVlNDUyMTVhNmQ2NDA5YzFjNzkwNThkOTgxZTk4Y2ZkOTJmZDI0MjYwZmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.PaHrRXQpfJw5afCtihUwsO9iXS9XX4xjv08uQqylP7c)
+
+- [Releases · Radekyspec/StartLive](https://github.com/Radekyspec/StartLive/releases)
+- [【腾讯文档】StartLive开播器使用说明](https://docs.qq.com/doc/DTHVMdkhtUWJjRFhv)
+
+先按照开发类中安装`uv`。
+
+```shell
+mkdir -p ~/.local/share/startlive
+# 克隆源码到指定目录
+git clone https://github.com/Radekyspec/StartLive.git ~/.local/share/startlive
+cd ~/.local/share/startlive
+
+# 创建虚拟环境
+uv venv
+# 激活虚拟环境
+source .venv/bin/activate
+# 安装依赖
+uv pip install -r requirements.txt
+# 安装备用后端库，确保在系统钥匙串服务（如 Gnome Keyring）缺失或不可用时，仍能通过本地文件存储凭据。
+uv pip install keyrings.alt
+# 强制指定 Python 使用上述明文文件后端存取 Cookie，彻底绕过尝试连接系统服务导致的报错。
+mkdir -p ~/.config/python_keyring/
+echo "[backend]
+default-keyring=keyrings.alt.file.PlaintextKeyring" > ~/.config/python_keyring/keyringrc.cfg
+
+# 创建快捷方式
+cat <<EOF > ~/.local/share/applications/startlive.desktop
+[Desktop Entry]
+Type=Application
+Name=StartLive
+Exec=$HOME/.local/share/startlive/.venv/bin/python $HOME/.local/share/startlive/StartLive.py
+Icon=$HOME/.local/share/startlive/resources/icon_left.ico
+Path=$HOME/.local/share/startlive
+Terminal=false
+Categories=Network;Video;
+EOF
+# 更新桌面数据库
+update-desktop-database ~/.local/share/applications/
+```
+
 ## VLC Media Player
 
 VLC 是一款自由、开源的跨平台多媒体播放器及框架，可播放大多数多媒体文件，以及 DVD、音频 CD、VCD 及各类流媒体协议。
