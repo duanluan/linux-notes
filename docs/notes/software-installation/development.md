@@ -400,6 +400,29 @@ cnpip set
 pipx install uv
 ```
 
+uv 全局换源：
+```shell
+# 创建 uv 配置文件
+$ mkdir ~/.config/uv
+$ nano ~/.config/uv/uv.toml
+
+[[index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
+
+# 创建测试虚拟环境
+$ cd /tmp
+$ uv venv test-env
+# 进入虚拟环境
+$ source test-env/bin/activate
+# 使用 uv pip 尝试安装 torch（仅测试，不真正安装）
+(test-env) $ uv pip install torch --dry-run
+# 退出虚拟环境
+(test-env) $ deactivate
+# 删除测试虚拟环境
+$ rm -rf test-env
+```
+
 ## Android Studio
 
 Android Studio 是开发 Android 应用的官方 IDE，包含构建 Android 应用所需的所有功能。
