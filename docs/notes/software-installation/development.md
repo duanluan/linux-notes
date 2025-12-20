@@ -293,6 +293,25 @@ Keywords=idea;
   $ mvn -v
   ```
 
+## Apache JMeter
+
+Apache JMeter 是一个 Java 应用程序，可以测试各种应用程序、服务器、协议和资源的性能和功能。
+
+![](https://jmeter.apache.org/images/screenshots/example-simple-plan.png)
+
+[Apache JMeter - Download Apache JMeter](https://jmeter.apache.org/download_jmeter.cgi)
+
+```shell
+# 安装
+$ paru jmeter
+
+# 创建环境变量脚本
+$ sudo nano /opt/jmeter/setenv.sh
+
+# 设置 JVM UI 缩放比例
+JVM_ARGS="-Dsun.java2d.uiScale=2.0"
+```
+
 ## JetBrains WebStorm
 
 JavaScript 和 TypeScript IDE。
