@@ -43,64 +43,6 @@ rule-providers:
     interval: 86400
 ```
 
-## Brook
-
-跨平台可编程网络工具。
-
-```shell
-# 临时设置代理
-$ export http_proxy=127.0.0.1:7897
-$ export https_proxy=127.0.0.1:7897
-
-# 使用 nami 安装 brook
-$ bash <(curl https://bash.ooo/nami.sh)
-$ nami install brook
-
-# 创建 brook 脚本，自定义目录
-$ nano ~/workspaces/bin/brook.service.sh
-
-#!/bin/bash
-# 查找包含 'brook wsclient' 的进程，并获取 PID
-pids=$(ps aux | grep '[b]rook wsclient' | awk '{print $2}')
-# 判断是否找到了 PID
-if [ -n "$pids" ]; then
-  for pid in $pids; do
-    echo "正在终止 brook wsclient 进程 (PID: $pid)"
-    kill "$pid"
-  done
-else
-  echo "没有找到 brook wsclient 进程"
-fi
-# 启动 brook，具体命令看官方文档
-/home/duanluan/.nami/bin/brook client -s 1.2.3.4:9999 -p 123456 --socks5 127.0.0.1:1080
-
-
-$ mkdir -p ~/.config/systemd/user
-# 将 brook 脚本创建为 systemd 服务
-$ nano ~/.config/systemd/user/brook.service
-
-[Unit]
-Description=A cross-platform programmable network tool.
-After=network.target
-
-[Service]
-ExecStart=bash /home/duanluan/workspaces/bin/brook.service.sh
-Restart=always
-RestartSec=5
-#StandardOutput=file:/home/duanluan/workspaces/bin/brook.log
-#StandardError=file:/home/duanluan/workspaces/bin/brook_error.log
-StandardOutput=null
-StandardError=null
-
-[Install]
-WantedBy=graphical-session.target
-
-$ systemctl --user daemon-reload
-$ systemctl --user enable brook
-$ systemctl --user start brook
-$ systemctl --user status brook
-```
-
 ## proxychains
 
 通过在应用程序与网络之间插入代理链，允许用户将所有流量通过指定的代理服务器进行转发，实现隐匿性和访问受限网络的目的。
@@ -118,6 +60,85 @@ sudo nano /etc/proxychains.conf
 [ProxyList]
 socks5 127.0.0.1 7897
 ```
+
+## Brook
+
+跨平台可编程网络工具，可用于代理。
+
+[Brook](https://www.txthinking.com/brook.html)
+
+```shell
+# 方式一：临时设置代理
+$ export http_proxy=127.0.0.1:7897
+$ export https_proxy=127.0.0.1:7897
+# 方式二：使用 proxychains -q 开头
+
+# 使用 nami 安装 brook
+$ bash <(curl https://bash.ooo/nami.sh)
+$ nami install brook
+```
+
+- 服务端
+  ```shell
+  $ nano brook-server.sh
+  
+  #!/bin/bash
+  pkill -f "brook wsserver"
+  sleep 1
+  # -l 端口号 -p 密码
+  nohup brook wsserver -l :9999 -p 123456 > /dev/null &
+  
+  $ chmod +x brook-server.sh
+  $ ./brook-server.sh
+  ```
+
+- 客户端
+
+  ```shell
+  # 创建 brook 脚本，自定义目录
+  $ nano ~/workspaces/bin/brook.service.sh
+  
+  #!/bin/bash
+  # 查找包含 'brook wsclient' 的进程，并获取 PID
+  pids=$(ps aux | grep '[b]rook wsclient' | awk '{print $2}')
+  # 判断是否找到了 PID
+  if [ -n "$pids" ]; then
+    for pid in $pids; do
+      echo "正在终止 brook wsclient 进程 (PID: $pid)"
+      kill "$pid"
+    done
+  else
+    echo "没有找到 brook wsclient 进程"
+  fi
+  # 启动 brook，具体命令看官方文档
+  /home/duanluan/.nami/bin/brook wsclient -s 1.2.3.4:9999 -p 123456 --socks5 127.0.0.1:1080
+  
+  
+  $ mkdir -p ~/.config/systemd/user
+  # 将 brook 脚本创建为 systemd 服务
+  $ nano ~/.config/systemd/user/brook.service
+  
+  [Unit]
+  Description=A cross-platform programmable network tool.
+  After=network.target
+  
+  [Service]
+  ExecStart=/bin/bash /home/duanluan/workspaces/bin/brook.service.sh
+  Restart=always
+  RestartSec=5
+  #StandardOutput=file:/home/duanluan/workspaces/bin/brook.log
+  #StandardError=file:/home/duanluan/workspaces/bin/brook_error.log
+  StandardOutput=null
+  StandardError=null
+  
+  [Install]
+  WantedBy=graphical-session.target
+  
+  $ systemctl --user daemon-reload
+  $ systemctl --user enable brook
+  $ systemctl --user start brook
+  $ systemctl --user status brook
+  ```
 
 ## Sublime Text
 
