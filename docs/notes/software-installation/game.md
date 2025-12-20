@@ -13,6 +13,18 @@ sudo pacman -S steam
 proxychains -q steam
 ```
 
+## Heroic Games Launcher
+
+Heroic 是一款免费且开源的 Epic、GOG 和 Amazon Prime Games 启动器，适用于 Linux、Windows 和 macOS。也适用于 SteamDeck！
+
+![](https://heroicgameslauncher.com/_next/static/images/heroic_01-766acd921e989be3aec2af1174d69dea.webp)
+
+[Download Heroic](https://heroicgameslauncher.com/downloads)
+
+```shell
+paru heroic-games-launcher-bin
+```
+
 ## HMCL - Minecraft 启动器
 
 HMCL 是一款开源、跨平台的 Minecraft 启动器，支持模组管理、游戏自定义、游戏自动安装 (Forge、NeoForge、Cleanroom、Fabric、Quilt、LiteLoader 和 OptiFine)、整合包创建、界面自定义等功能。
