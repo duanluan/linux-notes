@@ -248,6 +248,14 @@ Wine 设置，`应用程序`可以切换`Windows 版本`，`显示`-`屏幕分�
 ![](../assets/20250309231350.png)
 ![](../assets/20250309231516.png)
 
+## Proton-GE-Custom
+
+Proton-GE 是 Proton 的“瑞士军刀”版本。如果 Steam Deck 或 Linux 上的官方 Proton 无法运行某个游戏，或者过场动画黑屏（通常是编码问题），切换到 Proton-GE 通常能解决问题。
+
+```shell
+paru -S proton-ge-custom-bin
+```
+
 ## Wine 运行器
 
 Wine运行器是一个能让Linux用户更加方便地运行Windows应用的程序。原版的 Wine 只能使用命令操作，且安装过程较为繁琐，对小白不友好。于是该运行器为了解决该痛点，内置了对Wine图形化的支持、Wine 安装器、微型应用商店、各种Wine工具、自制的Wine程序打包器、运行库安装工具等。
@@ -655,7 +663,7 @@ makepkg -si
 
 [Releases · henryau53/xmind-crack-patch](https://github.com/henryau53/xmind-crack-patch/releases)
 
-参考开发类软件中先安装 nvm + Node.js + pnpm + nrm。
+先按照开发类中安装 nvm + Node.js + pnpm + nrm。
 
 ```shell
 pnpm add -g asar
