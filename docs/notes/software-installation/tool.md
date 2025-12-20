@@ -700,7 +700,8 @@ paru moonlight-qt-bin
 [下载 | OBS](https://obsproject.com/zh-cn/download)
 
 ```shell
-# 方法一：商店安装
+# 方法一
+sudo pacman -S obs-studio
 
 # 方法二：ffmpeg-obs 会和 ffmpeg 冲突。
 paru obs-studio-tytan652
