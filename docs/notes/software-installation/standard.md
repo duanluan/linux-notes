@@ -181,6 +181,21 @@ $ systemctl --user start unblock-netease-music
 $ systemctl --user status unblock-netease-music
 ```
 
+## go-musicfox
+
+go-musicfox 是用 Go 写的又一款网易云音乐命令行客户端，支持各种音质级别、UnblockNeteaseMusic、Last.fm、MPRIS 和 macOS 交互响应（睡眠暂停、蓝牙耳机连接断开响应和菜单栏控制等）等功能特性。
+
+![](https://raw.githubusercontent.com/go-musicfox/go-musicfox/refs/heads/master/previews/main.png)
+
+[安装 - go-musicfox/go-musicfox](https://github.com/go-musicfox/go-musicfox?tab=readme-ov-file#%E5%AE%89%E8%A3%85)
+
+```shell
+# 下载安装预编译好的二进制
+paru -S go-musicfox-bin
+# 或者下载源代码编译安装
+paru -S go-musicfox
+```
+
 ## LX Music 洛雪音乐播放器
 
 ![](https://github.com/lyswhut/lx-music-desktop/raw/master/doc/images/app.png)
