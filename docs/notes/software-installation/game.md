@@ -25,6 +25,18 @@ Heroic 是一款免费且开源的 Epic、GOG 和 Amazon Prime Games 启动器�
 paru heroic-games-launcher-bin
 ```
 
+## Lutris
+
+Lutris 是一款 Linux 平台上的开源游戏管理平台, 通过整合不同运行环境 (Runners) 来统一启动和管理来自 GOG、Epic、Steam 及模拟器等各个渠道的游戏。
+
+![](https://lutris.net/static/images/screenshots/gog-screen.jpg)
+
+[Download Lutris](https://lutris.net/downloads)
+
+```shell
+sudo pacman -S lutris
+```
+
 ## HMCL - Minecraft 启动器
 
 HMCL 是一款开源、跨平台的 Minecraft 启动器，支持模组管理、游戏自定义、游戏自动安装 (Forge、NeoForge、Cleanroom、Fabric、Quilt、LiteLoader 和 OptiFine)、整合包创建、界面自定义等功能。
