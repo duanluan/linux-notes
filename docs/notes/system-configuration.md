@@ -22,6 +22,20 @@ watch -n 1 ls -lh /tmp/home_xxx.tar
 
 # 系统配置
 
+## 登录失败次数和锁定时间
+
+```shell
+# 修改 faillock 配置文件
+$ sudo nano /etc/security/faillock.conf
+
+# 在这个时间段内累计的失败次数如果超过 deny，则触发锁定。
+fail_interval = 900
+# 在 fail_interval 间隔内，允许连续输错密码的次数。超过此数值，账户将被锁定。设置为 0 表示不锁定账户。
+deny = 10
+# 账户被锁定后，需要等待多久才能自动解锁。设置为 0 或 never 表示必须手动通过 faillock 命令解锁。
+unlock_time = 30
+```
+
 ## Pacman 换源
 
 如果在安装前选了时区和语言，`/etc/pacman.d/mirrorlist`开头会默认有`Country : China`的源。
