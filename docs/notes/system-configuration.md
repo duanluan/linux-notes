@@ -326,3 +326,43 @@ Dolphin 中左侧常用位置项右键`编辑`，修改位置。
 `plasmashell`/`Plasma 工作空间`：
 - **激活应用程序启动器**：Alt+F1
 - **显示桌面**：Ctrl+F12
+
+## GRUB 引导创建虚拟屏（远程必看）
+
+远程连接时，如果本地没有显示器或显示器未开启，无法正常工作。
+
+```shell
+# 查看当前系统识别到的显示接口 (用于确认 HDMI/DP 端口的具体名称)
+$ ls /sys/class/drm/
+
+card1       card1-DP-2  card1-HDMI-A-1  card1-HDMI-A-3  card1-HDMI-A-5  card2-DP-4  card2-DP-6      renderD128  version
+card1-DP-1  card1-DP-3  card1-HDMI-A-2  card1-HDMI-A-4  card2           card2-DP-5  card2-HDMI-A-6  renderD129
+
+# 列出各显示接口的状态，使用 disconnected 的接口名称
+$ grep "^" /sys/class/drm/*/status
+
+/sys/class/drm/card1-DP-1/status:disconnected
+/sys/class/drm/card1-DP-2/status:disconnected
+/sys/class/drm/card1-DP-3/status:disconnected
+/sys/class/drm/card1-HDMI-A-1/status:disconnected
+/sys/class/drm/card1-HDMI-A-2/status:disconnected
+/sys/class/drm/card1-HDMI-A-3/status:disconnected
+/sys/class/drm/card1-HDMI-A-4/status:disconnected
+/sys/class/drm/card1-HDMI-A-5/status:disconnected
+/sys/class/drm/card2-DP-4/status:disconnected
+/sys/class/drm/card2-DP-5/status:disconnected
+/sys/class/drm/card2-DP-6/status:disconnected
+/sys/class/drm/card2-HDMI-A-6/status:connected
+
+
+# 编辑 GRUB 配置文件
+$ sudo nano /etc/default/grub
+
+# 在 GRUB_CMDLINE_LINUX_DEFAULT 中追加 video=接口名称:分辨率@刷新率
+GRUB_CMDLINE_LINUX_DEFAULT='quiet splash udev.log_priority=3 video=HDMI-A-1:3840x2160@60e'
+
+# 更新 GRUB 引导
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+# 重启系统
+$ sudo reboot
+```
