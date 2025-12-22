@@ -906,8 +906,11 @@ DBeaver Agent：
 [下载 - Another Redis Desktop Manager](https://goanother.com/cn/#download)
 
 ```shell
-paru another-redis-desktop-manager
+paru another-redis-desktop-manager-bin
 ```
+
+解决启动报错“FATAL:gpu_data_manager_impl_private.cc(415)] GPU process isn't usable. Goodbye.”：开始菜单搜索`Another Redis Desktop Manager`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`命令行参数`中追加` --no-sandbox`，保存后打开软件。
+
 
 ## Offset Explorer
 
