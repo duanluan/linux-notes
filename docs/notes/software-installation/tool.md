@@ -13,7 +13,7 @@ geekbench
 
 A Clash Meta GUI based on Tauri.
 
-![](https://github.com/clash-verge-rev/clash-verge-rev/raw/dev/docs/preview_dark.png)
+![](https://raw.githubusercontent.com/clash-verge-rev/clash-verge-rev/dev/docs/preview_dark.png)
 
 [Releases · clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev/releases)
 
@@ -25,9 +25,22 @@ paru clash-verge-rev-bin
 
 [Loyalsoldier/clash-rules: Clash Premium 规则集 (RULE-SET)](https://github.com/Loyalsoldier/clash-rules)
 
-在`订阅`-`全局扩展覆写配置`中追加：
+在`订阅`中右键`全局扩展覆写配置`-`编辑文件`：
 
 ```yaml
+profile:
+  store-selected: true
+
+# 自定义策略组
+proxy-groups:
+  - name: "Universal"
+    type: select
+    # true 会把订阅里所有节点都抓取进来
+    include-all: true
+    proxies:
+      - DIRECT
+
+# 规则
 rule-providers:
   # 直连
   direct:
@@ -35,13 +48,30 @@ rule-providers:
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
     interval: 86400
-  # 代理
+    path: ./ruleset/direct.yaml
+  # 规则
   private:
     type: http
     behavior: domain
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
     interval: 86400
+    path: ./ruleset/proxy.yaml
+  # JetBrains
+  jetbrains:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/JetBrains.list"
+    interval: 86400
+    path: ./ruleset/jetbrains.yaml
+
+rules:
+  - RULE-SET,jetbrains,Universal
+  - RULE-SET,private,Universal
+  - RULE-SET,direct,DIRECT
+  - MATCH,DIRECT
 ```
+
+- 解决界面白屏：开始菜单搜索`Clash Verge`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`WEBKIT_DISABLE_DMABUF_RENDERER=1`，保存后打开软件。
 
 ## proxychains
 
