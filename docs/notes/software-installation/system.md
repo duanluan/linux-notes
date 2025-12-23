@@ -73,15 +73,15 @@ rm -rf paru
 yay -Ss 软件名
 ```
 
-也可以在开始菜单搜索`添加/删除软件`窗体中搜索软件名安装。
-
-后续我说`商店安装`就是在这装，有些从 AUR 装可能会装不上。
+也可以在开始菜单搜索`添加/删除软件`，在其中搜索软件名安装。
 
 ![](../assets/20250704220323.png)
 
-Paru 技巧：在代码审阅界面，按`q`可直接退出审阅并继续安装。
+常见问题：
 
-常见问题：[解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
+- 在代码审阅界面（冒号“:”等待输入）时，按`q`可直接退出审阅并继续安装。
+- [解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
+- `paru: error while loading shared libraries: libalpm.so.15: cannot open shared object file: No such file or directory`：系统更新后报错，重新克隆构建安装 paru 最新版。
 
 ## 🗜️ Zram 内存压缩
 
