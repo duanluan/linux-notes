@@ -35,7 +35,8 @@ mhwd -li
 ```
 
 其他显卡参考：
-- [archlinux 显卡驱动 | archlinux 简明指南](https://arch.icekylin.online/guide/rookie/graphic-driver)
+- [配置显卡 - Manjaro](https://wiki.manjaro.org/index.php/Configure_Graphics_Cards/zh-cn)（推荐）
+- [archlinux 显卡驱动 | archlinux 简明指南](https://arch.icekylin.online/guide/rookie/graphic-driver)（推荐）
 - [Intel 图形处理器 - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/Intel_%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E5%99%A8)
 - [ATI - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/ATI)
 - [NVIDIA - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/NVIDIA)
