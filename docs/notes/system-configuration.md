@@ -363,6 +363,10 @@ GRUB_CMDLINE_LINUX_DEFAULT='quiet splash udev.log_priority=3 video=HDMI-A-1:3840
 
 # 更新 GRUB 引导
 $ sudo grub-mkconfig -o /boot/grub/grub.cfg
-# 重启系统
-$ sudo reboot
 ```
+
+先按`Meta` `P`，修改为`屏幕镜像`，再重启系统。
+
+重启后如果出现鼠标键盘操作不能输入密码的情况，说明主屏幕在虚拟屏上，盲操作输入密码后按`Enter`。
+
+`系统设置`-`显示和监视器`-`显示器配置`，将真实显示器设置为`主要`。
