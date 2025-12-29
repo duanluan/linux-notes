@@ -666,6 +666,141 @@ $ sudo modprobe vboxdrv
     ```
     [修复 VirtualBox 中 “UUID 的硬盘已存在” 问题 - Linux-Terminal.com](https://cn.linux-terminal.com/?p=4755)
 
+## Docker + Docker Buildx + Docker Componse + lazydocker + Portainer
+
+- **Docker** + **Docker Buildx** + **Docker Componse**
+  ```shell
+  # 更新系统并安装 Docker + Docker Buildx + Docker Componse
+  sudo pacman -Syu --noconfirm docker docker-buildx docker-compose
+  # 启动 Docker 服务并设置为开机自启
+  sudo systemctl enable --now docker
+  # 将当前用户添加到 docker 用户组，以便无需 sudo 即可运行 docker 命令
+  sudo usermod -aG docker $USER
+  ```
+  
+  [Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
+  
+  镜像加速请看：[Docker 使用笔记问题答疑及 WSL2 相关 - duanluan 的博客](https://blog.zhjh.top/?p=io0ETi1lKgEyKR0OcDZgS)
+
+
+- **lazydocker**
+
+  一个用于 docker 和 docker-compose 的简单终端 UI，使用 Go 语言和 gocui 库编写。
+  
+  ![](https://raw.githubusercontent.com/jesseduffield/lazydocker/master/docs/resources/demo3.gif)
+  [Releases · jesseduffield/lazydocker](https://github.com/jesseduffield/lazydocker/releases)
+
+  ```shell
+  paru lazydocker-bin
+  ```
+
+
+- **Portainer**
+
+  Docker 可视化管理面板，简单、直观的 Docker 管理界面，让容器编排更轻松。
+
+  [Releases · portainer/portainer](https://github.com/portainer/portainer/releases)
+
+  ```shell
+  # 创建 Portainer 存储数据库的卷
+  sudo docker volume create portainer_data
+  # 启动 Portainer
+  proxychains sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+  ```
+
+  打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
+
+
+## WinBoat
+
+在 Linux 上运行 Windows 应用程序，实现无缝集成。
+
+![](https://www.winboat.app/_astro/feat_dash.dIVh_myb.webp)
+
+[WinBoat - Run Windows Apps on Linux with Seamless Integration](https://www.winboat.app/)
+
+```shell
+# 安装 WinBoat
+paru winboat
+```
+
+WinBoat Pre-Requisites：
+
+- **BIOS 开启虚拟化（SVM/VT-x）**
+
+  开启方式各不相同，可以先参考主板说明书或网络搜索具体型号的开启方法。
+  
+  进入 BIOS：重启电脑，按下开机键后连按 F2 或 Del（或在终端执行`systemctl reboot --firmware-setup`）。
+
+  修改设置： 找到 Advanced -> CPU Configuration。将`SVM Mode (AMD)`或`Intel Virtualization Technology`设置为`Enabled`。
+
+
+- **Docker**：根据上面 Docker 部分安装并启动 Docker 服务。
+
+
+- **配置用户权限**
+
+  为了让 WinBoat（以及作为普通用户的你）能直接调用 Docker 和 KVM，必须配置用户组。
+
+  ```shell
+  # 创建 kvm 组（通常已存在，以防万一）
+  sudo groupadd -f kvm
+  
+  # 将当前用户加入 docker 和 kvm 组
+  sudo usermod -aG docker $USER
+  sudo usermod -aG kvm $USER
+  
+  # 刷新设备权限规则
+  sudo udevadm trigger
+  
+  # 重启电脑使用户组变更生效
+  sudo reboot
+  ```
+
+
+- **手动安装 Docker Compose v2**
+
+  Docker Compose 版本号已经是 v5 了，WinBoat 要求 v2 版本。在 [Releases · docker/compose](https://github.com/docker/compose/releases) 查看 v2 最后版本为`v2.40.3`。
+  
+  ```shell
+  # 创建 Docker CLI 插件目录
+  mkdir -p ~/.docker/cli-plugins
+  # 下载官方编译好的二进制文件
+  curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+  # 赋予可执行权限
+  chmod +x ~/.docker/cli-plugins/docker-compose
+  # 验证版本
+  $ docker compose version
+  Docker Compose version v2.40.3
+  ```
+
+
+- **强制加载 KVM 内核模块**
+
+  ```shell
+  # 手动加载模块（立即生效），如果你是 Intel CPU，请将 kvm_amd 换成 kvm_intel
+  sudo modprobe kvm_amd
+  # 设置开机自动加载（持久化），使用 tee 命令以 root 权限写入文件
+  echo "kvm_amd" | sudo tee /etc/modules-load.d/winboat_kvm.conf
+  # 推荐再次重启电脑确保生效
+  sudo reboot
+  ```
+
+- **最终验证并安装系统**
+
+  ```shell
+  # 检查用户组是否包含 docker 和 kvm
+  $ groups
+  
+  # 检查 KVM 模块
+  $ lsmod | grep kvm
+  kvm_amd               241664  4
+  kvm                  1384448  3 kvm_amd
+  irqbypass              12288  1 kvm
+  ccp                   184320  1 kvm_amd
+  ```
+  重启 WinBoat 软件，查看启动要求是否全部通过，然后按提示安装 Windows 系统镜像。
+
 ## 安卓模拟器 麟卓卓懿
 
 [下载 | 北京麟卓信息科技有限公司](https://www.linzhuotech.com/Product/download) 下载。
