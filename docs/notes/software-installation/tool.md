@@ -279,6 +279,8 @@ $ sudo pacman -S virtualbox
 $ sudo modprobe vboxdrv
 ```
 
+---
+
 - 不能枚举 USB 设备：
 
     ```shell
@@ -298,7 +300,6 @@ $ sudo modprobe vboxdrv
   [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
 
 - VirtualBox can't enable the AMD-V extension：
-
 
     ```shell
     # 移除 KVM 模块
@@ -374,10 +375,10 @@ $ sudo modprobe vboxdrv
 
 ```shell
 # 安装 WinBoat
-paru winboat
+paru winboat-bin
 ```
 
-WinBoat Pre-Requisites：
+### WinBoat Pre-Requisites
 
 - **BIOS 开启虚拟化（SVM/VT-x）**
 
@@ -452,6 +453,121 @@ WinBoat Pre-Requisites：
   ccp                   184320  1 kvm_amd
   ```
   重启 WinBoat 软件，查看启动要求是否全部通过，然后按提示安装 Windows 系统镜像。
+
+### 自定义 ISO 镜像安装
+
+**注意**：最终没成功，WinBoat Guest API 一会儿好一会儿 Offline，Apps 点击无效。
+
+在 WinBoat（以及大多数基于 QEMU/KVM 的 Windows 容器）中，默认的磁盘控制器类型是 **VirtIO**，而精简版 ISO 通常不包含 VirtIO 驱动，导致安装程序“看不见”硬盘。
+
+解决方法是，将 VirtIO 驱动打包进 ISO 中。
+
+```shell
+# -----------------------------------------------------------------------------
+# 步骤一：环境准备与驱动获取
+# 说明：我们需要安装解压工具、ISO 打包工具以及制作 UEFI 引导镜像所需的 DOS 工具。
+# 同时，需要从 Fedora 官方获取最新的 VirtIO 驱动（解决“找不到硬盘”的核心）。
+# -----------------------------------------------------------------------------
+
+# 1. 安装必要工具
+# p7zip: 解压 Windows ISO
+# libisoburn: 提供 xorriso 命令用于打包
+# mtools/dosfstools: 用于后续手动制作 efisys.bin 引导镜像
+sudo pacman -S p7zip libisoburn mtools dosfstools
+
+# 2. 创建工作目录结构
+mkdir -p ~/win11_mod/drivers
+cd ~/win11_mod
+
+# 3. 下载 VirtIO 驱动 ISO (Fedora 官方源)
+# 如果下载慢，也可以手动下载后上传到该目录
+wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+
+# 4. 提取关键驱动
+# 我们只需要 w11 (Windows 11) 的 amd64 版本。
+# 必须提取的三个核心驱动：
+# - NetKVM: 网络适配器 (解决无法上网)
+# - viostor: 存储控制器 (解决找不到硬盘)
+# - vioscsi: SCSI 控制器 (增强兼容性，部分环境识别硬盘需要此驱动)
+7z x virtio-win.iso -o./temp_drivers
+cp -r temp_drivers/NetKVM/w11/amd64/* ./drivers/
+cp -r temp_drivers/viostor/w11/amd64/* ./drivers/
+cp -r temp_drivers/vioscsi/w11/amd64/* ./drivers/
+
+# 5. 清理临时下载文件，保持工作区整洁
+rm -rf temp_drivers virtio-win.iso
+
+
+# -----------------------------------------------------------------------------
+# 步骤二：解压系统镜像并注入驱动
+# 说明：将原版/精简版 Windows ISO 解压，并将上一步准备好的 drivers 文件夹放入其中。
+# -----------------------------------------------------------------------------
+
+# 1. 创建 ISO 内容目录
+mkdir -p ~/win11_mod/iso_content
+
+# 2. 解压 Windows ISO 到目录
+# 【重要警告】：7z 的 -o 参数后必须紧跟路径（无空格）。
+# 且在 -o 后使用 ~ (波浪号) 可能会导致 shell 扩展失败，强烈建议使用【绝对路径】。
+# 请将下面的 ISO 路径替换为你实际的下载路径。
+7z x "/home/duanluan/Downloads/纯净版win11.iso" -o/home/duanluan/win11_mod/iso_content
+
+# 3. 将驱动文件夹复制到解压后的系统根目录
+# 这样在安装界面点击“浏览”时，可以直接在光盘根目录看到 drivers 文件夹
+cp -r ~/win11_mod/drivers ~/win11_mod/iso_content/
+
+
+# -----------------------------------------------------------------------------
+# 步骤三：修复 UEFI 引导（关键步骤）
+# 说明：很多精简版 ISO 为了极致体积，删除了光盘引导文件（只保留了 U 盘启动结构）。
+# 我们需要手动生成一个 efisys.bin 引导镜像，否则 WinBoat 无法从 ISO 启动。
+# -----------------------------------------------------------------------------
+
+# 1. 创建一个 2.88MB 的空镜像文件
+dd if=/dev/zero of=efisys.bin bs=1024 count=2880
+# 2. 格式化为 FAT12 文件系统
+mkfs.vfat efisys.bin
+# 3. 在镜像内创建 EFI 目录结构
+mmd -i efisys.bin ::/EFI
+mmd -i efisys.bin ::/EFI/BOOT
+# 4. 将系统原本的 bootx64.efi 复制到引导镜像中
+# 注意：路径大小写可能不同，建议先用 find 确认一下
+# find ./iso_content -iname "bootx64.efi"
+mcopy -i efisys.bin iso_content/EFI/BOOT/bootx64.efi ::/EFI/BOOT/BOOTX64.EFI
+# 5. 将制作好的引导镜像放入 ISO 内容目录中（必须放进去，xorriso 才能读取）
+mv efisys.bin ./iso_content/
+
+
+# -----------------------------------------------------------------------------
+# 步骤四：重新打包 ISO
+# -----------------------------------------------------------------------------
+
+# 使用 xorriso 生成支持 UEFI 启动的 ISO
+# -V: 设置卷标
+# -e: 指定 UEFI 引导镜像（相对于 iso_content 根目录的路径）
+xorriso -as mkisofs \
+  -iso-level 4 \
+  -J -l -R \
+  -D \
+  -V "WIN11_VIRTIO" \
+  -o ./win11_final.iso \
+  -e efisys.bin \
+  -no-emul-boot \
+  -isohybrid-gpt-basdat \
+  ./iso_content
+
+# 此时，当前目录下生成的 win11_final.iso 即为成品。
+```
+
+WinBoat 安装时选择`~/win11_mod/win11_final.iso`，在 Installation 界面点击 **in your browser** 打开 **QWMU (windows) - noVNC**。
+
+手动安装 Windows 系统时找不到磁盘，`加载驱动程序`，选择`D:\drivers`目录，确定后选择`Red Hat VirtIO SCSI pass-through controller`，下一步就能看到磁盘。
+
+Windows 安装完成进入桌面后，打开**设备管理器**，找到带有黄色感叹号的**以太网控制器**，右键**更新驱动程序**，选择**浏览我的电脑以查找驱动程序**，选择`D:\drivers`目录，提示成功安装`Red Hat VirtIO Ethernet Adapter`。
+
+在 Windows 中浏览器打开`https://github.com/TibixDev/winboat/releases` ，下载`winboat-guest-server.zip`，将其中文件解压到`C:\Program Files\WinBoat`目录下，双击打开`RDPApps.reg`，右键管理员运行`install.bat`。
+
+关闭 WinBoat 重新打开，理论上可以正常运行。
 
 ## 安卓模拟器 麟卓卓懿
 
