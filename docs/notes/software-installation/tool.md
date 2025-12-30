@@ -170,6 +170,298 @@ $ nami install brook
   $ systemctl --user status brook
   ```
 
+## Wine
+
+Wine 不进行模拟、转译或虚拟化，而是通过直接提供一组 Win32 API 的对应实现来运行 Windows 应用程序。
+
+```shell
+sudo pacman -Syu wine wine-mono wine-gecko winetricks
+```
+- wine-mono：Wine 的 Mono 组件，允许在 Wine 环境中运行基于 .NET 的应用程序。
+- wine_gecko：Wine 的 Gecko 组件，提供对基于 HTML 的应用程序
+- winetricks：Wine 的辅助脚本，简化了安装和配置 Windows 应用程序和组件的过程。
+
+```shell
+# 指定 Wine 前缀目录，否则默认为 ~/.wine
+export WINEPREFIX=~/.wine-xxx
+# 初始化 Wine 容器并设置
+winecfg
+# 安装中文字体支持
+proxychains -q winetricks cjkfonts
+```
+
+Wine 设置，`应用程序`可以切换`Windows 版本`，`显示`-`屏幕分辨率`调大以适应本机分辨率。
+
+![](../assets/20250309231350.png)
+![](../assets/20250309231516.png)
+
+## Proton-GE-Custom
+
+Proton-GE 是 Proton 的“瑞士军刀”版本。如果 Steam Deck 或 Linux 上的官方 Proton 无法运行某个游戏，或者过场动画黑屏（通常是编码问题），切换到 Proton-GE 通常能解决问题。
+
+```shell
+paru -S proton-ge-custom-bin
+```
+
+## Wine 运行器
+
+Wine运行器是一个能让Linux用户更加方便地运行Windows应用的程序。原版的 Wine 只能使用命令操作，且安装过程较为繁琐，对小白不友好。于是该运行器为了解决该痛点，内置了对Wine图形化的支持、Wine 安装器、微型应用商店、各种Wine工具、自制的Wine程序打包器、运行库安装工具等。
+
+![](https://storage.deepin.org/thread/202210022215217037_%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20221002221112.png)
+
+星火应用商店下载并安装[Wine运行器](spk://store/tools/spark-deepin-wine-runner)。
+
+## VMware Workstation Pro
+
+VMware Workstation Pro 是一款功能强大的虚拟化软件，允许用户在单一物理机上创建和运行多个虚拟机，支持多种操作系统，适用于开发、测试和生产环境。
+
+[如何在 Linux 上下载和安装 VMware Workstation Pro 免费版 - 系统极客](https://www.sysgeek.cn/install-vmware-workstation-pro-on-linux/)
+
+[注册 Broadcom](https://profile.broadcom.com/web/registration) 账号，用邮箱作用户名登录。
+
+[Free Downloads - Support Portal - Broadcom support portal](https://support.broadcom.com/group/ecx/free-downloads) 搜索“VMware Workstation Pro”后下载 Linux 版。
+
+```shell
+# 方法一
+chmod u+x VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
+sudo ./VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
+
+# 方法二
+paru -S vmware-keymaps vmware-workstation
+```
+
+安装过程中“VMware's Customer Experience Improvement Program ("CEIP")”可以选 No。
+
+---
+
+- 安装 [open-vm-tools](https://github.com/vmware/open-vm-tools) 增强虚拟机：
+  ```shell
+  sudo pacman -S open-vm-tools
+  ```
+
+- Could not connect 'Ethernet0' to virtual network '/dev/vmnet8'
+
+  ```shell
+  sudo systemctl enable --now vmware-networks
+  ```
+
+- Fail Network configuration is missing. Ensure that /etc/vmware/networking exists
+  ```shell                                                      INT ✘ 
+  systemctl enable --now vmware-networks-configuration.service
+  ```
+
+## VirtualBox
+
+VirtualBox 是一款开源的虚拟化软件，允许用户在不同操作系统上创建和运行虚拟机，支持跨平台使用，适用于开发、测试和学习。
+
+[Linux_Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Linux_Downloads)
+[Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+
+```shell
+# 查看内核版本
+$ uname -r
+6.12.48-1-MANJARO
+
+# 安装 VirtualBox，选择指定内核版本的 extra，此处为 linux612-virtualbox-host-modules
+$ sudo pacman -S virtualbox
+:: 有 14 个软件包可提供 VIRTUALBOX-HOST-MODULES ：
+:: 软件仓库 extra
+   1) linux510-virtualbox-host-modules  2) linux515-virtualbox-host-modules
+   3) linux54-virtualbox-host-modules  4) linux61-rt-virtualbox-host-modules
+   5) linux61-virtualbox-host-modules  6) linux612-rt-virtualbox-host-modules
+   7) linux612-virtualbox-host-modules  8) linux615-rt-virtualbox-host-modules
+   9) linux616-rt-virtualbox-host-modules  10) linux616-virtualbox-host-modules
+   11) linux617-virtualbox-host-modules  12) linux66-rt-virtualbox-host-modules
+   13) linux66-virtualbox-host-modules  14) virtualbox-host-dkms
+输入某个数字 ( 默认=1 ): 7
+
+# 加载到内核，否则会报错“Kernel driver not installed (rc=-1908)”
+$ sudo modprobe vboxdrv
+```
+
+- 不能枚举 USB 设备：
+
+    ```shell
+    sudo usermod -aG vboxusers $USER
+    ```
+  运行后需要重启电脑生效。
+
+- 不显示 USB 设备：
+
+    ```shell
+    # 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
+    sudo groupadd usbfs
+    # 将用户添加到 vboxusers、usbfs 组
+    sudo usermod -aG vboxusers $USER
+    sudo usermod -aG usbfs $USER
+    ```
+  [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
+
+- VirtualBox can't enable the AMD-V extension：
+
+
+    ```shell
+    # 移除 KVM 模块
+    sudo rmmod kvm_amd
+    sudo rmmod kvm
+    # 将 kvm 和 kvm_amt 加入黑名单模块列表
+    echo "blacklist kvm" | sudo tee /etc/modprobe.d/blacklist.conf
+    echo "blacklist kvm_amd" | sudo tee -a /etc/modprobe.d/blacklist.conf
+    sudo update-initramfs -u
+    ```
+    [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
+
+- Cannot register the hard disk 'xxx.vdi' {new_uuid} because a hard disk 'xxx.vid' with UUID {old_uuid} already exists.
+
+    ```shell
+    # 释放硬盘介质
+    vboxmanage closemedium disk old_uuid
+    ```
+  [修复 VirtualBox 中 “UUID 的硬盘已存在” 问题 - Linux-Terminal.com](https://cn.linux-terminal.com/?p=4755)
+
+## Docker + Docker Buildx + Docker Componse + lazydocker + Portainer
+
+- **Docker** + **Docker Buildx** + **Docker Componse**
+  ```shell
+  # 更新系统并安装 Docker + Docker Buildx + Docker Componse
+  sudo pacman -Syu --noconfirm docker docker-buildx docker-compose
+  # 启动 Docker 服务并设置为开机自启
+  sudo systemctl enable --now docker
+  # 将当前用户添加到 docker 用户组，以便无需 sudo 即可运行 docker 命令
+  sudo usermod -aG docker $USER
+  ```
+
+  [Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
+
+  镜像加速请看：[Docker 使用笔记问题答疑及 WSL2 相关 - duanluan 的博客](https://blog.zhjh.top/?p=io0ETi1lKgEyKR0OcDZgS)
+
+
+- **lazydocker**
+
+  一个用于 docker 和 docker-compose 的简单终端 UI，使用 Go 语言和 gocui 库编写。
+
+  ![](https://raw.githubusercontent.com/jesseduffield/lazydocker/master/docs/resources/demo3.gif)
+  [Releases · jesseduffield/lazydocker](https://github.com/jesseduffield/lazydocker/releases)
+
+  ```shell
+  paru lazydocker-bin
+  ```
+
+
+- **Portainer**
+
+  Docker 可视化管理面板，简单、直观的 Docker 管理界面，让容器编排更轻松。
+
+  [Releases · portainer/portainer](https://github.com/portainer/portainer/releases)
+
+  ```shell
+  # 创建 Portainer 存储数据库的卷
+  sudo docker volume create portainer_data
+  # 启动 Portainer
+  proxychains sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
+  ```
+
+  打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
+
+
+## WinBoat
+
+在 Linux 上运行 Windows 应用程序，实现无缝集成。
+
+![](https://www.winboat.app/_astro/feat_dash.dIVh_myb.webp)
+
+[WinBoat - Run Windows Apps on Linux with Seamless Integration](https://www.winboat.app/)
+
+```shell
+# 安装 WinBoat
+paru winboat
+```
+
+WinBoat Pre-Requisites：
+
+- **BIOS 开启虚拟化（SVM/VT-x）**
+
+  开启方式各不相同，可以先参考主板说明书或网络搜索具体型号的开启方法。
+
+  进入 BIOS：重启电脑，按下开机键后连按 F2 或 Del（或在终端执行`systemctl reboot --firmware-setup`）。
+
+  修改设置： 找到 Advanced -> CPU Configuration。将`SVM Mode (AMD)`或`Intel Virtualization Technology`设置为`Enabled`。
+
+
+- **Docker**：根据上面 Docker 部分安装并启动 Docker 服务。
+- **FreeRDP**：`sudo pacman -S freerdp`。
+- **配置用户权限**
+
+  为了让 WinBoat（以及作为普通用户的你）能直接调用 Docker 和 KVM，必须配置用户组。
+
+  ```shell
+  # 创建 kvm 组（通常已存在，以防万一）
+  sudo groupadd -f kvm
+  
+  # 将当前用户加入 docker 和 kvm 组
+  sudo usermod -aG docker $USER
+  sudo usermod -aG kvm $USER
+  
+  # 刷新设备权限规则
+  sudo udevadm trigger
+  
+  # 重启电脑使用户组变更生效
+  sudo reboot
+  ```
+
+
+- **手动安装 Docker Compose v2**
+
+  Docker Compose 版本号已经是 v5 了，WinBoat 要求 v2 版本。在 [Releases · docker/compose](https://github.com/docker/compose/releases) 查看 v2 最后版本为`v2.40.3`。
+
+  ```shell
+  # 创建 Docker CLI 插件目录
+  mkdir -p ~/.docker/cli-plugins
+  # 下载官方编译好的二进制文件
+  curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+  # 赋予可执行权限
+  chmod +x ~/.docker/cli-plugins/docker-compose
+  # 验证版本
+  $ docker compose version
+  Docker Compose version v2.40.3
+  ```
+
+
+- **强制加载 KVM 内核模块**
+
+  ```shell
+  # 手动加载模块（立即生效），如果你是 Intel CPU，请将 kvm_amd 换成 kvm_intel
+  sudo modprobe kvm_amd
+  # 设置开机自动加载（持久化），使用 tee 命令以 root 权限写入文件
+  echo "kvm_amd" | sudo tee /etc/modules-load.d/winboat_kvm.conf
+  # 推荐重启电脑确保生效
+  sudo reboot
+  ```
+
+- **最终验证并安装系统**
+
+  ```shell
+  # 检查用户组是否包含 docker 和 kvm
+  $ groups
+  
+  # 检查 KVM 模块
+  $ lsmod | grep kvm
+  kvm_amd               241664  4
+  kvm                  1384448  3 kvm_amd
+  irqbypass              12288  1 kvm
+  ccp                   184320  1 kvm_amd
+  ```
+  重启 WinBoat 软件，查看启动要求是否全部通过，然后按提示安装 Windows 系统镜像。
+
+## 安卓模拟器 麟卓卓懿
+
+[下载 | 北京麟卓信息科技有限公司](https://www.linzhuotech.com/Product/download) 下载。
+
+```shell
+tar xvf xDroidInstall-x86_64-v13.2.380-20250306.tar.xz
+./xDroidInstall-x86_64-v13.2.380-20250306.run
+```
+
 ## Sublime Text
 
 [Linux Package Manager Repositories - Sublime Text](https://www.sublimetext.com/docs/linux_repositories.html)
@@ -252,47 +544,6 @@ XnView MP/Classic 是一款免费的图像查看器，可轻松打开和编辑�
 ```shell
 paru xnviewmp
 ```
-
-## Wine
-
-Wine 不进行模拟、转译或虚拟化，而是通过直接提供一组 Win32 API 的对应实现来运行 Windows 应用程序。
-
-```shell
-sudo pacman -Syu wine wine-mono wine-gecko winetricks
-```
-- wine-mono：Wine 的 Mono 组件，允许在 Wine 环境中运行基于 .NET 的应用程序。
-- wine_gecko：Wine 的 Gecko 组件，提供对基于 HTML 的应用程序
-- winetricks：Wine 的辅助脚本，简化了安装和配置 Windows 应用程序和组件的过程。
-
-```shell
-# 指定 Wine 前缀目录，否则默认为 ~/.wine
-export WINEPREFIX=~/.wine-xxx
-# 初始化 Wine 容器并设置
-winecfg
-# 安装中文字体支持
-proxychains -q winetricks cjkfonts
-```
-
-Wine 设置，`应用程序`可以切换`Windows 版本`，`显示`-`屏幕分辨率`调大以适应本机分辨率。
-
-![](../assets/20250309231350.png)
-![](../assets/20250309231516.png)
-
-## Proton-GE-Custom
-
-Proton-GE 是 Proton 的“瑞士军刀”版本。如果 Steam Deck 或 Linux 上的官方 Proton 无法运行某个游戏，或者过场动画黑屏（通常是编码问题），切换到 Proton-GE 通常能解决问题。
-
-```shell
-paru -S proton-ge-custom-bin
-```
-
-## Wine 运行器
-
-Wine运行器是一个能让Linux用户更加方便地运行Windows应用的程序。原版的 Wine 只能使用命令操作，且安装过程较为繁琐，对小白不友好。于是该运行器为了解决该痛点，内置了对Wine图形化的支持、Wine 安装器、微型应用商店、各种Wine工具、自制的Wine程序打包器、运行库安装工具等。
-
-![](https://storage.deepin.org/thread/202210022215217037_%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20221002221112.png)
-
-星火应用商店下载并安装[Wine运行器](spk://store/tools/spark-deepin-wine-runner)。
 
 ## uTools
 
@@ -556,258 +807,6 @@ sudo pacman -S flameshot
 
 ```shell
 paru e-search
-```
-
-## VMware Workstation Pro
-
-VMware Workstation Pro 是一款功能强大的虚拟化软件，允许用户在单一物理机上创建和运行多个虚拟机，支持多种操作系统，适用于开发、测试和生产环境。
-
-[如何在 Linux 上下载和安装 VMware Workstation Pro 免费版 - 系统极客](https://www.sysgeek.cn/install-vmware-workstation-pro-on-linux/)
-
-[注册 Broadcom](https://profile.broadcom.com/web/registration) 账号，用邮箱作用户名登录。
-
-[Free Downloads - Support Portal - Broadcom support portal](https://support.broadcom.com/group/ecx/free-downloads) 搜索“VMware Workstation Pro”后下载 Linux 版。
-
-```shell
-# 方法一
-chmod u+x VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
-sudo ./VMware-Workstation-Full-17.6.3-24583834.x86_64.bundle
-
-# 方法二
-paru -S vmware-keymaps vmware-workstation
-```
-
-安装过程中“VMware's Customer Experience Improvement Program ("CEIP")”可以选 No。
-
----
-
-- 安装 [open-vm-tools](https://github.com/vmware/open-vm-tools) 增强虚拟机：
-  ```shell
-  sudo pacman -S open-vm-tools
-  ```
-
-- Could not connect 'Ethernet0' to virtual network '/dev/vmnet8'
-
-  ```shell
-  sudo systemctl enable --now vmware-networks
-  ```
-
-- Fail Network configuration is missing. Ensure that /etc/vmware/networking exists
-  ```shell                                                      INT ✘ 
-  systemctl enable --now vmware-networks-configuration.service
-  ```
-
-## VirtualBox
-
-VirtualBox 是一款开源的虚拟化软件，允许用户在不同操作系统上创建和运行虚拟机，支持跨平台使用，适用于开发、测试和学习。
-
-[Linux_Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Linux_Downloads)
-[Downloads – Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-
-```shell
-# 查看内核版本
-$ uname -r
-6.12.48-1-MANJARO
-
-# 安装 VirtualBox，选择指定内核版本的 extra，此处为 linux612-virtualbox-host-modules
-$ sudo pacman -S virtualbox
-:: 有 14 个软件包可提供 VIRTUALBOX-HOST-MODULES ：
-:: 软件仓库 extra
-   1) linux510-virtualbox-host-modules  2) linux515-virtualbox-host-modules
-   3) linux54-virtualbox-host-modules  4) linux61-rt-virtualbox-host-modules
-   5) linux61-virtualbox-host-modules  6) linux612-rt-virtualbox-host-modules
-   7) linux612-virtualbox-host-modules  8) linux615-rt-virtualbox-host-modules
-   9) linux616-rt-virtualbox-host-modules  10) linux616-virtualbox-host-modules
-   11) linux617-virtualbox-host-modules  12) linux66-rt-virtualbox-host-modules
-   13) linux66-virtualbox-host-modules  14) virtualbox-host-dkms
-输入某个数字 ( 默认=1 ): 7
-
-# 加载到内核，否则会报错“Kernel driver not installed (rc=-1908)”
-$ sudo modprobe vboxdrv
-```
-
-- 不能枚举 USB 设备：
-
-    ```shell
-    sudo usermod -aG vboxusers $USER
-    ```
-    运行后需要重启电脑生效。
-
-- 不显示 USB 设备：
-
-    ```shell
-    # 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
-    sudo groupadd usbfs
-    # 将用户添加到 vboxusers、usbfs 组
-    sudo usermod -aG vboxusers $USER
-    sudo usermod -aG usbfs $USER
-    ```
-    [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
-
-- VirtualBox can't enable the AMD-V extension：
-
-    
-    ```shell
-    # 移除 KVM 模块
-    sudo rmmod kvm_amd
-    sudo rmmod kvm
-    # 将 kvm 和 kvm_amt 加入黑名单模块列表
-    echo "blacklist kvm" | sudo tee /etc/modprobe.d/blacklist.conf
-    echo "blacklist kvm_amd" | sudo tee -a /etc/modprobe.d/blacklist.conf
-    sudo update-initramfs -u
-    ```
-    [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
-
-- Cannot register the hard disk 'xxx.vdi' {new_uuid} because a hard disk 'xxx.vid' with UUID {old_uuid} already exists.
-
-    ```shell
-    # 释放硬盘介质
-    vboxmanage closemedium disk old_uuid
-    ```
-    [修复 VirtualBox 中 “UUID 的硬盘已存在” 问题 - Linux-Terminal.com](https://cn.linux-terminal.com/?p=4755)
-
-## Docker + Docker Buildx + Docker Componse + lazydocker + Portainer
-
-- **Docker** + **Docker Buildx** + **Docker Componse**
-  ```shell
-  # 更新系统并安装 Docker + Docker Buildx + Docker Componse
-  sudo pacman -Syu --noconfirm docker docker-buildx docker-compose
-  # 启动 Docker 服务并设置为开机自启
-  sudo systemctl enable --now docker
-  # 将当前用户添加到 docker 用户组，以便无需 sudo 即可运行 docker 命令
-  sudo usermod -aG docker $USER
-  ```
-  
-  [Install Portainer CE | Portainer Documentation](https://docs.portainer.io/start/install-ce/server/docker/linux)
-  
-  镜像加速请看：[Docker 使用笔记问题答疑及 WSL2 相关 - duanluan 的博客](https://blog.zhjh.top/?p=io0ETi1lKgEyKR0OcDZgS)
-
-
-- **lazydocker**
-
-  一个用于 docker 和 docker-compose 的简单终端 UI，使用 Go 语言和 gocui 库编写。
-  
-  ![](https://raw.githubusercontent.com/jesseduffield/lazydocker/master/docs/resources/demo3.gif)
-  [Releases · jesseduffield/lazydocker](https://github.com/jesseduffield/lazydocker/releases)
-
-  ```shell
-  paru lazydocker-bin
-  ```
-
-
-- **Portainer**
-
-  Docker 可视化管理面板，简单、直观的 Docker 管理界面，让容器编排更轻松。
-
-  [Releases · portainer/portainer](https://github.com/portainer/portainer/releases)
-
-  ```shell
-  # 创建 Portainer 存储数据库的卷
-  sudo docker volume create portainer_data
-  # 启动 Portainer
-  proxychains sudo docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:lts
-  ```
-
-  打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
-
-
-## WinBoat
-
-在 Linux 上运行 Windows 应用程序，实现无缝集成。
-
-![](https://www.winboat.app/_astro/feat_dash.dIVh_myb.webp)
-
-[WinBoat - Run Windows Apps on Linux with Seamless Integration](https://www.winboat.app/)
-
-```shell
-# 安装 WinBoat
-paru winboat
-```
-
-WinBoat Pre-Requisites：
-
-- **BIOS 开启虚拟化（SVM/VT-x）**
-
-  开启方式各不相同，可以先参考主板说明书或网络搜索具体型号的开启方法。
-  
-  进入 BIOS：重启电脑，按下开机键后连按 F2 或 Del（或在终端执行`systemctl reboot --firmware-setup`）。
-
-  修改设置： 找到 Advanced -> CPU Configuration。将`SVM Mode (AMD)`或`Intel Virtualization Technology`设置为`Enabled`。
-
-
-- **Docker**：根据上面 Docker 部分安装并启动 Docker 服务。
-
-
-- **配置用户权限**
-
-  为了让 WinBoat（以及作为普通用户的你）能直接调用 Docker 和 KVM，必须配置用户组。
-
-  ```shell
-  # 创建 kvm 组（通常已存在，以防万一）
-  sudo groupadd -f kvm
-  
-  # 将当前用户加入 docker 和 kvm 组
-  sudo usermod -aG docker $USER
-  sudo usermod -aG kvm $USER
-  
-  # 刷新设备权限规则
-  sudo udevadm trigger
-  
-  # 重启电脑使用户组变更生效
-  sudo reboot
-  ```
-
-
-- **手动安装 Docker Compose v2**
-
-  Docker Compose 版本号已经是 v5 了，WinBoat 要求 v2 版本。在 [Releases · docker/compose](https://github.com/docker/compose/releases) 查看 v2 最后版本为`v2.40.3`。
-  
-  ```shell
-  # 创建 Docker CLI 插件目录
-  mkdir -p ~/.docker/cli-plugins
-  # 下载官方编译好的二进制文件
-  curl -SL https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-  # 赋予可执行权限
-  chmod +x ~/.docker/cli-plugins/docker-compose
-  # 验证版本
-  $ docker compose version
-  Docker Compose version v2.40.3
-  ```
-
-
-- **强制加载 KVM 内核模块**
-
-  ```shell
-  # 手动加载模块（立即生效），如果你是 Intel CPU，请将 kvm_amd 换成 kvm_intel
-  sudo modprobe kvm_amd
-  # 设置开机自动加载（持久化），使用 tee 命令以 root 权限写入文件
-  echo "kvm_amd" | sudo tee /etc/modules-load.d/winboat_kvm.conf
-  # 推荐再次重启电脑确保生效
-  sudo reboot
-  ```
-
-- **最终验证并安装系统**
-
-  ```shell
-  # 检查用户组是否包含 docker 和 kvm
-  $ groups
-  
-  # 检查 KVM 模块
-  $ lsmod | grep kvm
-  kvm_amd               241664  4
-  kvm                  1384448  3 kvm_amd
-  irqbypass              12288  1 kvm
-  ccp                   184320  1 kvm_amd
-  ```
-  重启 WinBoat 软件，查看启动要求是否全部通过，然后按提示安装 Windows 系统镜像。
-
-## 安卓模拟器 麟卓卓懿
-
-[下载 | 北京麟卓信息科技有限公司](https://www.linzhuotech.com/Product/download) 下载。
-
-```shell
-tar xvf xDroidInstall-x86_64-v13.2.380-20250306.tar.xz
-./xDroidInstall-x86_64-v13.2.380-20250306.run
 ```
 
 ## XMind
