@@ -108,13 +108,13 @@ NAME       ALGORITHM DISKSIZE  DATA COMPR TOTAL STREAMS MOUNTPOINT
 /dev/zram0 zstd            4G  3.8G  1.1G  1.1G      16 [SWAP]
 ```
 
-## ⌨️ Rime 雾凇拼音
+## ⌨️ Rime 薄荷输入法 oh-my-rime / 雾凇拼音
 
 ```shell
 # 搜索并安装 Rime 拼音
 paru fcitx5-rime
-# 搜索并安装雾凇拼音方案
-paru rime-ice
+# 创建 Rime 配置目录
+mkdir -p ~/.local/share/fcitx5/rime
 ```
 
 托盘区输入法图标，右键`重新启动`，再右键`配置`。
@@ -123,28 +123,100 @@ paru rime-ice
 
 ![](../assets/20250702021910.png)
 
-配置参考：[AUR (zh_CN) - rime-ice-git](https://aur.archlinux.org/packages/rime-ice-git)
+配置后需要在托盘区键盘图标，右键`重新启动`或`输入法名称`-`重新部署`。
 
-```shell
-# 创建 Rime 配置
-$ mkdir -p ~/.local/share/fcitx5/rime
-$ nano ~/.local/share/fcitx5/rime/default.custom.yaml
+- 方案一：[oh-my-rime 输入法 | 薄荷输入法](https://www.mintimate.cc/zh/)
+  
+  ```shell
+  # 克隆安装薄荷输入法
+  git clone --depth 1 https://github.com/Mintimate/oh-my-rime.git /tmp/oh-my-rime
+  # 如果之前安装过其他输入法，先删除
+  rm -rf ~/.local/share/fcitx5/rime/*
+  # 复制薄荷输入法方案到 Rime 配置目录
+  cp -r /tmp/oh-my-rime/* ~/.local/share/fcitx5/rime/
+  ```
 
-patch:
-  # 仅使用「雾凇拼音」的默认配置，配置此行即可
-  __include: rime_ice_suggestion:/
-  # 候选词数量
-  menu/page_size: 10
-  # 快捷键绑定
-  key_binder:
-    bindings:
-      # , 键切换候选词到上页
-      - { when: composing, accept: comma, send: Page_Up }
-      # . 键切换候选词到下页
-      - { when: composing, accept: period, send: Page_Down }
-```
+  [输入法方案配置 - 配置覆写和定制 | oh-my-rime输入法](https://www.mintimate.cc/zh/guide/configurationOverride.html#%E8%BE%93%E5%85%A5%E6%B3%95%E6%96%B9%E6%A1%88%E9%85%8D%E7%BD%AE)
+  
+  ```shell
+  # 配置方案
+  $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
+  
+  patch:
+    # 九宫格依赖于 rime_mint ，如果需要使用其他方案（比如: 小鹤双拼的 九宫格），可以使用 custom 文件覆写
+    schema_list:
+      # - schema: rime_mint            # 薄荷拼音
+      # - schema: double_pinyin_flypy  # 小鹤双拼
+      - schema: rime_mint_flypy      # 薄荷拼音-小鹤混输方案
+      # - schema: terra_pinyin         # 地球拼音-薄荷定制
+      # - schema: wubi98_mint          # 五笔98-五笔小筑
+      # - schema: wubi86_jidian        # 五笔86-极点86
+      # - schema: t9                   # 仓九宫格-全拼输入
+      # 以下方案薄荷进行了适配，但是默认没有激活
+      # - schema: double_pinyin_abc    # 智能ABC双拼
+      # - schema: double_pinyin_mspy   # 微软双拼
+      # - schema: double_pinyin_sogou  # 搜狗双拼
+      # - schema: double_pinyin_ziguang # 紫光双拼
+      # - schema: double_pinyin         # 自然码双拼
+  
+  
+  # 全拼配置 rime_mint.custom.yaml，小鹤双拼是 double_pinyin_flypy.custom.yaml，小鹤混输是 rime_mint_flypy.custom.yaml
+  $ nano ~/.local/share/fcitx5/rime/rime_mint.custom.yaml
+  
+  patch:
+    # 候选词数量
+    menu/page_size: 10
+    # 中文模式下标点直接输出而不是候选
+    "punctuator/half_shape/[": "【"
+    "punctuator/half_shape/]": "】"
+  ```
 
-修改配置后需在托盘区键盘图标右键`重新启动`。
+
+- 方案二：[雾凇拼音](https://dvel.me/posts/rime-ice/)
+
+  ```shell
+  # 安装雾凇拼音方案
+  $ paru rime-ice
+  
+  1 aur/rime-ice-double-pinyin-abc-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 智能ABC双拼
+  2 aur/rime-ice-double-pinyin-flypy-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 小鹤双拼
+  3 aur/rime-ice-double-pinyin-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 自然码双拼
+  4 aur/rime-ice-double-pinyin-jiajia-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音加加双拼
+  5 aur/rime-ice-double-pinyin-mspy-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 微软双拼
+  6 aur/rime-ice-double-pinyin-sogou-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 搜狗双拼
+  7 aur/rime-ice-double-pinyin-ziguang-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 紫光双拼
+  8 aur/rime-ice-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库
+  9 aur/rime-ice-pinyin-git r845.0d85dd5-1 [+10 ~0.11]
+      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音方案
+  :: 要安装的软件包（例如：1 2 3, 1-3）：
+  ```
+  
+  [以 patch 的方式打补丁 - Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
+  ```shell
+  # 创建全局补丁
+  $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
+  
+  patch:
+    # 引入雾凇拼音的 rime_ice_suggestion.yaml 配置
+    __include: rime_ice_suggestion:/
+    # 候选词数量
+    menu/page_size: 10
+    # 快捷键绑定
+    key_binder:
+      bindings:
+        # , 键切换候选词到上页
+        - { when: composing, accept: comma, send: Page_Up }
+        # . 键切换候选词到下页
+        - { when: composing, accept: period, send: Page_Down }
+  ```
 
 ## 字体
 
