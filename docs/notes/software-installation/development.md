@@ -897,7 +897,7 @@ $ sudo nano /opt/offsetexplorer/offsetexplorer.vmoptions
 
 一个更快更好的 DevOps SSH/Telnet/Serial/Shell/Sftp 客户端。
 
-![](https://github.com/kingToolbox/WindTerm/raw/master/images/screenshots/WindTerm.png)
+![](https://raw.githubusercontent.com/kingToolbox/WindTerm/master/images/screenshots/WindTerm.png)
 
 [Releases · kingToolbox/WindTerm](https://github.com/kingToolbox/WindTerm/releases)
 
@@ -909,4 +909,16 @@ paru windterm-bin
 ```shell
 sudo mkdir -p /usr/lib/windterm/temp
 sudo chmod 1777 /usr/lib/windterm/temp
+```
+
+## XPipe
+
+XPipe 是一款新型的 shell 连接中心与远程文件管理器，它允许您从本地计算机访问整个服务器基础设施。它基于您已安装的命令行程序运行，并且不需要在您的远程系统上进行任何设置。因此，如果您通常使用 ssh、docker、kubectl 等 CLI 工具连接到您的服务器，您可以直接在 XPipe 上使用这些工具。
+
+![](https://xpipe.io/_next/image?url=%2Fassets%2Fimages%2FHomePage%2Fbanner.png&w=3840&q=100)
+
+[Download - XPipe](https://xpipe.io/download)
+
+```shell
+paru xpipe-bin
 ```
