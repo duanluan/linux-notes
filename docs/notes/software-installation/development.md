@@ -889,9 +889,51 @@ $ sudo nano /opt/offsetexplorer/offsetexplorer.vmoptions
 -Dsun.java2d.uiScale=2.0
 ```
 
-## MobaXterm Pro
+## MobaXterm Pro 汉化版
 
-星火应用商店下载并安装 [MobaXterm Pro（汉化版）](spk://store/development/net.mobatek.mobaxterm-pro-chs)。
+MobaXterm 是您远程计算的终极工具箱 。MobaXterm 提供了所有重要的 远程网络工具 （SSH、X11、RDP、VNC、FTP、MOSH、...）。
+
+![](https://mobaxterm.mobatek.net/img/slider/MobaXterm.png)
+
+- [MobaXterm Xserver with SSH, telnet, RDP, VNC and X11 - Download](https://mobaxterm.mobatek.net/download.html)
+- [mobaxterm 25.4 汉化 - Bing Search](https://cn.bing.com/search?q=mobaxterm%2025.4%20%E6%B1%89%E5%8C%96)
+- [wzsx150/MobaXterm_CN: MobaXterm 综合远程工具 汉化版](https://github.com/wzsx150/MobaXterm_CN)
+- [Mobaxterm Icon | Dashboard Icons](https://dashboardicons.com/icons/mobaxterm)
+
+```shell
+export WINEPREFIX=~/.wine-mobaxterm
+# 初始化容器
+winecfg
+# 安装中文字体
+proxychains -q winetricks cjkfonts
+# 网络上搜索并下载 MobaXterm
+mv MobaXterm /home/duanluan/.wine-mobaxterm/drive_c/Program\ Files
+# 启动测试
+wine /home/duanluan/.wine-mobaxterm/drive_c/Program\ Files/MobaXterm/MobaXterm.exe
+
+# 下载图标
+wget -O "/home/duanluan/.wine-mobaxterm/drive_c/Program Files/MobaXterm/mobaxterm.png" "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/mobaxterm.png"
+# 创建快捷方式
+$ nano /home/duanluan/.local/share/applications/mobaxterm.desktop
+
+# 创建快捷方式
+[Desktop Entry]
+Categories=Network;TerminalEmulator;
+Comment=
+Exec=env WINEPREFIX=/home/duanluan/.wine-mobaxterm wine '/home/duanluan/.wine-mobaxterm/drive_c/Program Files/MobaXterm/MobaXterm.exe'
+Icon=/home/duanluan/.wine-mobaxterm/drive_c/Program Files/MobaXterm/mobaxterm.png
+Name=MobaXterm
+NoDisplay=false
+Path=
+PrefersNonDefaultGPU=false
+StartupNotify=true
+StartupWMClass=MobaXterm.exe
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-SubstituteUID=false
+X-KDE-Username=
+```
 
 ## WindTerm
 
