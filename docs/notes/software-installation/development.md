@@ -633,13 +633,11 @@ $ sudo git clone --recurse-submodules https://github.com/msojocs/wechat-web-devt
 $ cd wechat-web-devtools-linux
 $ sudo tools/build-with-docker.sh
 
-Unable to find image 'jiyecafe/wechat-devtools-build:v1.0.4' locally
+Unable to find image 'msojocs/wechat-devtools-build:v1.0.6' locally
 docker: Error response from daemon: Get "https://registry-1.docker.io/v2/": context deadline exceeded
 
-# 方式一：代理运行
-$ sudo proxychains tools/build-with-docker.sh
-# 方式二：替换镜像源
-$ sudo sed -i 's|jiyecafe/wechat-devtools-build:v1.0.4|swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/jiyecafe/wechat-devtools-build:v1.0.4|g' tools/build-with-docker.sh
+# 替换镜像源
+$ sudo sed -i 's|msojocs/wechat-devtools-build:v1.0.6|swr.cn-north-4.myhuaweicloud.com/ddn-k8s/docker.io/msojocs/wechat-devtools-build:v1.0.6|g' tools/build-with-docker.sh
 
 # 构建开发者工具
 $ sudo tools/build-with-docker.sh
