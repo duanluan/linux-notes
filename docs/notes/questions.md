@@ -72,7 +72,7 @@ $ paru dingtalk-bin
 错误： 未能构建的软件包：dingtalk-bin-7.8.15.5101401-1
 
 # 编辑 PKGBUILD，校验失败的文件对应的 sha512sums 的行改为 'SKIP'
-$ cd /home/njcm/.cache/paru/clone/dingtalk-bin
+$ cd /home/duanluan/.cache/paru/clone/dingtalk-bin
 $ nano PKGBUILD
 
 # 找到类似如下内容，将校验失败的行改为 'SKIP'
@@ -147,10 +147,10 @@ sudo modprobe btusb
   
   # 查找环境变量位置
   $ grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null 
-  /home/njcm/.zhistory:415:echo $GTK_IM_MODULE
-  /home/njcm/.zhistory:416:env | grep -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS'
-  /home/njcm/.zhistory:422:printenv | grep -E '^(GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS|SDL_IM_MODULE|GLFW_IM_MODULE)='
-  /home/njcm/.zhistory:423:grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null
+  /home/duanluan/.zhistory:415:echo $GTK_IM_MODULE
+  /home/duanluan/.zhistory:416:env | grep -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS'
+  /home/duanluan/.zhistory:422:printenv | grep -E '^(GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS|SDL_IM_MODULE|GLFW_IM_MODULE)='
+  /home/duanluan/.zhistory:423:grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null
   /etc/profile.d/input-support.sh:6:    export GTK_IM_MODULE=$im
   /etc/profile.d/input-support.sh:7:    export QT_IM_MODULE=$im
   /etc/profile.d/input-support.sh:8:    export XMODIFIERS=@im=$im

@@ -776,7 +776,7 @@ Navicat Premium 是强大的一体化数据库开发解决方案，可从单一�
   [Oracle Instant Client Downloads | Oracle 中国](https://www.oracle.com/cn/database/technologies/instant-client/downloads.html) 下载 [Instant Client for Microsoft Windows (x64)](https://www.oracle.com/cn/database/technologies/instant-client/winx64-64-downloads.html) 中的`Basic Package`版本。
   ```shell
   unzip instantclient-basic-windows.x64-23.9.0.25.07.zip
-  mv instantclient_23_9 /home/njcm/.wine-navicat/drive_c/Program\ Files/PremiumSoft/Navicat\ Premium\ 17
+  mv instantclient_23_9 /home/duanluan/.wine-navicat/drive_c/Program\ Files/PremiumSoft/Navicat\ Premium\ 17
   ```
   Navicat 菜单栏`工具`-`选项`-`环境`-`OCI 环境`-`OCI library (oci.dll) *`改成`C:\Program Files\PremiumSoft\Navicat Premium 17\instantclient_23_9\oci.dll`。
 
