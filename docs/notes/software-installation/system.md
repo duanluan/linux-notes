@@ -324,10 +324,27 @@ sudo pacman -S tmux
 sudo pacman -S nushell
 ```
 
-## zoxide + fzf
+## fzf 命令行模糊查找
+
+```shell
+# 安装 fzf
+$ sudo pacman -S fzf
+
+# 在文件末尾添加
+$ kate ~/.zshrc
+
+# 激活 fzf 的 Zsh 插件和按键绑定
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+
+$ source ~/.zshrc
+```
+
+## zoxide 智能 cd
 
 zoxide 是一个 更智能的 cd 命令，灵感来自 z 和 autojump。它记住你最常用的目录，因此只需几个按键就能“跳”到这些目录。
-zoxide 支持所有主要 shell。
+
+zoxide 模糊跳转需要先安装 fzf。
 
 ![](https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/tutorial.webp)
 
@@ -336,13 +353,14 @@ zoxide 支持所有主要 shell。
 ```shell
 # 安装 zoxide
 sudo pacman -S zoxide
-# 安装 fzf（模糊查找工具，Manjaro 已经预装）
-sudo pacman -S fzf
 ```
 
 - Zsh 初始化
   ```shell
+  # 在文件末尾添加
   $ kate ~/.zshrc
+  
+  # zoxide
   eval "$(zoxide init zsh)"
   
   $ source ~/.zshrc
