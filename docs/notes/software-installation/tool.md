@@ -281,44 +281,57 @@ $ sudo modprobe vboxdrv
 
 ---
 
-- 不能枚举 USB 设备：
+- `不能枚举 USB 设备`：
 
-    ```shell
-    sudo usermod -aG vboxusers $USER
-    ```
+  ```shell
+  sudo usermod -aG vboxusers $USER
+  ```
   运行后需要重启电脑生效。
 
-- 不显示 USB 设备：
 
-    ```shell
-    # 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
-    sudo groupadd usbfs
-    # 将用户添加到 vboxusers、usbfs 组
-    sudo usermod -aG vboxusers $USER
-    sudo usermod -aG usbfs $USER
-    ```
-  [使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
+- `不显示 USB 设备`：
 
-- VirtualBox can't enable the AMD-V extension：
+  ```shell
+  # 添加 usbfs 用户组（virtualbox 装完成后会有 vboxusers 和　vboxsf）
+  sudo groupadd usbfs
+  # 将用户添加到 vboxusers、usbfs 组
+  sudo usermod -aG vboxusers $USER
+  sudo usermod -aG usbfs $USER
+  ```
+  参考：[使用VirtualBox时，怎么支持USB - 简书](https://www.jianshu.com/p/de430444a8ae)
 
-    ```shell
-    # 移除 KVM 模块
-    sudo rmmod kvm_amd
-    sudo rmmod kvm
-    # 将 kvm 和 kvm_amt 加入黑名单模块列表
-    echo "blacklist kvm" | sudo tee /etc/modprobe.d/blacklist.conf
-    echo "blacklist kvm_amd" | sudo tee -a /etc/modprobe.d/blacklist.conf
-    sudo update-initramfs -u
-    ```
-    [VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
 
-- Cannot register the hard disk 'xxx.vdi' {new_uuid} because a hard disk 'xxx.vid' with UUID {old_uuid} already exists.
+- `VirtualBox can't enable the AMD-V extension`：
 
-    ```shell
-    # 释放硬盘介质
-    vboxmanage closemedium disk old_uuid
-    ```
-  [修复 VirtualBox 中 “UUID 的硬盘已存在” 问题 - Linux-Terminal.com](https://cn.linux-terminal.com/?p=4755)
+  ```shell
+  # 移除 KVM 模块
+  sudo rmmod kvm_amd
+  sudo rmmod kvm
+  # 将 kvm 和 kvm_amt 加入黑名单模块列表
+  echo "blacklist kvm" | sudo tee /etc/modprobe.d/blacklist.conf
+  echo "blacklist kvm_amd" | sudo tee -a /etc/modprobe.d/blacklist.conf
+  sudo update-initramfs -u
+  ```
+  参考：[VirtualBox can't enable the AMD-V extension | 一张假钞的真实世界](https://www.zhangjc.com/2025/01/20/VirtualBox-can-t-enable-the-AMD-V-extension/)
+
+
+- `Cannot register the hard disk 'xxx.vdi' {new_uuid} because a hard disk 'xxx.vid' with UUID {old_uuid} already exists`.
+
+  ```shell
+  # 释放硬盘介质
+  vboxmanage closemedium disk old_uuid
+  ```
+  参考：[修复 VirtualBox 中 “UUID 的硬盘已存在” 问题 - Linux-Terminal.com](https://cn.linux-terminal.com/?p=4755)
+
+
+- `VT-x is being used by another hypervisor (VERR_VMX_IN_VMX_ROOT_MODE)`.
+
+  `VirtualBox can't operate in VMX root mode. Please disable the KVM kernel extension, recompile your kernel and reboot (VERR_VMX_IN_VMX_ROOT_MODE).`
+
+  Linux 内核自带的 KVM (Kernel-based Virtual Machine) 模块抢占了 CPU 的虚拟化硬件资源（VT-x/AMD-V），导致 VirtualBox 无法进入 VMX Root Mode。
+    
+  需要停止 QEMU / libvirt、Android Emulator、Docker 等使用 KVM 的服务。
+
 
 ## Docker + Docker Buildx + Docker Componse + lazydocker + Portainer
 
