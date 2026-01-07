@@ -406,6 +406,39 @@ $ sudo touch /var/cache/debtap/base-packages /var/cache/debtap/extended-base-pac
 $ sudo debtap -u
 ```
 
+## deepin-wine8/10-stable + spark-dwine-helper
+
+spark-dwine-helper 用于修改和增强 deepin-wine 来提升体验，被一些 AUR 包依赖。
+
+```shell
+cd ~/.cache
+paru -G deepin-wine8-stable
+cd deepin-wine8-stable
+nano PKGBUILD
+```
+
+修改`deepin-wine8-stable/PKGBUILD`中的`_pkgver`、`source`、`sha256sums`：
+```shell
+_pkgver=8.16deepin41_spark1
+
+source=(
+    "https://mirrors.sdu.edu.cn/spark-store/amd64-store/depends/deepin-wine8/deepin-wine8-stable_${_pkgver}_amd64.deb"
+)
+
+sha256sums=('SKIP')
+```
+
+```shell
+# 构建安装 deepin-wine8-stable
+makepkg -si
+
+# 安装 deepin-wine10-stable
+paru deepin-wine10-stable
+
+# 安装 spark-dwine-helper
+paru spark-dwine-helper
+```
+
 ## 🔥 Spark Store 星火应用商店
 
 ```shell
