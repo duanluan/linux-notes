@@ -935,6 +935,8 @@ X-KDE-SubstituteUID=false
 X-KDE-Username=
 ```
 
+MobaXterm 检测到它正在 WINE 中运行时，会提示 WINE 尚不支持 Mosh 功能。
+
 ## WindTerm
 
 一个更快更好的 DevOps SSH/Telnet/Serial/Shell/Sftp 客户端。
