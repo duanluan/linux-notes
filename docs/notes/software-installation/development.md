@@ -446,9 +446,8 @@ Keywords=android;studio;
 
 ```shell
 # 查看 Android Studio 版本
-$ cat /opt/android-studio/build.txt 
-AI-252.25557.131.2521.14344949% 
 $ cat /opt/jetbrains/android-studio/build.txt 
+AI-252.27397.103.2522.14617522% 
 
 # 复制 IDEA 安装目录下的中文插件到下载目录
 sudo cp /opt/jetbrains/intellij-idea-ultimate/plugins/localization-zh/lib/localization-zh.jar ~/Downloads/
@@ -458,15 +457,18 @@ unzip localization-zh.jar META-INF/plugin.xml
 ```
 
 编辑`META-INF/plugin.xml`：
-- `<version>252.27397.103</version>`修改为`<version>AI-252.25557.131</version>`。
-- `<idea-version since-build="252.27397.103" until-build="252.27397.103"/>`修改为`<idea-version since-build="AI-252.25557.131" until-build="252.*"/>`。
+- `<version>253.29346.138</version>`修改为`<version>AI-252.25557.131</version>`。
+- `<idea-version since-build="253.29346.138" until-build="253.29346.138"/>`修改为`<idea-version since-build="AI-252.27397.103" until-build="252.*"/>`。
+- 删除`<description>`标签内的内容，只保留`<description></description>`。
 
 ```shell
 # 将修改后的 plugin.xml 更新回 jar 包
-zip localization-zh.jar META-INF/plugin.xml
+sudo zip localization-zh.jar META-INF/plugin.xml
 ```
 
-打开 Android Studio，`Settings`-`Plugins`-右上角齿轮图标-`Install Plugin from Disk...`，选择修改后的`localization-zh.jar`安装。`Settings`-`Appearance & Behavior`-`System Settings`-`Language and Region`中`Language`选择`Chinese (Simplified) 简体中文`。
+打开 Android Studio，`Settings`-`Plugins`-右上角齿轮图标-`Install Plugin from Disk...`，选择修改后的`localization-zh.jar`，重启软件。
+
+`Settings`-`Appearance & Behavior`-`System Settings`-`Language and Region`中`Language`选择`Chinese (Simplified) 简体中文`。
 
 ## Visual Studio Code
 
