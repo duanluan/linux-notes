@@ -178,7 +178,7 @@ $ source ~/.zshrc
 # 解压并移动到 /opt 下
 tar zxvf ideaIU-2024.3.4.1.tar.gz
 sudo mkdir /opt/jetbrains
-sudo mv idea-IU-243.25659.59/ /opt/jetbrains/idea
+sudo mv idea-IU-243.25659.59/ /opt/jetbrains/intellij-idea-ultimate
 # 创建快捷方式
 $ sudo nano /usr/share/applications/idea.desktop
 
@@ -186,8 +186,8 @@ $ sudo nano /usr/share/applications/idea.desktop
 Name=IntelliJ IDEA Ultimate
 Comment=The IDE for Professional Development in Java and Kotlin
 GenericName=IDE
-Exec=/opt/jetbrains/idea/bin/idea %F
-Icon=/opt/jetbrains/idea/bin/idea.svg
+Exec=/opt/jetbrains/intellij-idea-ultimate/bin/idea %F
+Icon=/opt/jetbrains/intellij-idea-ultimate/bin/idea.svg
 Type=Application
 # 禁用启动时进度通知
 StartupNotify=false
@@ -211,13 +211,13 @@ Keywords=idea;
   # 末尾追加环境变量
   $ nano ~/.zshrc
   # Maven
-  export MAVEN_HOME="/opt/jetbrains/idea/plugins/maven/lib/maven3/"
+  export MAVEN_HOME="/opt/jetbrains/intellij-idea-ultimate/plugins/maven/lib/maven3/"
   export PATH=$MAVEN_HOME/bin:$PATH
   
   $ source ~/.zshrc
   $ mvn -v
   Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
-  Maven home: /opt/jetbrains/idea/plugins/maven/lib/maven3
+  Maven home: /opt/jetbrains/intellij-idea-ultimate/plugins/maven/lib/maven3
   Java version: 21.0.6, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.42.19-ca-jdk21.0.6
   Default locale: zh_CN, platform encoding: UTF-8
   OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family: "unix"
@@ -420,7 +420,7 @@ Android Studio 是开发 Android 应用的官方 IDE，包含构建 Android 应�
 ```shell
 # 解压并移动到 /opt 下
 tar zxvf android-studio-2025.2.1.7-linux.tar.gz
-sudo mv android-studio /opt/android-studio
+sudo mv android-studio /opt/jetbrains/android-studio
 # 创建快捷方式
 $ sudo nano /usr/share/applications/android-studio.desktop
 
@@ -428,8 +428,8 @@ $ sudo nano /usr/share/applications/android-studio.desktop
 Name=Android Studio
 Comment=Android Studio is the official IDE for Android development, and includes everything you need to build Android apps.
 GenericName=IDE
-Exec=/opt/android-studio/bin/studio %F
-Icon=/opt/android-studio/bin/studio.png
+Exec=/opt/jetbrains/android-studio/bin/studio %F
+Icon=/opt/jetbrains/android-studio/bin/studio.png
 Type=Application
 # 禁用启动时进度通知
 StartupNotify=false
@@ -448,9 +448,10 @@ Keywords=android;studio;
 # 查看 Android Studio 版本
 $ cat /opt/android-studio/build.txt 
 AI-252.25557.131.2521.14344949% 
+$ cat /opt/jetbrains/android-studio/build.txt 
 
 # 复制 IDEA 安装目录下的中文插件到下载目录
-sudo cp /opt/jetbrains/idea/plugins/localization-zh/lib/localization-zh.jar ~/Downloads/
+sudo cp /opt/jetbrains/intellij-idea-ultimate/plugins/localization-zh/lib/localization-zh.jar ~/Downloads/
 cd ~/Downloads/
 # 解压出 META-INF/plugin.xml
 unzip localization-zh.jar META-INF/plugin.xml
@@ -562,7 +563,7 @@ $ proxychains -q fvm flutter doctor -v
     • GL_EXT_texture_format_BGRA8888: yes (X11)
 
 [✓] Android Studio (version 2025.2.1) [8ms]
-    • Android Studio at /opt/android-studio
+    • Android Studio at /opt/jetbrains/android-studio
     • Flutter plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/9212-flutter
     • Dart plugin can be installed from:
@@ -570,7 +571,7 @@ $ proxychains -q fvm flutter doctor -v
     • Java version OpenJDK Runtime Environment (build 21.0.8+-14196175-b1038.72)
 
 [✓] IntelliJ IDEA Ultimate Edition (version 2025.2) [7ms]
-    • IntelliJ at /opt/jetbrains/idea
+    • IntelliJ at /opt/jetbrains/intellij-idea-ultimate
     • Flutter plugin can be installed from:
       🔨 https://plugins.jetbrains.com/plugin/9212-flutter
     • Dart plugin can be installed from:
