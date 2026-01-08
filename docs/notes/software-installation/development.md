@@ -485,12 +485,17 @@ paru visual-studio-code-bin
 ## FVM + Flutter 换源 + Dart
 
 ```shell
+# 下载 FVM 安装脚本
+wget https://fvm.app/install.sh
 # 代理安装 FVM
-proxychains curl -fsSL https://fvm.app/install.sh | bash
+proxychains -q bash install.sh
+
+# 末尾追加环境变量
+echo 'export PATH="$HOME/fvm/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 
 # 代理安装 Flutter SDK 稳定版
-proxychains fvm install stable
+proxychains -q fvm install stable
 
 # 将 stable 设为全局默认的 Flutter 版本
 $ fvm global stable 
@@ -499,18 +504,18 @@ Flutter SDK: Channel: Stable is now global
 # 查看 FVM 缓存
 $ fvm list
 Cache directory:  /home/duanluan/fvm/versions
-Directory Size: 758.62 MB
+Directory Size: 739.33 MB
 
 # 通过 FVM 检查当前 Flutter 版本
 $ fvm flutter --version
-Flutter 3.35.7 • channel stable • https://gh-proxy.com/https://github.com/flutter/flutter.git
-Framework • revision adc9010625 (3 周前) • 2025-10-21 14:16:03 -0400
-Engine • hash 6b24e1b529bc46df7ff397667502719a2a8b6b72 (revision 035316565a) (18 days ago) • 2025-10-21 14:28:01.000Z
-Tools • Dart 3.9.2 • DevTools 2.48.0
+Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
+Framework • revision f6ff1529fd (4 周前) • 2025-12-11 11:50:07 -0500
+Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (27 days ago) • 2025-12-11 15:04:31.000Z
+Tools • Dart 3.10.4 • DevTools 2.51.1
 
 # 通过 FVM 检查当前 Dart SDK 版本
 $ fvm dart --version
-Dart SDK version: 3.9.2 (stable) (Wed Aug 27 03:49:40 2025 -0700) on "linux_x64"
+Dart SDK version: 3.10.4 (stable) (Tue Dec 9 00:01:55 2025 -0800) on "linux_x64"
 ```
 
 - Flutter SDK 路径：`/home/duanluan/fvm/versions/stable`
@@ -606,15 +611,21 @@ $ proxychains -q fvm flutter doctor -v
   $ source ~/.zshrc
   ```
 
+- 解决`Unable to locate Android SDK`：
+
+  按照开发类中安装 Android Studio，打开软件会提示安装 Android SDK 和相关工具。
+
+
 - 解决`cmdline-tools component is missing`：
   
-  在 Android Studio `Settings`-`Language & Frameworks`-`Android SDK`-`SDK Tools`中勾选`Android SDK Command-line Tools (latest)`安装。
+  在 Android Studio `Settings`-`Language & Frameworks`-`Android SDK`-`SDK Tools`中勾选`Android SDK Command-line Tools (latest)`并应用安装。
   ![](../assets/20251109203812.png)
   再运行`fvm flutter doctor --android-licenses`，全部选`y`。
 
+
 - 解决`Cannot find Chrome executable at google-chrome`：
 
-  先根据之前的笔记安装 Google Chrome，然后设置环境变量：
+  先按照系统类中安装 Google Chrome，然后设置环境变量：
   ```shell
   # 末尾追加环境变量
   $ nano ~/.zshrc
@@ -625,6 +636,10 @@ $ proxychains -q fvm flutter doctor -v
   # 生效环境变量
   $ source ~/.zshrc
   ```
+
+- 解决`Due to an error, the doctor check did not complete.`、`Error: Unable to run "adb", check your Android SDK installation and ANDROID_HOME environment variable`：
+
+  不用代理运行`fvm flutter doctor -v`。
 
 ## 微信开发者工具
 
