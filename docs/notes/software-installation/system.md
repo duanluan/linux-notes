@@ -1,16 +1,16 @@
-# 系统类
+# ⚙️ 系统类
 
 ## 🏗️ base-devel + cmake + unzip（必须）
 
-````shell
+```shell
 sudo pacman -S base-devel cmake unzip
-````
+```
 
 - base-devel：基础开发工具包组，包含了编译软件包所需的常见工具。
 - cmake：跨平台的构建系统工具，用于自动化编译过程，通常与源代码编译相关。
 - unzip：解压缩 zip 格式文件。
 
-## 恢复 X11 登录选项
+## 🔙 恢复 X11 登录选项
 
 ```shell
 # 安装 X11 会话支持及必要的窗口管理器组件
@@ -126,7 +126,7 @@ mkdir -p ~/.local/share/fcitx5/rime
 配置后需要在托盘区键盘图标，右键`重新启动`或`输入法名称`-`重新部署`。
 
 - 方案一：[oh-my-rime 输入法 | 薄荷输入法](https://www.mintimate.cc/zh/)
-  
+
   ```shell
   # 克隆安装薄荷输入法
   git clone --depth 1 https://github.com/Mintimate/oh-my-rime.git /tmp/oh-my-rime
@@ -137,7 +137,7 @@ mkdir -p ~/.local/share/fcitx5/rime
   ```
 
   [输入法方案配置 - 配置覆写和定制 | oh-my-rime输入法](https://www.mintimate.cc/zh/guide/configurationOverride.html#%E8%BE%93%E5%85%A5%E6%B3%95%E6%96%B9%E6%A1%88%E9%85%8D%E7%BD%AE)
-  
+
   ```shell
   # 配置方案
   $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
@@ -198,7 +198,7 @@ mkdir -p ~/.local/share/fcitx5/rime
       Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音方案
   :: 要安装的软件包（例如：1 2 3, 1-3）：
   ```
-  
+
   [以 patch 的方式打补丁 - Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
   ```shell
   # 创建全局补丁
@@ -219,6 +219,7 @@ mkdir -p ~/.local/share/fcitx5/rime
   ```
 
 ## 字体
+## 🔤 字体
 
 - [LXGW WenKai / 霞鹜文楷](https://github.com/lxgw/LxgwWenKai)
   ```shell
@@ -279,12 +280,12 @@ mkdir -p ~/.local/share/fcitx5/rime
   :: 3
   ```
 - [Sarasa Gothic (更纱黑体 / 更紗黑體 / 更紗ゴシック / 사라사고딕)](https://github.com/be5invis/Sarasa-Gothic)
-  
+
   注意：此软件包体积巨大，因为它完整包含了简繁日韩全语言字符、所有字重与风格以及打入的 Nerd Font 全套图标。
   ```shell
   paru ttf-sarasa-gothic-nerd-fonts
   ```
-  
+
 - [Maple Mono](https://github.com/subframe7536/Maple-font)
   ```shell
   # 通过 ArchLinuxCN 安装
@@ -296,7 +297,7 @@ mkdir -p ~/.local/share/fcitx5/rime
   paru otf-myna
   ```
 
-## Tmux
+## 📟 Tmux
 
 tmux 是一个终端复用器。它让你可以轻松地在同一个终端中切换多个程序，将它们分离（它们会在后台继续运行），并将它们重新附加到不同的终端。
 
@@ -324,7 +325,7 @@ sudo pacman -S tmux
 sudo pacman -S nushell
 ```
 
-## fzf 命令行模糊查找
+## 🔍 fzf 命令行模糊查找
 
 ```shell
 # 安装 fzf
@@ -340,7 +341,7 @@ $ kate ~/.zshrc
 $ source ~/.zshrc
 ```
 
-## zoxide 智能 cd
+## 🚀 zoxide 智能 cd
 
 zoxide 是一个 更智能的 cd 命令，灵感来自 z 和 autojump。它记住你最常用的目录，因此只需几个按键就能“跳”到这些目录。
 
@@ -406,7 +407,7 @@ $ sudo touch /var/cache/debtap/base-packages /var/cache/debtap/extended-base-pac
 $ sudo debtap -u
 ```
 
-## deepin-wine8/10-stable + spark-dwine-helper
+## 🍷 deepin-wine8/10-stable + spark-dwine-helper
 
 spark-dwine-helper 用于修改和增强 deepin-wine 来提升体验，被一些 AUR 包依赖。
 
