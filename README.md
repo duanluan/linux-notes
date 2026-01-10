@@ -1,4 +1,4 @@
-# Linux 使用笔记（Manjaro）
+# Linux 使用笔记（Arch / Manjaro）
 
 ![Manjaro](https://img.shields.io/badge/Linux-Manjaro-33b959?style=flat-square&logo=manjaro&logoColor=white)
 ![VuePress](https://img.shields.io/badge/Docs-VuePress-3eaf7c?style=flat-square&logo=vue.js&logoColor=white)
@@ -8,7 +8,7 @@
 
 ## 📖 简介
 
-这份文档是我个人在使用 **Manjaro Linux** 过程中的详细记录。内容涵盖了从系统安装、初始化配置，到各类软件（开发、办公、影音、游戏）的安装避坑，以及常见问题的解决方案。
+这份文档是我个人在使用 **Arch 系 Manjaro Linux** 过程中的详细记录。内容涵盖了从系统安装、初始化配置，到各类软件（开发、办公、影音、游戏）的安装避坑，以及常见问题的解决方案。
 
 👉 **在线阅读：[https://duanluan.github.io/linux-notes/](https://duanluan.github.io/linux-notes/)**
 
@@ -28,7 +28,7 @@
 * **系统更新**：Pacman 更新策略与内核注意事项
 
 ### 3. 软件安装
-这里收录了我在 Manjaro 下使用的所有软件清单及配置方法：
+软件清单及配置方法：
 
 #### 🖥️ [系统类](https://duanluan.github.io/linux-notes/notes/software-installation/system.html)
 > 基础依赖与核心组件
