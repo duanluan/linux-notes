@@ -146,8 +146,8 @@ mkdir -p ~/.local/share/fcitx5/rime
     # 九宫格依赖于 rime_mint ，如果需要使用其他方案（比如: 小鹤双拼的 九宫格），可以使用 custom 文件覆写
     schema_list:
       # - schema: rime_mint            # 薄荷拼音
-      # - schema: double_pinyin_flypy  # 小鹤双拼
-      - schema: rime_mint_flypy      # 薄荷拼音-小鹤混输方案
+      - schema: double_pinyin_flypy  # 小鹤双拼
+      # - schema: rime_mint_flypy      # 薄荷拼音-小鹤混输方案
       # - schema: terra_pinyin         # 地球拼音-薄荷定制
       # - schema: wubi98_mint          # 五笔98-五笔小筑
       # - schema: wubi86_jidian        # 五笔86-极点86
@@ -160,12 +160,14 @@ mkdir -p ~/.local/share/fcitx5/rime
       # - schema: double_pinyin         # 自然码双拼
   
   
-  # 全拼配置 rime_mint.custom.yaml，小鹤双拼是 double_pinyin_flypy.custom.yaml，小鹤混输是 rime_mint_flypy.custom.yaml
+  # 全拼配置 rime_mint.custom.yaml，小鹤双拼是 double_pinyin_flypy.custom.yaml
   $ nano ~/.local/share/fcitx5/rime/rime_mint.custom.yaml
   
   patch:
     # 候选词数量
     menu/page_size: 10
+    # 拼音串最大长度（默认为 25）
+    codeLengthLimit_processor: 100
     # 中文模式下标点直接输出而不是候选
     "punctuator/half_shape/[": "【"
     "punctuator/half_shape/]": "】"
