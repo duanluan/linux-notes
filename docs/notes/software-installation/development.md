@@ -198,8 +198,22 @@ MimeType=application/java;application/java-archive;application/java-byte-code;ap
 Keywords=idea;
 ```
 
-快捷键调整：
+**快捷键调整：**
+
 `设置`-`按键映射`-`主菜单`-`导航`-`通过引用转到`-`选择位置…`在`KDE`按键方案中不是`Alt+F1`而是`Alt+Shift+1`，因为`Alt+F1`是`plasmashell`的快捷键。我们之前在系统配置中已经取消了`plasmashell`的这个快捷键，所以可以修改一下，或者直接将按键方案修改为`Windows`。
+
+**IDEA 占用内存过高只升不降：**
+
+使用 IDEA 2025.3.1.1，发现内存占用一直在升高（>20G），关闭 IDEA 后内存也没有释放，`ps aux | grep idea`发现很多`ExternalJavacProcess`进程。
+
+解决方法：
+
+- 打开`设置` / `Settings (Ctrl+Alt+S)`。
+- 进入`构建、执行、部署` -> `编译器` / `Build, Execution, Deployment` -> `Compiler`。
+- `并行编译独立模块` / `Compile independent modules in parallel`下拉框选择`已禁用` / `Disabled`。  
+  需注意除了在`新建项目设置` -> `为新项目设置` / `New Projects Settings` -> `Settings for New Projects`中设置外，还需要在当前项目中也进行相同设置。
+- 应用后重启 IDEA。
+
 
 ## Maven (Daemon)
 
