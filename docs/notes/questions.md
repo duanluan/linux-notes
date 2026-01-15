@@ -1,18 +1,5 @@
 # 问题解决
 
-## 终端粘贴出现 ^[[200~
-
-```shell
-# 临时解决
-$ printf "\e[?2004l"
-
-# 永久解决，追加内容
-$ nano ~/.zshrc
-
-# 禁用 Zsh 的 Bracketed Paste Mode (解决粘贴出现 ^[[200~ 的问题)
-unset zle_bracketed_paste
-```
-
 ## 关闭 KDE 钱包后开机需要输入 Wi-Fi 密码
 
 当`系统设置`-`KDE 密码库`-`启用 KDE 密码子系统`取消勾选后，开机需要输入 Wi-Fi 密码。

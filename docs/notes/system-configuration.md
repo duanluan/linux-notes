@@ -77,6 +77,19 @@ sudo nano /etc/pacman.conf
 - **启用 Pacman 颜色**：取消注释`#Color`为`Color`
 - **调整并行下载线程数**：修改`ParallelDownloads = 4`的值
 
+## 终端粘贴出现 ^[[200~
+
+```shell
+# 临时解决
+$ printf "\e[?2004l"
+
+# 永久解决，追加内容
+$ nano ~/.zshrc
+
+# 禁用 Zsh 的 Bracketed Paste Mode (解决粘贴出现 ^[[200~ 的问题)
+unset zle_bracketed_paste
+```
+
 ## ArchLinuxCN 源
 
 ```shell
