@@ -135,7 +135,6 @@ zramctl
 # /dev/zram0 zstd           32G   4K   64B   20K      16 [SWAP]
 ```
 
-## ⌨️ Rime 薄荷输入法 oh-my-rime / 雾凇拼音
 如果修改了配置文件（如调整大小）想立即生效且不重启电脑，建议按照以下“彻底重置”步骤操作：
 
 ```shell
@@ -178,6 +177,49 @@ vm.swappiness = 60
 sudo sysctl --system
 ```
 
+## 🛡️ EarlyOOM 防止系统卡死
+
+`earlyoom` 守护进程可以在系统完全卡死前介入，通过配置它可以**优先牺牲浏览器进程**（因为浏览器通常有标签页恢复功能，且占用内存最大），从而保住桌面环境和数据安全。
+
+[rfjakob/earlyoom: earlyoom - Early OOM Daemon for Linux](https://github.com/rfjakob/earlyoom)
+
+```shell
+# 安装 earlyoom
+sudo pacman -S earlyoom
+
+# 启动并设置开机自启
+sudo systemctl enable --now earlyoom
+
+# 配置优先查杀策略
+sudo nano /etc/default/earlyoom
+```
+
+写入以下内容：
+
+```bash
+# 1. 触发线：内存或 Swap 剩余 < 5%
+# 2. 必须保护 (--avoid)：
+#    - 初始化与系统总线: systemd, dbus
+#    - 显示管理器: sddm (Manjaro KDE默认), gdm, lightdm
+#    - 图形底层: Xorg, Xwayland
+#    - 桌面环境核心: plasmashell (KDE), gnome-shell, kwin (KDE窗口管理器), niri, hyprland, sway
+#    - 包管理器 (关键!): pacman, pamac (Manjaro GUI), yay, paru (防止更新中途被杀)
+#    - 远程连接: sshd
+# 3. 优先查杀 (--prefer): 所有主流浏览器
+EARLYOOM_ARGS="-m 5 -s 5 -r 60 --avoid '^(init|systemd.*|dbus.*|sddm.*|gdm.*|lightdm.*|Xorg|Xwayland|kwin_.*|plasmashell|gnome-shell|gnome-session.*|niri|sway|hyprland|pacman|pamac.*|yay|paru|sshd)$' --prefer '^(firefox|chromium|chrome|brave|microsoft-edge-.*|vivaldi-bin|opera)$'"
+```
+
+应用更改：
+
+```shell
+# 重启 earlyoom 服务
+sudo systemctl restart earlyoom
+
+# 检查日志以验证正则表达式是否正确加载
+journalctl -u earlyoom -n 20
+```
+
+## ⌨️ Rime 薄荷输入法 oh-my-rime / 雾凇拼音
 
 ```shell
 # 搜索并安装 Rime 拼音
