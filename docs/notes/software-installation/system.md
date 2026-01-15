@@ -219,13 +219,15 @@ sudo systemctl restart earlyoom
 journalctl -u earlyoom -n 20
 ```
 
-## ⌨️ Rime 薄荷输入法 oh-my-rime / 雾凇拼音
+## ⌨️ Rime 薄荷输入法 oh-my-rime / 雾凇拼音 / 万象拼音和模型
 
 ```shell
 # 搜索并安装 Rime 拼音
 paru fcitx5-rime
 # 创建 Rime 配置目录
 mkdir -p ~/.local/share/fcitx5/rime
+# 如果之前安装过其他输入法，先删除
+rm -rf ~/.local/share/fcitx5/rime/*
 ```
 
 托盘区输入法图标，右键`重新启动`，再右键`配置`。
@@ -241,8 +243,6 @@ mkdir -p ~/.local/share/fcitx5/rime
   ```shell
   # 克隆安装薄荷输入法
   git clone --depth 1 https://github.com/Mintimate/oh-my-rime.git /tmp/oh-my-rime
-  # 如果之前安装过其他输入法，先删除
-  rm -rf ~/.local/share/fcitx5/rime/*
   # 复制薄荷输入法方案到 Rime 配置目录
   cp -r /tmp/oh-my-rime/* ~/.local/share/fcitx5/rime/
   ```
@@ -313,6 +313,7 @@ mkdir -p ~/.local/share/fcitx5/rime
   ```
 
   [以 patch 的方式打补丁 - Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
+  
   ```shell
   # 创建全局补丁
   $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
@@ -331,7 +332,47 @@ mkdir -p ~/.local/share/fcitx5/rime
         - { when: composing, accept: period, send: Page_Down }
   ```
 
-## 字体
+- 方案三：[万象拼音](https://github.com/amzxyz/rime_wanxiang)
+
+  安装方式一：
+  
+  访问 [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) 下载标准版输入方案或双拼辅助码增强版输入方案。
+  
+  ```shell
+  # 解压到 Rime 配置目录
+  unzip rime-wanxiang-flypy-fuzhu.zip -d ~/.local/share/fcitx5/rime
+  ```
+  
+  安装方式二：
+  
+  先按照系统配置文档中临时切换为 ArchLinuxCN 源。
+  
+  ```shell
+  # 基础版包名：rime-wanxiang-[拼写方案名]，如：自然码方案：rime-wanxiang-zrm
+  # 双拼辅助码增强版包名：rime-wanxiang-pro-[拼写方案名]，如：自然码方案：rime-wanxiang-pro-zrm
+  $ paru rime-wanxiang-pro-flypy
+  ```
+
+  访问 [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) 下载语法模型。
+
+  ```shell
+  # 放到 Rime 配置目录
+  mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
+  ```
+
+  [rime_wanxiang/README.md at wanxiang · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/blob/wanxiang/README.md)
+
+  [Rime 万象拼音输入方案新手安装配置指南](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy)
+
+  ```shell
+  # 基础版是 wanxiang.custom.yaml，增强版是 wanxiang_pro.custom.yaml
+  $ cp ~/.local/share/fcitx5/rime/custom/wanxiang_pro.custom.yaml ~/.local/share/fcitx5/rime
+  # 配置方案
+  $ nano ~/.local/share/fcitx5/rime/wanxiang_pro.custom.yaml
+  ```
+
+  修改其中的`- wanxiang_algebra:/pro/自然码`为对应的拼写方案，重新部署。
+
 ## 🔤 字体
 
 - [LXGW WenKai / 霞鹜文楷](https://github.com/lxgw/LxgwWenKai)
