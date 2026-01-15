@@ -84,31 +84,100 @@ yay -Ss 软件名
 - [解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
 - `paru: error while loading shared libraries: libalpm.so.15: cannot open shared object file: No such file or directory`：系统更新后报错，重新克隆构建安装 paru 最新版。
 
-## 🗜️ Zram 内存压缩
+## 🗜️ Zram 内存压缩与 Swappiness 策略优化
+
+Zram 在内存中创建一个压缩块设备作为 Swap 使用。由于 RAM 的速度远快于磁盘，且 Zstd 压缩效率高，这能显著提升系统响应速度，避免系统在内存压力大时卡死。
+
+[zram: Compressed RAM-based block devices — The Linux Kernel documentation](https://docs.kernel.org/admin-guide/blockdev/zram.html)
+
+**通用配置原则：**
+- **Zram 大小**：建议设为物理内存的 **50%** (`zram-fraction = 0.5`)。
+  - **小内存设备 (<16GB)**：可激进设为 100% (1.0) 以防止内存耗尽。
+  - **大内存设备 (≥32GB)**：50% (0.5) 已绰绰有余，既能提供巨大的交换空间，又保留了足够的物理内存安全红线。
+- **Swappiness**：配合 Zram 时，建议保持默认 **60** 或更高（如 100）。这能让系统积极利用 Zram 压缩冷数据，腾出物理内存给文件缓存。**切勿**在使用 Zram 时将其设为 10。
+
+**1. 安装与配置 Zram**
 
 ```shell
 # 安装 zram-generator
-$ sudo pacman -S zram-generator
-# 创建配置文件
-$ sudo nano /etc/systemd/zram-generator.conf
+sudo pacman -S zram-generator
 
+# 创建配置文件
+sudo nano /etc/systemd/zram-generator.conf
+```
+
+写入以下内容（注意：可以解除 4GB 默认限制）：
+
+```ini
 [zram0]
 # 压缩算法，zstd 是性能和压缩率的最佳平衡
 compression-algorithm = zstd
-# 1.0 表示分配动态内存大小的 100% 作为 zram 设备
-zram-size-ram-max = 1.0
+# Zram 大小：设置为物理内存的 50% (对于 64G 内存即 32G)
+# 理由：32G Zram + 64G 物理内存已足够应对任何桌面场景，保留物理内存余量更安全
+zram-fraction = 0.5
+# 解除默认的 4096MB (4GB) 限制，否则大内存机器只会分到 4G
+max-zram-size = none
+# 优先级，确保比磁盘 Swap 高（如果有的话）
+swap-priority = 100
+```
 
-# 启动 zram 服务，它是一个 systemd 生成器所以不需要 enable
-$ sudo systemctl daemon-reload
-$ sudo systemctl start systemd-zram-setup@zram0.service
-# 查看 zram 设备信息
-$ zramctl
+启动服务：
 
-NAME       ALGORITHM DISKSIZE  DATA COMPR TOTAL STREAMS MOUNTPOINT
-/dev/zram0 zstd            4G  3.8G  1.1G  1.1G      16 [SWAP]
+```shell
+# 重新加载 systemd 并启动 zram
+sudo systemctl daemon-reload
+sudo systemctl start dev-zram0.swap
+
+# 验证状态
+zramctl
+# 预期输出示例（DISKSIZE 应接近你的物理内存大小，如 64G）：
+# NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
+# /dev/zram0 zstd           32G   4K   64B   20K      16 [SWAP]
 ```
 
 ## ⌨️ Rime 薄荷输入法 oh-my-rime / 雾凇拼音
+如果修改了配置文件（如调整大小）想立即生效且不重启电脑，建议按照以下“彻底重置”步骤操作：
+
+```shell
+# 1. 停止相关服务
+sudo systemctl stop dev-zram0.swap
+sudo systemctl stop systemd-zram-setup@zram0.service
+
+# 2. 【关键】卸载内核模块（清除旧设备状态，相当于拔掉旧内存条）
+# 如果提示模块在使用，请先执行 sudo swapoff /dev/zram0
+sudo modprobe -r zram
+
+# 3. 重新加载配置
+sudo systemctl daemon-reload
+
+# 4. 重新启动服务
+sudo systemctl start dev-zram0.swap
+```
+
+**2. 调整 Swappiness（确保 Zram 被有效利用）**
+
+```shell
+# 查看当前值（Manjaro 默认通常为 60）
+cat /proc/sys/vm/swappiness
+
+# 确保其不为 10。如果需要强制指定为 60 或更高（如 100）：
+sudo nano /etc/sysctl.d/99-swappiness.conf
+```
+
+写入：
+
+```ini
+# Zram 专用优化：保持积极的换页策略
+vm.swappiness = 60
+# 可选：如果希望系统更激进地利用 Zram，可设为 100
+# vm.swappiness = 100
+```
+
+```shell
+# 应用配置
+sudo sysctl --system
+```
+
 
 ```shell
 # 搜索并安装 Rime 拼音
