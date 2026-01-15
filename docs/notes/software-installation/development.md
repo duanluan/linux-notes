@@ -967,7 +967,7 @@ X-KDE-SubstituteUID=false
 X-KDE-Username=
 ```
 
-MobaXterm 检测到它正在 WINE 中运行时，会提示 WINE 尚不支持 Mosh 功能。
+新增 Mosh 会话时，会提示 WINE 尚不支持 Mosh 功能。
 
 ## WindTerm
 
