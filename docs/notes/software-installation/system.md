@@ -399,6 +399,12 @@ mkdir -p ~/.local/share/fcitx5/rime
   paru ttf-sarasa-gothic-nerd-fonts
   ```
 
+- [文泉驿微米黑](http://wenq.org/wqy2/index.cgi?%E9%A6%96%E9%A1%B5)
+
+  ```shell
+  sudo pacman -S wqy-microhei
+  ```
+
 - [Maple Mono](https://github.com/subframe7536/Maple-font)
   ```shell
   # 通过 ArchLinuxCN 安装
