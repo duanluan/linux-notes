@@ -112,8 +112,7 @@ sudo nano /etc/systemd/zram-generator.conf
 [zram0]
 # 压缩算法，zstd 是性能和压缩率的最佳平衡
 compression-algorithm = zstd
-# Zram 大小：设置为物理内存的 50% (对于 64G 内存即 32G)
-# 理由：32G Zram + 64G 物理内存已足够应对任何桌面场景，保留物理内存余量更安全
+# Zram 大小：设置为物理内存的百分之多少除以 100
 zram-fraction = 0.5
 # 解除默认的 4096MB (4GB) 限制，否则大内存机器只会分到 4G
 max-zram-size = none
@@ -143,7 +142,7 @@ sudo systemctl stop dev-zram0.swap
 sudo systemctl stop systemd-zram-setup@zram0.service
 
 # 2. 【关键】卸载内核模块（清除旧设备状态，相当于拔掉旧内存条）
-# 如果提示模块在使用，请先执行 sudo swapoff /dev/zram0
+# 如果提示模块在使用，请先执行 sudo swapoff /dev/zram0，再执行此命令
 sudo modprobe -r zram
 
 # 3. 重新加载配置
