@@ -236,7 +236,7 @@ rm -rf ~/.local/share/fcitx5/rime/*
 
 ![](../assets/20250702021910.png)
 
-配置后需要在托盘区键盘图标，右键`重新启动`或`输入法名称`-`重新部署`。
+**配置后需要在托盘区键盘图标，右键`重新启动`或`输入法名称`-`重新部署`。**
 
 - 方案一：[oh-my-rime 输入法 | 薄荷输入法](https://www.mintimate.cc/zh/)
 
@@ -256,17 +256,17 @@ rm -rf ~/.local/share/fcitx5/rime/*
   patch:
     # 九宫格依赖于 rime_mint ，如果需要使用其他方案（比如: 小鹤双拼的 九宫格），可以使用 custom 文件覆写
     schema_list:
-      # - schema: rime_mint            # 薄荷拼音
-      - schema: double_pinyin_flypy  # 小鹤双拼
-      # - schema: rime_mint_flypy      # 薄荷拼音-小鹤混输方案
-      # - schema: terra_pinyin         # 地球拼音-薄荷定制
-      # - schema: wubi98_mint          # 五笔98-五笔小筑
-      # - schema: wubi86_jidian        # 五笔86-极点86
-      # - schema: t9                   # 仓九宫格-全拼输入
+      # - schema: rime_mint             # 薄荷拼音
+      - schema: double_pinyin_flypy     # 小鹤双拼
+      # - schema: rime_mint_flypy       # 薄荷拼音-小鹤混输方案
+      # - schema: terra_pinyin          # 地球拼音-薄荷定制
+      # - schema: wubi98_mint           # 五笔98-五笔小筑
+      # - schema: wubi86_jidian         # 五笔86-极点86
+      # - schema: t9                    # 仓九宫格-全拼输入
       # 以下方案薄荷进行了适配，但是默认没有激活
-      # - schema: double_pinyin_abc    # 智能ABC双拼
-      # - schema: double_pinyin_mspy   # 微软双拼
-      # - schema: double_pinyin_sogou  # 搜狗双拼
+      # - schema: double_pinyin_abc     # 智能ABC双拼
+      # - schema: double_pinyin_mspy    # 微软双拼
+      # - schema: double_pinyin_sogou   # 搜狗双拼
       # - schema: double_pinyin_ziguang # 紫光双拼
       # - schema: double_pinyin         # 自然码双拼
   
@@ -367,11 +367,38 @@ rm -rf ~/.local/share/fcitx5/rime/*
   ```shell
   # 基础版是 wanxiang.custom.yaml，增强版是 wanxiang_pro.custom.yaml
   $ cp ~/.local/share/fcitx5/rime/custom/wanxiang_pro.custom.yaml ~/.local/share/fcitx5/rime
-  # 配置方案
+  # 修改方案，不用辅助码改成间接辅助，否则选单字时拼音可能会被作为辅助码消耗掉
   $ nano ~/.local/share/fcitx5/rime/wanxiang_pro.custom.yaml
+  
+  patch:
+    speller/algebra:
+      __patch:
+        #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
+        - wanxiang_algebra:/pro/小鹤双拼           # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+        - wanxiang_algebra:/pro/间接辅助           # 辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
+    
+    # …（中间省略你的其他配置）…
+    
+    # 下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
+    menu/page_size: 10
+    
+    # …（中间省略你的其他配置）…
+    
+    # --- 这是原有的配置开始 ---
+    # 下面这个可以改变tips上屏的按键
+    key_binder/tips_key: "comma"   #修改时候去default找，默认是逗号
+    key_binder/sequence: # Lua 配置：手动排序的快捷键 super_sequence.lua，不要用方向键，各种冲突，一定要避免冲突
+      up: "Control+j"    # 上移
+      down: "Control+k"  # 下移
+      reset: "Control+l" # 重置
+      pin: "Control+p"   # 置顶
+    # --- 这是原有的配置结束 ---
+    
+    # 逗号句号翻页
+    key_binder/bindings/+:
+      - { accept: comma, send: Page_Up, when: has_menu }
+      - { accept: period, send: Page_Down, when: has_menu }
   ```
-
-  修改其中的`- wanxiang_algebra:/pro/自然码`为对应的拼写方案，重新部署。
 
 ## 🔤 字体
 
