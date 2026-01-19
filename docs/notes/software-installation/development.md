@@ -208,7 +208,8 @@ Keywords=idea;
 
 解决方法：
 
-- 打开`设置` / `Settings (Ctrl+Alt+S)`。
+- `pkill -f "ExternalJavacProcess"`杀掉所有`ExternalJavacProcess`进程。
+- IDEA 打开`设置` / `Settings (Ctrl+Alt+S)`。
 - 进入`构建、执行、部署` -> `编译器` / `Build, Execution, Deployment` -> `Compiler`。
 - `并行编译独立模块` / `Compile independent modules in parallel`下拉框选择`已禁用` / `Disabled`。  
   需注意除了在`新建项目设置` -> `为新项目设置` / `New Projects Settings` -> `Settings for New Projects`中设置外，还需要在当前项目中也进行相同设置。
