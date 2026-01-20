@@ -181,6 +181,19 @@ $ systemctl --user start unblock-netease-music
 $ systemctl --user status unblock-netease-music
 ```
 
+## YesPlayMusic
+
+高颜值的第三方网易云播放器
+
+![](https://raw.githubusercontent.com/qier222/YesPlayMusic/master/images/library.png)
+
+[Releases · qier222/YesPlayMusic](https://github.com/qier222/YesPlayMusic/releases)
+
+```shell
+paru yesplaymusic
+```
+
+
 ## go-musicfox
 
 go-musicfox 是用 Go 写的又一款网易云音乐命令行客户端，支持各种音质级别、UnblockNeteaseMusic、Last.fm、MPRIS 和 macOS 交互响应（睡眠暂停、蓝牙耳机连接断开响应和菜单栏控制等）等功能特性。
