@@ -33,12 +33,24 @@ profile:
 
 # 自定义策略组
 proxy-groups:
+  # 自动选择组（URL-Test）
+  - name: "自动选择"
+    type: url-test
+    url: "http://www.gstatic.com/generate_204"
+    interval: 300
+    tolerance: 50
+    include-all: true
+    # 过滤掉非节点信息，防止误选导致断网
+    filter: "^(?!.*(流量|到期|重置|官网|不可用|产品|群)).*$"
+
+  # 主选择组 (Select)
   - name: "Universal"
     type: select
+    proxies:
+      - "自动选择"    # 将自动组加入首选项
+      - DIRECT
     # true 会把订阅里所有节点都抓取进来
     include-all: true
-    proxies:
-      - DIRECT
 
 # 规则
 rule-providers:
