@@ -340,9 +340,18 @@ Dolphin 中左侧常用位置项右键`编辑`，修改位置。
 - **激活应用程序启动器**：Alt+F1
 - **显示桌面**：Ctrl+F12
 
-## GRUB 引导创建虚拟屏（远程必看）
+## 创建虚拟屏（远程必看）
 
-远程连接时，如果本地没有显示器或显示器未开启，无法正常工作。
+**场景**：远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。通过以下配置强制创建一个虚拟屏幕即可解决。
+
+**注意**：
+1. 以下两种情况配置后，先按`Meta` `P`修改为`镜像屏幕`，再重启系统。
+2. 重启后出现黑屏或看不到密码输入框的情况，尝试盲按 `Meta` `P` 切换投影模式，或盲输密码回车。
+3. 进入桌面后，请到 `系统设置`-`显示和监视器`-`显示器配置` 中，将**真实显示器**设置为`主要`。
+
+### 开源驱动（Intel/AMD）
+
+通过内核参数强制创建一个虚拟接口。
 
 ```shell
 # 查看当前系统识别到的显示接口 (用于确认 HDMI/DP 端口的具体名称)
@@ -378,8 +387,117 @@ GRUB_CMDLINE_LINUX_DEFAULT='quiet splash udev.log_priority=3 video=HDMI-A-1:3840
 $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-先按`Meta` `P`，修改为`屏幕镜像`，再重启系统。
+### NVIDIA 闭源驱动（X11）
 
-重启后如果出现鼠标键盘操作不能输入密码的情况，说明主屏幕在虚拟屏上，盲操作输入密码后按`Enter`。
+NVIDIA 驱动无法通过 GRUB 注入，需修改 Xorg 配置文件来实现“双屏并存”（真实屏+虚拟屏）。
 
-`系统设置`-`显示和监视器`-`显示器配置`，将真实显示器设置为`主要`。
+```shell
+# 查询显卡 PCI 地址，获取显卡 BusID
+$ lspci | grep -i vga
+
+# 记下 01:00.0，在配置文件中需转换为十进制格式 PCI:1:0:0
+01:00.0 VGA compatible controller: NVIDIA Corporation AD107 [GeForce RTX 4060] (rev a1)
+
+# 查看当前连接的接口名称，找到 connected 的那个，记下 DFP-4
+$ nvidia-settings -q dpys
+
+    [4] njcm-pc:0[dpy:4] (HDMI-0) (connected, enabled)
+
+      Has the following names:
+        DFP
+        DFP-4
+        DPY-EDID-b83621ba-cd9f-fefb-a8c5-a438b3e7a04b
+        DPY-4
+        HDMI-0
+        Connector-1
+
+# 点击`Acquire EDID...`按钮将`edid.bin`保存到当前用户主目录
+$ nvidia-settings
+```
+
+![](assets/20260122094522.png)
+
+
+```shell
+# 将 EDID 文件移动到 X11 目录
+$ sudo mv edid.bin /etc/X11/edid.bin
+# 赋予读取权限
+$ sudo chmod 644 /etc/X11/edid.bin
+
+# 创建 Xorg 配置文件
+$ sudo nano /etc/X11/xorg.conf.d/20-nvidia-headless.conf
+
+# --- 内容如下 ---
+Section "ServerLayout"
+    Identifier     "Layout0"
+    Screen      0  "Screen0" 0 0
+EndSection
+
+Section "Device"
+    Identifier     "Device0"
+    Driver         "nvidia"
+    VendorName     "NVIDIA Corporation"
+    # 根据 lspci 结果修改 BusID，例如 01:00.0 改为 PCI:1:0:0
+    BusID          "PCI:1:0:0"
+
+    # --- 核心配置开始 ---
+    # 1. 允许无显示器启动
+    Option         "AllowEmptyInitialConfiguration" "True"
+
+    # 2. 强制开启双端口：填入 [真实接口], [虚拟空闲接口]
+    # 例如：DFP-4 是真实屏幕，DFP-0 是我们要生成的虚拟屏
+    Option         "ConnectedMonitor" "DFP-4, DFP-0"
+
+    # 3. 只给虚拟屏 (DFP-0) 加载 EDID 伪装
+    # 真实屏 (DFP-4) 留空，让它自动识别物理参数
+    Option         "CustomEDID" "DFP-0:/etc/X11/edid.bin"
+    # --- 核心配置结束 ---
+EndSection
+
+Section "Screen"
+    Identifier     "Screen0"
+    Device         "Device0"
+    Monitor        "Monitor0"
+    DefaultDepth    24
+    SubSection     "Display"
+        Depth       24
+        # 即使这里写了 1080P，如果 EDID 是 4K 的，系统仍可能优先使用 4K
+        Modes      "1920x1080"
+    EndSubSection
+EndSection
+
+Section "Monitor"
+    Identifier     "Monitor0"
+    Option         "DPMS"
+EndSection
+# --- end ---
+
+
+# 禁用系统自动生成的配置（通常是 90-mhwd.conf）
+$ sudo mv /etc/X11/xorg.conf.d/90-mhwd.conf /etc/X11/xorg.conf.d/90-mhwd.conf.bak
+# 禁用 dummy 驱动配置（如果存在）
+$ sudo mv /etc/X11/xorg.conf.d/10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf.bak
+```
+
+### 故障恢复
+
+重启后无法进入图形界面，通过 SSH 登录或 TTY（`Ctrl` `Alt` `F2`）执行以下命令恢复：
+
+```shell
+# 恢复 GRUB 配置
+sudo nano /etc/default/grub
+# 删除 video= 接口名称:分辨率@刷新率 部分
+# 更新 GRUB 引导
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# 删除自定义配置
+sudo mv /etc/X11/xorg.conf.d/20-nvidia-headless.conf /etc/X11/xorg.conf.d/20-nvidia-headless.conf.bak
+# 恢复系统自动生成的配置
+sudo mv /etc/X11/xorg.conf.d/90-mhwd.conf.bak /etc/X11/xorg.conf.d/90-mhwd.conf
+# 恢复 dummy 驱动配置（如果存在）
+sudo mv /etc/X11/xorg.conf.d/10-headless.conf.bak /etc/X11/xorg.conf.d/10-headless.conf
+
+# 重启系统
+sudo reboot
+```
+
