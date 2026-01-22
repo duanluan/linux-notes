@@ -370,6 +370,13 @@ rm -rf ~/.local/share/fcitx5/rime/*
   $ nano ~/.local/share/fcitx5/rime/wanxiang_pro.custom.yaml
   
   patch:
+    # 强制开启用户词典记录（记住你输过的词）
+    translator/enable_user_dict: true
+    # 强制开启自动调频（根据输入频率调整候选词顺序）
+    translator/enable_encoder: true
+    # 允许句子进入用户词典（不仅仅是短语）
+    translator/enable_sentence: true
+  
     speller/algebra:
       __patch:
         #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
