@@ -289,6 +289,9 @@ $ sudo pacman -S virtualbox
 
 # 加载到内核，否则会报错“Kernel driver not installed (rc=-1908)”
 $ sudo modprobe vboxdrv
+
+# 安装 VirtualBox 扩展包（可选，但建议安装以支持 USB 2.0/3.0、RDP 等功能）
+paru virtualbox-ext-oracle
 ```
 
 ---
