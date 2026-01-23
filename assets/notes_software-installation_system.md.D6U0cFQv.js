@@ -160,6 +160,13 @@ import{_ as i,o as a,c as n,ae as l}from"./chunks/framework.BvXBqrA8.js";const h
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">$</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> nano</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> ~/.local/share/fcitx5/rime/wanxiang_pro.custom.yaml</span></span>
 <span class="line"></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">patch:</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  # 强制开启用户词典记录（记住你输过的词）</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  translator/enable_user_dict:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> true</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  # 强制开启自动调频（根据输入频率调整候选词顺序）</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  translator/enable_encoder:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> true</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">  # 允许句子进入用户词典（不仅仅是短语）</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  translator/enable_sentence:</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> true</span></span>
+<span class="line"></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">  speller/algebra:</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">    __patch:</span></span>
 <span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">      #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目</span></span>

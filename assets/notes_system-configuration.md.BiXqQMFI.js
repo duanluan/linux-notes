@@ -192,9 +192,8 @@ import{_ as i,o as a,c as n,ae as l}from"./chunks/framework.BvXBqrA8.js";const p
 <span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">    # 例如：DFP-4 是真实屏幕，DFP-0 是我们要生成的虚拟屏</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">    Option</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">         &quot;ConnectedMonitor&quot;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;DFP-4, DFP-0&quot;</span></span>
 <span class="line"></span>
-<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">    # 3. 只给虚拟屏 (DFP-0) 加载 EDID 伪装</span></span>
-<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">    # 真实屏 (DFP-4) 留空，让它自动识别物理参数</span></span>
-<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">    Option</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">         &quot;CustomEDID&quot;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;DFP-0:/etc/X11/edid.bin&quot;</span></span>
+<span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">    # 3. 两个屏幕都加载 EDID，无需握手即可识别屏幕，避免唤醒黑屏</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">    Option</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">         &quot;CustomEDID&quot;</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> &quot;DFP-4:/etc/X11/edid.bin; DFP-0:/etc/X11/edid.bin&quot;</span></span>
 <span class="line"><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;">    # --- 核心配置结束 ---</span></span>
 <span class="line"><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">EndSection</span></span>
 <span class="line"></span>
