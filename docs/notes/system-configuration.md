@@ -448,9 +448,8 @@ Section "Device"
     # 例如：DFP-4 是真实屏幕，DFP-0 是我们要生成的虚拟屏
     Option         "ConnectedMonitor" "DFP-4, DFP-0"
 
-    # 3. 只给虚拟屏 (DFP-0) 加载 EDID 伪装
-    # 真实屏 (DFP-4) 留空，让它自动识别物理参数
-    Option         "CustomEDID" "DFP-0:/etc/X11/edid.bin"
+    # 3. 两个屏幕都加载 EDID，无需握手即可识别屏幕，避免唤醒黑屏
+    Option         "CustomEDID" "DFP-4:/etc/X11/edid.bin; DFP-0:/etc/X11/edid.bin"
     # --- 核心配置结束 ---
 EndSection
 
