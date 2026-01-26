@@ -77,6 +77,19 @@ sudo nano /etc/pacman.conf
 - **启用 Pacman 颜色**：取消注释`#Color`为`Color`
 - **调整并行下载线程数**：修改`ParallelDownloads = 4`的值
 
+## 网络时间同步
+
+```shell
+# 启用网络时间同步
+sudo timedatectl set-ntp true
+
+# 如果是 Windows 双系统，建议设置 RTC 使用本地时间，防止切换系统后时间相差 8 小时
+sudo timedatectl set-local-rtc 1 --adjust-system-clock
+
+# 检查状态
+timedatectl status
+```
+
 ## 终端粘贴出现 ^[[200~
 
 ```shell
