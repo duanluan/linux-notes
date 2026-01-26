@@ -847,6 +847,8 @@ Synology Drive Client 是一款桌面实用程序，可在多台客户端计算�
 paru synology-drive
 ```
 
+[Synology Drive Client 同步过滤目录文件夹](https://blog.zhjh.top/?p=SSLgqawi)
+
 ## Syncthing + Syncthing Tray
 
 Syncthing 是开源的、跨设备实时文件同步工具。
