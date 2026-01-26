@@ -20,13 +20,13 @@ paru wechat-bin
 
 下载 [activate-wechat.sh](https://github.com/duanluan/shell-scripts/blob/main/activate-wechat.sh)。
 
-开始菜单搜索`快捷键`-`新增`-`命令或脚本`。
-
-- 命令：`上面脚本存放的目录/activate-wechat.sh`
+开始菜单搜索`快捷键`-`新增`-`命令或脚本`，命令：`上面脚本存放的目录/activate-wechat.sh`。
 
 右侧`添加`，输入快捷键`Ctrl` `Alt` `W`，右下角`应用`。
 
 ![](../assets/20250704230110.png)
+
+微信在任务栏或托盘区时，按`Ctrl` `Alt` `W`即可激活微信主窗口。
 
 ## 飞书
 

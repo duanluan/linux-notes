@@ -355,12 +355,7 @@ Dolphin 中左侧常用位置项右键`编辑`，修改位置。
 
 ## 创建虚拟屏（远程必看）
 
-**场景**：远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。通过以下配置强制创建一个虚拟屏幕即可解决。
-
-**注意**：
-1. 以下两种情况配置后，先按`Meta` `P`修改为`镜像屏幕`，再重启系统。
-2. 重启后出现黑屏或看不到密码输入框的情况，尝试盲按 `Meta` `P` 切换投影模式，或盲输密码回车。
-3. 进入桌面后，请到 `系统设置`-`显示和监视器`-`显示器配置` 中，将**真实显示器**设置为`主要`。
+远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。通过以下配置强制创建一个虚拟屏幕即可解决。
 
 ### 开源驱动（Intel/AMD）
 
@@ -411,7 +406,7 @@ $ lspci | grep -i vga
 # 记下 01:00.0，在配置文件中需转换为十进制格式 PCI:1:0:0
 01:00.0 VGA compatible controller: NVIDIA Corporation AD107 [GeForce RTX 4060] (rev a1)
 
-# 查看当前连接的接口名称，找到 connected 的那个，记下 DFP-4
+# 查看当前连接的接口名称，找到 connected 的那个，记下 DFP-4、HDMI-0
 $ nvidia-settings -q dpys
 
     [4] njcm-pc:0[dpy:4] (HDMI-0) (connected, enabled)
@@ -432,10 +427,15 @@ $ nvidia-settings
 
 
 ```shell
-# 将 EDID 文件移动到 X11 目录
+# 将 EDID 文件移动到 X11 目录并授权
 $ sudo mv edid.bin /etc/X11/edid.bin
-# 赋予读取权限
 $ sudo chmod 644 /etc/X11/edid.bin
+
+# 生成 1080P EDID 数据
+python -c "import binascii; open('virtual_1080p.bin', 'wb').write(binascii.unhexlify('00ffffffffffff0031d8000000000000051601036d3c2278ea5e03a1544c99260f5054a1080081800101010101010101010101010101023a801871382d40582c450056502100001e000000fc004c696e7578204648440a20202020000000fd00323c1e4611000a202020202020000000ff004c696e75782023300a2020202001ba02030400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000092'))"
+# 移动并授权
+$ sudo mv virtual_1080p.bin /etc/X11/virtual_1080p.bin
+$ sudo chmod 644 /etc/X11/virtual_1080p.bin
 
 # 创建 Xorg 配置文件
 $ sudo nano /etc/X11/xorg.conf.d/20-nvidia-headless.conf
@@ -461,8 +461,8 @@ Section "Device"
     # 例如：DFP-4 是真实屏幕，DFP-0 是我们要生成的虚拟屏
     Option         "ConnectedMonitor" "DFP-4, DFP-0"
 
-    # 3. 两个屏幕都加载 EDID，无需握手即可识别屏幕，避免唤醒黑屏
-    Option         "CustomEDID" "DFP-4:/etc/X11/edid.bin; DFP-0:/etc/X11/edid.bin"
+    # 3. 分别加载不同的 EDID：真实屏用原厂数据，虚拟屏用生成的 1080P 数据
+    Option         "CustomEDID" "DFP-4:/etc/X11/edid.bin; DFP-0:/etc/X11/virtual_1080p.bin"
     # --- 核心配置结束 ---
 EndSection
 
@@ -473,13 +473,14 @@ Section "Screen"
     DefaultDepth    24
     SubSection     "Display"
         Depth       24
-        # 即使这里写了 1080P，如果 EDID 是 4K 的，系统仍可能优先使用 4K
+        # 虚拟屏的默认参考分辨率
         Modes      "1920x1080"
     EndSubSection
 EndSection
 
 Section "Monitor"
     Identifier     "Monitor0"
+    # 保持 DPMS 开启，允许 KDE 进行电源管理
     Option         "DPMS"
 EndSection
 # --- end ---
@@ -490,6 +491,35 @@ $ sudo mv /etc/X11/xorg.conf.d/90-mhwd.conf /etc/X11/xorg.conf.d/90-mhwd.conf.ba
 # 禁用 dummy 驱动配置（如果存在）
 $ sudo mv /etc/X11/xorg.conf.d/10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf.bak
 ```
+
+### 解决物理显示器无法点亮/黑屏
+
+当物理显示器关闭电源再打开，或系统休眠唤醒后出现黑屏（但远程正常），说明显卡信号握手失败。需配置脚本强制重置输出信号。
+
+```shell
+# 创建信号重置脚本
+$ nano ~/workspaces/bin/reset_screen.sh
+
+#!/bin/bash
+# 1. 强制关闭真实显示器输出，其中 HDMI-0 替换为你的接口名称
+xrandr --output HDMI-0 --off
+# 等待 1 秒让电容放电/状态生效
+sleep 1
+# 2. 重新开启并设为主屏
+# --auto: 恢复最佳分辨率
+# --primary: 确保任务栏回归
+# 不指定位置(--right-of)，交由 KDE 自动恢复之前的布局记忆
+xrandr --output HDMI-0 --auto --primary
+
+# 保存退出后赋予可执行权限
+$ chmod +x ~/workspaces/bin/reset_screen.sh
+```
+
+开始菜单搜索`快捷键`-`新增`-`命令或脚本`，命令：`~/workspaces/bin/reset_screen.sh`。
+
+右侧`添加`，输入快捷键`Meta` `F10`，右下角`应用`。
+
+显示器打开电源后按`Meta` `F10`，等待几秒即可亮屏。
 
 ### 故障恢复
 
