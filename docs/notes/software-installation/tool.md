@@ -23,7 +23,8 @@ paru clash-verge-rev-bin
 
 配置全局规则：
 
-[Loyalsoldier/clash-rules: Clash Premium 规则集 (RULE-SET)](https://github.com/Loyalsoldier/clash-rules)
+- [Loyalsoldier/clash-rules: Clash Premium 规则集 (RULE-SET)](https://github.com/Loyalsoldier/clash-rules)
+- [ACL4SSR/Clash at master](https://github.com/ACL4SSR/ACL4SSR/tree/master/Clash)
 
 在`订阅`中右键`全局扩展覆写配置`-`编辑文件`：
 
@@ -68,13 +69,13 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
     interval: 86400
     path: ./ruleset/proxy.yaml
-  # JetBrains
-  jetbrains:
-    type: http
-    behavior: classical
-    url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/JetBrains.list"
-    interval: 86400
-    path: ./ruleset/jetbrains.yaml
+  # 其他示例
+  # jetbrains:
+  #   type: http
+  #   behavior: classical
+  #   url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/JetBrains.list"
+  #   interval: 86400
+  #   path: ./ruleset/jetbrains.yaml
 
 rules:
   - RULE-SET,jetbrains,Universal
@@ -84,6 +85,91 @@ rules:
 ```
 
 - 解决界面白屏：开始菜单搜索`Clash Verge`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`WEBKIT_DISABLE_DMABUF_RENDERER=1`，保存后打开软件。
+
+## FlClash
+
+A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.
+
+![](https://raw.githubusercontent.com/chen08209/FlClash/refs/heads/main/snapshots/desktop.gif)
+
+[Releases · chen08209/FlClash](https://github.com/chen08209/FlClash/releases)
+
+```shell
+paru flclash-bin
+```
+
+安装配置订阅后，需要在`仪表盘`右下角点击启用，或在`工具`-`应用程序`中勾选`自动运行`。
+
+覆写脚本：
+
+在`配置`-三个点-`更多`-`覆写`-`前往配置脚本`中添加脚本，添加后在`覆写脚本`中勾选启用脚本，再返回到配置页面即可刷新代理。
+
+```javascript
+const main = (config) => {
+  // 1. 定义自定义策略组
+  const autoGroupName = "自动选择1"; // 名字不能和已存在的组名相同
+  const autoGroup = {
+    name: autoGroupName,
+    type: "url-test",
+    url: "http://www.gstatic.com/generate_204",
+    interval: 300,
+    tolerance: 50,
+    "include-all": true,
+    filter: "^(?!.*(流量|到期|重置|官网|不可用|产品|群)).*$"
+  };
+
+  const universalGroup = {
+    name: "Universal",
+    type: "select",
+    proxies: [autoGroupName, "DIRECT"],
+    "include-all": true
+  };
+
+  // 将自定义策略组插入列表头部
+  if (!config['proxy-groups']) {
+    config['proxy-groups'] = [];
+  }
+  config['proxy-groups'].unshift(autoGroup, universalGroup);
+
+  // 2. 定义规则集 (Rule Providers)
+  if (!config['rule-providers']) {
+    config['rule-providers'] = {};
+  }
+
+  const customProviders = {
+    direct: {
+      type: "http",
+      behavior: "domain",
+      url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt",
+      interval: 86400,
+      path: "./ruleset/direct.yaml"
+    },
+    private: {
+      type: "http",
+      behavior: "domain",
+      url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt",
+      interval: 86400,
+      path: "./ruleset/proxy.yaml"
+    }
+  };
+
+  Object.assign(config['rule-providers'], customProviders);
+
+  // 3. 规则合并逻辑
+  const myRules = [
+    "RULE-SET,private,Universal",
+    "RULE-SET,direct,DIRECT"
+  ];
+
+  // 获取原有规则，若不存在则初始化为空数组
+  const originalRules = config.rules || [];
+
+  // 将自定义规则插入到原有规则之前
+  config.rules = [...myRules, ...originalRules];
+
+  return config;
+}
+```
 
 ## proxychains
 
