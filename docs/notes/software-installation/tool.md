@@ -1239,7 +1239,7 @@ wget -O /tmp/easytier.sh "https://raw.githubusercontent.com/EasyTier/EasyTier/ma
 
 [linux 安装 cpolar 内网穿透 - cpolar 极点云官网](https://www.cpolar.com/blog/linux-system-installation-cpolar)
 
-[—> 注册 <—](https://dashboard.cpolar.com/signup?channel=0&inviteCode=6NQK) 后就可以获取到 Authtoken。
+[>> 注册 <<](https://dashboard.cpolar.com/signup?channel=0&inviteCode=6NQK) 后获取 Authtoken。
 
 ```shell
 # 安装
@@ -1249,10 +1249,27 @@ systemctl enable cpolar
 systemctl start cpolar 
 
 # 将 Authtoken 添加到 cpolar.yml 文件
-cpolar authtoken xxx
+cpolar authtoken $YOUR_AUTHTOKEN
 
 # 在端口 80 上启动 HTTP 隧道
 cpolar http 80
+```
+
+## Ngrok：内网穿透
+
+[Install ngrok on Linux - ngrok](https://ngrok.com/docs/guides/device-gateway/linux)
+
+[注册](https://dashboard.ngrok.com/signup)后查看[认证令牌](https://dashboard.ngrok.com/get-started/your-authtoken)。
+
+```shell
+# 安装
+paru ngrok
+
+# 验证 ngrok 代理，将 Authtoken 保存到默认配置文件中
+ngrok config add-authtoken $YOUR_AUTHTOKEN
+
+# 在端口 80 上启动 HTTP 隧道
+ngrok http 80
 ```
 
 ## RustDesk：开源远程可自建
