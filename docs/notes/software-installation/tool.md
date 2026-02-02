@@ -1,6 +1,10 @@
 # 工具类
 
-## Geekbench 6 跑分
+## Geekbench 6：性能测试跑分
+
+一款跨平台基准测试工具。
+
+![](https://www.geekbench.com/img/rosedale/macos-result.png)
 
 [Downloading Geekbench 6 for Linux](https://www.geekbench.com/download/linux/)
 
@@ -479,7 +483,7 @@ paru virtualbox-ext-oracle
   打开 [https://localhost:9443/](https://localhost:9443/) 初始化管理员账号。
 
 
-## WinBoat
+## WinBoat：无缝运行 Windows 应用
 
 在 Linux 上运行 Windows 应用程序，实现无缝集成。
 
@@ -761,7 +765,7 @@ Pandoc 是一个开源的文档转换工具，支持多种文档格式之间的�
 proxychains -q sudo paru pandoc-bin
 ```
 
-## XnView MP
+## XnView MP：图像查看器
 
 XnView MP/Classic 是一款免费的图像查看器，可轻松打开和编辑您的照片文件。这款图像查看器支持所有主流图像格式（JPEG、TIFF、PNG、GIF、WEBP、JPEG-XL、AVIF、HEIC、PSD、JPEG2000、OpenEXR、相机 RAW、PDF、DNG、CR2）。
 
@@ -775,7 +779,7 @@ XnView MP/Classic 是一款免费的图像查看器，可轻松打开和编辑�
 paru xnviewmp
 ```
 
-## uTools
+## uTools：快速启动 + 工具插件
 
 ![](https://www.u-tools.cn/assets/feat/main.png)
 
@@ -787,7 +791,7 @@ paru utools
 
 注意默认安装的 KRunner 快捷键为`Alt` `Space`。
 
-## Rubick
+## Rubick：开源快速启动 + 工具插件
 
 ![](https://pic1.zhimg.com/80/v2-359c03a47d128e72a01a51e1d824741e_720w.png)
 
@@ -892,7 +896,7 @@ paru freedownloadmanager
 - [Free Download Manager - Chrome 应用商店](https://chromewebstore.google.com/detail/free-download-manager/ahmpjcflkgiildlgicmcieglgoilbfdp?hl=zh-CN)
 - [Free Download Manager official extension – Get this Extension for 🦊 Firefox](https://addons.mozilla.org/en-US/firefox/addon/free-download-manager-addon/)
 
-## Gopeed
+## Gopeed 下载器
 
 一款现代化的下载器。开源、轻量、原生，支持（HTTP、BitTorrent、Magnet 等）协议下载。
 
@@ -968,7 +972,7 @@ GpgFrontend 是一个现代化的、跨平台的 OpenPGP 图形用户界面工�
 paru gpgfrontend
 ```
 
-## Snipaste
+## Snipaste 截图贴图
 
 Snipaste 是一个简单但强大的截图工具，也可以让你将截图贴回到屏幕上！下载并打开 Snipaste，按下 F1 来开始截图，再按 F3，截图就在桌面置顶显示了。就这么简单！
 
@@ -992,7 +996,7 @@ paru snipaste
 
 更多参考：[命令行选项 - Snipaste](https://docs.snipaste.com/zh-cn/command-line-options)
 
-## 🔥 Flameshot 火焰截图
+## Flameshot 火焰截图
 
 Flameshot 是一款免费且开源的跨平台工具，用于进行截图，具有许多内置功能，可为您节省时间。
 
@@ -1031,11 +1035,13 @@ sudo pacman -S flameshot
   - 窗口标题：`完全匹配` `flameshot pin`
   - 窗口置顶：`强制` `是`
 
-## eSearch
+## eSearch：识屏・搜索
 
-截屏+OCR+搜索+翻译+贴图+屏幕翻译+以图搜图+滚动截屏+录屏
+截屏 + OCR + 搜索 + 翻译 + 贴图 + 屏幕翻译 + 以图搜图 + 滚动截屏 + 录屏
 
-![](https://camo.githubusercontent.com/264e167cffe3622e587343e9421af73178c80f0b86531fc4f44e673d7a3e0924/68747470733a2f2f657365617263682d6170702e6e65746c6966792e6170702f726561646d652f312e77656270)
+![](https://esearch-app.netlify.app/readme/8.webp)
+
+[Releases · xushengfeng/eSearch](https://github.com/xushengfeng/eSearch/releases)
 
 ```shell
 paru e-search
@@ -1114,9 +1120,7 @@ paru obs-studio-tytan652
 paru obs-studio-liberty
 ```
 
-## StartLive 开播器
-
-B 站推流开播。
+## StartLive：B 站推流开播
 
 ![](https://private-user-images.githubusercontent.com/93813543/445881146-974b0dbb-fcd5-4b26-be76-42db728b8942.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjYxNDY4NTAsIm5iZiI6MTc2NjE0NjU1MCwicGF0aCI6Ii85MzgxMzU0My80NDU4ODExNDYtOTc0YjBkYmItZmNkNS00YjI2LWJlNzYtNDJkYjcyOGI4OTQyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEyMTklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMjE5VDEyMTU1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk1ZWIwMWIxOTQ5MjgyYjA5YzMwYWVlNDUyMTVhNmQ2NDA5YzFjNzkwNThkOTgxZTk4Y2ZkOTJmZDI0MjYwZmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.PaHrRXQpfJw5afCtihUwsO9iXS9XX4xjv08uQqylP7c)
 
@@ -1184,13 +1188,15 @@ sudo pacman -S freerdp
 paru remote-desktop-manager
 ```
 
-## EasyTier
+## EasyTier：去中心组网
 
 一个简单、安全、去中心化的内网穿透 VPN 组网方案，使用 Rust 语言和 Tokio 框架实现。
 
-![](https://github.com/EasyTier/EasyTier/raw/main/assets/image-6.png)
+![](https://raw.githubusercontent.com/EasyTier/EasyTier/main/assets/image-6.png)
 
 [Releases · EasyTier/EasyTier](https://github.com/EasyTier/EasyTier/releases)
+
+[群晖 Docker 项目搭建 EasyTier 组网节点 - duanluan 博客](https://blog.zhjh.top/?p=1sp9m0Jo)
 
 ```shell
 # 脚本安装
@@ -1249,9 +1255,9 @@ cpolar authtoken xxx
 cpolar http 80
 ```
 
-## RustDesk
+## RustDesk：开源远程可自建
 
-快速开源远程访问和支持软件
+远程桌面软件，开箱即用，无需任何配置。您完全掌控数据，不用担心安全问题。您可以使用我们的注册/中继服务器，或者[自己设置](https://rustdesk.com/docs/zh-cn/self-host/rustdesk-server-oss/install/)，亦或者[开发您的版本](https://github.com/rustdesk/rustdesk-server-demo)。
 
 ![](https://rustdesk.com/main.png)
 
@@ -1350,7 +1356,7 @@ paru todesk-bin
   ```
   开始菜单搜索`ToDesk`，右键`编辑应用程序...`，清空`环境变量`，`程序`修改为`/opt/todesk/bin/start-todesk.sh`后保存。
 
-## CopyQ
+## CopyQ：剪切板记录
 
 CopyQ 监控系统剪贴板并将其内容保存在自定义选项卡中。 保存的剪贴板稍后可以直接复制并粘贴到任何应用程序中。
 
@@ -1366,7 +1372,7 @@ sudo pacman -S copyq
 
 打开 CopyQ，`文件`-`首选项`-`快捷键`-`全局`-`显示/隐藏主窗口`设置为`Meta/Super` `V`。
 
-## 闪电藤/LocalSend
+## 闪电藤/LocalSend：局域网传输
 
 闪电藤是基于 LocalSend 的二次开发产品，在原有局域网文件传输基础上，增加了 webdav 传输和云传输的能力，是一个万能的文件传输助手。
 
@@ -1378,9 +1384,7 @@ sudo pacman -S copyq
 paru localsend-bin 
 ```
 
-## Calibre
-
-全能电子书管理阅读编辑转换。
+## Calibre：电子书管理阅读编辑转换
 
 ![]()
 
