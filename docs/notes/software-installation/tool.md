@@ -1225,6 +1225,30 @@ wget -O /tmp/easytier.sh "https://raw.githubusercontent.com/EasyTier/EasyTier/ma
 注意事项：
 - easytier-core 命令输出的 TOML 中`rpc_portal = "0.0.0.0:15888"`，本机在`/opt/easytier/config/default.conf`保持为`rpc_portal = "0.0.0.0:0`不变才正常连通网络。
 
+## cpolar：本地 HTTP 到公网 HTTPS
+
+将内网站点发布至公网，高效调试微信公众号、小程序、对接支付宝网关等云端服务。注册用户有一个免费 1Mbps 在线 cpolar 进程。
+
+![](https://www.cpolar.com/static/images/image_1dbjdu6mp15sj1nlqd1k6tb7p13.png)
+
+[linux 安装 cpolar 内网穿透 - cpolar 极点云官网](https://www.cpolar.com/blog/linux-system-installation-cpolar)
+
+[—> 注册 <—](https://dashboard.cpolar.com/signup?channel=0&inviteCode=6NQK) 后就可以获取到 Authtoken。
+
+```shell
+# 安装
+curl -L https://www.cpolar.com/static/downloads/install-release-cpolar.sh | sudo bash
+# 自启服务（可选）
+systemctl enable cpolar
+systemctl start cpolar 
+
+# 将 Authtoken 添加到 cpolar.yml 文件
+cpolar authtoken xxx
+
+# 在端口 80 上启动 HTTP 隧道
+cpolar http 80
+```
+
 ## RustDesk
 
 快速开源远程访问和支持软件
