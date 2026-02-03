@@ -37,7 +37,7 @@ Lutris 是一款 Linux 平台上的开源游戏管理平台, 通过整合不同�
 sudo pacman -S lutris
 ```
 
-## HMCL - Minecraft 启动器
+## HMCL：Minecraft 启动器
 
 HMCL 是一款开源、跨平台的 Minecraft 启动器，支持模组管理、游戏自定义、游戏自动安装 (Forge、NeoForge、Cleanroom、Fabric、Quilt、LiteLoader 和 OptiFine)、整合包创建、界面自定义等功能。
 
@@ -82,3 +82,13 @@ StartupNotify=false
 Categories=Game;
 StartupWMClass=org.jackhuang.hmcl.Launcher
 ```
+
+## LauncherX：Minecraft 启动器
+
+功能强大、界面优美的下一代 MineCraft 启动器。
+
+![](https://corona.studio/assets/LauncherX_3-JbAuEZQu.webp)
+
+[LauncherX 下载 - Corona Studio](https://corona.studio/lx/download)
+
+使用脚本 [install-launcherx-bin.sh - duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/install-launcherx-bin.sh) 进行安装。
