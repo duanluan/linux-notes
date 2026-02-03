@@ -220,9 +220,21 @@ paru -S go-musicfox-bin
 paru -S go-musicfox
 ```
 
+## MoeKoeMusic：酷狗第三方客户端
+
+一款开源简洁高颜值的酷狗第三方客户端。
+
+![](https://raw.githubusercontent.com/MoeKoeMusic/MoeKoeMusic/main/images/1.png)
+
+[Releases · MoeKoeMusic/MoeKoeMusic](https://github.com/MoeKoeMusic/MoeKoeMusic/releases)
+
+```shell
+paru moekoemusic-bin
+```
+
 ## LX Music 洛雪音乐播放器
 
-![](https://github.com/lyswhut/lx-music-desktop/raw/master/doc/images/app.png)
+![](https://raw.githubusercontent.com/lyswhut/lx-music-desktop/master/doc/images/app.png)
 
 ```shell
 paru lx-music-desktop-bin
