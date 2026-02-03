@@ -232,6 +232,19 @@ paru lx-music-desktop-bin
 
 自定义源： 在`设置` `自定义源` `自定义源管理`中`在线导入`，导入后关闭导入窗口，在`自定义源`中勾选导入的源。
 
+## 哔哩哔哩客户端
+
+基于哔哩哔哩官方客户端移植的 Linux 版本，支持漫游。
+
+![](https://raw.githubusercontent.com/msojocs/bilibili-linux/master/res/screenshots/1.png)
+
+先在 [AUR (en) - bilibili-bin](https://aur.archlinux.org/packages/bilibili-bin) 查看依赖的 electron 哪个版本。
+
+```shell
+paru electron28-bin
+paru bilibili-bin
+```
+
 ## 百度网盘
 
 [百度网盘 客户端下载](https://pan.baidu.com/download#pan)
