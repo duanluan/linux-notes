@@ -120,6 +120,34 @@ sudo modprobe btusb
 
 参考：[Manjaro蓝牙BUG：Bluetooth: hci0: Failed to load Intel firmware file intel/ibt-0040-1050.sfi (-2) - CY BLOG](https://cy.terase.cn/2024/12/24/bluetooth-bug/)
 
+## ModuleNotFoundError: No module named 'mesonbuild'
+
+```shell
+# 查看 meson 版本报错
+$ meson --version
+Traceback (most recent call last):
+  File "/usr/bin/meson", line 5, in <module>
+    from mesonbuild.mesonmain import main
+ModuleNotFoundError: No module named 'mesonbuild'
+
+# 完整升级系统
+$ sudo pacman -Syu
+错误：无法准备事务处理 (无法满足依赖关系)
+:: 安装 virtualbox (7.2.6-1) 破坏依赖 'virtualbox=7.2.4'
+ （virtualbox-ext-oracle 需要）
+
+# 先卸载再升级再重新安装
+$ sudo pacman -Rns virtualbox-ext-oracle
+$ sudo pacman -Syu
+$ paru virtualbox-ext-oracle
+
+# 验证 meson 是否可用
+$ meson --version
+1.10.1
+$ python -c "import mesonbuild; print(mesonbuild.__file__)"
+/usr/lib/python3.14/site-packages/mesonbuild/__init__.py
+```
+
 ## X11 切换到 Wayland 问题
 
 - 提示“`检测到设置了 GTK_IM_MODULE 和 QT_IM_MODULE 而且 Wayland 输入法前端正在正常工作。推荐使用 Wayland 输入法前端。更多信息请参见 https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma `”

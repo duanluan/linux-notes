@@ -823,6 +823,10 @@ paru fsearch
 
 打开后`选项`-`数据库`，添加路径`/`。
 
+常见问题：
+
+- [ModuleNotFoundError: No module named 'mesonbuild'](../questions.html#ModuleNotFoundError%3a+No+module+named+%27mesonbuild%27)
+
 ### AnyTXT Searcher
 
 免费桌面全文搜索工具
