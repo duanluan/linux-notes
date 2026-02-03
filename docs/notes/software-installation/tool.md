@@ -825,7 +825,7 @@ paru fsearch
 
 常见问题：
 
-- [ModuleNotFoundError: No module named 'mesonbuild'](../questions.html#ModuleNotFoundError%3a+No+module+named+%27mesonbuild%27)
+- [ModuleNotFoundError: No module named 'mesonbuild'](../questions.html#modulenotfounderror-no-module-named-mesonbuild)
 
 ### AnyTXT Searcher
 
