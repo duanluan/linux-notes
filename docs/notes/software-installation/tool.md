@@ -1415,3 +1415,15 @@ paru localsend-bin
 # 不用 AUR 中的 calibre-bin，会无法切换中文
 sudo pacman -S calibre
 ```
+
+## Cherry Studio：大语言模型客户端
+
+Cherry Studio 是一款支持多个大语言模型（LLM）服务商的桌面客户端。
+
+![](https://docs.cherry-ai.com/~gitbook/image?url=https%3A%2F%2F3562065924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F0Ut5BptC3t8CtSU1UWpM%252Fuploads%252Fgit-blob-1d8f30028704ce0a78a9e2bcff6d1dd0326e41f9%252Fimage.png%3Falt%3Dmedia&width=400&dpr=3&quality=100&sign=536c0510&sv=2)
+
+[客户端下载 | Cherry Studio](https://docs.cherry-ai.com/cherry-studio/download)
+
+```shell
+paru cherry-studio-bin
+```
