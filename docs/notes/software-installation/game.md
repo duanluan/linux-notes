@@ -37,6 +37,18 @@ Lutris 是一款 Linux 平台上的开源游戏管理平台, 通过整合不同�
 sudo pacman -S lutris
 ```
 
+## Watt Toolkit：Steam 工具箱
+
+一个开源跨平台的多功能 Steam 工具箱。
+
+![](https://steampp.net/images/home/js.webp)
+
+[下载 - Watt Toolkit](https://steampp.net/download)
+
+```shell
+paru watt-toolkit-bin
+```
+
 ## HMCL：Minecraft 启动器
 
 HMCL 是一款开源、跨平台的 Minecraft 启动器，支持模组管理、游戏自定义、游戏自动安装 (Forge、NeoForge、Cleanroom、Fabric、Quilt、LiteLoader 和 OptiFine)、整合包创建、界面自定义等功能。
