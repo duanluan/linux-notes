@@ -988,14 +988,14 @@ sudo mkdir -p /usr/lib/windterm/temp
 sudo chmod 1777 /usr/lib/windterm/temp
 ```
 
-## XPipe
+## WoTerm 
 
-XPipe 是一款新型的 shell 连接中心与远程文件管理器，它允许您从本地计算机访问整个服务器基础设施。它基于您已安装的命令行程序运行，并且不需要在您的远程系统上进行任何设置。因此，如果您通常使用 ssh、docker、kubectl 等 CLI 工具连接到您的服务器，您可以直接在 XPipe 上使用这些工具。
+集成所有主流远程通信协议，满足您的多样化需求：支持 SSH1/SSH2、FTP/FTPS、SFTP、TELNET、RLOGIN、RDP、VNC、SHELL、串口、TCP、UDP 等协议——无需在不同工具间切换。通过统一平台轻松应对各类远程访问与通信场景。
 
-![](https://xpipe.io/_next/image?url=%2Fassets%2Fimages%2FHomePage%2Fbanner.png&w=3840&q=100)
+![](https://en.woterm.com/static/images/carousel_1.png)
 
-[Download - XPipe](https://xpipe.io/download)
+[Download – WoTerm](https://en.woterm.com/download/)
 
 ```shell
-paru xpipe-bin
+paru woterm-bin
 ```
