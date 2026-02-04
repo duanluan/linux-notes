@@ -181,6 +181,18 @@ $ systemctl --user start unblock-netease-music
 $ systemctl --user status unblock-netease-music
 ```
 
+## SPlayer
+
+一个简约的音乐播放器，支持逐字歌词，网易云音乐云盘及本地音乐管理，流媒体 Jellyfin / Navidrome / Emby 播放，音乐频谱，移动端适配。
+
+![](https://raw.githubusercontent.com/imsyy/SPlayer/refs/heads/dev/screenshots/SPlayer.jpg)
+
+[Releases · imsyy/SPlayer](https://github.com/imsyy/SPlayer/releases)
+
+```shell
+paru splayer
+```
+
 ## YesPlayMusic
 
 高颜值的第三方网易云播放器
@@ -249,6 +261,8 @@ paru lx-music-desktop-bin
 基于哔哩哔哩官方客户端移植的 Linux 版本，支持漫游。
 
 ![](https://raw.githubusercontent.com/msojocs/bilibili-linux/master/res/screenshots/1.png)
+
+[Releases · msojocs/bilibili-linux](https://github.com/msojocs/bilibili-linux/releases)
 
 先在 [AUR (en) - bilibili-bin](https://aur.archlinux.org/packages/bilibili-bin) 查看依赖的 electron 哪个版本。
 
