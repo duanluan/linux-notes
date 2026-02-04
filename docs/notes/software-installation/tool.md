@@ -786,7 +786,7 @@ paru xnviewmp
 [下载中心 - uTools 官网](https://www.u-tools.cn/download/)
 
 ```shell
-paru utools
+paru utools-bin
 ```
 
 注意默认安装的 KRunner 快捷键为`Alt` `Space`。
