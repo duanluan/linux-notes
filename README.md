@@ -1,8 +1,8 @@
-# Linux 使用笔记（Arch / Manjaro）
+# Linux 使用笔记（Arch Manjaro KDE）
 
 ![Manjaro](https://img.shields.io/badge/Linux-Manjaro-33b959?style=flat-square&logo=manjaro&logoColor=white)
 ![Desktop](https://img.shields.io/badge/DE-KDE%20Plasma-1d99f3?style=flat-square&logo=kde&logoColor=white)
-![VuePress](https://img.shields.io/badge/Docs-VuePress-3eaf7c?style=flat-square&logo=vue.js&logoColor=white)
+![VitePress](https://img.shields.io/badge/Docs-VitePress-646cff?style=flat-square&logo=vite&logoColor=white)
 ![License](https://img.shields.io/github/license/duanluan/linux-notes?style=flat-square)
 ![Last Commit](https://img.shields.io/github/last-commit/duanluan/linux-notes?style=flat-square)
 
@@ -13,99 +13,87 @@
 
 👉 **在线阅读：[https://duanluan.github.io/linux-notes/](https://duanluan.github.io/linux-notes/)**
 
----
-
 ## 🗂️ 核心内容索引
 
-### 1. 🚀 [系统安装 & 初始化](https://duanluan.github.io/linux-notes/notes/system-installation.html)
-从零开始构建你的工作台：
-* **安装引导**：Ventoy 启动盘制作 / BIOS 设置 / 分区与 Swap 策略
-* **[系统配置](https://duanluan.github.io/linux-notes/notes/system-configuration.html)**：
-  * **源加速**：Pacman 镜像 / GitHub 镜像
-  * **性能与体验**：Pacman 并行下载 / 登录失败锁定策略 / X11 会话还原
-  * **输入法**：Fcitx5 / Rime（雾凇/薄荷/万象） 挂载与词库管理
-  * **显示优化**：HiDPI 缩放 / 虚拟屏配置（远程必看）
-  * **环境修整**：Zsh 配置 / 用户目录英文路径 / 全局快捷键防冲突
+### 1. 🚀 [系统安装](docs/notes/system-installation.md)
+* **版本经历**：Deepin 23.1 → Xubuntu 24.04.2 → Manjaro（当前）
+* **制作启动盘**：Ventoy + Manjaro KDE Plasma ISO
+* **安装流程**：BIOS 启动 / 分区（Swap/休眠）/ 时区语言设置
 
-### 2. 🛠️ 软件生态装机清单
+### 2. ⚙️ [系统配置（必看）](docs/notes/system-configuration.md)
+* **系统基础**：faillock 锁定策略 / 系统更新注意事项 / NTP 时间同步
+* **Pacman & 源**：换源 / 并行下载 / ArchLinuxCN 临时启用
+* **GitHub/AUR 加速**：axel + makepkg `DLAGENTS` / URL rewrite / curl&wget wrapper / hosts 加速
+* **桌面体验**：DPI 缩放 / 个人目录英文 / 取消冲突全局快捷键 / 终端粘贴 `^[[200~`
+* **远程必看**：虚拟屏（Intel/AMD GRUB 注入 + NVIDIA X11 EDID）/ 黑屏信号重置与回滚方案
 
-#### 💻 [系统与基础工具](https://duanluan.github.io/linux-notes/notes/software-installation/system.html)
-* **核心基建**：`base-devel` / Kernel Headers / 显卡驱动（NVIDIA/AMD）
-* **性能优化**：Zram 内存压缩 / EarlyOOM 防卡死 / Swappiness 策略
-* **包管理增强**：`yay` & `paru` 进阶 / Spark Store（星火应用商店） / Debtap（Deb转Arch）
-* **终端增强**：Nushell / Tmux / Zoxide / Fzf
-* **Wine 生态**：Deepin-Wine 8/10 / Spark-Dwine-Helper
-* **字体美化**：霞鹜文楷（LXGW） / 更纱黑体（Sarasa） / Maple Mono / Myna / 文泉驿
-* **浏览器**：Microsoft Edge / Google Chrome / Tor Browser
+### 3. 🛠️ 软件安装（按用途分类）
 
-#### 🔧 [生产力工具箱](https://duanluan.github.io/linux-notes/notes/software-installation/tool.html)
-* **虚拟化与兼容**：
-  * **WinBoat**（无缝运行 Windows 应用 + 驱动注入教程）
-  * **Docker** + Compose + Portainer + Lazydocker
-  * VMware Workstation Pro（网络修复） / VirtualBox（USB/KVM 冲突修复）
-  * **Wine 运行器** / Proton-GE-Custom
-  * **安卓模拟器**：麟卓卓懿（xDroid）
-* **网络与远程**：
-  * Clash Verge（规则覆写） / Brook / Proxychains / EasyTier 组网
-  * RustDesk / ToDesk（启动服务修复） / 向日葵 / TeamViewer / AnyDesk
-  * Remote Desktop Manager（FreeRDP） / MobaXterm Pro（汉化 + Wine）
-* **效率办公**：
-  * **笔记文档**：Obsidian / Typora（激活） / Sublime Text / Pandoc / XMind / Draw.io
-  * **搜索启动**：uTools / Rubick / FSearch / AnyTXT Searcher
-  * **截图录屏**：Snipaste（Wayland 修复） / Flameshot（黑屏修复） / eSearch / SimpleScreenRecorder / OBS Studio / StartLive（B站开播）
-  * **文件传输**：Synology Drive / Syncthing（+ Tray） / LocalSend（闪电藤） / CopyQ
-  * **下载工具**：FDM / Gopeed / qBittorrent EE
-  * **其他**：Geekbench 6 / KeePassXC / GnuPG + GpgFrontend / Calibre / XnView MP
+#### 💻 [系统与基础工具](docs/notes/software-installation/system.md)
+* **必装基建**：`base-devel` / 显卡驱动 / 恢复 X11 会话
+* **包管理增强**：`yay` / `paru` / `debtap` / Spark Store（星火应用商店）
+* **性能与稳定**：Zram + Swappiness / EarlyOOM
+* **输入法方案**：Rime（oh-my-rime / 雾凇 / 万象）与模型配置
+* **终端与效率**：Tmux / Nushell / fzf / zoxide
+* **Wine 生态**：deepin-wine8/10-stable + spark-dwine-helper
+* **字体 & 浏览器**：常用中文/编程字体 / Edge / Chrome / Tor Browser
 
-#### 👨‍💻 [全栈开发环境](https://duanluan.github.io/linux-notes/notes/software-installation/development.html)
-* **IDE/编辑器**：
-  * **JetBrains 全家桶**（Toolbox / IDEA / WebStorm / PyCharm / DataGrip）
-    * *包含 IDEA 内存泄露修复 / Android Studio 安装中文插件*
-  * VS Code / 微信开发者工具（Linux 移植）
-* **前端与移动端**：
-  * Node.js（nvm / pnpm / nrm） / Flutter（FVM + 换源 + 环境修复）
-* **后端与系统级**：
-  * Java（JDK / Maven Daemon / Gradle / JMeter）
-  * Python（pipx / uv / cnpip） / Rust（Cargo换源）
-* **数据库与中间件**：
-  * Navicat Premium（Lite 版 / Wine / OCI修复） / DBeaver EE（Agent破解） / Another Redis Desktop Manager
-  * Kafka Offset Explorer（缩放修复） / Apifox / Apipost / Postman
-* **终端与运维**：
-  * WindTerm（临时文件报错修复） / XPipe（Server Hub） / act（本地 GitHub Actions）
-  * Git（配置/SSH）
+#### 🔧 [工具与生产力](docs/notes/software-installation/tool.md)
+* **网络与代理**：Clash Verge / FlClash / Brook / proxychains / EasyTier
+* **虚拟化与兼容**：VMware / VirtualBox / Docker（Buildx/Compose/Portainer）/ WinBoat / Wine / Proton-GE / Wine 运行器
+* **效率办公**：Sublime Text / Typora / Obsidian / Pandoc / XMind / Draw.io / uTools / Rubick
+* **截图录屏**：Snipaste / Flameshot / eSearch / SimpleScreenRecorder / OBS / StartLive
+* **下载与同步**：FDM / Gopeed / qBittorrent EE / Synology Drive / Syncthing / LocalSend / CopyQ
+* **远程工具**：RustDesk / ToDesk / 向日葵 / TeamViewer / AnyDesk / Remote Desktop Manager + FreeRDP
+* **其他**：Geekbench / KeePassXC / GnuPG + GpgFrontend / VLC / Calibre / Cherry Studio
 
-#### 🎨 [影音与设计](https://duanluan.github.io/linux-notes/notes/software-installation/img-video-audio-edit.html)
-* **图像设计**：GIMP + PhotoGIMP / Krita / Figma / Aseprite / Blender
-* **视频后期**：DaVinci Resolve Studio / Kdenlive / HandBrake
+#### 👨‍💻 [全栈开发环境](docs/notes/software-installation/development.md)
+* **通用**：Git（SSH）/ act（本地跑 GitHub Actions）
+* **前端与移动端**：nvm + Node.js + pnpm / Flutter（FVM）/ VS Code / 微信开发者工具
+* **后端与系统级**：Java（JDK/Maven/Gradle/JMeter）/ Python（pipx/uv/cnpip）/ Rust（Cargo 换源）
+* **数据库与接口工具**：DataGrip / Navicat / DBeaver EE / Redis Desktop / Offset Explorer / Apifox / Apipost / Postman
+* **运维终端**：MobaXterm / WindTerm / WoTerm
+
+#### 🎨 [图影音编辑](docs/notes/software-installation/img-video-audio-edit.md)
+* **图像/设计**：GIMP + PhotoGIMP / Krita / Blender / Figma Linux / Aseprite
+* **视频后期**：DaVinci Resolve（含 Studio 安装方案）/ Kdenlive / HandBrake
 * **音频处理**：Audacity
 
-#### 🎮 [游戏与娱乐](https://duanluan.github.io/linux-notes/notes/software-installation/game.html)
+#### 🎮 [游戏与娱乐](docs/notes/software-installation/game.md)
 * **平台**：Steam / Heroic / Lutris
-* **Minecraft**：HMCL 启动器（高分屏修复）
-* **串流**：Sunshine + Moonlight
+* **工具**：Watt Toolkit（Steam 工具箱）
+* **Minecraft**：HMCL（缩放修复）/ LauncherX
 
-#### 💬 [即时通讯与办公](https://duanluan.github.io/linux-notes/notes/software-installation/standard.html)
-* **通讯**：微信 + 激活脚本 / QQ / 钉钉 / 飞书
-* **办公套件**：WPS Office（365 / CN） / 腾讯会议
-* **音乐**：
-  * 网易云音乐（Electron / UnblockNeteaseMusic 服务端搭建）
-  * YesPlayMusic / VutronMusic / go-musicfox（命令行版）
-  * LX Music（洛雪音乐 + 自定义源）
-* **网盘**：百度网盘
-* **播放器**：VLC
+#### 💬 [即时通讯与办公](docs/notes/software-installation/standard.md)
+* **通讯/会议**：微信 / QQ / 钉钉 / 飞书 / 腾讯会议
+* **办公套件**：WPS Office（365/CN）/ LibreOffice / OnlyOffice
+* **音乐**：网易云（含 UnblockNeteaseMusic）/ SPlayer / YesPlayMusic / VutronMusic / go-musicfox / MoeKoeMusic / LX Music
+* **影音/网盘**：哔哩哔哩客户端 / 百度网盘
 
 ---
 
-### 3. 🚑 [故障排查（Troubleshooting）](https://duanluan.github.io/linux-notes/notes/questions.html)
+### 4. 🚑 [问题解决](docs/notes/questions.md)
+* KDE 钱包关闭后 Wi-Fi 密码提示
+* 忘记 root 密码（Live CD + chroot）
+* AUR “有效性检查”失败（PKGBUILD `SKIP`）
+* 托盘区蓝牙不显示 / 固件缺失修复
+* `mesonbuild` 缺失（升级冲突处理）
+* X11 ↔ Wayland 输入法环境变量冲突处理
 
-* **硬件相关**：蓝牙固件丢失修复
-* **系统相关**：KDE 钱包无限弹窗 / Root 密码重置 / AUR 签名效验失败修复
-* **图形界面**：Wayland 下输入法环境变量冲突 / 终端粘贴 `^[[200~`
-* **[遗留 BUG](https://duanluan.github.io/linux-notes/notes/bug.html)**：Edge 中文输入问题等
+### 5. 🐞 [未解决 BUG](docs/notes/bug.md)
+* Offset Explorer 文字叠加
+* Snipaste Wayland 快捷键冲突
+* Edge Wayland 下 Ctrl+H 无法输入中文
 
-### 4. 🧹 [维护与技巧](https://duanluan.github.io/linux-notes/notes/tips-tricks.html)
-* **[软件卸载](https://duanluan.github.io/linux-notes/notes/software-uninstallation.html)**：Pacman/Paru 级联清理、VMware/WinBoat 彻底卸载
-* **使用技巧**：KDE 窗口高效管理 / Dolphin 多标签策略 / 开机自启管理
+### 6. 🧹 [软件卸载](docs/notes/software-uninstallation.md)
+* **包管理**：pacman / yay / paru `-Rns` 级联清理
+* **专项卸载**：VMware Workstation Pro / WinBoat（容器+配置）/ Firefox 残留清理
+
+### 7. 🧩 [使用技巧](docs/notes/tips-tricks.md)
+* Meta + 鼠标：移动/缩放窗口
+* 开机自启管理
+* 关闭动画特效
+* Dolphin 单窗口多标签打开目录
 
 ---
 

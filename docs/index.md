@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "Linux 使用笔记"
-  text: "Manjaro"
+  name: "Linux 使用笔记（Arch Manjaro KDE）"
+  text: "by duanluan"
   tagline: 从系统安装到环境配置再到日常使用
   actions:
     - theme: brand
