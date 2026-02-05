@@ -105,6 +105,30 @@ paru dingtalk-bin
   
   ![](../assets/20251103223224.png)
 
+## LibreOffice
+
+LibreOffice 是一款开放源代码的自由免费全能办公软件，可运行于 Microsoft Windows, GNU/Linux 以及 macOS 等操作系统上。它包含了 Writer, Calc, Impress, Draw, Math 以及 Base 等组件，可分别用于文本文档、电子表格、幻灯片演示文稿、绘图文档、数学公式编辑、数据库管理等工作。
+
+![](https://upload.wikimedia.org/wikipedia/commons/9/97/LibreOffice_7.5_start_center_screenshot.png)
+
+[下载 LibreOffice | LibreOffice 简体中文官方网站 - 自由免费的办公套件](https://zh-cn.libreoffice.org/download/libreoffice/)
+
+```shell
+sudo pacman -S libreoffice-still libreoffice-still-zh-cn
+```
+
+## OnlyOffice
+
+功能强大的在线编辑器，支持文本文档、电子表格、演示文稿、PDF 文件及可填写表格。开源、安全、跨平台且真正无障碍。
+
+![](https://static-site.onlyoffice.com/public/images/templates/main/hero/hero@2x.png)
+
+[ONLYOFFICE desktop and mobile apps | ONLYOFFICE](https://www.onlyoffice.com/download-desktop#desktop)
+
+```shell
+paru onlyoffice-bin
+```
+
 ## 腾讯会议
 
 ![](https://cdn.meeting.tencent.com/assets/next-website/_next/static/images/feature3-1-79a7d46ff4fa27eb.png)
