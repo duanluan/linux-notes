@@ -931,6 +931,18 @@ paru gopeed-bin
 paru qbittorrent-enhanced
 ```
 
+## PeaZip：压缩/解压
+
+PeaZip 免费文件压缩工具。支持打开、解压 RAR、TAR、ZIP 格式文件。
+
+![](https://peazip.github.io/peazip.png)
+
+[Download PeaZip archive manager for Linux x86_64](https://peazip.github.io/peazip-linux.html)
+
+```shell
+paru peazip-qt-bin
+```
+
 ## Synology Drive Client
 
 Synology Drive Client 是一款桌面实用程序，可在多台客户端计算机上提供面向集中化服务器 Synology Drive Server 的文件同步和个人计算机备份服务。
