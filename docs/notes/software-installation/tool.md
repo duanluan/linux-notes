@@ -1309,6 +1309,24 @@ $ sudo systemctl enable --now rustdesk
 
 修改缩放：开始菜单搜索`RustDesk`，右键`编辑应用程序`，在`常规`-`环境变量`中添加`GDK_SCALE=2`（2 为缩放比例），保存后重启软件。
 
+`rustdesk`命令行运行报错：
+
+```shell
+$ rustdesk
+Failed to load "librustdesk.so"
+libxdo.so.3: cannot open shared object file: No such file or directory
+Please run "pacman -Qo libxdo.so.3" to search and install the pkg.
+
+# 安装 xdotool 包
+$ sudo pacman -Syu xdotool
+# 查看 libxdo 位置
+$ ldconfig -p | grep libxdo 
+        libxdo.so.4 (libc6,x86-64) => /usr/lib/libxdo.so.4
+        libxdo.so (libc6,x86-64) => /usr/lib/libxdo.so
+# RustDesk 需要 libxdo.so.3，但 xdotool 安装的是 libxdo.so.4，创建软链接解决问题。
+$ sudo ln -s /usr/lib/libxdo.so.4 /usr/lib/libxdo.so.3
+```
+
 ## TeamViewer
 
 ![](https://teamviewer.scene7.com/is/image/teamviewergmbh/product-teamviewer-remote-support-banner?fmt=png-alpha&dpr=off)
