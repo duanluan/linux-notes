@@ -848,31 +848,32 @@ SimpleScreenRecorder是一款屏幕录制软件，它具有录制整个桌面、
 [Download - SimpleScreenRecorder - Maarten Baert's website](https://www.maartenbaert.be/simplescreenrecorder/#download)
 
 ```shell
-# 直接安装会报错
 $ paru simplescreenrecorder
-……
+```
+
+如果安装报错，按照它提示的做。
+
+```shell
 ==> 正在开始 build()...
 CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-  Compatibility with CMake < 3.5 has been removed from CMake.
+Compatibility with CMake < 3.5 has been removed from CMake.
 
-  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-  to tell CMake that the project requires at least <min> but has been updated
-  to work with policies introduced by <max> or earlier.
+Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+to tell CMake that the project requires at least <min> but has been updated
+to work with policies introduced by <max> or earlier.
 
-  Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
+Or, add -DCMAKE_POLICY_VERSION_MINIMUM=3.5 to try configuring anyway.
 
 -- Configuring incomplete, errors occurred!
 ==> 错误： 在 build() 中发生一个错误。
-    正在放弃...
-错误： 未能构建 'simplescreenrecorder-0.4.4-3': 
+正在放弃...
+错误： 未能构建 'simplescreenrecorder-0.4.4-3':
 错误： 未能构建的软件包：simplescreenrecorder-0.4.4-3
-```
 
-按照它提示的做。
 
-```shell
 # 下载源码
 $ git clone https://aur.archlinux.org/simplescreenrecorder.git
+$ cd simplescreenrecorder
 # 在 cmake 命令后加上 -DCMAKE_POLICY_VERSION_MINIMUM=3.5
 $ nano PKGBUILD
 ……
