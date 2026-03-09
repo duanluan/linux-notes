@@ -521,6 +521,8 @@ $ chmod +x ~/workspaces/bin/reset_screen.sh
 
 显示器打开电源后按`Meta` `F10`，等待几秒即可亮屏。
 
+问题：**锁屏后按全局快捷键无效！**
+
 ### 故障恢复
 
 重启后无法进入图形界面，通过 SSH 登录或 TTY（`Ctrl` `Alt` `F2`）执行以下命令恢复：
