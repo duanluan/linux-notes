@@ -13,83 +13,6 @@ paru geekbench
 geekbench
 ```
 
-## Clash Verge
-
-A Clash Meta GUI based on Tauri.
-
-![](https://raw.githubusercontent.com/clash-verge-rev/clash-verge-rev/dev/docs/preview_dark.png)
-
-[Releases · clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev/releases)
-
-```shell
-paru clash-verge-rev-bin
-```
-
-配置全局规则：
-
-- [Loyalsoldier/clash-rules: Clash Premium 规则集 (RULE-SET)](https://github.com/Loyalsoldier/clash-rules)
-- [ACL4SSR/Clash at master](https://github.com/ACL4SSR/ACL4SSR/tree/master/Clash)
-
-在`订阅`中右键`全局扩展覆写配置`-`编辑文件`：
-
-```yaml
-profile:
-  store-selected: true
-
-# 自定义策略组
-proxy-groups:
-  # 自动选择组（URL-Test）
-  - name: "自动选择"
-    type: url-test
-    url: "http://www.gstatic.com/generate_204"
-    interval: 300
-    tolerance: 50
-    include-all: true
-    # 过滤掉非节点信息，防止误选导致断网
-    filter: "^(?!.*(流量|到期|重置|官网|不可用|产品|群)).*$"
-
-  # 主选择组 (Select)
-  - name: "Universal"
-    type: select
-    proxies:
-      - "自动选择"    # 将自动组加入首选项
-      - DIRECT
-    # true 会把订阅里所有节点都抓取进来
-    include-all: true
-
-# 规则
-rule-providers:
-  # 直连
-  direct:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
-    interval: 86400
-    path: ./ruleset/direct.yaml
-  # 规则
-  private:
-    type: http
-    behavior: domain
-    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
-    interval: 86400
-    path: ./ruleset/proxy.yaml
-  # 其他示例
-  # jetbrains:
-  #   type: http
-  #   behavior: classical
-  #   url: "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/JetBrains.list"
-  #   interval: 86400
-  #   path: ./ruleset/jetbrains.yaml
-
-rules:
-  - RULE-SET,jetbrains,Universal
-  - RULE-SET,private,Universal
-  - RULE-SET,direct,DIRECT
-  - MATCH,DIRECT
-```
-
-- 解决界面白屏：开始菜单搜索`Clash Verge`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`WEBKIT_DISABLE_DMABUF_RENDERER=1`，保存后打开软件。
-
 ## FlClash
 
 A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.
@@ -102,78 +25,22 @@ A multi-platform proxy client based on ClashMeta,simple and easy to use, open-so
 paru flclash-bin
 ```
 
-安装配置订阅后，需要在`仪表盘`右下角点击启用，或在`工具`-`应用程序`中勾选`自动运行`。
+- 如果主要使用`TUN`模式，更推荐`FlClash`。自己使用过程中发现，`Clash Verge`即使开启了`TUN`，`IDEA`的`AI Assistant`里安装`codex`依然极慢，表现得像没有走代理；终端里登录`codex`授权页面时还会报错：`Token exchange failed: token endpoint returned status 403 Forbidden`。
+- 安装配置订阅后，需要在`仪表盘`右下角点击启用，或在`工具`-`应用程序`中勾选`自动运行`。
 
-覆写脚本：
+## Clash Verge
 
-在`配置`-三个点-`更多`-`覆写`-`前往配置脚本`中添加脚本，添加后在`覆写脚本`中勾选启用脚本，再返回到配置页面即可刷新代理。
+A Clash Meta GUI based on Tauri.
 
-```javascript
-const main = (config) => {
-  // 1. 定义自定义策略组
-  const autoGroupName = "自动选择1"; // 名字不能和已存在的组名相同
-  const autoGroup = {
-    name: autoGroupName,
-    type: "url-test",
-    url: "http://www.gstatic.com/generate_204",
-    interval: 300,
-    tolerance: 50,
-    "include-all": true,
-    filter: "^(?!.*(流量|到期|重置|官网|不可用|产品|群)).*$"
-  };
+![](https://raw.githubusercontent.com/clash-verge-rev/clash-verge-rev/dev/docs/preview_dark.png)
 
-  const universalGroup = {
-    name: "Universal",
-    type: "select",
-    proxies: [autoGroupName, "DIRECT"],
-    "include-all": true
-  };
+[Releases · clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev/releases)
 
-  // 将自定义策略组插入列表头部
-  if (!config['proxy-groups']) {
-    config['proxy-groups'] = [];
-  }
-  config['proxy-groups'].unshift(autoGroup, universalGroup);
-
-  // 2. 定义规则集 (Rule Providers)
-  if (!config['rule-providers']) {
-    config['rule-providers'] = {};
-  }
-
-  const customProviders = {
-    direct: {
-      type: "http",
-      behavior: "domain",
-      url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt",
-      interval: 86400,
-      path: "./ruleset/direct.yaml"
-    },
-    private: {
-      type: "http",
-      behavior: "domain",
-      url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt",
-      interval: 86400,
-      path: "./ruleset/proxy.yaml"
-    }
-  };
-
-  Object.assign(config['rule-providers'], customProviders);
-
-  // 3. 规则合并逻辑
-  const myRules = [
-    "RULE-SET,private,Universal",
-    "RULE-SET,direct,DIRECT"
-  ];
-
-  // 获取原有规则，若不存在则初始化为空数组
-  const originalRules = config.rules || [];
-
-  // 将自定义规则插入到原有规则之前
-  config.rules = [...myRules, ...originalRules];
-
-  return config;
-}
+```shell
+paru clash-verge-rev-bin
 ```
+
+- 解决界面白屏：开始菜单搜索`Clash Verge`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`WEBKIT_DISABLE_DMABUF_RENDERER=1`，保存后打开软件。
 
 ## proxychains
 
