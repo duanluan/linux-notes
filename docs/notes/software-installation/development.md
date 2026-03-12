@@ -95,20 +95,22 @@ nrm use xxx
 [Java 8, 11, 17, 21, 23 Download for Linux, Windows and macOS](https://www.azul.com/downloads/?os=debian&architecture=x86-64-bit&package=jdk#zulu)
 
 ```shell
-tar zxvf zulu21.42.19-ca-jdk21.0.7-linux_x64.tar.gz
+tar zxvf zulu17.64.17-ca-jdk17.0.18-linux_x64.tar.gz
 sudo mkdir /opt/java
-sudo mv zulu21.42.19-ca-jdk21.0.7-linux_x64 /opt/java/zulu21.42.19-ca-jdk21.0.6
+sudo mv zulu17.64.17-ca-jdk17.0.18-linux_x64 /opt/java/
+# 可选：创建固定别名，后续升级只改软链接
+sudo ln -sfn /opt/java/zulu17.64.17-ca-jdk17.0.18-linux_x64 /opt/java/jdk17
 # 末尾追加环境变量
 $ nano ~/.zshrc
 # JDK
-export JAVA_HOME="/opt/java/zulu21.42.19-ca-jdk21.0.6"
+export JAVA_HOME="/opt/java/jdk17"
 export PATH=$JAVA_HOME/bin:$PATH
 
 $ source ~/.zshrc
 $ java -version
-openjdk version "21.0.6" 2025-01-21 LTS
-OpenJDK Runtime Environment Zulu21.40+17-CA (build 21.0.6+7-LTS)
-OpenJDK 64-Bit Server VM Zulu21.40+17-CA (build 21.0.6+7-LTS, mixed mode, sharing)
+openjdk version "17.0.18" 2026-01-20 LTS
+OpenJDK Runtime Environment Zulu17.64+17-CA (build 17.0.18+8-LTS)
+OpenJDK 64-Bit Server VM Zulu17.64+17-CA (build 17.0.18+8-LTS, mixed mode, sharing)
 ```
 
 ## Gradle
@@ -233,7 +235,7 @@ Keywords=idea;
   $ mvn -v
   Apache Maven 3.9.9 (8e8579a9e76f7d015ee5ec7bfcdc97d260186937)
   Maven home: /opt/jetbrains/intellij-idea-ultimate/plugins/maven/lib/maven3
-  Java version: 21.0.6, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.42.19-ca-jdk21.0.6
+  Java version: 17.0.18, vendor: Azul Systems, Inc., runtime: /opt/java/zulu17.64.17-ca-jdk17.0.18-linux_x64
   Default locale: zh_CN, platform encoding: UTF-8
   OS name: "linux", version: "6.12.9-amd64-desktop-rolling", arch: "amd64", family: "unix"
   ```
@@ -265,7 +267,7 @@ Keywords=idea;
   Terminal: org.jline.terminal.impl.PosixSysTerminal with pty org.jline.terminal.impl.jni.linux.LinuxNativePty
   Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
   Maven home: /opt/maven-mvnd/mvn
-  Java version: 21.0.9, vendor: Azul Systems, Inc., runtime: /opt/java/zulu21.46.19-ca-jdk21.0.9
+  Java version: 17.0.18, vendor: Azul Systems, Inc., runtime: /opt/java/zulu17.64.17-ca-jdk17.0.18-linux_x64
   Default locale: zh_CN, platform encoding: UTF-8
   OS name: "linux", version: "6.12.48-1-manjaro", arch: "amd64", family: "unix"
   
