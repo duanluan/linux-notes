@@ -455,6 +455,45 @@ MimeType=text/x-java;text/x-kotlin;text/x-groovy;application/xml;text/xml;applic
 Keywords=android;studio;
 ```
 
+### 安装 Android SDK / NDK / Command-line Tools
+
+首次启动 Android Studio 后，进入 `Tools`-`SDK Manager`（或 `Settings`-`Language & Frameworks`-`Android SDK`）：
+
+1. `SDK Platforms`：选择并安装需要的 Android API（建议至少安装一个稳定版，如 API 35/36）。
+2. `SDK Tools`：勾选并安装以下组件：
+   - `Android SDK Build-Tools`
+   - `NDK (Side by side)`
+   - `Android SDK Command-line Tools (latest)`
+   - `Android SDK Platform-Tools`
+
+安装完成后确认目录（默认）：
+```shell
+$ ls -lah ~/Android/Sdk
+$ ls -1 ~/Android/Sdk/ndk
+29.0.14206865
+```
+
+配置环境变量（`nano ~/.zshrc`）：
+```shell
+# Android SDK / NDK
+export ANDROID_HOME="$HOME/Android/Sdk"
+export NDK_HOME="$ANDROID_HOME/ndk/29.0.14206865"
+# Android command-line tools + Android Studio
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/emulator:/opt/jetbrains/android-studio/bin:$PATH"
+```
+
+如果是通过 JetBrains Toolbox 安装 Android Studio，把上面 `PATH` 里的 `/opt/jetbrains/android-studio/bin` 替换为实际安装目录。
+
+使环境变量生效并验证：
+```shell
+source ~/.zshrc
+adb version
+sdkmanager --version
+echo $ANDROID_HOME
+echo $NDK_HOME
+which studio
+```
+
 ### 安装 IDEA 的中文插件
 
 此处修改是最新版 IDEA 安装目录下的`plugins/localization-zh/lib/localization-zh.jar`，使用 [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/13710/versions) 下载的 [v242.152](https://plugins.jetbrains.com/plugin/download?rel=true&updateId=557305) 来修改也是差不多的。
