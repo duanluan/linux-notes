@@ -728,6 +728,27 @@ $ rustc --version                                                               
 rustc 1.91.1 (ed61e7d7e 2025-11-07)
 ```
 
+取消 Rustup 和 Cargo 镜像（恢复官方源）：
+```shell
+# 1) 删除 shell 配置中的 Rustup 镜像环境变量（按实际 shell 配置文件调整）
+sed -i '/RUSTUP_UPDATE_ROOT=.*mirrors.tuna.tsinghua.edu.cn/d' ~/.zshrc
+sed -i '/RUSTUP_DIST_SERVER=.*mirrors.tuna.tsinghua.edu.cn/d' ~/.zshrc
+source ~/.zshrc
+
+# 2) 必须执行一次官方源更新，才能真正切回官方源
+RUSTUP_DIST_SERVER="https://static.rust-lang.org" rustup update
+```
+
+Cargo 取消镜像：
+```shell
+# 删除 ${CARGO_HOME:-$HOME/.cargo}/config.toml 中以下镜像配置
+[source.crates-io]
+replace-with = 'mirror'
+
+[source.mirror]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+```
+
 - [rustup | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/rustup/)
 - [crates.io-index.git | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/crates.io-index.git/)
 
