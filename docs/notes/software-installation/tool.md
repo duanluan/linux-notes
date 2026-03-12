@@ -828,8 +828,9 @@ paru synology-drive
 可以使用监控脚本 [synology-ignore-monitor.sh](https://github.com/duanluan/shell-scripts/blob/main/synology-ignore-monitor.sh) 监听底层的 blacklist.filter 配置文件并自动注入规则。
 
 ```shell
+$ mkdir -p ~/workspaces/bin
 # 下载脚本到本地 bin 目录
-$ curl -o ~/workspaces/bin/synology-ignore-monitor.sh [https://raw.githubusercontent.com/duanluan/shell-scripts/main/synology-ignore-monitor.sh](https://raw.githubusercontent.com/duanluan/shell-scripts/main/synology-ignore-monitor.sh)
+$ curl -fL -o ~/workspaces/bin/synology-ignore-monitor.sh https://raw.githubusercontent.com/duanluan/shell-scripts/main/synology-ignore-monitor.sh
 # 赋予可执行权限
 $ chmod +x ~/workspaces/bin/synology-ignore-monitor.sh
 
@@ -842,7 +843,7 @@ After=local-fs.target
 
 [Service]
 Type=simple
-ExecStart=/bin/bash %h/workspaces/bin/synology_ignore_monitor.sh
+ExecStart=/bin/bash %h/workspaces/bin/synology-ignore-monitor.sh
 Restart=always
 RestartSec=3
 
