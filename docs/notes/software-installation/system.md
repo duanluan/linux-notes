@@ -237,174 +237,166 @@ rm -rf ~/.local/share/fcitx5/rime/*
 
 **配置后需要在托盘区键盘图标，右键`重新启动`或`输入法名称`-`重新部署`。**
 
-- 方案一：[oh-my-rime 输入法 | 薄荷输入法](https://www.mintimate.cc/zh/)
+### 方案一：[oh-my-rime 输入法 | 薄荷输入法](https://www.mintimate.cc/zh/)
 
-  ```shell
-  # 克隆安装薄荷输入法
-  git clone --depth 1 https://github.com/Mintimate/oh-my-rime.git /tmp/oh-my-rime
-  # 复制薄荷输入法方案到 Rime 配置目录
-  cp -r /tmp/oh-my-rime/* ~/.local/share/fcitx5/rime/
-  ```
+```shell
+# 克隆安装薄荷输入法
+git clone --depth 1 https://github.com/Mintimate/oh-my-rime.git /tmp/oh-my-rime
+# 复制薄荷输入法方案到 Rime 配置目录
+cp -r /tmp/oh-my-rime/* ~/.local/share/fcitx5/rime/
+```
 
-  [输入法方案配置 - 配置覆写和定制 | oh-my-rime输入法](https://www.mintimate.cc/zh/guide/configurationOverride.html#%E8%BE%93%E5%85%A5%E6%B3%95%E6%96%B9%E6%A1%88%E9%85%8D%E7%BD%AE)
+[输入法方案配置 - 配置覆写和定制 | oh-my-rime输入法](https://www.mintimate.cc/zh/guide/configurationOverride.html#%E8%BE%93%E5%85%A5%E6%B3%95%E6%96%B9%E6%A1%88%E9%85%8D%E7%BD%AE)
 
-  ```shell
-  # 配置方案
-  $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
-  
-  patch:
-    # 九宫格依赖于 rime_mint ，如果需要使用其他方案（比如: 小鹤双拼的 九宫格），可以使用 custom 文件覆写
-    schema_list:
-      # - schema: rime_mint             # 薄荷拼音
-      - schema: double_pinyin_flypy     # 小鹤双拼
-      # - schema: rime_mint_flypy       # 薄荷拼音-小鹤混输方案
-      # - schema: terra_pinyin          # 地球拼音-薄荷定制
-      # - schema: wubi98_mint           # 五笔98-五笔小筑
-      # - schema: wubi86_jidian         # 五笔86-极点86
-      # - schema: t9                    # 仓九宫格-全拼输入
-      # 以下方案薄荷进行了适配，但是默认没有激活
-      # - schema: double_pinyin_abc     # 智能ABC双拼
-      # - schema: double_pinyin_mspy    # 微软双拼
-      # - schema: double_pinyin_sogou   # 搜狗双拼
-      # - schema: double_pinyin_ziguang # 紫光双拼
-      # - schema: double_pinyin         # 自然码双拼
-  
-  
-  # 全拼配置 rime_mint.custom.yaml，小鹤双拼是 double_pinyin_flypy.custom.yaml
-  $ nano ~/.local/share/fcitx5/rime/rime_mint.custom.yaml
-  
-  patch:
-    # 候选词数量
-    menu/page_size: 10
-    # 拼音串最大长度（默认为 25）
-    codeLengthLimit_processor: 100
-    # 中文模式下标点直接输出而不是候选
-    "punctuator/half_shape/[": "【"
-    "punctuator/half_shape/]": "】"
-  ```
+```shell
+# 配置方案
+$ nano ~/.local/share/fcitx5/rime/default.custom.yaml
+
+patch:
+  # 九宫格依赖于 rime_mint ，如果需要使用其他方案（比如: 小鹤双拼的 九宫格），可以使用 custom 文件覆写
+  schema_list:
+    # - schema: rime_mint             # 薄荷拼音
+    - schema: double_pinyin_flypy     # 小鹤双拼
+    # - schema: rime_mint_flypy       # 薄荷拼音-小鹤混输方案
+    # - schema: terra_pinyin          # 地球拼音-薄荷定制
+    # - schema: wubi98_mint           # 五笔98-五笔小筑
+    # - schema: wubi86_jidian         # 五笔86-极点86
+    # - schema: t9                    # 仓九宫格-全拼输入
+    # 以下方案薄荷进行了适配，但是默认没有激活
+    # - schema: double_pinyin_abc     # 智能ABC双拼
+    # - schema: double_pinyin_mspy    # 微软双拼
+    # - schema: double_pinyin_sogou   # 搜狗双拼
+    # - schema: double_pinyin_ziguang # 紫光双拼
+    # - schema: double_pinyin         # 自然码双拼
 
 
-- 方案二：[雾凇拼音](https://dvel.me/posts/rime-ice/)
+# 全拼配置 rime_mint.custom.yaml，小鹤双拼是 double_pinyin_flypy.custom.yaml
+$ nano ~/.local/share/fcitx5/rime/rime_mint.custom.yaml
 
-  ```shell
-  # 安装雾凇拼音方案
-  $ paru rime-ice
-  
-  1 aur/rime-ice-double-pinyin-abc-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 智能ABC双拼
-  2 aur/rime-ice-double-pinyin-flypy-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 小鹤双拼
-  3 aur/rime-ice-double-pinyin-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 自然码双拼
-  4 aur/rime-ice-double-pinyin-jiajia-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音加加双拼
-  5 aur/rime-ice-double-pinyin-mspy-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 微软双拼
-  6 aur/rime-ice-double-pinyin-sogou-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 搜狗双拼
-  7 aur/rime-ice-double-pinyin-ziguang-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 紫光双拼
-  8 aur/rime-ice-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库
-  9 aur/rime-ice-pinyin-git r845.0d85dd5-1 [+10 ~0.11]
-      Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音方案
-  :: 要安装的软件包（例如：1 2 3, 1-3）：
-  ```
+patch:
+  # 候选词数量
+  menu/page_size: 10
+  # 拼音串最大长度（默认为 25）
+  codeLengthLimit_processor: 100
+  # 中文模式下标点直接输出而不是候选
+  "punctuator/half_shape/[": "【"
+  "punctuator/half_shape/]": "】"
+```
 
-  [以 patch 的方式打补丁 - Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
-  
-  ```shell
-  # 创建全局补丁
-  $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
-  
-  patch:
-    # 引入雾凇拼音的 rime_ice_suggestion.yaml 配置
-    __include: rime_ice_suggestion:/
-    # 候选词数量
-    menu/page_size: 10
-    # 快捷键绑定
-    key_binder:
-      bindings:
-        # , 键切换候选词到上页
-        - { when: composing, accept: comma, send: Page_Up }
-        # . 键切换候选词到下页
-        - { when: composing, accept: period, send: Page_Down }
-  ```
 
-- 方案三：[万象拼音](https://github.com/amzxyz/rime_wanxiang)
+### 方案二：[雾凇拼音](https://dvel.me/posts/rime-ice/)
 
-  安装方式一：
-  
-  访问 [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) 下载标准版输入方案或双拼辅助码增强版输入方案。
-  
-  ```shell
-  # 解压到 Rime 配置目录
-  unzip rime-wanxiang-flypy-fuzhu.zip -d ~/.local/share/fcitx5/rime
-  ```
-  
-  安装方式二：
-  
-  先按照系统配置文档中临时切换为 ArchLinuxCN 源。
-  
-  ```shell
-  # 基础版包名：rime-wanxiang-[拼写方案名]，如：自然码方案：rime-wanxiang-zrm
-  # 双拼辅助码增强版包名：rime-wanxiang-pro-[拼写方案名]，如：自然码方案：rime-wanxiang-pro-zrm
-  $ paru rime-wanxiang-pro-flypy
-  ```
+```shell
+# 安装雾凇拼音方案
+$ paru rime-ice
 
-  访问 [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) 下载语法模型。
+1 aur/rime-ice-double-pinyin-abc-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 智能ABC双拼
+2 aur/rime-ice-double-pinyin-flypy-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 小鹤双拼
+3 aur/rime-ice-double-pinyin-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 自然码双拼
+4 aur/rime-ice-double-pinyin-jiajia-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音加加双拼
+5 aur/rime-ice-double-pinyin-mspy-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 微软双拼
+6 aur/rime-ice-double-pinyin-sogou-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 搜狗双拼
+7 aur/rime-ice-double-pinyin-ziguang-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 紫光双拼
+8 aur/rime-ice-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库
+9 aur/rime-ice-pinyin-git r845.0d85dd5-1 [+10 ~0.11]
+    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音方案
+:: 要安装的软件包（例如：1 2 3, 1-3）：
+```
 
-  ```shell
-  # 放到 Rime 配置目录
-  mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
-  ```
+[以 patch 的方式打补丁 - Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
 
-  [rime_wanxiang/README.md at wanxiang · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/blob/wanxiang/README.md)
+```shell
+# 创建全局补丁
+$ nano ~/.local/share/fcitx5/rime/default.custom.yaml
 
-  [Rime 万象拼音输入方案新手安装配置指南](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy)
+patch:
+  # 引入雾凇拼音的 rime_ice_suggestion.yaml 配置
+  __include: rime_ice_suggestion:/
+  # 候选词数量
+  menu/page_size: 10
+  # 快捷键绑定
+  key_binder:
+    bindings:
+      # , 键切换候选词到上页
+      - { when: composing, accept: comma, send: Page_Up }
+      # . 键切换候选词到下页
+      - { when: composing, accept: period, send: Page_Down }
+```
 
-  ```shell
-  # 基础版是 wanxiang.custom.yaml，增强版是 wanxiang_pro.custom.yaml
-  $ cp ~/.local/share/fcitx5/rime/custom/wanxiang_pro.custom.yaml ~/.local/share/fcitx5/rime
-  # 修改方案，不用辅助码改成间接辅助，否则选单字时拼音可能会被作为辅助码消耗掉
-  $ nano ~/.local/share/fcitx5/rime/wanxiang_pro.custom.yaml
+### 方案三：[万象拼音](https://github.com/amzxyz/rime_wanxiang)
+
+安装方式一：
+
+访问 [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) 下载标准版输入方案或双拼辅助码增强版输入方案。
+
+```shell
+# 解压到 Rime 配置目录
+unzip rime-wanxiang-flypy-fuzhu.zip -d ~/.local/share/fcitx5/rime
+```
+
+安装方式二：
+
+先按照系统配置文档中临时切换为 ArchLinuxCN 源。
+
+```shell
+# 基础版包名：rime-wanxiang-[拼写方案名]，如：自然码方案：rime-wanxiang-zrm
+$ paru rime-wanxiang-flypy
+# 双拼辅助码增强版包名：rime-wanxiang-pro-[拼写方案名]，如：自然码方案：rime-wanxiang-pro-zrm
+$ paru rime-wanxiang-pro-flypy
+```
+
+访问 [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) 下载语法模型。
+
+```shell
+# 放到 Rime 配置目录
+mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
+```
+
+[rime_wanxiang/README.md at wanxiang · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/blob/wanxiang/README.md)
+
+[Rime 万象拼音输入方案新手安装配置指南](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy)
+
+```shell
+# 基础版是 wanxiang.custom.yaml，增强版是 wanxiang_pro.custom.yaml
+$ cp ~/.local/share/fcitx5/rime/custom/wanxiang_pro.custom.yaml ~/.local/share/fcitx5/rime
+# 此处修改方案：不用辅助码改成间接辅助，否则选单字时拼音可能会被作为辅助码消耗掉
+$ nano ~/.local/share/fcitx5/rime/wanxiang_pro.custom.yaml
+
+patch:
+  # 是否开启用户词典
+  translator/enable_user_dict: true
+  # 允许句子进入用户词典
+  translator/enable_sentence: true
+  # 是否启用自动造词，如果启用，输入法会根据用户输入的习惯自动添加新词到用户词典中
+  # 如果是万象 Pro 方案则无效，它是固定词频，用 ↓/↑ 移动候选词高亮，用 Ctrl+P 置顶、Ctrl+J/K 调整顺序、Ctrl+L 重置 高亮候选词的词频
+  translator/enable_encoder: true
+
+  # 触发“自动施加辅助码/锁定当前候选”的快捷键，默认为句号
+  force_upper_aux/hotkey: "Tab"
+  # 逗号句号翻页
+  key_binder/bindings/+:
+    - { accept: comma, send: Page_Up, when: has_menu }
+    - { accept: period, send: Page_Down, when: has_menu }
+
+  speller/algebra:
+    __patch:
+      #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
+      - wanxiang_algebra:/pro/小鹤双拼           # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
+      - wanxiang_algebra:/pro/间接辅助           # 辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
   
-  patch:
-    # 强制开启用户词典记录（记住你输过的词）
-    translator/enable_user_dict: true
-    # 强制开启自动调频（根据输入频率调整候选词顺序）
-    translator/enable_encoder: true
-    # 允许句子进入用户词典（不仅仅是短语）
-    translator/enable_sentence: true
+  # …（中间省略你的其他配置）…
   
-    speller/algebra:
-      __patch:
-        #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
-        - wanxiang_algebra:/pro/小鹤双拼           # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-        - wanxiang_algebra:/pro/间接辅助           # 辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
-    
-    # …（中间省略你的其他配置）…
-    
-    # 下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
-    menu/page_size: 10
-    
-    # …（中间省略你的其他配置）…
-    
-    # --- 这是原有的配置开始 ---
-    # 下面这个可以改变tips上屏的按键
-    key_binder/tips_key: "comma"   #修改时候去default找，默认是逗号
-    key_binder/sequence: # Lua 配置：手动排序的快捷键 super_sequence.lua，不要用方向键，各种冲突，一定要避免冲突
-      up: "Control+j"    # 上移
-      down: "Control+k"  # 下移
-      reset: "Control+l" # 重置
-      pin: "Control+p"   # 置顶
-    # --- 这是原有的配置结束 ---
-    
-    # 逗号句号翻页
-    key_binder/bindings/+:
-      - { accept: comma, send: Page_Up, when: has_menu }
-      - { accept: period, send: Page_Down, when: has_menu }
-  ```
+  # 下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
+  menu/page_size: 10
+```
 
 ## 🔤 字体
 
