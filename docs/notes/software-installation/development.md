@@ -97,9 +97,9 @@ nrm use xxx
 ```shell
 tar zxvf zulu17.64.17-ca-jdk17.0.18-linux_x64.tar.gz
 sudo mkdir /opt/java
-sudo mv zulu17.64.17-ca-jdk17.0.18-linux_x64 /opt/java/
-# 可选：创建固定别名，后续升级只改软链接
-sudo ln -sfn /opt/java/zulu17.64.17-ca-jdk17.0.18-linux_x64 /opt/java/jdk17
+sudo mv zulu17.64.17-ca-jdk17.0.18-linux_x64 /opt/java/zulu17.64.17-ca-jdk17.0.18
+# 创建固定别名，后续升级只改软链接
+sudo ln -sfn /opt/java/zulu17.64.17-ca-jdk17.0.18 /opt/java/jdk17
 # 末尾追加环境变量
 $ nano ~/.zshrc
 # JDK
