@@ -565,6 +565,76 @@ sudo zip localization-zh.jar META-INF/plugin.xml
 paru visual-studio-code-bin
 ```
 
+## Cursor
+
+Cursor 旨在大幅提升您的生产力，是使用 AI 编码的最佳方式。
+
+![](https://cursor.com/docs-static/_next/image?url=%2Fdocs-static%2Fimages%2Fagent%2Freview.jpg&w=1024&q=75&dpl=dpl_3BLcT9FRejoM2QpppgiP1dNtQ42k)
+
+[Cursor · Download](https://cursor.com/cn/download)
+
+```shell
+paru cursor-bin
+```
+
+## Windsurf
+
+Windsurf 是一款直观的 AI 编程工具，旨在让您和您的团队始终保持高效的工作状态。
+
+[Download Windsurf Editor and Plugins | Windsurf](https://windsurf.com/download)
+
+```shell
+paru windsurf
+```
+
+## Antigravity
+
+Google Antigravity AI IDE 是谷歌推出的“Agent-First”智能开发环境，把代码编辑、终端和浏览器级自动化整合到一起，让 AI 能直接参与从编写、调试到验证的整条开发流程。
+
+![](https://antigravity.google/assets/image/docs/editor-open-agent-manager.png)
+
+[Google Antigravity Download](https://antigravity.google/download)
+
+```shell
+paru antigravity
+```
+
+## Kiro
+
+Kiro 通过基于规格说明的开发，为 AI 编程提供结构化框架，助您发挥最佳水平。
+
+![](https://kiro.dev/images/home/secondary-specs-requirements.png?h=865ca945)
+
+[Downloads - Kiro](https://kiro.dev/downloads/)
+
+```shell
+paru kiro-ide
+```
+
+## Trae
+
+TRAE（/treɪ/）深度融合 AI 能力，是一名能够理解需求、调用工具并独立完成各类开发任务的“AI 开发工程师”，帮助你高效推进每一个项目。
+
+![](https://p16-arcosite-sg.ibyteimg.com/tos-alisg-i-k9wyc2ijk0-sg/bed61a992e3a446585554ed3144db28c~tplv-k9wyc2ijk0-image.image)
+
+[Download | TRAE - Collaborate with Intelligence](https://www.trae.ai/download)
+
+```shell
+paru trae-bin
+```
+
+## Qoder
+
+Qoder，面向真实软件的智能体编程平台
+
+![](https://img.alicdn.com/imgextra/i2/O1CN01rJsQ0Y1izj4k0jCl3_!!6000000004484-2-tps-2760-1864.png)
+
+[下载 | Qoder - 智能体编程平台](https://qoder.com/download)
+
+```shell
+paru qoder-bin
+```
+
 ## FVM + Flutter 换源 + Dart
 
 ```shell
