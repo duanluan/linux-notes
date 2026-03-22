@@ -545,3 +545,28 @@ sudo mv /etc/X11/xorg.conf.d/10-headless.conf.bak /etc/X11/xorg.conf.d/10-headle
 sudo reboot
 ```
 
+## 调整 X11 客户端最大连接数
+
+解决 Maximum number of clients reached 无法启动新应用。
+
+```shell
+$ sudo pacman -S lsof
+# 统计并排序列出当前占用 X11 连接数最多的前 10 个进程
+$ sudo lsof -U | grep X11-unix | awk '{print $1}' | sort | uniq -c | sort -nr | head -n 10
+
+lsof: WARNING: can't stat() fuse.portal file system /run/user/1000/doc
+      Output information may be incomplete.
+lsof: WARNING: can't stat() fuse.cherry-studio.AppImage file system /tmp/.mount_cherryJWuJUB
+Output information may be incomplete.
+107 Xorg
+
+# 调高 X11 的最大客户端连接数
+$ sudo nano /etc/sddm.conf.d/x11-clients.conf
+
+# X11 客户端最大连接数限制
+[X11]
+ServerArguments=-nolisten tcp -maxclients 1024
+
+# 重启电脑或执行 sudo systemctl restart sddm（会注销）
+```
+
