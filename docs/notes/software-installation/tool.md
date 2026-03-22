@@ -799,6 +799,18 @@ paru gopeed-bin
 paru qbittorrent-enhanced
 ```
 
+## Transmission
+
+一款快速、简单且免费的 BitTorrent 客户端。
+
+![](https://transmissionbt.com/assets/images/homepage/carousel_homepage/screenshot_apple_light.png)
+
+[Transmission | Download](https://transmissionbt.com/download)
+
+```shell
+paru -S transmission-qt
+```
+
 ## PeaZip：压缩/解压
 
 PeaZip 免费文件压缩工具。支持打开、解压 RAR、TAR、ZIP 格式文件。
