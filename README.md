@@ -29,7 +29,7 @@
 
 ### 3. 🛠️ 软件安装（按用途分类）
 
-#### 💻 [系统与基础工具](docs/notes/software-installation/system.md)
+#### 💻 [系统与基础工具](docs/notes/apps/system.md)
 * **必装基建**：`base-devel` / 显卡驱动 / 恢复 X11 会话
 * **包管理增强**：`yay` / `paru` / `debtap` / Spark Store（星火应用商店）
 * **性能与稳定**：Zram + Swappiness / EarlyOOM
@@ -38,7 +38,7 @@
 * **Wine 生态**：deepin-wine8/10-stable + spark-dwine-helper
 * **字体 & 浏览器**：常用中文/编程字体 / Edge / Chrome / Tor Browser
 
-#### 🔧 [工具与生产力](docs/notes/software-installation/tool.md)
+#### 🔧 [工具与生产力](docs/notes/apps/tool.md)
 * **网络与代理**：Clash Verge / FlClash / Brook / proxychains / EasyTier
 * **虚拟化与兼容**：VMware / VirtualBox / Docker（Buildx/Compose/Portainer）/ WinBoat / Wine / Proton-GE / Wine 运行器
 * **效率办公**：Sublime Text / Typora / Obsidian / Pandoc / XMind / Draw.io / uTools / Rubick
@@ -47,24 +47,24 @@
 * **远程工具**：RustDesk / ToDesk / 向日葵 / TeamViewer / AnyDesk / Remote Desktop Manager + FreeRDP
 * **其他**：Geekbench / KeePassXC / GnuPG + GpgFrontend / VLC / Calibre / Cherry Studio
 
-#### 👨‍💻 [全栈开发环境](docs/notes/software-installation/development.md)
+#### 👨‍💻 [全栈开发环境](docs/notes/apps/development.md)
 * **通用**：Git（SSH）/ act（本地跑 GitHub Actions）
 * **前端与移动端**：nvm + Node.js + pnpm / Flutter（FVM）/ VS Code / 微信开发者工具
 * **后端与系统级**：Java（JDK/Maven/Gradle/JMeter）/ Python（pipx/uv/cnpip）/ Rust（Cargo 换源）
 * **数据库与接口工具**：DataGrip / Navicat / DBeaver EE / Redis Desktop / Offset Explorer / Apifox / Apipost / Postman
 * **运维终端**：MobaXterm / WindTerm / WoTerm
 
-#### 🎨 [图影音编辑](docs/notes/software-installation/img-video-audio-edit.md)
+#### 🎨 [图影音编辑](docs/notes/apps/img-video-audio-edit.md)
 * **图像/设计**：GIMP + PhotoGIMP / Krita / Blender / Figma Linux / Aseprite
 * **视频后期**：DaVinci Resolve（含 Studio 安装方案）/ Kdenlive / HandBrake
 * **音频处理**：Audacity
 
-#### 🎮 [游戏与娱乐](docs/notes/software-installation/game.md)
+#### 🎮 [游戏与娱乐](docs/notes/apps/game.md)
 * **平台**：Steam / Heroic / Lutris
 * **工具**：Watt Toolkit（Steam 工具箱）
 * **Minecraft**：HMCL（缩放修复）/ LauncherX
 
-#### 💬 [即时通讯与办公](docs/notes/software-installation/standard.md)
+#### 💬 [即时通讯与办公](docs/notes/apps/standard.md)
 * **通讯/会议**：微信 / QQ / 钉钉 / 飞书 / 腾讯会议
 * **办公套件**：WPS Office（365/CN）/ LibreOffice / OnlyOffice
 * **音乐**：网易云（含 UnblockNeteaseMusic）/ SPlayer / YesPlayMusic / VutronMusic / go-musicfox / MoeKoeMusic / LX Music

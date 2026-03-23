@@ -21,12 +21,12 @@ export default defineConfig({
           { text: '系统安装', link: '/notes/system-installation.md' },
           { text: '系统配置（必看）', link: '/notes/system-configuration.md' },
           { text: '软件安装', items: [
-              { text: '系统类（必看）', link: '/notes/software-installation/system' },
-              { text: '工具类', link: '/notes/software-installation/tool' },
-              { text: '普通类', link: '/notes/software-installation/standard' },
-              { text: '图影音编辑类', link: '/notes/software-installation/img-video-audio-edit' },
-              { text: '开发类', link: '/notes/software-installation/development' },
-              { text:'游戏类', link: '/notes/software-installation/game' }
+              { text: '系统类（必看）', link: '/notes/apps/system' },
+              { text: '工具类', link: '/notes/apps/tool' },
+              { text: '普通类', link: '/notes/apps/standard' },
+              { text: '图影音编辑类', link: '/notes/apps/img-video-audio-edit' },
+              { text: '开发类', link: '/notes/apps/development' },
+              { text:'游戏类', link: '/notes/apps/game' }
             ]
           },
           { text: '软件卸载', link: '/notes/software-uninstallation.md' },
