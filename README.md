@@ -47,6 +47,11 @@
 * **远程工具**：RustDesk / ToDesk / 向日葵 / TeamViewer / AnyDesk / Remote Desktop Manager + FreeRDP
 * **其他**：Geekbench / KeePassXC / GnuPG + GpgFrontend / VLC / Calibre / Cherry Studio
 
+#### 🤖 [AI 与智能助手](docs/notes/apps/ai.md)
+* **编码代理**：OpenCode / Claude Code / Cline CLI
+* **配置切换**：CC Switch 统一管理多 CLI 供应商与模型
+* **大模型客户端**：Cherry Studio
+
 #### 👨‍💻 [全栈开发环境](docs/notes/apps/development.md)
 * **通用**：Git（SSH）/ act（本地跑 GitHub Actions）
 * **前端与移动端**：nvm + Node.js + pnpm / Flutter（FVM）/ VS Code / 微信开发者工具
