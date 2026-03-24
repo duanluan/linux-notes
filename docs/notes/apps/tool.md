@@ -9,7 +9,7 @@
 [Downloading Geekbench 6 for Linux](https://www.geekbench.com/download/linux/)
 
 ```shell
-paru geekbench
+paru -S geekbench
 geekbench
 ```
 
@@ -22,7 +22,7 @@ A multi-platform proxy client based on ClashMeta,simple and easy to use, open-so
 [Releases · chen08209/FlClash](https://github.com/chen08209/FlClash/releases)
 
 ```shell
-paru flclash-bin
+paru -S flclash-bin
 ```
 
 - 如果主要使用`TUN`模式，更推荐`FlClash`。自己使用过程中发现，`Clash Verge`即使开启了`TUN`，`IDEA`的`AI Assistant`里安装`codex`依然极慢，表现得像没有走代理；终端里登录`codex`授权页面时还会报错：`Token exchange failed: token endpoint returned status 403 Forbidden`。
@@ -37,10 +37,58 @@ A Clash Meta GUI based on Tauri.
 [Releases · clash-verge-rev/clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev/releases)
 
 ```shell
-paru clash-verge-rev-bin
+paru -S clash-verge-rev-bin
 ```
 
 - 解决界面白屏：开始菜单搜索`Clash Verge`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`WEBKIT_DISABLE_DMABUF_RENDERER=1`，保存后打开软件。
+
+## Clash Party
+
+一个更易用的代理客户端。
+
+![](https://raw.githubusercontent.com/mihomo-party-org/clash-party/refs/heads/smart_core/images/preview.jpg)
+
+[Releases · mihomo-party-org/clash-party](https://github.com/mihomo-party-org/clash-party/releases)
+
+```shell
+paru -S clash-party-bin
+```
+
+## Stelliberty
+
+一款采用 Flutter 和 Rust 构建的现代跨平台 Clash 客户端，采用独特的 MD3M（Material Design 3 Modern）视觉风格。
+
+![](https://github.com/Kindness-Kismet/Stelliberty/blob/main/.github/screenshots/home-page-light.jpg)
+
+[Releases · Kindness-Kismet/Stelliberty](https://github.com/Kindness-Kismet/Stelliberty/releases)
+
+```shell
+paru -S stelliberty-bin
+```
+
+## Clash Mi
+
+Clash Mi 是内置 clash mihomo 内核的移动端代理工具. 开源、完全免费。
+
+![](https://clashmi.app/assets/demo01.C4B0Jq5C.png)
+
+[Download Clash Mi/下载Clash Mi | Clash Mi Project](https://clashmi.app/download)
+
+```shell
+paru -S clash-mi
+```
+
+## Koala Clash
+
+一款基于 Electron 的现代图形用户界面客户端，专为在 Windows、macOS 和 Linux 系统上运行而设计，旨在提供量身定制的代理体验。
+
+![](https://raw.githubusercontent.com/coolcoala/koala-clash/main/docs/preview.png)
+
+[Releases · coolcoala/koala-clash](https://github.com/coolcoala/koala-clash/releases)
+
+```shell
+paru -S koala-clash-bin
+```
 
 ## proxychains
 
