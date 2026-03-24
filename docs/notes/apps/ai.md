@@ -17,6 +17,9 @@ curl -fsSL https://opencode.ai/install | bash
 npm i -g opencode-ai
 # AUR 安装
 paru -S opencode
+
+# 创建配置目录
+mkdir -p ~/.config/opencode
 ```
 
 配置第三方 API，`nano ~/.config/opencode/opencode.json`修改配置文件：
@@ -249,6 +252,42 @@ Security guide
 
 ❯ 1. Yes, I trust this folder
   2. No, exit
+```
+
+## Codex CLI
+
+```shell
+$ npm i -g @openai/codex
+```
+
+配置第三方 API：
+
+```shell
+$ mkdir -p ~/.codex
+
+# 配置第三方 Key
+$ nano ~/.codex/auth.json
+
+}
+  "OPENAI_API_KEY": "sk-xxx"
+}
+
+# 配置第三方 API 地址等
+$ nano ~/.codex/config.toml
+
+model_provider = "custom"
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+disable_response_storage = true
+
+[model_providers.custom]
+name = "custom"
+wire_api = "responses"
+requires_openai_auth = true
+base_url = "https://example.com/v1"
+
+# 运行
+$ codex
 ```
 
 ## CC Switch
