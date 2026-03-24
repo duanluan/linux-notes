@@ -20,95 +20,25 @@ paru -S opencode
 
 # 创建配置目录
 mkdir -p ~/.config/opencode
+
+# 启用 LSP
+echo 'export OPENCODE_EXPERIMENTAL_LSP_TOOL=true' >> ~/.zshrc
+echo 'export OPENCODE_ENABLE_EXA=1' >> ~/.zshrc
+source ~/.zshrc
 ```
 
 配置第三方 API，`nano ~/.config/opencode/opencode.json`修改配置文件：
 
 ```json
 {
+  "$schema": "https://opencode.ai/config.json",
   "provider": {
     "openai": {
       "options": {
-        "baseURL": "https://example.com/v1",
+        "baseURL": "https://example.com",
         "apiKey": "sk-xxx"
       },
       "models": {
-        "gpt-5-codex": {
-          "name": "GPT-5 Codex",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {}
-          }
-        },
-        "gpt-5.1-codex": {
-          "name": "GPT-5.1 Codex",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {}
-          }
-        },
-        "gpt-5.1-codex-max": {
-          "name": "GPT-5.1 Codex Max",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {}
-          }
-        },
-        "gpt-5.1-codex-mini": {
-          "name": "GPT-5.1 Codex Mini",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {}
-          }
-        },
-        "gpt-5.2": {
-          "name": "GPT-5.2",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
         "gpt-5.4": {
           "name": "GPT-5.4",
           "limit": {
@@ -116,29 +46,28 @@ mkdir -p ~/.config/opencode
             "output": 128000
           },
           "options": {
-            "store": false
+            "store": false,
+            "reasoningEffort": "medium",
+            "textVerbosity": "low",
+            "reasoningSummary": "auto"
           },
           "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
-        "gpt-5.3-codex-spark": {
-          "name": "GPT-5.3 Codex Spark",
-          "limit": {
-            "context": 128000,
-            "output": 32000
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
+            "low": {
+              "reasoningEffort": "low",
+              "textVerbosity": "low"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "textVerbosity": "low"
+            },
+            "high": {
+              "reasoningEffort": "high",
+              "textVerbosity": "low"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh",
+              "textVerbosity": "low"
+            }
           }
         },
         "gpt-5.3-codex": {
@@ -148,47 +77,70 @@ mkdir -p ~/.config/opencode
             "output": 128000
           },
           "options": {
-            "store": false
+            "store": false,
+            "reasoningEffort": "medium",
+            "textVerbosity": "low",
+            "reasoningSummary": "auto"
           },
           "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
-        "gpt-5.2-codex": {
-          "name": "GPT-5.2 Codex",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
-        "codex-mini-latest": {
-          "name": "Codex Mini",
-          "limit": {
-            "context": 200000,
-            "output": 100000
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {}
+            "low": {
+              "reasoningEffort": "low",
+              "textVerbosity": "low"
+            },
+            "medium": {
+              "reasoningEffort": "medium",
+              "textVerbosity": "low"
+            },
+            "high": {
+              "reasoningEffort": "high",
+              "textVerbosity": "low"
+            },
+            "xhigh": {
+              "reasoningEffort": "xhigh",
+              "textVerbosity": "low"
+            }
           }
         }
       }
+    }
+  },
+  "model": "openai/gpt-5.4",
+  "small_model": "openai/gpt-5.3-codex",
+  "permission": {
+    "*": "ask",
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "skill": "allow",
+    "todoread": "allow",
+    "todowrite": "allow",
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "rg *": "allow",
+      "grep *": "allow",
+      "cat *": "allow",
+      "ls *": "allow",
+      "find *": "allow",
+      "pnpm test*": "allow",
+      "npm test*": "allow",
+      "pytest*": "allow",
+      "go test*": "allow",
+      "cargo test*": "allow",
+      "git push*": "deny",
+      "rm*": "deny",
+      "sudo*": "deny"
+    },
+    "edit": {
+      "*": "ask",
+      "src/*": "allow",
+      "tests/*": "allow"
     }
   },
   "agent": {
@@ -202,8 +154,7 @@ mkdir -p ~/.config/opencode
         "store": false
       }
     }
-  },
-  "$schema": "https://opencode.ai/config.json"
+  }
 }
 ```
 
@@ -256,6 +207,12 @@ Security guide
 
 ## Codex CLI
 
+Codex CLI 是 OpenAI 推出的一款编程助手。
+
+![](https://raw.githubusercontent.com/openai/codex/main/.github/codex-cli-splash.png)
+
+[CLI – Codex | OpenAI Developers](https://developers.openai.com/codex/cli)
+
 ```shell
 $ npm i -g @openai/codex
 ```
@@ -275,16 +232,21 @@ $ nano ~/.codex/auth.json
 # 配置第三方 API 地址等
 $ nano ~/.codex/config.toml
 
-model_provider = "custom"
+model_provider = "OpenAI"
 model = "gpt-5.4"
+review_model = "gpt-5.4"
 model_reasoning_effort = "high"
 disable_response_storage = true
+network_access = "enabled"
+windows_wsl_setup_acknowledged = true
+model_context_window = 1000000
+model_auto_compact_token_limit = 900000
 
-[model_providers.custom]
-name = "custom"
+[model_providers.OpenAI]
+name = "OpenAI"
+base_url = "https://example.com"
 wire_api = "responses"
 requires_openai_auth = true
-base_url = "https://example.com/v1"
 
 # 运行
 $ codex
