@@ -91,7 +91,7 @@ source ~/.zshrc
   "provider": {
     "openai": {
       "options": {
-        "baseURL": "https://example.com",
+        "baseURL": "https://example.com/v1",
         "apiKey": "sk-xxx"
       },
       "models": {
@@ -245,11 +245,11 @@ paru -S claude-code
 # 新开终端
 
 # 临时设置第三方 API 地址和 Key
-$ export ANTHROPIC_BASE_URL="https://example.com"
+$ export ANTHROPIC_BASE_URL="https://example.com/v1"
 $ export ANTHROPIC_AUTH_TOKEN="sk-xxx"
 
 # 永久设置第三方 API 地址和 Key
-$ echo 'export ANTHROPIC_BASE_URL="https://example.com"' >> ~/.zshrc
+$ echo 'export ANTHROPIC_BASE_URL="https://example.com/v1"' >> ~/.zshrc
 $ echo 'export ANTHROPIC_AUTH_TOKEN="sk-xxx"' >> ~/.zshrc
 $ source ~/.zshrc
 
@@ -300,7 +300,7 @@ model_auto_compact_token_limit = 900000
 
 [model_providers.OpenAI]
 name = "OpenAI"
-base_url = "https://example.com"
+base_url = "https://example.com/v1"
 wire_api = "responses"
 requires_openai_auth = true
 
