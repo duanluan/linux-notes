@@ -2,6 +2,62 @@
 
 下文中`> `代表为 AI 应用内命令。
 
+## Cherry Studio：大语言模型客户端
+
+Cherry Studio 是一款支持多个大语言模型（LLM）服务商的桌面客户端。
+
+![](https://docs.cherry-ai.com/~gitbook/image?url=https%3A%2F%2F3562065924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F0Ut5BptC3t8CtSU1UWpM%252Fuploads%252Fgit-blob-1d8f30028704ce0a78a9e2bcff6d1dd0326e41f9%252Fimage.png%3Falt%3Dmedia&width=400&dpr=3&quality=100&sign=536c0510&sv=2)
+
+[客户端下载 | Cherry Studio](https://docs.cherry-ai.com/cherry-studio/download)
+
+```shell
+paru cherry-studio-bin
+```
+
+## CC Switch
+
+CC Switch 为你提供一个桌面应用来管理所有五个 CLI 工具。无需手动编辑配置文件，你将获得一个可视化界面，一键将供应商导入应用，一键在不同的供应商之间进行切换，内置 50+ 供应商预设、统一的 MCP, SKILLS 管理以及系统托盘即时切换功能——所有操作都基于可靠的 SQLite 数据库和原子写入机制，保护你的配置不被损坏。
+
+![](https://raw.githubusercontent.com/farion1231/cc-switch/main/assets/screenshots/main-zh.png)
+
+[Releases · farion1231/cc-switch](https://github.com/farion1231/cc-switch/releases)
+
+```shell
+paru -S cc-switch-bin
+```
+
+打开后，在特定 CLI 下添加供应商，输入 API 地址、Key，添加模型后切换供应商，除 Claude Code 外，其他对应的 CLI 工具要重启以应用更改。
+
+添加供应商时，如果要调整 OpenAI 模型的推理强度（可选 `off`|`minimal`|`low`|`medium`|`high`|`xhigh`），修改配置 JSON：
+
+```json
+{
+  "models": {
+    "gpt-5.4": {
+      "name": "GPT-5.4",
+      "options": {
+        "reasoning": {
+          "effort": "high"
+        }
+      }
+    },
+    "gpt-5.3-codex": {
+      "name": "GPT-5.3 Codex",
+      "options": {
+        "reasoning": {
+          "effort": "high"
+        }
+      }
+    }
+  },
+  "npm": "@ai-sdk/openai-compatible",
+  "options": {
+    "apiKey": "sk-xxx",
+    "baseURL": "https://example.com/v1"
+  }
+}
+```
+
 ## OpenCode
 
 OpenCode 是一个开源的 AI 编码代理。它提供终端界面、桌面应用和 IDE 扩展等多种使用方式。
@@ -252,50 +308,6 @@ requires_openai_auth = true
 $ codex
 ```
 
-## CC Switch
-
-CC Switch 为你提供一个桌面应用来管理所有五个 CLI 工具。无需手动编辑配置文件，你将获得一个可视化界面，一键将供应商导入应用，一键在不同的供应商之间进行切换，内置 50+ 供应商预设、统一的 MCP, SKILLS 管理以及系统托盘即时切换功能——所有操作都基于可靠的 SQLite 数据库和原子写入机制，保护你的配置不被损坏。
-
-![](https://raw.githubusercontent.com/farion1231/cc-switch/main/assets/screenshots/main-zh.png)
-
-[Releases · farion1231/cc-switch](https://github.com/farion1231/cc-switch/releases)
-
-```shell
-paru -S cc-switch-bin
-```
-
-打开后，在特定 CLI 下添加供应商，输入 API 地址、Key，添加模型后切换供应商，除 Claude Code 外，其他对应的 CLI 工具要重启以应用更改。
-
-添加供应商时，如果要调整 OpenAI 模型的推理强度（可选 `off`|`minimal`|`low`|`medium`|`high`|`xhigh`），修改配置 JSON：
-
-```json
-{
-  "models": {
-    "gpt-5.4": {
-      "name": "GPT-5.4",
-      "options": {
-        "reasoning": {
-          "effort": "high"
-        }
-      }
-    },
-    "gpt-5.3-codex": {
-      "name": "GPT-5.3 Codex",
-      "options": {
-        "reasoning": {
-          "effort": "high"
-        }
-      }
-    }
-  },
-  "npm": "@ai-sdk/openai-compatible",
-  "options": {
-    "apiKey": "sk-xxx",
-    "baseURL": "https://example.com/v1"
-  }
-}
-```
-
 ## Cline CLI
 
 Cline CLI 直接在您的终端中运行 AI 编码代理。通过管道传输 git diff 以在 CI/CD 中进行自动代码审查，同时运行多个实例以进行并行开发，或将 Cline 集成到您现有的 shell 工作流程中。
@@ -327,14 +339,89 @@ Base URL (optional)
 > https://example.com/v1
 ```
 
-## Cherry Studio：大语言模型客户端
+## rtk：过滤压缩 LLM 上下文
 
-Cherry Studio 是一款支持多个大语言模型（LLM）服务商的桌面客户端。
+rtk 在命令输出到达 LLM 上下文之前进行过滤和压缩。单一 Rust 二进制文件，零依赖，<10ms 开销。
 
-![](https://docs.cherry-ai.com/~gitbook/image?url=https%3A%2F%2F3562065924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F0Ut5BptC3t8CtSU1UWpM%252Fuploads%252Fgit-blob-1d8f30028704ce0a78a9e2bcff6d1dd0326e41f9%252Fimage.png%3Falt%3Dmedia&width=400&dpr=3&quality=100&sign=536c0510&sv=2)
+![](https://www.rtk-ai.app/assets/screenshots/rtkgain02.png)
 
-[客户端下载 | Cherry Studio](https://docs.cherry-ai.com/cherry-studio/download)
+[rtk — Make your AI coding agent smarter | CLI proxy](https://www.rtk-ai.app/#)
 
 ```shell
-paru cherry-studio-bin
+# 脚本安装
+curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+# AUR 安装
+paru -S rtk
+```
+
+命令：[rtk/README_zh.md at master · rtk-ai/rtk](https://github.com/rtk-ai/rtk/blob/master/README_zh.md#%E5%91%BD%E4%BB%A4)
+
+初始化：
+```shell
+# 这会安装一个 PreToolUse 钩子，透明地将 Bash 命令重写为 rtk 等价命令。
+$ rtk init --global 
+
+RTK hook installed/updated (global).
+
+  Hook:      /home/duanluan/.claude/hooks/rtk-rewrite.sh
+  RTK.md:    /home/duanluan/.claude/RTK.md (10 lines)
+  CLAUDE.md: @RTK.md reference added
+
+Patch existing /home/duanluan/.claude/settings.json? [y/N] 
+y
+
+  settings.json: hook added
+  Restart Claude Code. Test with: git status
+  filters:   /home/duanluan/.config/rtk/filters.toml (template, edit to add user-global filters)
+
+
+  [info] Anonymous telemetry is enabled (opt-out: RTK_TELEMETRY_DISABLED=1)
+  [info] See: https://github.com/rtk-ai/rtk#privacy--telemetry
+```
+
+指定初始化：
+```shell
+rtk init -g --opencode
+rtk init -g --codex
+
+rtk init -g --agent cursor
+rtk init -g --agent windsurf
+rtk init -g --agent cline
+```
+
+查看初始化情况：
+```shell
+rtk init --show 
+rtk Configuration:
+
+[ok] Hook: /home/njcm/.claude/hooks/rtk-rewrite.sh (thin delegator, version 3)
+[ok] RTK.md: /home/njcm/.claude/RTK.md (slim mode)
+[ok] Integrity: hook hash verified
+[ok] Global (~/.claude/CLAUDE.md): @RTK.md reference
+[--] Local (./CLAUDE.md): not found
+[ok] settings.json: RTK hook configured
+[ok] OpenCode: plugin installed (/home/njcm/.config/opencode/plugins/rtk.ts)
+[--] Cursor hook: not found
+[--] Cursor hooks.json: not found
+
+Usage:
+  rtk init              # Full injection into local CLAUDE.md
+  rtk init -g           # Hook + RTK.md + @RTK.md + settings.json (recommended)
+  rtk init -g --auto-patch    # Same as above but no prompt
+  rtk init -g --no-patch      # Skip settings.json (manual setup)
+  rtk init -g --uninstall     # Remove all RTK artifacts
+  rtk init -g --claude-md     # Legacy: full injection into ~/.claude/CLAUDE.md
+  rtk init -g --hook-only     # Hook only, no RTK.md
+  rtk init --codex            # Configure local AGENTS.md + RTK.md
+  rtk init -g --codex         # Configure ~/.codex/AGENTS.md + ~/.codex/RTK.md
+  rtk init -g --opencode      # OpenCode plugin only
+  rtk init -g --agent cursor  # Install Cursor Agent hooks
+```
+
+分析：
+
+```shell
+rtk gain                        # 节省统计
+rtk gain --graph                # ASCII 图表（30 天）
+rtk discover                    # 发现遗漏的节省机会
 ```
