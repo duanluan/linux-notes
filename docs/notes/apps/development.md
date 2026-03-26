@@ -899,7 +899,7 @@ API 设计、开发、测试一体化协作平台
 [下载 Apifox - Apifox 帮助文档](https://docs.apifox.com/download)
 
 ```shell
-paru apifox
+paru -S apifox-bin
 ```
 
 ## Apipost
