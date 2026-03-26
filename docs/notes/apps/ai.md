@@ -37,7 +37,7 @@ paru -S cc-switch-bin
       "name": "GPT-5.4",
       "options": {
         "reasoning": {
-          "effort": "high"
+          "effort": "xhigh"
         }
       }
     },
@@ -45,7 +45,7 @@ paru -S cc-switch-bin
       "name": "GPT-5.3 Codex",
       "options": {
         "reasoning": {
-          "effort": "high"
+          "effort": "xhigh"
         }
       }
     }
@@ -261,7 +261,7 @@ $ mkdir -p ~/.codex
 # 配置第三方 Key
 $ nano ~/.codex/auth.json
 
-}
+{
   "OPENAI_API_KEY": "sk-xxx"
 }
 
@@ -271,7 +271,7 @@ $ nano ~/.codex/config.toml
 model_provider = "OpenAI"
 model = "gpt-5.4"
 review_model = "gpt-5.4"
-model_reasoning_effort = "high"
+model_reasoning_effort = "xhigh"
 disable_response_storage = true
 network_access = "enabled"
 windows_wsl_setup_acknowledged = true
