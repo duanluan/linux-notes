@@ -163,40 +163,20 @@ source ~/.zshrc
   "model": "openai/gpt-5.4",
   "small_model": "openai/gpt-5.3-codex",
   "permission": {
-    "*": "ask",
-    "read": "allow",
-    "grep": "allow",
-    "glob": "allow",
-    "list": "allow",
-    "lsp": "allow",
-    "webfetch": "allow",
-    "websearch": "allow",
-    "skill": "allow",
-    "todoread": "allow",
-    "todowrite": "allow",
+    "*": "allow",
+    "external_directory": {
+      "*": "ask"
+    },
+    "doom_loop": "ask",
     "bash": {
-      "*": "ask",
-      "git status*": "allow",
-      "git diff*": "allow",
-      "git log*": "allow",
-      "rg *": "allow",
-      "grep *": "allow",
-      "cat *": "allow",
-      "ls *": "allow",
-      "find *": "allow",
-      "pnpm test*": "allow",
-      "npm test*": "allow",
-      "pytest*": "allow",
-      "go test*": "allow",
-      "cargo test*": "allow",
-      "git push*": "deny",
-      "rm*": "deny",
-      "sudo*": "deny"
+      "*": "allow",
+      "git push*": "ask",
+      "git commit*": "ask",
+      "rm*": "ask",
+      "sudo*": "ask"
     },
     "edit": {
-      "*": "ask",
-      "src/*": "allow",
-      "tests/*": "allow"
+      "*": "allow"
     }
   },
   "agent": {
