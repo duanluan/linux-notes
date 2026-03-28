@@ -721,7 +721,13 @@ paru rubick
 ![](https://keepassxc.org/assets/img/screenshots/database_view.png)
 
 ```shell
-paru keepassxc-git
+# 安装
+paru -S keepassxc-qt6
+
+# 解决编译报错：.../OpenSSHKeyGen.cpp:92:43: error: variable ‘Botan::EC_Group domain’ has initializer but incomplete type，在 OpenSSHKeyGen.cpp 中补充缺失的头文件
+sed -i '/#include <botan\/rsa.h>/a #include <botan/ec_group.h>' ~/.cache/paru/clone/keepassxc-qt6/src/keepassxc/src/sshagent/OpenSSHKeyGen.cpp
+cd ~/.cache/paru/clone/keepassxc-qt6
+makepkg -efsi
 ```
 
 `KeePassXC`-菜单栏`工具`-`设置`-`浏览器集成`-`高级`选项卡-`使用自定义代理位置`浏览：`/usr/bin/keepassxc-proxy`
