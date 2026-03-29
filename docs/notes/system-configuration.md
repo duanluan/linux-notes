@@ -166,13 +166,13 @@ DLAGENTS=('file::/usr/bin/curl -qgC - -o %o %u'
 
 ```shell
 rm -rf ~/.cache/paru/clone/geekbench
-paru geekbench
+paru -S geekbench
 ```
 
 github 下载生效：
 
 ```shell
-$ paru clash-verge-rev-bin
+$ paru -S clash-verge-rev-bin
 
 ==> 获取源代码...
   -> 正在下载 clash-verge-rev-2.4.2-x86_64.deb...

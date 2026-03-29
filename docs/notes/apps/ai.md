@@ -11,7 +11,7 @@ Cherry Studio 是一款支持多个大语言模型（LLM）服务商的桌面客
 [客户端下载 | Cherry Studio](https://docs.cherry-ai.com/cherry-studio/download)
 
 ```shell
-paru cherry-studio-bin
+paru -S cherry-studio-bin
 ```
 
 ## CC Switch

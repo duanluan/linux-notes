@@ -7,7 +7,7 @@
 [QQ Linux 版 - 轻松做自己](https://im.qq.com/linuxqq/index.shtml)
 
 ```shell
-paru linuxqq
+paru -S linuxqq
 ```
 
 ## 微信
@@ -15,7 +15,7 @@ paru linuxqq
 [微信 Linux 版](https://linux.weixin.qq.com/)
 
 ```shell
-paru wechat-bin
+paru -S wechat-bin
 ```
 
 下载 [activate-wechat.sh](https://github.com/duanluan/shell-scripts/blob/main/activate-wechat.sh)。
@@ -36,7 +36,7 @@ paru wechat-bin
 
 AUR：
 ```shell
-paru feishu-bin
+paru -S feishu-bin
 ```
 
 最新版：
@@ -69,7 +69,7 @@ $ makepkg -si
 [钉钉官网下载页面 - 钉钉，让进步发生](https://www.dingtalk.com/download)
 
 ```shell
-paru dingtalk-bin
+paru -S dingtalk-bin
 ```
 
 ## WPS Office (365)
@@ -126,7 +126,7 @@ sudo pacman -S libreoffice-still libreoffice-still-zh-cn
 [ONLYOFFICE desktop and mobile apps | ONLYOFFICE](https://www.onlyoffice.com/download-desktop#desktop)
 
 ```shell
-paru onlyoffice-bin
+paru -S onlyoffice-bin
 ```
 
 ## Thunderbird
@@ -148,7 +148,7 @@ sudo pacman -S thunderbird
 [下载中心 - 腾讯会议](https://meeting.tencent.com/download/index.html)
 
 ```shell
-paru wemeet-bin
+paru -S wemeet-bin
 ```
 
 ## electron-netease-cloud-music
@@ -158,13 +158,13 @@ paru wemeet-bin
 ![](https://user-images.githubusercontent.com/13914967/52464615-8cee9900-2bb6-11e9-8aa3-a74d8cf7bea5.png)
 
 ```shell
-paru electron-netease-cloud-music-bin
+paru -S electron-netease-cloud-music-bin
 ```
 
 ## 网易云 + UnblockNeteaseMusic
 
 ```shell
-paru com.163.music.spark
+paru -S com.163.music.spark
 ```
 
 先按照开发类中安装 nvm + Node.js。
@@ -226,7 +226,7 @@ $ systemctl --user status unblock-netease-music
 [Releases · imsyy/SPlayer](https://github.com/imsyy/SPlayer/releases)
 
 ```shell
-paru splayer
+paru -S splayer
 ```
 
 ## YesPlayMusic
@@ -238,7 +238,7 @@ paru splayer
 [Releases · qier222/YesPlayMusic](https://github.com/qier222/YesPlayMusic/releases)
 
 ```shell
-paru yesplaymusic
+paru -S yesplaymusic
 ```
 
 ## VutronMusic
@@ -250,7 +250,7 @@ paru yesplaymusic
 [Releases · stark81/VutronMusic](https://github.com/stark81/VutronMusic/releases)
 
 ```shell
-paru vutronmusic-bin
+paru -S vutronmusic-bin
 ```
 
 ## go-musicfox
@@ -277,7 +277,7 @@ paru -S go-musicfox
 [Releases · MoeKoeMusic/MoeKoeMusic](https://github.com/MoeKoeMusic/MoeKoeMusic/releases)
 
 ```shell
-paru moekoemusic-bin
+paru -S moekoemusic-bin
 ```
 
 ## LX Music 洛雪音乐播放器
@@ -285,7 +285,7 @@ paru moekoemusic-bin
 ![](https://raw.githubusercontent.com/lyswhut/lx-music-desktop/master/doc/images/app.png)
 
 ```shell
-paru lx-music-desktop-bin
+paru -S lx-music-desktop-bin
 ```
 
 [洛雪音乐源](https://github.com/pdone/lx-music-source)
@@ -303,8 +303,8 @@ paru lx-music-desktop-bin
 先在 [AUR (en) - bilibili-bin](https://aur.archlinux.org/packages/bilibili-bin) 查看依赖的 electron 哪个版本。
 
 ```shell
-paru electron28-bin
-paru bilibili-bin
+paru -S electron28-bin
+paru -S bilibili-bin
 ```
 
 ## 百度网盘
@@ -312,5 +312,5 @@ paru bilibili-bin
 [百度网盘 客户端下载](https://pan.baidu.com/download#pan)
 
 ```shell
-paru baidunetdisk-bin
+paru -S baidunetdisk-bin
 ```

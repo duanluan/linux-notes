@@ -57,7 +57,7 @@ passwd root
 
 ```shell
 # paru 安装软件
-$ paru dingtalk-bin
+$ paru -S dingtalk-bin
 
 ==> 正在验证 source 文件，使用sha512sums...
     service-terms-zh_7.8.15.5101401.html ... 失败
@@ -149,7 +149,7 @@ $ sudo pacman -Syu
 # 先卸载再升级再重新安装
 $ sudo pacman -Rns virtualbox-ext-oracle
 $ sudo pacman -Syu
-$ paru virtualbox-ext-oracle
+$ paru -S virtualbox-ext-oracle
 
 # 验证 meson 是否可用
 $ meson --version

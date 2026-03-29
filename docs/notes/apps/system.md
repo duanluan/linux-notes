@@ -222,7 +222,7 @@ journalctl -u earlyoom -n 20
 
 ```shell
 # 搜索并安装 Rime 拼音
-paru fcitx5-rime
+paru -S fcitx5-rime
 # 创建 Rime 配置目录
 mkdir -p ~/.local/share/fcitx5/rime
 # 如果之前安装过其他输入法，先删除
@@ -402,7 +402,7 @@ patch:
 
 - [LXGW WenKai / 霞鹜文楷](https://github.com/lxgw/LxgwWenKai)
   ```shell
-  $ paru ttf-lxgw-wenkai
+  $ paru -S ttf-lxgw-wenkai
   
   1 aur/ttf-lxgw-wenkai 1.521-1 [+9 ~0.16]
       An open-source Chinese font derived from Fontworks' Klee One.
@@ -431,7 +431,7 @@ patch:
 
 - [LXGW Neo XiHei / 霞鹜新晰黑](https://github.com/lxgw/LxgwNeoXiHei)
   ```shell
-  $ paru ttf-lxgw-neo-xihei
+  $ paru -S ttf-lxgw-neo-xihei
   
   1 aur/ttf-lxgw-neo-xihei 1.225-1 [+3 ~0.00]
       霞鹜新晰黑。一款衍生于「IPAexゴシック」的中文黑体字型。A Simplified Chinese sans-serif font derived from IPAex Gothic.
@@ -447,7 +447,7 @@ patch:
 
 - [LXGW Neo ZhiSong / 霞鹜新致宋 / 霞鶩新緻宋](https://github.com/lxgw/LxgwNeoZhiSong)
   ```shell
-  $ paru ttf-lxgw-neo-zhisong
+  $ paru -S ttf-lxgw-neo-zhisong
   
   1 aur/ttf-lxgw-neo-zhisong 1.050-1 [+0 ~0.00]
       霞鹜新致宋。一款衍生于「IPAmj明朝」的中文宋体字型。A Chinese serif font derived from IPAmj Mincho.
@@ -462,7 +462,7 @@ patch:
 
   注意：此软件包体积巨大，因为它完整包含了简繁日韩全语言字符、所有字重与风格以及打入的 Nerd Font 全套图标。
   ```shell
-  paru ttf-sarasa-gothic-nerd-fonts
+  paru -S ttf-sarasa-gothic-nerd-fonts
   ```
 
 - [文泉驿微米黑](http://wenq.org/wqy2/index.cgi?%E9%A6%96%E9%A1%B5)
@@ -479,7 +479,7 @@ patch:
 
 - [Myna](https://github.com/sayyadirfanali/Myna/)
   ```shell
-  paru otf-myna
+  paru -S otf-myna
   ```
 
 ## 📟 Tmux
@@ -576,7 +576,7 @@ z wo my
 
 ```shell
 # 安装 debtap
-$ paru debtap
+$ paru -S debtap
 
 # 初始化 debtap 数据库
 $ sudo debtap -u
@@ -619,16 +619,16 @@ sha256sums=('SKIP')
 makepkg -si
 
 # 安装 deepin-wine10-stable
-paru deepin-wine10-stable
+paru -S deepin-wine10-stable
 
 # 安装 spark-dwine-helper
-paru spark-dwine-helper
+paru -S spark-dwine-helper
 ```
 
 ## 🔥 Spark Store 星火应用商店
 
 ```shell
-$ paru amber-ce-bookworm
+$ paru -S amber-ce-bookworm
 
 ==> 获取源代码...
   -> 找到 amber-ce-bookworm-12.7.5.tar.gz
@@ -670,7 +670,7 @@ sudo apt install ./spark-store_4.8.2_amd64.deb
 [官方下载 Microsoft Edge](https://www.microsoft.com/zh-cn/edge/download)
 
 ```shell
-paru microsoft-edge-stable-bin
+paru -S microsoft-edge-stable-bin
 ```
 
 开始菜单搜索`默认应用程序`可以修改默认网页浏览器。
@@ -680,7 +680,7 @@ paru microsoft-edge-stable-bin
 [Google Chrome 网络浏览器](https://www.google.com/chrome/)
 
 ```shell
-paru google-chrome
+paru -S google-chrome
 ```
 
 ## 🧅 Tor Browser
@@ -688,7 +688,7 @@ paru google-chrome
 Tor 浏览器是一款基于隐私保护的开源浏览器，通过多层加密和中继网络匿名访问互联网，隐藏用户的身份和位置。
 
 ```shell
-# paru tor-browser-bin 时导入报错“gpg: 从公钥服务器接收失败：无数据 错误： 未能运行： gpg --recv-keys EF6E286DDA85EA2A4BA7DE684E2C6E8793298290”，所以手动导入
+# paru -S tor-browser-bin 时导入报错“gpg: 从公钥服务器接收失败：无数据 错误： 未能运行： gpg --recv-keys EF6E286DDA85EA2A4BA7DE684E2C6E8793298290”，所以手动导入
 curl -s https://keys.openpgp.org/vks/v1/by-fingerprint/EF6E286DDA85EA2A4BA7DE684E2C6E8793298290 | gpg --import
-paru tor-browser-bin
+paru -S tor-browser-bin
 ```
