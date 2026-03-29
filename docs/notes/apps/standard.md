@@ -161,62 +161,6 @@ paru -S wemeet-bin
 paru -S electron-netease-cloud-music-bin
 ```
 
-## 网易云 + UnblockNeteaseMusic
-
-```shell
-paru -S com.163.music.spark
-```
-
-先按照开发类中安装 nvm + Node.js。
-
-```shell
-git clone git@github.com:UnblockNeteaseMusic/server.git
-sudo mv server/ /opt/UnblockNeteaseMusic
-cd /opt/UnblockNeteaseMusic
-# 启用 yarn
-corepack enable yarn
-# 使用 repo 的最新开发内容
-yarn
-yarn build
-# 使用 52100:52101 端口启动
-$ node app.js -p 52100:52101
-INFO: (app) HTTP Server running @ http://0.0.0.0:52100
-INFO: (app) HTTPS Server running @ http://0.0.0.0:52101
-```
-
-网易云音乐`设置`-`工具`-`http代理`-`自定义代理`：
-- 类型：HTTP代理
-- 服务器：`127.0.0.1`
-- 端口：`52100`
-
-点击“测试”按钮提示“该代理可使用”，点击“确定”按钮“现在重启”。
-
-可用后将启动命令添加到服务，此服务只需要桌面用户登录后启动。
-
-```shell
-# 查看 nvm 应用的 Node 位置
-$ nvm which 22
-/home/duanluan/.nvm/versions/node/v22.17.0/bin/node
-
-$ vim ~/.config/systemd/user/unblock-netease-music.service
-
-[Unit]
-Description=Revive unavailable songs for Netease Cloud Music (Refactored & Enhanced version)
-After=network.target
-
-[Service]
-ExecStart=/home/duanluan/.nvm/versions/node/v22.17.0/bin/node /opt/UnblockNeteaseMusic/app.js -p 52100:52101
-Restart=always
-
-[Install]
-WantedBy=graphical-session.target
-
-$ systemctl --user daemon-reload
-$ systemctl --user enable unblock-netease-music
-$ systemctl --user start unblock-netease-music
-$ systemctl --user status unblock-netease-music
-```
-
 ## SPlayer
 
 一个简约的音乐播放器，支持逐字歌词，网易云音乐云盘及本地音乐管理，流媒体 Jellyfin / Navidrome / Emby 播放，音乐频谱，移动端适配。
