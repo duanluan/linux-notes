@@ -129,6 +129,18 @@ sudo pacman -S libreoffice-still libreoffice-still-zh-cn
 paru onlyoffice-bin
 ```
 
+## Thunderbird
+
+Thunderbird 是一款自由开源的邮件客户端，支持多账户邮箱、日历、通讯录和扩展。
+
+![](https://www.thunderbird.net/media/img/thunderbird/new/screens/calendar-screen.avif)
+
+[Thunderbird — 解放收件箱](https://www.thunderbird.net/zh-CN/)
+
+```shell
+sudo pacman -S thunderbird
+```
+
 ## 腾讯会议
 
 ![](https://cdn.meeting.tencent.com/assets/next-website/_next/static/images/feature3-1-79a7d46ff4fa27eb.png)

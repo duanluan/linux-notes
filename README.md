@@ -71,6 +71,7 @@
 
 #### 💬 [即时通讯与办公](docs/notes/apps/standard.md)
 * **通讯/会议**：微信 / QQ / 钉钉 / 飞书 / 腾讯会议
+* **邮件**：Thunderbird
 * **办公套件**：WPS Office（365/CN）/ LibreOffice / OnlyOffice
 * **音乐**：网易云（含 UnblockNeteaseMusic）/ SPlayer / YesPlayMusic / VutronMusic / go-musicfox / MoeKoeMusic / LX Music
 * **影音/网盘**：哔哩哔哩客户端 / 百度网盘
