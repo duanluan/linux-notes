@@ -14,6 +14,18 @@ Cherry Studio 是一款支持多个大语言模型（LLM）服务商的桌面客
 paru -S cherry-studio-bin
 ```
 
+## Chatbox
+
+Chatbox AI 是一款 AI 客户端应用和智能助手，支持众多先进的 AI 模型和 API，可在 Windows、MacOS、Android、iOS、Linux 和网页版上使用。
+
+![](https://chatboxai.app/_next/image?url=https%3A%2F%2Fdownload.chatboxai.app%2Fstatic%2Fsnapshot_file.gif&w=1920&q=75)
+
+[Chatbox AI官网：办公学习的AI好助手，全平台AI客户端，官方免费下载](https://chatboxai.app/zh/#download)
+
+```shell
+paru -S chatbox-bin
+```
+
 ## CC Switch
 
 CC Switch 为你提供一个桌面应用来管理所有五个 CLI 工具。无需手动编辑配置文件，你将获得一个可视化界面，一键将供应商导入应用，一键在不同的供应商之间进行切换，内置 50+ 供应商预设、统一的 MCP, SKILLS 管理以及系统托盘即时切换功能——所有操作都基于可靠的 SQLite 数据库和原子写入机制，保护你的配置不被损坏。
