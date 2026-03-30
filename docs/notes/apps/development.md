@@ -390,7 +390,7 @@ MimeType=application/xhtml+xml;text/javascript;text/css;
 Keywords=pycharm;
 ```
 
-## Python + pipx + cnpip 切换最快 pip 镜像源 + uv
+## Python + pipx + cnpip 切换最快 pip 镜像源 + Miniforge + uv
 
 自带 Python，但当你想全局安装依赖时会报错：
 ```shell
@@ -425,6 +425,60 @@ pipx install cnpip
 cnpip set
 # pipx 安装 uv
 pipx install uv
+```
+
+如果你还想保留一套独立于系统 Python 的环境，也可以安装 Miniforge：
+```shell
+# 代理下载 Miniforge 安装脚本
+$ proxychains -q curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+# or
+$ proxychains -q wget "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+# or
+$ proxychains -q axel -n 10 "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+
+# 安装 Miniforge
+$ bash Miniforge3-$(uname)-$(uname -m).sh
+
+# 安装过程中执行初始化
+Proceed with initialization? [yes|no]
+[no] >>> yes
+
+# 新开终端
+$ conda --version
+conda 26.1.1
+```
+
+Miniforge 换源：
+```shell
+# 创建全局 conda 配置文件
+$ nano ~/.condarc
+
+# 来源自 ~/miniforge3/.condarc
+channels:
+  - conda-forge
+mirrored_channels:
+  conda-forge:
+    - https://conda.anaconda.org/conda-forge
+    - https://prefix.dev/conda-forge
+# 显示 channel url 的信息
+show_channel_urls: true
+# 自定义镜像源
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+
+# 查看当前配置来源
+$ conda config --show-sources
+
+# 创建名为 test-conda-env 的虚拟环境，并指定 Python 版本为 3.11
+conda create -n test-conda-env python=3.11
+# 进入（激活）虚拟环境
+conda activate test-conda-env
+# 退出当前虚拟环境
+conda deactivate
+# 删除虚拟环境及其内部的所有包（需在退出该环境后执行）
+conda remove -n test-conda-env --all
+# 查看当前系统中存在的所有 conda 虚拟环境，确认是否删除干净
+conda env list
 ```
 
 uv 全局换源：
