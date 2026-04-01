@@ -865,6 +865,16 @@ paru -S qbittorrent-enhanced
 paru -S transmission-qt
 ```
 
+## 迅雷
+
+![](https://pc.xunlei.com/_nuxt/pc-content-bg-3.d4b6b35f.jpg)
+
+[Linux 迅雷_迅雷论坛](https://bbs.xunlei.com/circles/17)
+
+```shell
+paru -S xunlei-bin
+```
+
 ## PeaZip：压缩/解压
 
 PeaZip 免费文件压缩工具。支持打开、解压 RAR、TAR、ZIP 格式文件。

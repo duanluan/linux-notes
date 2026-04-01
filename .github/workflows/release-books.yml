@@ -1,0 +1,59 @@
+name: release-books
+
+on:
+  push:
+    tags:
+      - 'v[0-9][0-9][0-9][0-9].[0-9][0-9].[0-9][0-9]'
+      - '[0-9][0-9][0-9][0-9].[0-9][0-9].[0-9][0-9]'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Parse version from tag
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          raw_tag="${GITHUB_REF_NAME}"
+          version="${raw_tag#v}"
+
+          if [[ ! "${version}" =~ ^[0-9]{4}\.[0-9]{2}\.[0-9]{2}$ ]]; then
+            echo "Tag must use YYYY.MM.DD or vYYYY.MM.DD format. Got: ${raw_tag}" >&2
+            exit 1
+          fi
+
+          normalized="${version//./-}"
+          if ! date -d "${normalized}" "+%Y-%m-%d" >/dev/null 2>&1; then
+            echo "Invalid date in tag: ${raw_tag}" >&2
+            exit 1
+          fi
+
+          echo "version=${version}" >> "${GITHUB_OUTPUT}"
+
+      - name: Install pandoc and latex
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-lang-chinese fonts-noto-cjk
+
+      - name: Build EPUB and PDF
+        run: |
+          chmod +x scripts/build-release-books.sh
+          ./scripts/build-release-books.sh "${{ steps.version.outputs.version }}"
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Linux Notes ${{ steps.version.outputs.version }}
+          generate_release_notes: true
+          files: |
+            dist/linux-notes-${{ steps.version.outputs.version }}.epub
+            dist/linux-notes-${{ steps.version.outputs.version }}.pdf
