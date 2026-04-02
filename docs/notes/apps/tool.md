@@ -143,7 +143,8 @@ $ nami install brook
 
   ```shell
   # 创建 brook 脚本，自定义目录
-  $ nano ~/workspaces/bin/brook.service.sh
+  $ mkdir -p ~/.local/bin
+  $ nano ~/.local/bin/brook.service.sh
   
   #!/bin/bash
   # 查找包含 'brook wsclient' 的进程，并获取 PID
@@ -161,6 +162,7 @@ $ nami install brook
   /home/duanluan/.nami/bin/brook wsclient -s 1.2.3.4:9999 -p 123456 --socks5 127.0.0.1:1080
   
   
+  $ mkdir -p ~/.local/state/brook
   $ mkdir -p ~/.config/systemd/user
   # 将 brook 脚本创建为 systemd 服务
   $ nano ~/.config/systemd/user/brook.service
@@ -170,11 +172,11 @@ $ nami install brook
   After=network.target
   
   [Service]
-  ExecStart=/bin/bash /home/duanluan/workspaces/bin/brook.service.sh
+  ExecStart=/bin/bash %h/.local/bin/brook.service.sh
   Restart=always
   RestartSec=5
-  #StandardOutput=file:/home/duanluan/workspaces/bin/brook.log
-  #StandardError=file:/home/duanluan/workspaces/bin/brook_error.log
+  #StandardOutput=file:%h/.local/state/brook/brook.log
+  #StandardError=file:%h/.local/state/brook/brook_error.log
   StandardOutput=null
   StandardError=null
   
@@ -904,11 +906,11 @@ paru -S synology-drive
 可以使用监控脚本 [synology-ignore-monitor.sh](https://github.com/duanluan/shell-scripts/blob/main/synology-ignore-monitor.sh) 监听底层的 blacklist.filter 配置文件并自动注入规则。
 
 ```shell
-$ mkdir -p ~/workspaces/bin
+$ mkdir -p ~/.local/bin
 # 下载脚本到本地 bin 目录
-$ curl -fL -o ~/workspaces/bin/synology-ignore-monitor.sh https://raw.githubusercontent.com/duanluan/shell-scripts/main/synology-ignore-monitor.sh
+$ curl -fL -o ~/.local/bin/synology-ignore-monitor.sh https://raw.githubusercontent.com/duanluan/shell-scripts/main/synology-ignore-monitor.sh
 # 赋予可执行权限
-$ chmod +x ~/workspaces/bin/synology-ignore-monitor.sh
+$ chmod +x ~/.local/bin/synology-ignore-monitor.sh
 
 $ mkdir -p ~/.config/systemd/user/
 $ nano ~/.config/systemd/user/synology-ignore.service
@@ -919,7 +921,7 @@ After=local-fs.target
 
 [Service]
 Type=simple
-ExecStart=/bin/bash %h/workspaces/bin/synology-ignore-monitor.sh
+ExecStart=/bin/bash %h/.local/bin/synology-ignore-monitor.sh
 Restart=always
 RestartSec=3
 

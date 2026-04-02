@@ -132,12 +132,13 @@ sudo sed -i 's/^\[\(archlinuxcn\)\]/# [\1]/; s/^\(Server.*archlinuxcn\)/# \1/' /
 # 安装 axel
 $ sudo pacman -S axel
 # 创建脚本文件
-$ sudo nano /home/duanluan/workspaces/bin/github-mirror-axel.sh
+$ mkdir -p ~/.local/bin
+$ nano ~/.local/bin/github-mirror-axel.sh
 ```
 `github-mirror-axel.sh`：[shell-scripts/github-mirror-axel.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-mirror-axel.sh)
 ```shell
 # 保存退出后赋予可执行权限
-$ sudo chmod +x /home/duanluan/workspaces/bin/github-mirror-axel.sh
+$ chmod +x ~/.local/bin/github-mirror-axel.sh
 ```
 
 修改`makepkg.conf`：
@@ -155,7 +156,7 @@ DLAGENTS=('file::/usr/bin/curl -qgC - -o %o %u'
           #'https::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u'
           'ftp::/usr/bin/axel -n 10 -a -o %o %u'
           'http::/usr/bin/axel -n 10 -a -o %o %u'
-          'https::/home/duanluan/workspaces/bin/github-mirror-axel.sh %o %u'
+          "https::$HOME/.local/bin/github-mirror-axel.sh %o %u"
           'rsync::/usr/bin/rsync --no-motd -z %u %o'
           'scp::/usr/bin/scp -C %u %o')
 ```
@@ -220,18 +221,19 @@ remote: Total 11879 (delta 24), reused 9 (delta 9), pack-reused 11835 (from 3)
 
 ```shell
 # 创建脚本文件
-$ nano /home/duanluan/workspaces/bin/github-wrappers.sh
+$ mkdir -p ~/.local/bin
+$ nano ~/.local/bin/github-wrappers.sh
 ```
 `github-wrappers.sh`：[shell-scripts/github-wrappers.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-wrappers.sh)
 ```shell
 # 授予可执行权限
-$ chmod +x /home/duanluan/workspaces/bin/github-wrappers.sh
+$ chmod +x ~/.local/bin/github-wrappers.sh
 # 编辑 zsh 配置文件，在文件末尾添加
 $ nano ~/.zshrc
 
 #  加载 GitHub 镜像加速的 Shell 包装器
-if [ -f /home/duanluan/workspaces/bin/github-wrappers.sh ]; then
-    source /home/duanluan/workspaces/bin/github-wrappers.sh
+if [ -f ~/.local/bin/github-wrappers.sh ]; then
+    source ~/.local/bin/github-wrappers.sh
 fi
 
 # 保存退出后使配置生效
@@ -498,7 +500,8 @@ $ sudo mv /etc/X11/xorg.conf.d/10-headless.conf /etc/X11/xorg.conf.d/10-headless
 
 ```shell
 # 创建信号重置脚本
-$ nano ~/workspaces/bin/reset_screen.sh
+$ mkdir -p ~/.local/bin
+$ nano ~/.local/bin/reset_screen.sh
 
 #!/bin/bash
 # 1. 强制关闭真实显示器输出，其中 HDMI-0 替换为你的接口名称
@@ -512,10 +515,10 @@ sleep 1
 xrandr --output HDMI-0 --auto --primary
 
 # 保存退出后赋予可执行权限
-$ chmod +x ~/workspaces/bin/reset_screen.sh
+$ chmod +x ~/.local/bin/reset_screen.sh
 ```
 
-开始菜单搜索`快捷键`-`新增`-`命令或脚本`，命令：`~/workspaces/bin/reset_screen.sh`。
+开始菜单搜索`快捷键`-`新增`-`命令或脚本`，命令：`~/.local/bin/reset_screen.sh`。
 
 右侧`添加`，输入快捷键`Meta` `F10`，右下角`应用`。
 
@@ -569,4 +572,3 @@ ServerArguments=-nolisten tcp -maxclients 1024
 
 # 重启电脑或执行 sudo systemctl restart sddm（会注销）
 ```
-
