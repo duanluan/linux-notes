@@ -53,7 +53,7 @@ passwd root
 
 ## 解决“一个或多个文件没有通过有效性检查”
 
-先执行`paru -Sc`清除缓存后重试，如果仍然失败，则编辑`PKGBUILD`跳过校验。
+先执行`paru -Sc`清除缓存后重试，如果仍然失败，可以下载脚本自动修复校验值并继续执行`makepkg`；也可以手动编辑`PKGBUILD`跳过校验。
 
 ```shell
 # paru 安装软件
@@ -68,6 +68,25 @@ $ paru -S dingtalk-bin
 错误： 未能下载 'dingtalk-bin-7.8.15.5101401-1' 的源:
 错误： 未能构建的软件包：dingtalk-bin-7.8.15.5101401-1
 
+# 下载脚本
+$ mkdir -p ~/.local/bin
+$ curl -fL -o ~/.local/bin/aur-fix-checksums-and-make https://raw.githubusercontent.com/duanluan/shell-scripts/main/aur-fix-checksums-and-make.sh
+$ chmod +x ~/.local/bin/aur-fix-checksums-and-make
+
+# 确保 ~/.local/bin 在 PATH 中
+$ grep -qxF 'export PATH="$HOME/.local/bin:$PATH"' ~/.zshrc || echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+$ source ~/.zshrc
+
+# 自动修复校验值并继续 makepkg
+$ aur-fix-checksums-and-make dingtalk-bin
+
+==> 正在验证 source 文件，使用sha512sums...
+    service-terms-zh_7.8.15.5101401.html ... 已更新
+    com.alibabainc.dingtalk.desktop ... 通过
+    dingtalk.sh ... 通过
+    com.alibabainc.dingtalk.svg ... 通过
+
+# 也可以手动编辑 PKGBUILD
 # 编辑 PKGBUILD，校验失败的文件对应的 sha512sums 的行改为 'SKIP'
 $ cd /home/duanluan/.cache/paru/clone/dingtalk-bin
 $ nano PKGBUILD

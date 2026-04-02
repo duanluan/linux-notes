@@ -131,15 +131,12 @@ sudo sed -i 's/^\[\(archlinuxcn\)\]/# [\1]/; s/^\(Server.*archlinuxcn\)/# \1/' /
 ```shell
 # 安装 axel
 $ sudo pacman -S axel
-# 创建脚本文件
+# 下载脚本文件
 $ mkdir -p ~/.local/bin
-$ nano ~/.local/bin/github-mirror-axel.sh
-```
-`github-mirror-axel.sh`：[shell-scripts/github-mirror-axel.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-mirror-axel.sh)
-```shell
-# 保存退出后赋予可执行权限
+$ curl -fL -o ~/.local/bin/github-mirror-axel.sh https://raw.githubusercontent.com/duanluan/shell-scripts/main/github-mirror-axel.sh
 $ chmod +x ~/.local/bin/github-mirror-axel.sh
 ```
+`github-mirror-axel.sh`：[shell-scripts/github-mirror-axel.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-mirror-axel.sh)
 
 修改`makepkg.conf`：
 ```shell
