@@ -413,7 +413,18 @@ Usage:
 分析：
 
 ```shell
-rtk gain                        # 节省统计
+rtk gain                        # 统计节省
 rtk gain --graph                # ASCII 图表（30 天）
 rtk discover                    # 发现遗漏的节省机会
+```
+
+Codex / Claude Code 使用无效时，需调整`~/.codex/AGENTS.md`/`~/.claude/CLAUDE.md`：
+
+```shell
+$ nano ~/.codex/AGENTS.md
+
+NO_BUILTINS. 
+SIMPLE_CMD: rtk <cmd>
+COMPLEX_PIPELINE: rtk proxy sh -c "<cmd>"
+@/home/xxx/.codex/RTK.md
 ```
