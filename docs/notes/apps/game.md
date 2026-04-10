@@ -67,7 +67,14 @@ $ sudo nano /usr/share/applications/hmcl-bin.desktop
 Exec=/usr/bin/java -jar -Dglass.gtk.uiScale=1.5 /usr/share/java/hmcl-bin/hmcl-bin.jar
 ```
 
-方式二：手动安装
+方式二：脚本安装
+
+```shell
+# 安装或更新
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install-hmcl.sh | bash
+```
+
+方式三：手动安装
 
 从[官网](https://hmcl.huangyuhui.net/download)或 [GitHub Releases](https://github.com/HMCL-dev/HMCL/releases) 下载最新稳定版 jar 文件。
 
