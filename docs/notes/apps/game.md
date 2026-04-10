@@ -103,4 +103,7 @@ StartupWMClass=org.jackhuang.hmcl.Launcher
 
 [LauncherX 下载 - Corona Studio](https://corona.studio/lx/download)
 
-使用脚本 [install-launcherx-bin.sh - duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/install-launcherx-bin.sh) 进行安装。
+```shell
+# 脚本安装
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install-launcherx-bin.sh | bash
+```
