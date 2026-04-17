@@ -3,23 +3,22 @@
 layout: home
 
 hero:
-  name: "Linux 使用笔记（Arch Manjaro KDE）"
+  name: "Linux Notes (Arch / Manjaro KDE)"
   text: "by duanluan"
-  tagline: 从系统安装到环境配置再到日常使用
+  tagline: From installation and system setup to daily use
   actions:
     - theme: brand
-      text: 开始
+      text: Get Started
       link: /notes/system-installation.md
     - theme: alt
-      text: 源码
+      text: Source Code
       link: https://github.com/duanluan/linux-notes
 
 features:
-  - title: 简洁
-    details: 语言简洁，内容丰富。
-  - title: 渐进式
-    details: 从装系统到开发环境。
-  - title: 初学者
-    details: 时刻从初学者的角度出发。
+  - title: Concise
+    details: Practical notes with dense and focused content.
+  - title: Progressive
+    details: Covers the full path from OS installation to development setup.
+  - title: Beginner-Friendly
+    details: Written from the perspective of someone setting up Linux step by step.
 ---
-

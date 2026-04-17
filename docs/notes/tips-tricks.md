@@ -1,29 +1,29 @@
-# 使用技巧
+# Tips & Tricks
 
-## 窗口便捷移动改变大小
+## Move and Resize Windows Quickly
 
-`系统设置`-`应用和窗口`-`窗口管理`-`窗口行为`-`窗口操作`中。
+Go to `System Settings` -> `Apps & Windows` -> `Window Management` -> `Window Behavior` -> `Window Actions`.
 
-- Meta + 左键拖动：移动窗口
-- Meta + 右键拖动：改变窗口大小
+- Meta + left-drag: move the window
+- Meta + right-drag: resize the window
 
-## 开机自动启动
+## Start Apps Automatically at Login
 
-`系统设置`-`系统`-`自动启动`中添加。
+Add the app under `System Settings` -> `System` -> `Autostart`.
 
 ![](assets/20251017011812.png)
 
-## 关闭动画特效
+## Turn Off Unneeded Desktop Effects
 
-`系统设置`-`应用和窗口`-`窗口管理`-`桌面特效`，取消勾选不需要的特效。
+Go to `System Settings` -> `Apps & Windows` -> `Window Management` -> `Desktop Effects`, and disable the effects you do not need.
 
-我只勾选了：
+I only keep these enabled:
 
-- **无响应窗口灰化**：降低无响应/已卡死窗口的颜色饱和度
-- **高亮显示屏幕边缘和四角**：光标靠近触碰时会触发操作的屏幕边缘和四角时高亮显示他们
-- **对话框父级窗口变暗**：当前活动对话框的父窗口将会变暗
-- **桌面概览**：用于显示虚拟桌面和窗口的概览；使用快捷键激活
+- **Dim Inactive Windows**: reduce the color saturation of unresponsive or frozen windows
+- **Highlight Screen Edge**: highlight screen edges and corners when the pointer reaches an active trigger area
+- **Dim Parent Windows**: dim the parent window of the currently active dialog
+- **Desktop Grid**: show an overview of virtual desktops and windows, and activate it with a shortcut
 
-## 其他软件打开 Dolphin 文件管理器时在新标签页中打开，而不是新窗口
+## Open Dolphin Folders in Tabs Instead of New Windows
 
-`Dolphin`地址栏最右边图标-`配置`-`配置 Dolphin`-`界面`-`文件夹与标签页`-`打开文件夹`，勾选`保持单个 Dolphin 窗口，在标签页中打开新文件夹`。
+In `Dolphin`, click the icon at the far right of the address bar, then go to `Configure` -> `Configure Dolphin` -> `Interface` -> `Folders & Tabs` -> `Opening Folders`, and enable `Open new folders in tabs`.

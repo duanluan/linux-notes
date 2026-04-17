@@ -1,25 +1,25 @@
-# 软件卸载
+# Software Uninstallation
 
-## 包管理
+## Package Management
 
-`-Rns`表示级联删除依赖和配置文件。
+`-Rns` removes the package together with unused dependencies and configuration files.
 
 ```shell
-# pacman 卸载软件
+# uninstall with pacman
 sudo pacman -Rns xxx
-# yay 卸载软件
+# uninstall with yay
 yay -Rns xxx
-# yaru 卸载软件
+# uninstall with paru
 paru -Rns xxx
 ```
 
 ## VMware Workstation Pro
 
 ```shell
-# 方法一
+# option 1
 sudo vmware-installer -u vmware-workstation
 
-# 方法二
+# option 2
 paru -Rns vmware-keymaps vmware-workstation
 ```
 
@@ -28,21 +28,21 @@ paru -Rns vmware-keymaps vmware-workstation
 ```shell
 sudo pacman -Rns winboat-bin
 
-# 删除之前的强制加载配置文件
+# remove the previously forced module-loading config
 sudo rm -f /etc/modules-load.d/winboat_kvm.conf
 
-# 停止并删除 WinBoat 容器
+# stop and remove the WinBoat container
 docker stop WinBoat 2>/dev/null && docker rm WinBoat 2>/dev/null
 
-# 删除 WinBoat 数据目录
+# remove the WinBoat data directory
 rm -rf ~/winboat
 ```
 
 ## Firefox
 
-开始菜单搜索`添加/删除软件`，在弹窗中搜索`firefox`，点击软件右侧的卸载图标按钮后`应用`卸载。
+Search for `Add/Remove Software` in the launcher, search for `firefox` in the window that opens, click the uninstall icon on the right side of the app entry, then click `Apply`.
 
-卸载后还需删除残留文件：
+After uninstalling, remove the remaining files as well:
 
 ```shell
 sudo rm -rf ~/.mozilla

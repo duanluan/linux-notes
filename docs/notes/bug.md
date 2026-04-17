@@ -1,7 +1,7 @@
-# 未解决 BUG
+# Known Bugs
 
-## Offset Explorer 文字叠加
+## Offset Explorer Text Overlap
 
-## Snipaste 在 Wayland 下截图后快捷键会触发其他软件的快捷键
+## Snipaste Screenshot Shortcuts Trigger Other App Shortcuts on Wayland
 
-## Edge 在 Wayland 下 Ctrl + H 搜索历史记录无法输入中文
+## Edge Cannot Input Chinese in the Ctrl + H History Search on Wayland

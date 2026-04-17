@@ -1,0 +1,134 @@
+# 游戏类
+
+## Steam
+
+Steam 是一个数字发行平台，提供数千款游戏的购买、下载和管理服务。它支持多人联机、社区交流、成就系统等功能，是全球最大的 PC 游戏平台之一。
+
+[Steam — 高质量游戏平台](https://store.steampowered.com/about/)
+
+```shell
+sudo pacman -S steam
+
+# 第一次使用代理或 TUN 启动，会下载更新
+proxychains -q steam
+```
+
+## Heroic Games Launcher
+
+Heroic 是一款免费且开源的 Epic、GOG 和 Amazon Prime Games 启动器，适用于 Linux、Windows 和 macOS。也适用于 SteamDeck！
+
+![](https://heroicgameslauncher.com/_next/static/images/heroic_01-766acd921e989be3aec2af1174d69dea.webp)
+
+[Download Heroic](https://heroicgameslauncher.com/downloads)
+
+```shell
+paru -S heroic-games-launcher-bin
+```
+
+## Lutris
+
+Lutris 是一款 Linux 平台上的开源游戏管理平台, 通过整合不同运行环境 (Runners) 来统一启动和管理来自 GOG、Epic、Steam 及模拟器等各个渠道的游戏。
+
+![](https://lutris.net/static/images/screenshots/gog-screen.jpg)
+
+[Download Lutris](https://lutris.net/downloads)
+
+```shell
+sudo pacman -S lutris
+```
+
+## Watt Toolkit：Steam 工具箱
+
+一个开源跨平台的多功能 Steam 工具箱。
+
+![](https://steampp.net/images/home/js.webp)
+
+[下载 - Watt Toolkit](https://steampp.net/download)
+
+```shell
+paru -S watt-toolkit-bin
+```
+
+## Minecraft 启动器
+
+### HMCL
+
+HMCL 是一款开源、跨平台的 Minecraft 启动器，支持模组管理、游戏自定义、游戏自动安装 (Forge、NeoForge、Cleanrooddm、Fabric、Quilt、LiteLoader 和 OptiFine)、整合包创建、界面自定义等功能。
+
+![](https://cdn.bbsmc.net/bbsmc/data/s1TSUWSf/images/9a9563b4fdffce87a632c89752c1d7302beb2a12.png)
+
+方式一：从 [AUR](https://aur.archlinux.org/packages?K=hmcl) 安装
+
+```shell
+# 安装
+$ paru -S hmcl-bin
+
+# 解决缩放问题
+$ sudo nano /usr/share/applications/hmcl-bin.desktop
+# 将 Exec=hmcl-bin 修改为
+Exec=/usr/bin/java -jar -Dglass.gtk.uiScale=1.5 /usr/share/java/hmcl-bin/hmcl-bin.jar
+```
+
+方式二：脚本安装
+
+```shell
+# 安装或更新
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install-hmcl.sh | bash
+```
+
+方式三：手动安装
+
+从[官网](https://hmcl.huangyuhui.net/download)或 [GitHub Releases](https://github.com/HMCL-dev/HMCL/releases) 下载最新稳定版 jar 文件。
+
+
+```shell
+mkdir ~/.local/share/hmcl
+mv HMCL-3.7.5.jar /home/duanluan/.local/share/hmcl/HMCL.jar
+
+# 下载图标
+wget -P /home/duanluan/.local/share/hmcl https://docs.hmcl.net/assets/img/hmcl.png
+
+# 创建快捷方式
+$ nano /home/duanluan/.local/share/applications/hmcl.desktop
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=HMCL
+Comment=Hello Minecraft! Launcher, a powerful Minecraft launcher.
+Exec=/usr/bin/java -jar -Dglass.gtk.uiScale=1.5 /home/duanluan/.local/share/hmcl/HMCL.jar
+Icon=/home/duanluan/.local/share/hmcl/hmcl.png
+Terminal=false
+StartupNotify=false
+Categories=Game;
+StartupWMClass=org.jackhuang.hmcl.Launcher
+```
+
+### LauncherX
+
+功能强大、界面优美的下一代 MineCraft 启动器。
+
+![](https://corona.studio/assets/LauncherX_3-JbAuEZQu.webp)
+
+[LauncherX 下载 - Corona Studio](https://corona.studio/lx/download)
+
+```shell
+# 脚本安装
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install-launcherx-bin.sh | bash
+```
+
+### SJMCL
+
+SJMC Launcher 是一款基于 Tauri 框架打造的现代化、跨平台 Minecraft 启动器，由上海交通大学 Minecraft 社成员发起，并与开源社区贡献者共同开发维护。
+
+![](https://mc.sjtu.cn/sjmcl/images/mod-loader-download-step2.png)
+
+[SJMC Launcher | 新一代开源跨平台 Minecraft 启动器](https://mc.sjtu.cn/sjmcl/)
+
+```shell
+paru -S sjmcl-bin
+```
+
+启动没有界面或有一根白线：
+
+开始菜单搜索`SJMCL`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`WEBKIT_DISABLE_DMABUF_RENDERER=1`，保存后重启软件。

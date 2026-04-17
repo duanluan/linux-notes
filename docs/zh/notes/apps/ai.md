@@ -1,14 +1,14 @@
-# AI
+# AI 类
 
-In the examples below, `> ` indicates a command entered inside the AI application itself.
+下文中`> `代表为 AI 应用内命令。
 
-## Cherry Studio: LLM Desktop Client
+## Cherry Studio：大语言模型客户端
 
-Cherry Studio is a desktop client that supports multiple large language model providers.
+Cherry Studio 是一款支持多个大语言模型（LLM）服务商的桌面客户端。
 
 ![](https://docs.cherry-ai.com/~gitbook/image?url=https%3A%2F%2F3562065924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F0Ut5BptC3t8CtSU1UWpM%252Fuploads%252Fgit-blob-1d8f30028704ce0a78a9e2bcff6d1dd0326e41f9%252Fimage.png%3Falt%3Dmedia&width=400&dpr=3&quality=100&sign=536c0510&sv=2)
 
-[Download Client | Cherry Studio](https://docs.cherry-ai.com/cherry-studio/download)
+[客户端下载 | Cherry Studio](https://docs.cherry-ai.com/cherry-studio/download)
 
 ```shell
 paru -S cherry-studio-bin
@@ -16,11 +16,11 @@ paru -S cherry-studio-bin
 
 ## Chatbox
 
-Chatbox AI is an AI client and assistant that supports a wide range of advanced AI models and APIs on Windows, macOS, Android, iOS, Linux, and the web.
+Chatbox AI 是一款 AI 客户端应用和智能助手，支持众多先进的 AI 模型和 API，可在 Windows、MacOS、Android、iOS、Linux 和网页版上使用。
 
 ![](https://chatboxai.app/_next/image?url=https%3A%2F%2Fdownload.chatboxai.app%2Fstatic%2Fsnapshot_file.gif&w=1920&q=75)
 
-[Chatbox AI](https://chatboxai.app/zh/#download)
+[Chatbox AI官网：办公学习的AI好助手，全平台AI客户端，官方免费下载](https://chatboxai.app/zh/#download)
 
 ```shell
 paru -S chatbox-bin
@@ -28,7 +28,7 @@ paru -S chatbox-bin
 
 ## CC Switch
 
-CC Switch provides a desktop app for managing all five CLI tools in one place. Instead of editing config files manually, you get a visual interface with one-click vendor import, one-click switching between vendors, 50+ built-in vendor presets, unified MCP and SKILLS management, and instant system tray switching. Everything is backed by SQLite and atomic writes to avoid corrupting your configuration.
+CC Switch 为你提供一个桌面应用来管理所有五个 CLI 工具。无需手动编辑配置文件，你将获得一个可视化界面，一键将供应商导入应用，一键在不同的供应商之间进行切换，内置 50+ 供应商预设、统一的 MCP, SKILLS 管理以及系统托盘即时切换功能——所有操作都基于可靠的 SQLite 数据库和原子写入机制，保护你的配置不被损坏。
 
 ![](https://raw.githubusercontent.com/farion1231/cc-switch/main/assets/screenshots/main-zh.png)
 
@@ -38,9 +38,9 @@ CC Switch provides a desktop app for managing all five CLI tools in one place. I
 paru -S cc-switch-bin
 ```
 
-After launching the app, add a provider under the target CLI, enter the API base URL and key, add the model, then switch providers. All CLI tools except Claude Code need to be restarted before the changes take effect.
+打开后，在特定 CLI 下添加供应商，输入 API 地址、Key，添加模型后切换供应商，除 Claude Code 外，其他对应的 CLI 工具要重启以应用更改。
 
-If you want to adjust the reasoning effort for OpenAI models while adding a provider, edit the JSON config. Supported values are `off`, `minimal`, `low`, `medium`, `high`, and `xhigh`:
+添加供应商时，如果要调整 OpenAI 模型的推理强度（可选 `off`|`minimal`|`low`|`medium`|`high`|`xhigh`），修改配置 JSON：
 
 ```json
 {
@@ -72,30 +72,30 @@ If you want to adjust the reasoning effort for OpenAI models while adding a prov
 
 ## OpenCode
 
-OpenCode is an open-source AI coding agent. It provides a terminal interface, desktop app, and IDE extensions.
+OpenCode 是一个开源的 AI 编码代理。它提供终端界面、桌面应用和 IDE 扩展等多种使用方式。
 
 ![](https://opencode.ai/docs/_astro/screenshot.CQjBbRyJ_1dLadc.webp)
 
-[OpenCode | Download](https://opencode.ai/zh/download)
+[OpenCode | 下载](https://opencode.ai/zh/download)
 
 ```shell
-# install with script
+# 脚本安装
 curl -fsSL https://opencode.ai/install | bash
-# install with Node
+# Node 方式安装
 npm i -g opencode-ai
-# install from AUR
+# AUR 安装
 paru -S opencode
 
-# create the config directory
+# 创建配置目录
 mkdir -p ~/.config/opencode
 
-# enable LSP
+# 启用 LSP
 echo 'export OPENCODE_EXPERIMENTAL_LSP_TOOL=true' >> ~/.zshrc
 echo 'export OPENCODE_ENABLE_EXA=1' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-To configure a third-party API, edit `~/.config/opencode/opencode.json`:
+配置第三方 API，`nano ~/.config/opencode/opencode.json`修改配置文件：
 
 ```json
 {
@@ -207,40 +207,40 @@ To configure a third-party API, edit `~/.config/opencode/opencode.json`:
 ```
 
 ```shell
-# open a new terminal
+# 新开终端
 $ opencode
 
-# select the model
+# 选择模型
 > /models
 ```
 
 ## Claude Code
 
-Collaborate with Claude directly inside your codebase. You can build, debug, and ship from the terminal, IDE, Slack, or the web. Describe what you need, and let Claude handle the rest.
+直接在您的代码库中与 Claude 协作。您可以在终端、IDE、Slack 或网页端进行构建、调试和发布。只需说明您的需求，剩下的就交给 Claude 来处理。
 
 ![](https://cdn.prod.website-files.com/6889473510b50328dbb70ae6/69b844bc7b091916ff1ffc13_claude_code_in_terminal-img.webp)
 
 [Download Claude | Claude by Anthropic](https://claude.com/download)
 
 ```shell
-# install with script
+# 脚本安装
 curl -fsSL https://claude.ai/install.sh | bash
-# install with Node
+# Node 方式安装
 npm i -g @anthropic-ai/claude-code
-# install from AUR
+# AUR 安装
 paru -S claude-code
 ```
 
-Configure a third-party API:
+配置第三方 API：
 
 ```shell
-# open a new terminal
+# 新开终端
 
-# set a third-party base URL and key temporarily
+# 临时设置第三方 API 地址和 Key
 $ export ANTHROPIC_BASE_URL="https://example.com/v1"
 $ export ANTHROPIC_AUTH_TOKEN="sk-xxx"
 
-# set a third-party base URL and key permanently
+# 永久设置第三方 API 地址和 Key
 $ echo 'export ANTHROPIC_BASE_URL="https://example.com/v1"' >> ~/.zshrc
 $ echo 'export ANTHROPIC_AUTH_TOKEN="sk-xxx"' >> ~/.zshrc
 $ source ~/.zshrc
@@ -255,29 +255,29 @@ Security guide
 
 ## Codex CLI
 
-Codex CLI is a coding assistant released by OpenAI.
+Codex CLI 是 OpenAI 推出的一款编程助手。
 
 ![](https://raw.githubusercontent.com/openai/codex/main/.github/codex-cli-splash.png)
 
-[CLI - Codex | OpenAI Developers](https://developers.openai.com/codex/cli)
+[CLI – Codex | OpenAI Developers](https://developers.openai.com/codex/cli)
 
 ```shell
 $ npm i -g @openai/codex
 ```
 
-Configure a third-party API:
+配置第三方 API：
 
 ```shell
 $ mkdir -p ~/.codex
 
-# configure the third-party key
+# 配置第三方 Key
 $ nano ~/.codex/auth.json
 
 {
   "OPENAI_API_KEY": "sk-xxx"
 }
 
-# configure the third-party base URL and related settings
+# 配置第三方 API 地址等
 $ nano ~/.codex/config.toml
 
 model_provider = "OpenAI"
@@ -296,21 +296,21 @@ base_url = "https://example.com/v1"
 wire_api = "responses"
 requires_openai_auth = true
 
-# run
+# 运行
 $ codex
 ```
 
 ## Cline CLI
 
-Cline CLI runs an AI coding agent directly in your terminal. You can pipe `git diff` into it for automated code review in CI/CD, run multiple instances for parallel development, or integrate it into your existing shell workflows.
+Cline CLI 直接在您的终端中运行 AI 编码代理。通过管道传输 git diff 以在 CI/CD 中进行自动代码审查，同时运行多个实例以进行并行开发，或将 Cline 集成到您现有的 shell 工作流程中。
 
-[Install - Cline Docs](https://docs.cline.net.cn/cline-cli/installation)
+[安装 - Cline 文档](https://docs.cline.net.cn/cline-cli/installation)
 
 ```shell
 $ npm i -g cline
 ```
 
-Configure a third-party API:
+配置第三方 API：
 
 ```shell
 $ cline
@@ -331,28 +331,26 @@ Base URL (optional)
 > https://example.com/v1
 ```
 
-## rtk: Filter and Compact LLM Context
+## rtk：过滤压缩 LLM 上下文
 
-rtk filters and compacts command output before it reaches the LLM context. It is a single Rust binary with zero dependencies and typically adds less than 10 ms of overhead.
+rtk 在命令输出到达 LLM 上下文之前进行过滤和压缩。单一 Rust 二进制文件，零依赖，<10ms 开销。
 
 ![](https://www.rtk-ai.app/assets/screenshots/rtkgain02.png)
 
-[rtk - Make your AI coding agent smarter | CLI proxy](https://www.rtk-ai.app/#)
+[rtk — Make your AI coding agent smarter | CLI proxy](https://www.rtk-ai.app/#)
 
 ```shell
-# install with script
+# 脚本安装
 curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
-# install from AUR
+# AUR 安装
 paru -S rtk
 ```
 
-Commands: [rtk/README_zh.md at master · rtk-ai/rtk](https://github.com/rtk-ai/rtk/blob/master/README_zh.md#%E5%91%BD%E4%BB%A4)
+命令：[rtk/README_zh.md at master · rtk-ai/rtk](https://github.com/rtk-ai/rtk/blob/master/README_zh.md#%E5%91%BD%E4%BB%A4)
 
-Initialize:
-
+初始化：
 ```shell
-# This installs a PreToolUse hook that transparently rewrites Bash commands
-# into their rtk equivalents.
+# 这会安装一个 PreToolUse 钩子，透明地将 Bash 命令重写为 rtk 等价命令。
 $ rtk init --global 
 
 RTK hook installed/updated (global).
@@ -373,8 +371,7 @@ y
   [info] See: https://github.com/rtk-ai/rtk#privacy--telemetry
 ```
 
-Initialize for a specific tool:
-
+指定初始化：
 ```shell
 rtk init -g --opencode
 rtk init -g --codex
@@ -384,8 +381,7 @@ rtk init -g --agent windsurf
 rtk init -g --agent cline
 ```
 
-Show the current setup:
-
+查看初始化情况：
 ```shell
 rtk init --show 
 rtk Configuration:
@@ -414,15 +410,15 @@ Usage:
   rtk init -g --agent cursor  # Install Cursor Agent hooks
 ```
 
-Inspect savings:
+分析：
 
 ```shell
-rtk gain                        # summary
-rtk gain --graph                # ASCII graph (30 days)
-rtk discover                    # find missed savings opportunities
+rtk gain                        # 统计节省
+rtk gain --graph                # ASCII 图表（30 天）
+rtk discover                    # 发现遗漏的节省机会
 ```
 
-If it does not work with Codex or Claude Code, adjust `~/.codex/AGENTS.md` or `~/.claude/CLAUDE.md`:
+Codex / Claude Code 使用无效时，需调整`~/.codex/AGENTS.md`/`~/.claude/CLAUDE.md`：
 
 ```shell
 $ nano ~/.codex/AGENTS.md
@@ -435,7 +431,7 @@ COMPLEX_PIPELINE: rtk proxy sh -c "<cmd>"
 
 ## Cockpit Tools
 
-An AI IDE account manager that currently supports Antigravity, Codex, GitHub Copilot, Windsurf, Kiro, Cursor, Gemini CLI, CodeBuddy, CodeBuddy CN, Qoder, Trae, and Zed. It also supports multi-account, multi-instance parallel runs.
+AI IDE 账号管理工具，目前支持 Antigravity、Codex、GitHub Copilot、Windsurf、Kiro、Cursor、Gemini Cli、CodeBuddy、CodeBuddy CN、Qoder、Trae 和 Zed，并支持多账号多实例并行运行。
 
 ![](https://raw.githubusercontent.com/jlcodes99/cockpit-tools/main/docs/images/dashboard_overview.png)
 
@@ -447,7 +443,7 @@ paru -S cockpit-tools-bin
 
 ## Cursor
 
-Cursor is built to make you dramatically more productive and is one of the strongest ways to code with AI.
+Cursor 旨在大幅提升您的生产力，是使用 AI 编码的最佳方式。
 
 ![](https://cursor.com/docs-static/_next/image?url=%2Fdocs-static%2Fimages%2Fagent%2Freview.jpg&w=1024&q=75&dpl=dpl_3BLcT9FRejoM2QpppgiP1dNtQ42k)
 
@@ -459,7 +455,7 @@ paru -S cursor-bin
 
 ## Windsurf
 
-Windsurf is an intuitive AI coding tool designed to keep you and your team productive.
+Windsurf 是一款直观的 AI 编程工具，旨在让您和您的团队始终保持高效的工作状态。
 
 [Download Windsurf Editor and Plugins | Windsurf](https://windsurf.com/download)
 
@@ -469,7 +465,7 @@ paru -S windsurf
 
 ## Antigravity
 
-Google Antigravity AI IDE is an agent-first development environment that combines code editing, terminal access, and browser-level automation, allowing AI to participate directly in writing, debugging, and validating software.
+Google Antigravity AI IDE 是谷歌推出的“Agent-First”智能开发环境，把代码编辑、终端和浏览器级自动化整合到一起，让 AI 能直接参与从编写、调试到验证的整条开发流程。
 
 ![](https://antigravity.google/assets/image/docs/editor-open-agent-manager.png)
 
@@ -481,7 +477,7 @@ paru -S antigravity
 
 ## Kiro
 
-Kiro provides a structured framework for AI coding through specification-driven development.
+Kiro 通过基于规格说明的开发，为 AI 编程提供结构化框架，助您发挥最佳水平。
 
 ![](https://kiro.dev/images/home/secondary-specs-requirements.png?h=865ca945)
 
@@ -493,7 +489,7 @@ paru -S kiro-ide
 
 ## Trae
 
-TRAE (/treɪ/) deeply integrates AI capabilities and acts like an AI software engineer that can understand requirements, use tools, and complete development tasks independently.
+TRAE（/treɪ/）深度融合 AI 能力，是一名能够理解需求、调用工具并独立完成各类开发任务的“AI 开发工程师”，帮助你高效推进每一个项目。
 
 ![](https://p16-arcosite-sg.ibyteimg.com/tos-alisg-i-k9wyc2ijk0-sg/bed61a992e3a446585554ed3144db28c~tplv-k9wyc2ijk0-image.image)
 
@@ -505,11 +501,11 @@ paru -S trae-bin
 
 ## Qoder
 
-Qoder is an agentic programming platform built for real software projects.
+Qoder，面向真实软件的智能体编程平台
 
 ![](https://img.alicdn.com/imgextra/i2/O1CN01rJsQ0Y1izj4k0jCl3_!!6000000004484-2-tps-2760-1864.png)
 
-[Download | Qoder](https://qoder.com/download)
+[下载 | Qoder - 智能体编程平台](https://qoder.com/download)
 
 ```shell
 paru -S qoder-bin

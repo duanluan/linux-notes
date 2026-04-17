@@ -1,46 +1,47 @@
-# 设备介绍
+# Hardware Overview
 
-- AMD 锐龙 7 PRO 8845HS
-- 32GBx2 DDR5 5600MHz
-- PCIe 4.0 NVMe SSD 2TB
+- AMD Ryzen 7 PRO 8845HS
+- 32 GB x2 DDR5 5600 MHz
+- PCIe 4.0 NVMe SSD 2 TB
 
-Geekbench 6 跑分结果：
-- Deepin 23.1：[Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/10922940)
-- Xubuntu 24.04.2：[Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/12633571)
-- Manjaro KDE Plasma 25.0.3：[Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/12680900)
+Geekbench 6 results:
 
-# 备份旧发行版
+- Deepin 23.1: [Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/10922940)
+- Xubuntu 24.04.2: [Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/12633571)
+- Manjaro KDE Plasma 25.0.3: [Tianbei GEM12 - Geekbench](https://browser.geekbench.com/v6/cpu/12680900)
 
-我并没有备份整个系统，而只是将 home 目录压缩拷贝了出来。
+# Back Up the Previous Distro
+
+I did not back up the entire system. I only archived the home directory and copied it out.
 
 ```shell
-# 将个人目录打包
+# archive the home directory
 sudo tar -cf /tmp/home_xxx.tar /home/xxx
-# 新开终端查看打包后大小
+# open another terminal and monitor the size while the archive is being created
 watch -n 1 ls -lh /tmp/home_xxx.tar
 ```
 
-# 系统配置
+# System Configuration
 
-## 登录失败次数和锁定时间
+## Login Failure Count and Lockout Duration
 
 ```shell
-# 修改 faillock 配置文件
+# edit the faillock configuration file
 $ sudo nano /etc/security/faillock.conf
 
-# 在这个时间段内累计的失败次数如果超过 deny，则触发锁定。
+# if the number of failed attempts within this interval exceeds deny, the account is locked
 fail_interval = 900
-# 在 fail_interval 间隔内，允许连续输错密码的次数。超过此数值，账户将被锁定。设置为 0 表示不锁定账户。
+# allowed consecutive password failures within fail_interval
 deny = 10
-# 账户被锁定后，需要等待多久才能自动解锁。设置为 0 或 never 表示必须手动通过 faillock 命令解锁。
+# automatic unlock time after the account is locked; set to 0 or never for manual unlock only
 unlock_time = 30
 ```
 
-## Pacman 换源
+## Pacman Mirror Selection
 
-如果在安装前选了时区和语言，`/etc/pacman.d/mirrorlist`开头会默认有`Country : China`的源。
+If you selected the time zone and language during installation, the top of `/etc/pacman.d/mirrorlist` usually includes a `Country : China` mirror by default.
 
-```
+```text
 ##
 ## Manjaro Linux default mirrorlist
 ## Generated on 2025-06-30 23:48
@@ -59,94 +60,96 @@ Server = https://ohioix.mm.fcix.net/manjaro/stable/$repo/$arch
 Server = https://bd.mirror.vanehost.com/Manjaro/stable/$repo/$arch
 ```
 
-如果没有，参考 [archlinux | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/help/archlinux/) 换源。
+If not, follow [archlinux | Tsinghua Open Source Mirror Help](https://mirrors.tuna.tsinghua.edu.cn/help/archlinux/) to switch mirrors.
 
-或者使用命令：
+Or use:
 
 ```shell
 sudo pacman-mirrors -c china
 ```
 
-## Pacman 配置
+## Pacman Configuration
 
 ```shell
-# 修改 Pacman 配置文件
+# edit the Pacman configuration file
 sudo nano /etc/pacman.conf
 ```
 
-- **启用 Pacman 颜色**：取消注释`#Color`为`Color`
-- **调整并行下载线程数**：修改`ParallelDownloads = 4`的值
+- **Enable colored output**: uncomment `#Color` so it becomes `Color`.
+- **Adjust parallel downloads**: change the value of `ParallelDownloads = 4`.
 
-## 网络时间同步
+## Network Time Synchronization
 
 ```shell
-# 启用网络时间同步
+# enable network time sync
 sudo timedatectl set-ntp true
 
-# 如果是 Windows 双系统，建议设置 RTC 使用本地时间，防止切换系统后时间相差 8 小时
+# on dual-boot systems with Windows, use local RTC time to avoid an 8-hour offset when switching systems
 sudo timedatectl set-local-rtc 1 --adjust-system-clock
 
-# 检查状态
+# check the status
 timedatectl status
 ```
 
-## 终端粘贴出现 ^[[200~
+## `^[[200~` Appears When Pasting Into the Terminal
 
 ```shell
-# 临时解决
+# temporary fix
 $ printf "\e[?2004l"
 
-# 永久解决，追加内容
+# permanent fix: append to ~/.zshrc
 $ nano ~/.zshrc
 
-# 禁用 Zsh 的 Bracketed Paste Mode (解决粘贴出现 ^[[200~ 的问题)
+# disable Zsh bracketed paste mode
 unset zle_bracketed_paste
 ```
 
-## ArchLinuxCN 源
+## ArchLinuxCN Repository
 
 ```shell
-# 在末尾添加 ArchLinuxCN 源并注释
+# append the ArchLinuxCN repository block to /etc/pacman.conf in commented form
 sudo nano /etc/pacman.conf
 
 # [archlinuxcn]
 # Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
 
-# 启用源 (使用 sed 去掉行首的 #)
+# enable the repo by removing the leading '#'
 sudo sed -i 's/^# *\[\(archlinuxcn\)\]/[\1]/; s/^# *\(Server.*archlinuxcn\)/\1/' /etc/pacman.conf
-# 首次使用时安装 ArchLinuxCN 的 GPG 密钥
+# install the ArchLinuxCN GPG keyring on first use
 sudo pacman -Sy archlinuxcn-keyring
-# 刷新数据库 (仅同步数据库，不要进行全局更新 -Su)
+# refresh the package database only; do not do a full -Su here
 sudo pacman -Sy
-# 安装需要的软件
+# install the package you need
 sudo pacman -S ttf-maplemono-nf-cn-unhinted
-# 禁用源 (安装完成后立即恢复注释，防止系统更新时混用)
+# disable the repo again immediately afterwards to avoid mixed-source upgrades
 sudo sed -i 's/^\[\(archlinuxcn\)\]/# [\1]/; s/^\(Server.*archlinuxcn\)/# \1/' /etc/pacman.conf
 ```
 
-## 加速 AUR 的 GitHub 下载和 git clone GitHub 仓库
+## Speed Up AUR GitHub Downloads and `git clone`
 
-安装 axel 多线程下载工具，创建替换 github 下载的脚本：
+Install `axel` and create a wrapper script for GitHub downloads:
 
 ```shell
-# 安装 axel
+# install axel
 $ sudo pacman -S axel
-# 下载脚本文件
+# download the helper script
 $ mkdir -p ~/.local/bin
 $ curl -fL -o ~/.local/bin/github-mirror-axel.sh https://raw.githubusercontent.com/duanluan/shell-scripts/main/github-mirror-axel.sh
 $ chmod +x ~/.local/bin/github-mirror-axel.sh
 ```
-`github-mirror-axel.sh`：[shell-scripts/github-mirror-axel.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-mirror-axel.sh)
 
-修改`makepkg.conf`：
+`github-mirror-axel.sh`: [shell-scripts/github-mirror-axel.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-mirror-axel.sh)
+
+Edit `makepkg.conf`:
+
 ```shell
-# 复制 /etc/pacman.conf 到个人目录，避免系统更新 pacman 包时覆盖
+# copy the default file into the home directory so pacman updates do not overwrite it
 cp /etc/makepkg.conf ~/.makepkg.conf
 
-# 修改 ~/.makepkg.conf
+# edit ~/.makepkg.conf
 nano ~/.makepkg.conf
 
-# 找到 DLAGENTS 部分，修改为如下内容
+# find DLAGENTS and change it to:
 DLAGENTS=('file::/usr/bin/curl -qgC - -o %o %u'
           #'ftp::/usr/bin/curl -qgfC - --ftp-pasv --retry 3 --retry-delay 3 -o %o %u'
           #'http::/usr/bin/curl -qgb "" -fLC - --retry 3 --retry-delay 3 -o %o %u'
@@ -158,140 +161,145 @@ DLAGENTS=('file::/usr/bin/curl -qgC - -o %o %u'
           'scp::/usr/bin/scp -C %u %o')
 ```
 
-遇到“没有状态文件，无法恢复下载！”提示，是因为之前使用 curl 下载到一半，现在又用 axel 下载。
+If you see `No state file, cannot resume download!`, it usually means curl partially downloaded the file earlier and axel is trying to resume it.
 
-删除缓存后重新下载，例如：
+Clear the cache and download again, for example:
 
 ```shell
 rm -rf ~/.cache/paru/clone/geekbench
 paru -S geekbench
 ```
 
-github 下载生效：
+Example showing that the GitHub download wrapper is working:
 
 ```shell
 $ paru -S clash-verge-rev-bin
 
-==> 获取源代码...
-  -> 正在下载 clash-verge-rev-2.4.2-x86_64.deb...
-github-mirror-axel.sh 生效
-正在初始化下载：https://gh-proxy.com/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.4.2/Clash.Verge_2.4.2_amd64.deb
-File size: 47.8972 兆字节 (50223894 bytes)
-正在打开输出文件 clash-verge-rev-2.4.2-x86_64.deb.part
-正在开始下载
+==> Retrieving sources...
+  -> Downloading clash-verge-rev-2.4.2-x86_64.deb...
+github-mirror-axel.sh is active
+Initializing download: https://gh-proxy.com/https://github.com/clash-verge-rev/clash-verge-rev/releases/download/v2.4.2/Clash.Verge_2.4.2_amd64.deb
+File size: 47.8972 MB (50223894 bytes)
+Opening output file clash-verge-rev-2.4.2-x86_64.deb.part
+Starting download
 
-连接 0 完成下载
-连接 1 完成下载
+Connection 0 finished
+Connection 1 finished
 [100%] [.....................................................................................] [   2.7MB/s] [00:00]
 
-已下载 47.8972 兆字节，用时 17 秒。（2766.17 KB/s）
+Downloaded 47.8972 MB in 17 seconds (2766.17 KB/s)
 ```
 
-配置 URL 重写，加速 GitHub Clone：
+Set up URL rewriting to speed up `git clone` from GitHub:
+
 ```shell
-# 删除旧规则（如果配置过）
+# remove old rules if you configured them before
 git config --global --unset-all url."https://download.fastgit.org/https://github.com/".insteadof
-# 设置新规则
+# add the new rule
 git config --global url."https://gh-proxy.com/https://github.com/".insteadof "https://github.com/"
-# 查看所有规则
+# inspect all configured rules
 git config --global --get-regexp url
 ```
 
-克隆 github 仓库生效：
+Example showing that accelerated GitHub cloning is working:
 
 ```shell
 $ paru rime-ice
 
-==> 获取源代码...
-  -> 正在克隆 rime-ice git 仓库...
-克隆到纯仓库 '/home/duanluan/.cache/paru/clone/rime-ice-git/rime-ice'...
+==> Retrieving sources...
+  -> Cloning rime-ice git repo...
+Cloning into bare repository '/home/duanluan/.cache/paru/clone/rime-ice-git/rime-ice'...
 remote: Enumerating objects: 11879, done.
 remote: Counting objects: 100% (44/44), done.
 remote: Compressing objects: 100% (35/35), done.
 remote: Total 11879 (delta 24), reused 9 (delta 9), pack-reused 11835 (from 3)
-接收对象中: 100% (11879/11879), 232.18 MiB | 7.03 MiB/s, 完成.
+Receiving objects: 100% (11879/11879), 232.18 MiB | 7.03 MiB/s, done.
 ```
 
-参考 [Archlinux AUR 加速完整设置 – 平凡生活小记](https://caveallegory.cn/2024/03/archlinux-aur%E5%8A%A0%E9%80%9F%E5%AE%8C%E6%95%B4%E8%AE%BE%E7%BD%AE/)
+Reference: [Complete Archlinux AUR acceleration setup](https://caveallegory.cn/2024/03/archlinux-aur%E5%8A%A0%E9%80%9F%E5%AE%8C%E6%95%B4%E8%AE%BE%E7%BD%AE/)
 
-## 加速 curl / wget GitHub 下载
+## Speed Up `curl` and `wget` GitHub Downloads
 
 ```shell
-# 创建脚本文件
+# create the helper script
 $ mkdir -p ~/.local/bin
 $ nano ~/.local/bin/github-wrappers.sh
 ```
-`github-wrappers.sh`：[shell-scripts/github-wrappers.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-wrappers.sh)
+
+`github-wrappers.sh`: [shell-scripts/github-wrappers.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/github-wrappers.sh)
+
 ```shell
-# 授予可执行权限
+# make it executable
 $ chmod +x ~/.local/bin/github-wrappers.sh
-# 编辑 zsh 配置文件，在文件末尾添加
+# edit the zsh config and append:
 $ nano ~/.zshrc
 
-#  加载 GitHub 镜像加速的 Shell 包装器
+# load the shell wrappers for GitHub acceleration
 if [ -f ~/.local/bin/github-wrappers.sh ]; then
     source ~/.local/bin/github-wrappers.sh
 fi
 
-# 保存退出后使配置生效
+# reload the config
 $ source ~/.zshrc
 ```
 
-## 修改 GitHub Host 加速
+## Speed Up GitHub With `/etc/hosts`
 
 ```shell
-# 备份 hosts 文件
+# back up the hosts file
 sudo cp /etc/hosts /etc/hosts.bak
 ```
 
-访问 [https://github-hosts.tinsfox.com/hosts](https://github-hosts.tinsfox.com/hosts)，复制内容
+Visit [https://github-hosts.tinsfox.com/hosts](https://github-hosts.tinsfox.com/hosts) and copy the generated hosts entries.
 
 ```shell
-# 内容追加到 /etc/hosts 末尾
+# append them to the end of /etc/hosts
 nano /etc/hosts
 ```
 
-参考：[GitHub Host - 加速访问 GitHub | 自动更新的 Hosts 工具](https://github-hosts.tinsfox.com/)
+Reference: [GitHub Host - Accelerate GitHub access](https://github-hosts.tinsfox.com/)
 
-或者使用脚本：[shell-scripts/update-github-hosts.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/update-github-hosts.sh)
+Or use the script: [shell-scripts/update-github-hosts.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/update-github-hosts.sh)
 
-## 安装 Fcitx5（必看）
+## Install Fcitx5 (Must Read)
 
-进入系统后，Manjaro Hello 弹窗中点击`Applications`按钮，勾选`Extended language support`-`Manjaro Asian Input Support Fcitx5`，点击`UPDATE SYSTEM`按钮。
+After entering the system, in the Manjaro Hello popup click `Applications`, check `Extended language support` -> `Manjaro Asian Input Support Fcitx5`, then click `UPDATE SYSTEM`.
 
 ![](assets/20250702003138.png)
 
-选择`fcitx5-chinese-addons: 简体中文 | Simplified Chinese`安装。
+Choose `fcitx5-chinese-addons: Simplified Chinese` and install it.
 
 ![](assets/20250702003227.png)
 
-开始菜单，`离开`-`注销`并重新登录，按`Ctrl` `Space`切换输入法。
+Log out from `Leave` -> `Log Out`, then sign in again. Use `Ctrl` `Space` to switch input methods.
 
-开始菜单搜索`输入法`。
+Search for `Input Method` from the launcher.
 
-可选修改配置：
-- `配置全局选项`-`快捷键`：
-  - `切换启用/禁用输入法`快捷键改成`Ctrl` `Shift`。
-- `配置全局选项`-`行为`：
-  - `共享输入状态`选择`所有`。
+Optional configuration changes:
 
-可选删除快捷键：
-- `配置全局选项`-`快捷键`：
-  - `切换是否使用嵌入预编辑`
-- `键盘-汉语`-右侧配置图标：
-  - `切换提示模式`
-  - `触发一次提示模式`
-- `配置附加组件`
-  - `模块`-`标点`-`切换键`
-  - `模块`-`剪贴板`-`触发键`
-  - `模块`-`简繁转换`-`切换键`
-  - `模块`-`快速输入`-`触发键`
-  - `模块`-`云拼音`-`切换键`
-  - `模块`-`Unicode`-`触发键`、`使用十六进制数字输入 Unicode 字符`
+- `Configure global options` -> `Shortcuts`
+  - change the shortcut for `Toggle Input Method` to `Ctrl` `Shift`
+- `Configure global options` -> `Behavior`
+  - set `Share Input State` to `All`
 
-## 系统更新
+Optional shortcuts to clear:
 
-开始菜单搜索`软件更新`，`应用`更新。
+- `Configure global options` -> `Shortcuts`
+  - `Toggle embedded preedit`
+- `Keyboard - Chinese` -> right-side configure icon
+  - `Switch Hint Mode`
+  - `Trigger Hint Mode Once`
+- `Configure Addons`
+  - `Modules` -> `Punctuation` -> `Toggle Key`
+  - `Modules` -> `Clipboard` -> `Trigger Key`
+  - `Modules` -> `Simplified and Traditional Chinese` -> `Toggle Key`
+  - `Modules` -> `Quick Phrase` -> `Trigger Key`
+  - `Modules` -> `Cloud Pinyin` -> `Toggle Key`
+  - `Modules` -> `Unicode` -> `Trigger Key`, `Input Unicode characters with hexadecimal numbers`
+
+## System Updates
+
+Search for `Software Update` in the launcher and click `Apply`.
 
 ![](assets/20250702011829.png)
 
@@ -299,75 +307,80 @@ nano /etc/hosts
 sudo pacman -Syu
 ```
 
-更新后要重启系统，否则系统内核和内核模块版本对不上，导致`modprobe tun`等命令运行失败。
+Reboot after updates. Otherwise, the running kernel and kernel modules may not match, and commands such as `modprobe tun` can fail.
 
-## DPI 缩放
+## DPI Scaling
 
-开始菜单搜索`显示器配置`，修改`全局缩放率`，`应用`后重新登录生效。
+Search for `Display Configuration`, change `Global scale`, click `Apply`, and then log out and back in for the change to take effect.
 
 ![](assets/20250702012133.png)
 
-## 切换个人目录下语言
+## Switch Home Directory Names to English
 
 ```shell
-# 安装 xdg-user-dirs-gtk
+# install xdg-user-dirs-gtk
 sudo pacman -S xdg-user-dirs-gtk
 export LANG=en_US
 xdg-user-dirs-gtk-update
 ```
+
 ![](assets/20250702012609.png)
-选择“Update Names”。
+
+Choose `Update Names`.
 
 ```shell
 export LANG=zh_CN.UTF-8
 xdg-user-dirs-gtk-update
 ```
 
-勾选“不要再次询问我”，选择“保留旧的名称”。
+Check `Don’t ask me this again`, then choose `Keep Old Names`.
 
-手动删除主文件夹下残留的视频、图片、文档、下载、桌面等中文文件夹。
+Manually remove any leftover Chinese-named directories such as Videos, Pictures, Documents, Downloads, and Desktop under the home directory.
 
-Dolphin 中左侧常用位置项右键`编辑`，修改位置。
+In Dolphin, right-click the entries under Places and choose `Edit` to update them.
 
 ![](assets/20250702012916.png)
 
-## 取消 KRunner、KWin/窗口管理、plasmashell/Plasma 工作空间 的全局快捷键
+## Disable Conflicting Global Shortcuts in KRunner, KWin, and Plasma Workspace
 
-取消勾选`系统设置` `键盘` `快捷键`中的活动快捷键后`应用`。
+In `System Settings` -> `Keyboard` -> `Shortcuts`, clear the active shortcut and click `Apply`.
 
-`KRunner`：
-- **启动**：Alt+F2
+`KRunner`:
 
-`KWin`/`窗口管理`：
-- **切换到桌面1**：Ctrl+F1
-- **切换到桌面2**：Ctrl+F2
-- **切换到桌面3**：Ctrl+F3
-- **切换到a桌面4**：Ctrl+F4
-- **显示隐藏窗口平铺(窗口类)**：Ctrl+F7
-- **显示隐藏窗口平铺(当前桌面)**：Ctrl+F9
-- **显示隐藏窗口平铺(全部桌面)**：Ctrl+F10
-- **暂停显示特效合成**：Alt+Shift+F12
+- **Run command**: Alt+F2
 
-`plasmashell`/`Plasma 工作空间`：
-- **激活应用程序启动器**：Alt+F1
-- **显示桌面**：Ctrl+F12
+`KWin` / `Window Management`:
 
-## 创建虚拟屏（远程必看）
+- **Switch to Desktop 1**: Ctrl+F1
+- **Switch to Desktop 2**: Ctrl+F2
+- **Switch to Desktop 3**: Ctrl+F3
+- **Switch to Desktop 4**: Ctrl+F4
+- **Toggle Tiling by Window Class**: Ctrl+F7
+- **Toggle Tiling on Current Desktop**: Ctrl+F9
+- **Toggle Tiling on All Desktops**: Ctrl+F10
+- **Suspend Compositing**: Alt+Shift+F12
 
-远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。通过以下配置强制创建一个虚拟屏幕即可解决。
+`plasmashell` / `Plasma Workspace`:
 
-### 开源驱动（Intel/AMD）
+- **Activate Application Launcher**: Alt+F1
+- **Show Desktop**: Ctrl+F12
 
-通过内核参数强制创建一个虚拟接口。
+## Create a Virtual Display (Must Read for Remote Access)
+
+When connecting remotely, if no monitor is attached locally or the monitor is powered off, the session can fail to connect or show a black screen. Forcing a virtual display solves this.
+
+### Open-Source Drivers (Intel / AMD)
+
+Use a kernel parameter to force a virtual output.
 
 ```shell
-# 查看当前系统识别到的显示接口 (用于确认 HDMI/DP 端口的具体名称)
+# list the current display connectors detected by the system
 $ ls /sys/class/drm/
 
 card1       card1-DP-2  card1-HDMI-A-1  card1-HDMI-A-3  card1-HDMI-A-5  card2-DP-4  card2-DP-6      renderD128  version
 card1-DP-1  card1-DP-3  card1-HDMI-A-2  card1-HDMI-A-4  card2           card2-DP-5  card2-HDMI-A-6  renderD129
 
-# 列出各显示接口的状态，使用 disconnected 的接口名称
+# list connector status and choose one that is disconnected
 $ grep "^" /sys/class/drm/*/status
 
 /sys/class/drm/card1-DP-1/status:disconnected
@@ -384,28 +397,28 @@ $ grep "^" /sys/class/drm/*/status
 /sys/class/drm/card2-HDMI-A-6/status:connected
 
 
-# 编辑 GRUB 配置文件
+# edit the GRUB config
 $ sudo nano /etc/default/grub
 
-# 在 GRUB_CMDLINE_LINUX_DEFAULT 中追加 video=接口名称:分辨率@刷新率
+# append video=connector-name:resolution@refresh-rate to GRUB_CMDLINE_LINUX_DEFAULT
 GRUB_CMDLINE_LINUX_DEFAULT='quiet splash udev.log_priority=3 video=HDMI-A-1:3840x2160@60e'
 
-# 更新 GRUB 引导
+# regenerate the GRUB config
 $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-### NVIDIA 闭源驱动（X11）
+### NVIDIA Proprietary Driver (X11)
 
-NVIDIA 驱动无法通过 GRUB 注入，需修改 Xorg 配置文件来实现“双屏并存”（真实屏+虚拟屏）。
+With the NVIDIA proprietary driver, GRUB injection does not work. You need to modify the Xorg config and create a real-display + virtual-display setup.
 
 ```shell
-# 查询显卡 PCI 地址，获取显卡 BusID
+# get the GPU PCI address and derive the BusID
 $ lspci | grep -i vga
 
-# 记下 01:00.0，在配置文件中需转换为十进制格式 PCI:1:0:0
+# note 01:00.0; convert it to decimal notation PCI:1:0:0 in the config
 01:00.0 VGA compatible controller: NVIDIA Corporation AD107 [GeForce RTX 4060] (rev a1)
 
-# 查看当前连接的接口名称，找到 connected 的那个，记下 DFP-4、HDMI-0
+# inspect the currently connected display outputs
 $ nvidia-settings -q dpys
 
     [4] njcm-pc:0[dpy:4] (HDMI-0) (connected, enabled)
@@ -418,28 +431,27 @@ $ nvidia-settings -q dpys
         HDMI-0
         Connector-1
 
-# 点击`Acquire EDID...`按钮将`edid.bin`保存到当前用户主目录
+# click `Acquire EDID...` in nvidia-settings and save the file as `edid.bin` in your home directory
 $ nvidia-settings
 ```
 
 ![](assets/20260122094522.png)
 
-
 ```shell
-# 将 EDID 文件移动到 X11 目录并授权
+# move the EDID file into the X11 directory and fix permissions
 $ sudo mv edid.bin /etc/X11/edid.bin
 $ sudo chmod 644 /etc/X11/edid.bin
 
-# 生成 1080P EDID 数据
+# generate a 1080p EDID file for the virtual display
 python -c "import binascii; open('virtual_1080p.bin', 'wb').write(binascii.unhexlify('00ffffffffffff0031d8000000000000051601036d3c2278ea5e03a1544c99260f5054a1080081800101010101010101010101010101023a801871382d40582c450056502100001e000000fc004c696e7578204648440a20202020000000fd00323c1e4611000a202020202020000000ff004c696e75782023300a2020202001ba02030400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000092'))"
-# 移动并授权
+# move it into place and set permissions
 $ sudo mv virtual_1080p.bin /etc/X11/virtual_1080p.bin
 $ sudo chmod 644 /etc/X11/virtual_1080p.bin
 
-# 创建 Xorg 配置文件
+# create the Xorg config file
 $ sudo nano /etc/X11/xorg.conf.d/20-nvidia-headless.conf
 
-# --- 内容如下 ---
+# --- file content ---
 Section "ServerLayout"
     Identifier     "Layout0"
     Screen      0  "Screen0" 0 0
@@ -449,20 +461,19 @@ Section "Device"
     Identifier     "Device0"
     Driver         "nvidia"
     VendorName     "NVIDIA Corporation"
-    # 根据 lspci 结果修改 BusID，例如 01:00.0 改为 PCI:1:0:0
+    # change BusID based on lspci, for example 01:00.0 becomes PCI:1:0:0
     BusID          "PCI:1:0:0"
 
-    # --- 核心配置开始 ---
-    # 1. 允许无显示器启动
+    # --- key settings start ---
+    # 1. allow startup without a physical monitor
     Option         "AllowEmptyInitialConfiguration" "True"
 
-    # 2. 强制开启双端口：填入 [真实接口], [虚拟空闲接口]
-    # 例如：DFP-4 是真实屏幕，DFP-0 是我们要生成的虚拟屏
+    # 2. force-enable two outputs: [real connector], [virtual connector]
     Option         "ConnectedMonitor" "DFP-4, DFP-0"
 
-    # 3. 分别加载不同的 EDID：真实屏用原厂数据，虚拟屏用生成的 1080P 数据
+    # 3. load different EDID files for the real and virtual displays
     Option         "CustomEDID" "DFP-4:/etc/X11/edid.bin; DFP-0:/etc/X11/virtual_1080p.bin"
-    # --- 核心配置结束 ---
+    # --- key settings end ---
 EndSection
 
 Section "Screen"
@@ -472,86 +483,86 @@ Section "Screen"
     DefaultDepth    24
     SubSection     "Display"
         Depth       24
-        # 虚拟屏的默认参考分辨率
+        # default reference resolution for the virtual screen
         Modes      "1920x1080"
     EndSubSection
 EndSection
 
 Section "Monitor"
     Identifier     "Monitor0"
-    # 保持 DPMS 开启，允许 KDE 进行电源管理
+    # keep DPMS enabled so KDE can still manage power
     Option         "DPMS"
 EndSection
 # --- end ---
 
 
-# 禁用系统自动生成的配置（通常是 90-mhwd.conf）
+# disable the auto-generated Xorg config (usually 90-mhwd.conf)
 $ sudo mv /etc/X11/xorg.conf.d/90-mhwd.conf /etc/X11/xorg.conf.d/90-mhwd.conf.bak
-# 禁用 dummy 驱动配置（如果存在）
+# disable any dummy driver config if it exists
 $ sudo mv /etc/X11/xorg.conf.d/10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf.bak
 ```
 
-### 解决物理显示器无法点亮/黑屏
+### Fix a Physical Monitor That Stays Black After Power Cycling or Resume
 
-当物理显示器关闭电源再打开，或系统休眠唤醒后出现黑屏（但远程正常），说明显卡信号握手失败。需配置脚本强制重置输出信号。
+If the physical monitor stays black after being powered back on, or after resume, while remote access still works, the GPU probably failed to renegotiate the display signal. Add a script that force-resets the output.
 
 ```shell
-# 创建信号重置脚本
+# create the reset script
 $ mkdir -p ~/.local/bin
 $ nano ~/.local/bin/reset_screen.sh
 
 #!/bin/bash
-# 1. 强制关闭真实显示器输出，其中 HDMI-0 替换为你的接口名称
+# 1. force-disable the physical display output; replace HDMI-0 with your connector
 xrandr --output HDMI-0 --off
-# 等待 1 秒让电容放电/状态生效
+# wait a second so the hardware state fully settles
 sleep 1
-# 2. 重新开启并设为主屏
-# --auto: 恢复最佳分辨率
-# --primary: 确保任务栏回归
-# 不指定位置(--right-of)，交由 KDE 自动恢复之前的布局记忆
+# 2. turn it back on and make it the primary display
+# --auto restores the preferred resolution
+# --primary makes sure the taskbar returns
+# do not specify a relative position; let KDE restore the previous layout automatically
 xrandr --output HDMI-0 --auto --primary
 
-# 保存退出后赋予可执行权限
+# save and make it executable
 $ chmod +x ~/.local/bin/reset_screen.sh
 ```
 
-开始菜单搜索`快捷键`-`新增`-`命令或脚本`，命令：`~/.local/bin/reset_screen.sh`。
+Search for `Shortcuts` from the launcher, go to `Add New` -> `Command or Script`, and set the command to `~/.local/bin/reset_screen.sh`.
 
-右侧`添加`，输入快捷键`Meta` `F10`，右下角`应用`。
+Click `Add` on the right, assign the shortcut `Meta` `F10`, then click `Apply`.
 
-显示器打开电源后按`Meta` `F10`，等待几秒即可亮屏。
+After turning the monitor back on, press `Meta` `F10` and wait a few seconds.
 
-问题：**锁屏后按全局快捷键无效！**
+Problem: **global shortcuts do not work while the screen is locked**.
 
-### 故障恢复
+### Recovery
 
-重启后无法进入图形界面，通过 SSH 登录或 TTY（`Ctrl` `Alt` `F2`）执行以下命令恢复：
+If the system can no longer enter the graphical session after rebooting, log in via SSH or switch to a TTY with `Ctrl` `Alt` `F2` and run:
 
 ```shell
-# 恢复 GRUB 配置
+# restore the GRUB config
 sudo nano /etc/default/grub
-# 删除 video= 接口名称:分辨率@刷新率 部分
-# 更新 GRUB 引导
+# remove the video=connector:resolution@refresh-rate fragment
+# regenerate GRUB
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-# 删除自定义配置
+# remove the custom Xorg config
 sudo mv /etc/X11/xorg.conf.d/20-nvidia-headless.conf /etc/X11/xorg.conf.d/20-nvidia-headless.conf.bak
-# 恢复系统自动生成的配置
+# restore the auto-generated config
 sudo mv /etc/X11/xorg.conf.d/90-mhwd.conf.bak /etc/X11/xorg.conf.d/90-mhwd.conf
-# 恢复 dummy 驱动配置（如果存在）
+# restore the dummy driver config if it exists
 sudo mv /etc/X11/xorg.conf.d/10-headless.conf.bak /etc/X11/xorg.conf.d/10-headless.conf
 
-# 重启系统
+# reboot
 sudo reboot
 ```
 
-## 调整 X11 客户端最大连接数
+## Increase the X11 Client Limit
 
-解决 Maximum number of clients reached 无法启动新应用。
+This fixes `Maximum number of clients reached` when launching new graphical applications.
 
 ```shell
 $ sudo pacman -S lsof
-# 统计并排序列出当前占用 X11 连接数最多的前 10 个进程
+# show the top 10 processes using the most X11 connections
 $ sudo lsof -U | grep X11-unix | awk '{print $1}' | sort | uniq -c | sort -nr | head -n 10
 
 lsof: WARNING: can't stat() fuse.portal file system /run/user/1000/doc
@@ -560,12 +571,12 @@ lsof: WARNING: can't stat() fuse.cherry-studio.AppImage file system /tmp/.mount_
 Output information may be incomplete.
 107 Xorg
 
-# 调高 X11 的最大客户端连接数
+# raise the X11 client connection limit
 $ sudo nano /etc/sddm.conf.d/x11-clients.conf
 
-# X11 客户端最大连接数限制
+# X11 maximum client limit
 [X11]
 ServerArguments=-nolisten tcp -maxclients 1024
 
-# 重启电脑或执行 sudo systemctl restart sddm（会注销）
+# reboot, or run sudo systemctl restart sddm (this logs you out)
 ```

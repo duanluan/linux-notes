@@ -1,471 +1,473 @@
-# ⚙️ 系统类
+# System and Essentials
 
-## 🏗️ base-devel + cmake + unzip（必须）
+## base-devel + cmake + unzip (Required)
 
 ```shell
 sudo pacman -S base-devel cmake unzip
 ```
 
-- base-devel：基础开发工具包组，包含了编译软件包所需的常见工具。
-- cmake：跨平台的构建系统工具，用于自动化编译过程，通常与源代码编译相关。
-- unzip：解压缩 zip 格式文件。
+- `base-devel`: the base development tool group that includes common tools required for building packages.
+- `cmake`: a cross-platform build system generator, commonly used when compiling software from source.
+- `unzip`: extracts ZIP archives.
 
-## 🔙 恢复 X11 登录选项
+## Restore the X11 Login Option
 
 ```shell
-# 安装 X11 会话支持及必要的窗口管理器组件
+# install X11 session support and the required window manager components
 sudo pacman -S plasma-x11-session kwin-x11
 ```
 
-注销到登录界面，左下角选择`Plasma (X11)`会话后登录。
+Log out to the login screen, choose the `Plasma (X11)` session in the lower-left corner, and log in again.
 
-## 📺 显卡驱动
+## GPU Drivers
 
-没有正确安装显卡驱动可能会导致睡眠后无法唤醒等问题。
+If the GPU driver is not installed correctly, you may run into problems such as the system failing to wake from suspend.
 
-RTX 全系列（40系, 30系, 20系）、GTX 16/10 系列（1660, 1080, 1060 等）、GTX 900 系列（Maxwell 架构）：
+For the full RTX lineup (40, 30, and 20 series), GTX 16/10 series (1660, 1080, 1060, and similar), and GTX 900 series (Maxwell architecture):
+
 ```shell
-# 更新系统数据库
+# refresh package databases and update the system
 sudo pacman -Syyu
-# 安装闭源驱动 nonfree，自动屏蔽开源驱动 nouveau
-# 0300 的含义：这是 PCI 设备分类代码（Class ID），03 代表 显示控制器 (Display Controller)，00 代表 VGA 兼容控制器（也就是我们常说的显卡）。
+# install the proprietary driver stack and automatically blacklist nouveau
+# 0300 is the PCI class code for a display controller.
 sudo mhwd -a pci nonfree 0300
-# 重启后运行，应该能看到 video-nvidia
+# after rebooting, this should show video-nvidia
 mhwd -li
 ```
 
-其他显卡参考：
-- [配置显卡 - Manjaro](https://wiki.manjaro.org/index.php/Configure_Graphics_Cards/zh-cn)（推荐）
-- [archlinux 显卡驱动 | archlinux 简明指南](https://arch.icekylin.online/guide/rookie/graphic-driver)（推荐）
-- [Intel 图形处理器 - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/Intel_%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E5%99%A8)
-- [ATI - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/ATI)
-- [NVIDIA - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/NVIDIA)
-- [PRIME - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/PRIME)
+For other GPUs, see:
 
-## 📦 AUR 助手：Yay & Paru (必装)
+- [Configure Graphics Cards - Manjaro](https://wiki.manjaro.org/index.php/Configure_Graphics_Cards/zh-cn) (recommended)
+- [Graphics Drivers | Arch Linux Simple Guide](https://arch.icekylin.online/guide/rookie/graphic-driver) (recommended)
+- [Intel graphics - Arch Linux Chinese Wiki](https://wiki.archlinuxcn.org/wiki/Intel_%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E5%99%A8)
+- [ATI - Arch Linux Chinese Wiki](https://wiki.archlinuxcn.org/wiki/ATI)
+- [NVIDIA - Arch Linux Chinese Wiki](https://wiki.archlinuxcn.org/wiki/NVIDIA)
+- [PRIME - Arch Linux Chinese Wiki](https://wiki.archlinuxcn.org/wiki/PRIME)
 
-Arch 用户软件仓库 (AUR) 的辅助工具，用于方便地安装社区包。
+## AUR Helpers: Yay and Paru (Required)
+
+AUR helpers simplify installation of community packages from the Arch User Repository.
 
 ```shell
-# 安装 yay
+# install yay
 sudo pacman -S yay
-# 配置 yay：启用开发版(如 -git)包更新检查，并保存到配置文件 ~/.config/yay/config.json 使其永久生效
+# enable devel package update checks and save the setting permanently
 yay -Y --devel --save
 ```
 
-也可以使用 [paru](https://github.com/Morganamilo/paru)（功能更强，编译稍慢）：
+You can also use [paru](https://github.com/Morganamilo/paru), which is more capable but usually a bit slower to build:
 
 ```shell
-# 克隆 paru 源码仓库
+# clone the paru source repository
 git clone https://aur.archlinux.org/paru.git
 cd paru
-# 构建并安装 paru
+# build and install paru
 makepkg -si
 
-# 安装完成后返回上级目录并删除源码文件夹
+# after installation, return to the parent directory and remove the source tree
 cd ..
 rm -rf paru
 ```
 
-核心区别：Yay 默认只比对 AUR 页面上的静态版本号，而 Paru 能主动运行脚本计算 源码的实时版本号。
+Core difference: Yay normally compares against the static version number on the AUR page, while Paru can actively run package scripts and calculate the live upstream version.
 
-下载的软件可以在 [AUR - Packages](https://aur.archlinux.org/packages) 搜索，或使用命令行：
+You can search packages on [AUR - Packages](https://aur.archlinux.org/packages), or from the command line:
+
 ```shell
-yay -Ss 软件名
+yay -Ss package-name
 ```
 
-也可以在开始菜单搜索`添加/删除软件`，在其中搜索软件名安装。
+You can also search for `Add/Remove Software` in the application menu and install packages there.
 
 ![](../assets/20250704220323.png)
 
-常见问题：
+Common issues:
 
-- 在代码审阅界面（冒号“:”等待输入）时，按`q`可直接退出审阅并继续安装。
-- [解决“一个或多个文件没有通过有效性检查”](../questions.html#解决-一个或多个文件没有通过有效性检查)
-- `paru: error while loading shared libraries: libalpm.so.15: cannot open shared object file: No such file or directory`：系统更新后报错，重新克隆构建安装 paru 最新版。
+- When reviewing build files in the pager prompt (`:` waiting for input), press `q` to exit the review and continue installation.
+- [Fix “One or More Files Did Not Pass the Validity Check”](../questions.html#fix-one-or-more-files-did-not-pass-the-validity-check)
+- `paru: error while loading shared libraries: libalpm.so.15: cannot open shared object file: No such file or directory`: if this appears after a system update, clone and rebuild the latest version of `paru`.
 
-## 🗜️ Zram 内存压缩与 Swappiness 策略优化
+## Zram Compression and Swappiness Tuning
 
-Zram 在内存中创建一个压缩块设备作为 Swap 使用。由于 RAM 的速度远快于磁盘，且 Zstd 压缩效率高，这能显著提升系统响应速度，避免系统在内存压力大时卡死。
+Zram creates a compressed block device in memory and uses it as swap. Because RAM is much faster than disk and Zstd compression is efficient, it can noticeably improve responsiveness and prevent the machine from freezing under heavy memory pressure.
 
 [zram: Compressed RAM-based block devices — The Linux Kernel documentation](https://docs.kernel.org/admin-guide/blockdev/zram.html)
 
-**通用配置原则：**
-- **Zram 大小**：建议设为物理内存的 **50%** (`zram-fraction = 0.5`)。
-  - **小内存设备 (<16GB)**：可激进设为 100% (1.0) 以防止内存耗尽。
-  - **大内存设备 (≥32GB)**：50% (0.5) 已绰绰有余，既能提供巨大的交换空间，又保留了足够的物理内存安全红线。
-- **Swappiness**：配合 Zram 时，建议保持默认 **60** 或更高（如 100）。这能让系统积极利用 Zram 压缩冷数据，腾出物理内存给文件缓存。**切勿**在使用 Zram 时将其设为 10。
+General guidelines:
 
-**1. 安装与配置 Zram**
+- **Zram size**: set it to **50%** of physical memory (`zram-fraction = 0.5`).
+  - **Low-memory devices (<16 GB)**: you can be more aggressive and set it to 100% (`1.0`) to reduce the risk of running out of memory.
+  - **High-memory devices (≥32 GB)**: 50% (`0.5`) is already more than enough, providing a large compressed swap area while still keeping plenty of RAM available.
+- **Swappiness**: when using Zram, keep the default **60** or even increase it to **100**. This encourages the system to move cold pages into Zram and free RAM for file cache. Do **not** set it to 10 when Zram is enabled.
+
+### 1. Install and Configure Zram
 
 ```shell
-# 安装 zram-generator
+# install zram-generator
 sudo pacman -S zram-generator
 
-# 创建配置文件
+# create the config file
 sudo nano /etc/systemd/zram-generator.conf
 ```
 
-写入以下内容（注意：可以解除 4GB 默认限制）：
+Add the following configuration. Note that this removes the default 4 GB limit:
 
 ```ini
 [zram0]
-# 压缩算法，zstd 是性能和压缩率的最佳平衡
+# zstd offers the best balance between performance and compression ratio
 compression-algorithm = zstd
-# Zram 大小：设置为物理内存的百分之多少除以 100
+# percentage of physical memory to allocate to zram
 zram-fraction = 0.5
-# 解除默认的 4096MB (4GB) 限制，否则大内存机器只会分到 4G
+# remove the default 4096 MB limit, otherwise large-memory machines only get 4 GB
 max-zram-size = none
-# 优先级，确保比磁盘 Swap 高（如果有的话）
+# make sure zram has higher priority than disk swap
 swap-priority = 100
 ```
 
-启动服务：
+Start the service:
 
 ```shell
-# 重新加载 systemd 并启动 zram
+# reload systemd and start zram
 sudo systemctl daemon-reload
 sudo systemctl start dev-zram0.swap
 
-# 验证状态
+# verify the status
 zramctl
-# 预期输出示例（DISKSIZE 应接近你的物理内存大小，如 64G）：
+# expected example output (DISKSIZE should be close to your physical memory size, e.g. 64G):
 # NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
 # /dev/zram0 zstd           32G   4K   64B   20K      16 [SWAP]
 ```
 
-如果修改了配置文件（如调整大小）想立即生效且不重启电脑，建议按照以下“彻底重置”步骤操作：
+If you change the config file and want the changes to take effect immediately without rebooting, use this full reset flow:
 
 ```shell
-# 1. 停止相关服务
+# 1. stop the related services
 sudo systemctl stop dev-zram0.swap
 sudo systemctl stop systemd-zram-setup@zram0.service
 
-# 2. 【关键】卸载内核模块（清除旧设备状态，相当于拔掉旧内存条）
-# 如果提示模块在使用，请先执行 sudo swapoff /dev/zram0，再执行此命令
+# 2. unload the kernel module to clear the old device state
+# if the module is busy, run sudo swapoff /dev/zram0 first
 sudo modprobe -r zram
 
-# 3. 重新加载配置
+# 3. reload the configuration
 sudo systemctl daemon-reload
 
-# 4. 重新启动服务
+# 4. start the service again
 sudo systemctl start dev-zram0.swap
 ```
 
-**2. 调整 Swappiness（确保 Zram 被有效利用）**
+### 2. Adjust Swappiness
 
 ```shell
-# 查看当前值（Manjaro 默认通常为 60）
+# check the current value (Manjaro defaults to 60 in most cases)
 cat /proc/sys/vm/swappiness
 
-# 确保其不为 10。如果需要强制指定为 60 或更高（如 100）：
+# make sure it is not 10; if needed, force it to 60 or higher, such as 100
 sudo nano /etc/sysctl.d/99-swappiness.conf
 ```
 
-写入：
+Add:
 
 ```ini
-# Zram 专用优化：保持积极的换页策略
+# tuning for zram: keep an active swapping policy
 vm.swappiness = 60
-# 可选：如果希望系统更激进地利用 Zram，可设为 100
+# optional: set to 100 if you want the system to lean on zram even more
 # vm.swappiness = 100
 ```
 
 ```shell
-# 应用配置
+# apply the configuration
 sudo sysctl --system
 ```
 
-## 🛡️ EarlyOOM 防止系统卡死
+## EarlyOOM to Prevent Full System Freezes
 
-`earlyoom` 守护进程可以在系统完全卡死前介入，通过配置它可以**优先牺牲浏览器进程**（因为浏览器通常有标签页恢复功能，且占用内存最大），从而保住桌面环境和数据安全。
+The `earlyoom` daemon can intervene before the system becomes completely unresponsive. With the right configuration, it can **preferentially kill browser processes** first, which is often the safest choice because browsers usually support session restore and tend to consume the most memory.
 
 [rfjakob/earlyoom: earlyoom - Early OOM Daemon for Linux](https://github.com/rfjakob/earlyoom)
 
 ```shell
-# 安装 earlyoom
+# install earlyoom
 sudo pacman -S earlyoom
 
-# 启动并设置开机自启
+# enable it and start it immediately
 sudo systemctl enable --now earlyoom
 
-# 配置优先查杀策略
+# configure the preferred kill policy
 sudo nano /etc/default/earlyoom
 ```
 
-写入以下内容：
+Add:
 
 ```bash
-# 1. 触发线：内存或 Swap 剩余 < 5%
-# 2. 必须保护 (--avoid)：
-#    - 初始化与系统总线: systemd, dbus
-#    - 显示管理器: sddm (Manjaro KDE默认), gdm, lightdm
-#    - 图形底层: Xorg, Xwayland
-#    - 桌面环境核心: plasmashell (KDE), gnome-shell, kwin (KDE窗口管理器), niri, hyprland, sway
-#    - 包管理器 (关键!): pacman, pamac (Manjaro GUI), yay, paru (防止更新中途被杀)
-#    - 远程连接: sshd
-# 3. 优先查杀 (--prefer): 所有主流浏览器
+# 1. trigger when free RAM or swap drops below 5%
+# 2. always protect (--avoid):
+#    - init and system bus: systemd, dbus
+#    - display managers: sddm, gdm, lightdm
+#    - display stack: Xorg, Xwayland
+#    - desktop core processes: plasmashell, gnome-shell, kwin, niri, hyprland, sway
+#    - package managers: pacman, pamac, yay, paru
+#    - remote access: sshd
+# 3. prefer killing (--prefer): major browsers
 EARLYOOM_ARGS="-m 5 -s 5 -r 60 --avoid '^(init|systemd.*|dbus.*|sddm.*|gdm.*|lightdm.*|Xorg|Xwayland|kwin_.*|plasmashell|gnome-shell|gnome-session.*|niri|sway|hyprland|pacman|pamac.*|yay|paru|sshd)$' --prefer '^(firefox|chromium|chrome|brave|microsoft-edge-.*|vivaldi-bin|opera)$'"
 ```
 
-应用更改：
+Apply the changes:
 
 ```shell
-# 重启 earlyoom 服务
+# restart the earlyoom service
 sudo systemctl restart earlyoom
 
-# 检查日志以验证正则表达式是否正确加载
+# inspect the logs and confirm the regular expressions were loaded correctly
 journalctl -u earlyoom -n 20
 ```
 
-## ⌨️ Rime 薄荷输入法 oh-my-rime / 雾凇拼音 / 万象拼音和模型
+## Rime Input Method: oh-my-rime / Rime Ice / Wanxiang and Models
 
 ```shell
-# 搜索并安装 Rime 拼音
+# search for and install the Rime input method
 paru -S fcitx5-rime
-# 创建 Rime 配置目录
+# create the Rime config directory
 mkdir -p ~/.local/share/fcitx5/rime
-# 如果之前安装过其他输入法，先删除
+# if you installed another setup before, clear it first
 rm -rf ~/.local/share/fcitx5/rime/*
 ```
 
-托盘区输入法图标，右键`重新启动`，再右键`配置`。
+Right-click the input method icon in the system tray, choose `Restart`, then right-click again and choose `Configure`.
 
-点击`添加输入法`按钮，添加`中州韵`，删除`键盘-汉语`。
+Click `Add Input Method`, add `Rime`, and remove `Keyboard - Chinese`.
 
 ![](../assets/20250702021910.png)
 
-**配置后需要在托盘区键盘图标，右键`重新启动`或`输入法名称`-`重新部署`。**
+After changing the configuration, right-click the tray keyboard icon and choose `Restart`, or right-click the active input method name and choose `Redeploy`.
 
-### 方案一：[oh-my-rime 输入法 | 薄荷输入法](https://www.mintimate.cc/zh/)
+### Option 1: [oh-my-rime | Mint Input Method](https://www.mintimate.cc/zh/)
 
 ```shell
-# 克隆安装薄荷输入法
+# clone and install oh-my-rime
 git clone --depth 1 https://github.com/Mintimate/oh-my-rime.git /tmp/oh-my-rime
-# 复制薄荷输入法方案到 Rime 配置目录
+# copy the scheme files into the Rime config directory
 cp -r /tmp/oh-my-rime/* ~/.local/share/fcitx5/rime/
 ```
 
-[输入法方案配置 - 配置覆写和定制 | oh-my-rime输入法](https://www.mintimate.cc/zh/guide/configurationOverride.html#%E8%BE%93%E5%85%A5%E6%B3%95%E6%96%B9%E6%A1%88%E9%85%8D%E7%BD%AE)
+[Input Method Scheme Configuration - Override and Customization | oh-my-rime](https://www.mintimate.cc/zh/guide/configurationOverride.html#%E8%BE%93%E5%85%A5%E6%B3%95%E6%96%B9%E6%A1%88%E9%85%8D%E7%BD%AE)
 
 ```shell
-# 配置方案
+# configure the available schemes
 $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
 
 patch:
-  # 九宫格依赖于 rime_mint ，如果需要使用其他方案（比如: 小鹤双拼的 九宫格），可以使用 custom 文件覆写
+  # the T9 layout depends on rime_mint; override this list if you need another scheme
   schema_list:
-    # - schema: rime_mint             # 薄荷拼音
-    - schema: double_pinyin_flypy     # 小鹤双拼
-    # - schema: rime_mint_flypy       # 薄荷拼音-小鹤混输方案
-    # - schema: terra_pinyin          # 地球拼音-薄荷定制
-    # - schema: wubi98_mint           # 五笔98-五笔小筑
-    # - schema: wubi86_jidian         # 五笔86-极点86
-    # - schema: t9                    # 仓九宫格-全拼输入
-    # 以下方案薄荷进行了适配，但是默认没有激活
-    # - schema: double_pinyin_abc     # 智能ABC双拼
-    # - schema: double_pinyin_mspy    # 微软双拼
-    # - schema: double_pinyin_sogou   # 搜狗双拼
-    # - schema: double_pinyin_ziguang # 紫光双拼
-    # - schema: double_pinyin         # 自然码双拼
+    # - schema: rime_mint             # Mint Pinyin
+    - schema: double_pinyin_flypy     # Xiaohe double pinyin
+    # - schema: rime_mint_flypy       # Mint Pinyin + Xiaohe mixed input
+    # - schema: terra_pinyin          # Terra Pinyin customized by Mint
+    # - schema: wubi98_mint           # Wubi 98
+    # - schema: wubi86_jidian         # Wubi 86
+    # - schema: t9                    # T9 full pinyin
+    # the following schemes are supported by Mint but not enabled by default
+    # - schema: double_pinyin_abc
+    # - schema: double_pinyin_mspy
+    # - schema: double_pinyin_sogou
+    # - schema: double_pinyin_ziguang
+    # - schema: double_pinyin
 
 
-# 全拼配置 rime_mint.custom.yaml，小鹤双拼是 double_pinyin_flypy.custom.yaml
+# full pinyin uses rime_mint.custom.yaml; Xiaohe double pinyin uses double_pinyin_flypy.custom.yaml
 $ nano ~/.local/share/fcitx5/rime/rime_mint.custom.yaml
 
 patch:
-  # 候选词数量
+  # number of candidates
   menu/page_size: 10
-  # 拼音串最大长度（默认为 25）
+  # maximum pinyin string length (default: 25)
   codeLengthLimit_processor: 100
-  # 中文模式下标点直接输出而不是候选
+  # output punctuation directly in Chinese mode instead of showing it as a candidate
   "punctuator/half_shape/[": "【"
   "punctuator/half_shape/]": "】"
 ```
 
-
-### 方案二：[雾凇拼音](https://dvel.me/posts/rime-ice/)
+### Option 2: [Rime Ice](https://dvel.me/posts/rime-ice/)
 
 ```shell
-# 安装雾凇拼音方案
+# install a Rime Ice scheme
 $ paru rime-ice
 
 1 aur/rime-ice-double-pinyin-abc-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 智能ABC双拼
+    Rime Ice - long-maintained Simplified Chinese dictionary - Smart ABC double pinyin
 2 aur/rime-ice-double-pinyin-flypy-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 小鹤双拼
+    Rime Ice - long-maintained Simplified Chinese dictionary - Xiaohe double pinyin
 3 aur/rime-ice-double-pinyin-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 自然码双拼
+    Rime Ice - long-maintained Simplified Chinese dictionary - Ziranma double pinyin
 4 aur/rime-ice-double-pinyin-jiajia-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音加加双拼
+    Rime Ice - long-maintained Simplified Chinese dictionary - JiaJia double pinyin
 5 aur/rime-ice-double-pinyin-mspy-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 微软双拼
+    Rime Ice - long-maintained Simplified Chinese dictionary - Microsoft double pinyin
 6 aur/rime-ice-double-pinyin-sogou-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 搜狗双拼
+    Rime Ice - long-maintained Simplified Chinese dictionary - Sogou double pinyin
 7 aur/rime-ice-double-pinyin-ziguang-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 紫光双拼
+    Rime Ice - long-maintained Simplified Chinese dictionary - Ziguang double pinyin
 8 aur/rime-ice-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库
+    Rime Ice - long-maintained Simplified Chinese dictionary
 9 aur/rime-ice-pinyin-git r845.0d85dd5-1 [+10 ~0.11]
-    Rime 配置：雾凇拼音 | 长期维护的简体词库 - 拼音方案
-:: 要安装的软件包（例如：1 2 3, 1-3）：
+    Rime Ice - long-maintained Simplified Chinese dictionary - full pinyin
+:: Packages to install (example: 1 2 3, 1-3):
 ```
 
-[以 patch 的方式打补丁 - Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
+[Apply patches via `patch` - Rime Ice](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
 
 ```shell
-# 创建全局补丁
+# create a global patch
 $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
 
 patch:
-  # 引入雾凇拼音的 rime_ice_suggestion.yaml 配置
+  # import the rime_ice_suggestion.yaml config
   __include: rime_ice_suggestion:/
-  # 候选词数量
+  # number of candidates
   menu/page_size: 10
-  # 快捷键绑定
+  # key bindings
   key_binder:
     bindings:
-      # , 键切换候选词到上页
+      # use comma for the previous page of candidates
       - { when: composing, accept: comma, send: Page_Up }
-      # . 键切换候选词到下页
+      # use period for the next page of candidates
       - { when: composing, accept: period, send: Page_Down }
 ```
 
-### 方案三：[万象拼音](https://github.com/amzxyz/rime_wanxiang)
+### Option 3: [Wanxiang Pinyin](https://github.com/amzxyz/rime_wanxiang)
 
-安装方式一：
+Method 1:
 
-访问 [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) 下载标准版输入方案或双拼辅助码增强版输入方案。
+Visit [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) and download either the standard scheme or the enhanced double-pinyin auxiliary-code scheme.
 
 ```shell
-# 解压到 Rime 配置目录
+# extract it into the Rime config directory
 unzip rime-wanxiang-flypy-fuzhu.zip -d ~/.local/share/fcitx5/rime
 ```
 
-安装方式二：
+Method 2:
 
-先按照系统配置文档中临时切换为 ArchLinuxCN 源。
+Temporarily enable the ArchLinuxCN repository as described in the system configuration document.
 
 ```shell
-# 基础版包名：rime-wanxiang-[拼写方案名]，如：自然码方案：rime-wanxiang-zrm
+# basic edition package naming: rime-wanxiang-[scheme-name]
 $ paru rime-wanxiang-flypy
-# 双拼辅助码增强版包名：rime-wanxiang-pro-[拼写方案名]，如：自然码方案：rime-wanxiang-pro-zrm
+# enhanced edition package naming: rime-wanxiang-pro-[scheme-name]
 $ paru rime-wanxiang-pro-flypy
 ```
 
-访问 [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) 下载语法模型。
+Then visit [Releases · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/releases) and download the grammar model.
 
 ```shell
-# 放到 Rime 配置目录
+# move it into the Rime config directory
 mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
 ```
 
 [rime_wanxiang/README.md at wanxiang · amzxyz/rime_wanxiang](https://github.com/amzxyz/rime_wanxiang/blob/wanxiang/README.md)
 
-[Rime 万象拼音输入方案新手安装配置指南](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy)
+[Rime Wanxiang beginner installation guide](https://docs.qq.com/doc/DQ0FqSXBmYVpWVFpy)
 
 ```shell
-# 基础版是 wanxiang.custom.yaml，增强版是 wanxiang_pro.custom.yaml
+# use wanxiang.custom.yaml for the basic edition and wanxiang_pro.custom.yaml for the enhanced edition
 $ cp ~/.local/share/fcitx5/rime/custom/wanxiang_pro.custom.yaml ~/.local/share/fcitx5/rime
-# 此处修改方案：不用辅助码改成间接辅助，否则选单字时拼音可能会被作为辅助码消耗掉
+# switch from direct auxiliary codes to indirect auxiliary codes, otherwise pinyin may be consumed as an auxiliary code when picking single characters
 $ nano ~/.local/share/fcitx5/rime/wanxiang_pro.custom.yaml
 
 patch:
-  # 是否开启用户词典
+  # whether to enable the user dictionary
   translator/enable_user_dict: true
-  # 允许句子进入用户词典
+  # allow complete sentences to enter the user dictionary
   translator/enable_sentence: true
-  # 是否启用自动造词，如果启用，输入法会根据用户输入的习惯自动添加新词到用户词典中
-  # 如果是万象 Pro 方案则无效，它是固定词频，用 ↓/↑ 移动候选词高亮，用 Ctrl+P 置顶、Ctrl+J/K 调整顺序、Ctrl+L 重置 高亮候选词的词频
+  # whether to enable automatic word generation based on typing habits
+  # this has no effect in Wanxiang Pro because it uses fixed word frequency
   translator/enable_encoder: true
 
-  # 触发“自动施加辅助码/锁定当前候选”的快捷键，默认为句号
+  # hotkey for "apply auxiliary code automatically / lock current candidate"
   force_upper_aux/hotkey: "Tab"
-  # 逗号句号翻页
+  # use comma and period for paging
   key_binder/bindings/+:
     - { accept: comma, send: Page_Up, when: has_menu }
     - { accept: period, send: Page_Down, when: has_menu }
 
   speller/algebra:
     __patch:
-      #- 模糊音                                  # 这里启用后，本文件末尾可配置具体条目
-      - wanxiang_algebra:/pro/小鹤双拼           # 可选输入方案名称：自然码, 自然龙, 小鹤双拼, 搜狗双拼, 微软双拼, 智能ABC, 紫光双拼, 国标双拼
-      - wanxiang_algebra:/pro/间接辅助           # 辅助码升级为：直接辅助和间接辅助两种类型，都是句中任意，不同点在于直接辅助是nire=你  而间接则需要/引导  ni/re=你 ，在这个基础上直接辅助支持拼音后任意位置数字声调参与，间接辅助声调在/引导前参与
+      #- fuzzy initials/finals
+      - wanxiang_algebra:/pro/小鹤双拼
+      - wanxiang_algebra:/pro/间接辅助
   
-  # …（中间省略你的其他配置）…
+  # ... your other settings omitted ...
   
-  # 下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
+  # number of candidates; 7/8/9/0 map to tones 1/2/3/4, so keep the page size at 6 or lower if that matters to you
   menu/page_size: 10
 ```
 
-## 🔤 字体
+## Fonts
 
-- [LXGW WenKai / 霞鹜文楷](https://github.com/lxgw/LxgwWenKai)
+- [LXGW WenKai](https://github.com/lxgw/LxgwWenKai)
   ```shell
   $ paru -S ttf-lxgw-wenkai
   
   1 aur/ttf-lxgw-wenkai 1.521-1 [+9 ~0.16]
       An open-source Chinese font derived from Fontworks' Klee One.
   2 aur/ttf-lxgw-wenkai-screen 1.520-1 [+3 ~0.00]
-      本字体是霞鹜文楷的屏幕舒适阅读版本,增强了字重，包括LXGWWenKaiScreen（使用文楷完整版字库，不以其他任何字体打底）和LXGWWenKaiScreenR（在文楷完整版字库基础上，使用Roboto补全缺失字符，可能有文字形态不统一）。另外带
-      GB 的表示 GB 2312、通用规范汉字表范围内汉字为陆标字形，不带 GB 的为原版文楷的半陆标字形。
+      Screen-optimized variant of LXGW WenKai.
   3 aur/ttf-lxgw-wenkai-mono-nerd 1.521-1 [+1 ~0.16]
       LXGW WenKai Mono patched with Nerd Font glyphs
   4 aur/ttf-lxgw-wenkai-nerd 1.521-1 [+1 ~0.16]
       LXGW WenKai patched with Nerd Font glyphs
   5 aur/ttf-lxgw-wenkai-tc 1.520-1 [+1 ~0.00]
-      The Traditional Chinese Version of LXGW WenKai
+      Traditional Chinese version of LXGW WenKai
   6 aur/ttf-lxgw-wenkai-tc-mono 1.520-1 [+1 ~0.00]
-      The traditional chinese mono version of LXGW WenKai.
+      Traditional Chinese mono version of LXGW WenKai
   7 aur/ttf-lxgw-wenkai-gb 1.520-1 [+0 ~0.00]
-      An open-source Chinese font derived from Klee One, modified to conform to GB2312 standard.
+      LXGW WenKai adjusted to the GB2312 standard
   8 aur/ttf-lxgw-wenkai-lite 1.521-1 [+0 ~0.00]
-      LXGW WenKai Lite / 霞鹜文楷轻便版 An open-source Chinese font derived from Fontworks' Klee One. 一款基于 FONTWORKS 出品字体 Klee One 
-      改造的开源中文字体。
+      LXGW WenKai Lite
   9 aur/ttf-lxgw-wenkai-mono-lite 1.521-1 [+0 ~0.00]
-      LXGW WenKai Mono Lite / 霞鹜文楷等宽轻便版 An open-source Chinese font derived from Fontworks' Klee One. 一款基于 FONTWORKS 出品字体 Klee 
-      One 改造的开源中文字体。
-  :: 要安装的软件包（例如：1 2 3, 1-3）：
+      LXGW WenKai Mono Lite
+  :: Packages to install (example: 1 2 3, 1-3):
   :: 2
   ```
 
-- [LXGW Neo XiHei / 霞鹜新晰黑](https://github.com/lxgw/LxgwNeoXiHei)
+- [LXGW Neo XiHei](https://github.com/lxgw/LxgwNeoXiHei)
   ```shell
   $ paru -S ttf-lxgw-neo-xihei
   
   1 aur/ttf-lxgw-neo-xihei 1.225-1 [+3 ~0.00]
-      霞鹜新晰黑。一款衍生于「IPAexゴシック」的中文黑体字型。A Simplified Chinese sans-serif font derived from IPAex Gothic.
+      LXGW Neo XiHei, a Simplified Chinese sans-serif font derived from IPAex Gothic
   2 aur/ttf-lxgw-neo-xihei-screen 25.10.22-1 [+3 ~0.00]
-      霞鹜新晰黑屏幕阅读版。霞鹜新晰黑 的屏幕阅读版本，将原版 霞鹜新晰黑 加粗 6 个单位后，调整度量数据与 Android 默认字体 Roboto 相同。
+      Screen-optimized edition of LXGW Neo XiHei
   3 aur/ttf-lxgw-neo-xihei-plus 1.225-1 [+2 ~0.03]
-      「霞鹜新晰黑＋ / LXGW Neo XiHei Plus」，在「霞鹜新晰黑」基础上补全扩展 A 区所有汉字，以使字库达到 GB 18030-2022 实现级别 2 的收字范围。
+      Extended edition with full CJK Extension A support
   4 aur/ttf-lxgw-neo-xihei-screen-full 25.12.07-1 [+2 ~0.00]
-      霞鹜新晰黑屏幕阅读版Droid Sans Fallback打底补全版，更适合 PC 及 Android 手机屏幕显示。
-  :: 要安装的软件包（例如：1 2 3, 1-3）：
+      Screen edition with wider glyph coverage
+  :: Packages to install (example: 1 2 3, 1-3):
   :: 4
   ```
 
-- [LXGW Neo ZhiSong / 霞鹜新致宋 / 霞鶩新緻宋](https://github.com/lxgw/LxgwNeoZhiSong)
+- [LXGW Neo ZhiSong](https://github.com/lxgw/LxgwNeoZhiSong)
   ```shell
   $ paru -S ttf-lxgw-neo-zhisong
   
   1 aur/ttf-lxgw-neo-zhisong 1.050-1 [+0 ~0.00]
-      霞鹜新致宋。一款衍生于「IPAmj明朝」的中文宋体字型。A Chinese serif font derived from IPAmj Mincho.
+      A Chinese serif font derived from IPAmj Mincho
   2 aur/ttf-lxgw-neo-zhisong-screen 25.12.07-1 [+0 ~0.00]
-      霞鹜新致宋屏幕阅读版。
+      Screen edition of LXGW Neo ZhiSong
   3 aur/ttf-lxgw-neo-zhisong-screen-full 25.12.07-1 [+0 ~0.00]
-      霞鹜新致宋屏幕阅读版。
-  :: 要安装的软件包（例如：1 2 3, 1-3）：
+      Full screen edition of LXGW Neo ZhiSong
+  :: Packages to install (example: 1 2 3, 1-3):
   :: 3
   ```
-- [Sarasa Gothic (更纱黑体 / 更紗黑體 / 更紗ゴシック / 사라사고딕)](https://github.com/be5invis/Sarasa-Gothic)
 
-  注意：此软件包体积巨大，因为它完整包含了简繁日韩全语言字符、所有字重与风格以及打入的 Nerd Font 全套图标。
+- [Sarasa Gothic](https://github.com/be5invis/Sarasa-Gothic)
+
+  Note: this package is huge because it includes full Simplified Chinese, Traditional Chinese, Japanese, and Korean coverage, multiple weights and styles, plus a complete Nerd Font icon set.
+
   ```shell
   paru -S ttf-sarasa-gothic-nerd-fonts
   ```
 
-- [文泉驿微米黑](http://wenq.org/wqy2/index.cgi?%E9%A6%96%E9%A1%B5)
+- [WenQuanYi Micro Hei](http://wenq.org/wqy2/index.cgi?%E9%A6%96%E9%A1%B5)
 
   ```shell
   sudo pacman -S wqy-microhei
@@ -473,7 +475,7 @@ patch:
 
 - [Maple Mono](https://github.com/subframe7536/Maple-font)
   ```shell
-  # 通过 ArchLinuxCN 安装
+  # install through ArchLinuxCN
   sudo pacman -S ttf-maplemono-nf-cn-unhinted
   ```
 
@@ -482,9 +484,9 @@ patch:
   paru -S otf-myna
   ```
 
-## 📟 Tmux
+## tmux
 
-tmux 是一个终端复用器。它让你可以轻松地在同一个终端中切换多个程序，将它们分离（它们会在后台继续运行），并将它们重新附加到不同的终端。
+tmux is a terminal multiplexer. It lets you switch between multiple programs in a single terminal, detach them so they keep running in the background, and reattach them later from another terminal.
 
 ![](https://github.com/tmux/tmux/wiki/images/tmux_with_panes.png)
 
@@ -494,13 +496,13 @@ tmux 是一个终端复用器。它让你可以轻松地在同一个终端中切
 sudo pacman -S tmux
 ```
 
-## 🐚 Nushell
+## Nushell
 
-[Nushell](https://www.nushell.sh/zh-CN/) 是一种新的 Shell。
+[Nushell](https://www.nushell.sh/zh-CN/) is a new kind of shell.
 
-- 利用管道控制任意系统：Nu 可以在 Linux、macOS、BSD 和 Windows 上运行。一次学习，处处可用。
-- 一切皆数据：Nu 管道使用结构化数据，你可以用同样的方式安全地选择，过滤和排序。停止解析字符串，开始解决问题。
-- 强大的插件系统：具备强大的插件系统，Nu 可以轻松扩展。
+- Control any system with pipelines: Nu works on Linux, macOS, BSD, and Windows.
+- Everything is data: Nu pipelines use structured data, making selection, filtering, and sorting safer and easier.
+- Strong plugin system: Nu is easy to extend.
 
 ![](https://www.nushell.sh/frontpage/ls-example.png)
 ![](https://www.nushell.sh/frontpage/fetch-example.png)
@@ -510,40 +512,40 @@ sudo pacman -S tmux
 sudo pacman -S nushell
 ```
 
-## 🔍 fzf 命令行模糊查找
+## fzf Command-Line Fuzzy Finder
 
 ```shell
-# 安装 fzf
+# install fzf
 $ sudo pacman -S fzf
 
-# 在文件末尾添加
+# append the following to the end of the file
 $ kate ~/.zshrc
 
-# 激活 fzf 的 Zsh 插件和按键绑定
+# enable the Zsh plugin and key bindings for fzf
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 
 $ source ~/.zshrc
 ```
 
-## 🚀 zoxide 智能 cd
+## zoxide Smart `cd`
 
-zoxide 是一个 更智能的 cd 命令，灵感来自 z 和 autojump。它记住你最常用的目录，因此只需几个按键就能“跳”到这些目录。
+zoxide is a smarter `cd` command inspired by `z` and `autojump`. It remembers the directories you use most often so you can jump back to them with only a few keystrokes.
 
-zoxide 模糊跳转需要先安装 fzf。
+Fuzzy jumping with zoxide requires `fzf`.
 
 ![](https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/tutorial.webp)
 
 [Installation - ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
 
 ```shell
-# 安装 zoxide
+# install zoxide
 sudo pacman -S zoxide
 ```
 
-- Zsh 初始化
+- Zsh initialization
   ```shell
-  # 在文件末尾添加
+  # append the following to the end of the file
   $ kate ~/.zshrc
   
   # zoxide
@@ -551,50 +553,51 @@ sudo pacman -S zoxide
   
   $ source ~/.zshrc
   ```
-- Nushell 初始化
+- Nushell initialization
   ```shell
   zoxide init nushell | save -f ~/.zoxide.nu
   source ~/.zoxide.nu
   ```
 
-使用示例：
+Examples:
+
 ```shell
-# 第一次精确跳转
+# exact jump the first time
 z ~/workspaces/my
 
-# 之后模糊跳转
+# fuzzy jump afterwards
 z work
 z my
 z wo my
 ```
 
-## 🔄 debtap
+## debtap
 
-一个用于将 .deb 软件包转换为 Arch Linux 软件包的脚本，专注于准确性。
+A script for converting `.deb` packages into Arch Linux packages with a strong focus on correctness.
 
 [helixarch/debtap: A script for converting .deb packages into Arch Linux packages, focused on accuracy](https://github.com/helixarch/debtap)
 
 ```shell
-# 安装 debtap
+# install debtap
 $ paru -S debtap
 
-# 初始化 debtap 数据库
+# initialize the debtap database
 $ sudo debtap -u
 
-cat: /var/cache/debtap/base-packages: 没有那个文件或目录
-sort: 无法读取: /var/cache/debtap/extended-base-packages-list-temp: 没有那个文件或目录
+cat: /var/cache/debtap/base-packages: No such file or directory
+sort: cannot read: /var/cache/debtap/extended-base-packages-list-temp: No such file or directory
 
-# 因为用的是 Manjaro，所以需要预创建 debtap 需要的缓存目录与临时文件
+# on Manjaro, create the required cache directory and temp files first
 $ sudo install -d -m755 /var/cache/debtap
 $ sudo touch /var/cache/debtap/base-packages /var/cache/debtap/extended-base-packages-list-temp
 
-# 重新初始化 debtap 数据库
+# initialize again
 $ sudo debtap -u
 ```
 
-## 🍷 deepin-wine8/10-stable + spark-dwine-helper
+## deepin-wine8/10-stable + spark-dwine-helper
 
-spark-dwine-helper 用于修改和增强 deepin-wine 来提升体验，被一些 AUR 包依赖。
+spark-dwine-helper patches and enhances deepin-wine to improve the overall experience, and some AUR packages depend on it.
 
 ```shell
 cd ~/.cache
@@ -603,7 +606,8 @@ cd deepin-wine8-stable
 nano PKGBUILD
 ```
 
-修改`deepin-wine8-stable/PKGBUILD`中的`_pkgver`、`source`、`sha256sums`：
+Edit `_pkgver`, `source`, and `sha256sums` in `deepin-wine8-stable/PKGBUILD`:
+
 ```shell
 _pkgver=8.16deepin41_spark1
 
@@ -615,80 +619,80 @@ sha256sums=('SKIP')
 ```
 
 ```shell
-# 构建安装 deepin-wine8-stable
+# build and install deepin-wine8-stable
 makepkg -si
 
-# 安装 deepin-wine10-stable
+# install deepin-wine10-stable
 paru -S deepin-wine10-stable
 
-# 安装 spark-dwine-helper
+# install spark-dwine-helper
 paru -S spark-dwine-helper
 ```
 
-## 🔥 Spark Store 星火应用商店
+## Spark Store
 
 ```shell
 $ paru -S amber-ce-bookworm
 
-==> 获取源代码...
-  -> 找到 amber-ce-bookworm-12.7.5.tar.gz
-==> 正在验证 source 文件，使用sha256sums...
-    amber-ce-bookworm-12.7.5.tar.gz ... 失败
-==> 错误： 一个或多个文件没有通过有效性检查！
-错误： 未能下载 'amber-ce-bookworm-12.7.5-1' 的源: 
-错误： 未能构建的软件包：amber-ce-bookworm-12.7.5-1
-
+==> Retrieving sources...
+  -> Found amber-ce-bookworm-12.7.5.tar.gz
+==> Validating source files with sha256sums...
+    amber-ce-bookworm-12.7.5.tar.gz ... FAILED
+==> ERROR: One or more files did not pass the validity check!
+error: failed to download sources for 'amber-ce-bookworm-12.7.5-1'
+error: packages failed to build: amber-ce-bookworm-12.7.5-1
 ```
 
-因为 gitee 下载增加了机器验证，所以需要手动下载 [下载仓库 · Amber CE/amber-ce-bookworm - Gitee.com](https://gitee.com/amber-ce/amber-ce-bookworm/repository/archive/12.7.5.tar.gz)
+Gitee now enforces additional bot verification, so you need to download the archive manually from [Amber CE/amber-ce-bookworm - Gitee.com](https://gitee.com/amber-ce/amber-ce-bookworm/repository/archive/12.7.5.tar.gz).
 
 ```shell
-# 将下载的文件放到 AUR 构建目录
+# move the downloaded file into the AUR build directory
 cd ~/.cache/paru/clone/amber-ce-bookworm
 mv -f ~/Downloads/.hmcl/amber-ce-bookworm-12.7.5.tar.gz ./
 
-# 重新构建并安装
+# rebuild and install
 makepkg -si
 ```
 
-无 N 卡报错“无法获取 NVIDIA 驱动版本 Can not determine NVIDIA Driver version”可以忽略，安装后需重启。
+You can ignore the error `Can not determine NVIDIA Driver version` if your machine does not use an NVIDIA GPU. Reboot after installation.
 
-[下载星火应用商店 - Spark Store](https://www.spark-app.store/download/) 下载 DEB 文件。
+Download the DEB from [Download Spark Store](https://www.spark-app.store/download/).
 
-开始菜单搜索`ACE Bookworm兼容环境`并打开：
+Search for `ACE Bookworm Compatibility Environment` in the application menu and open it:
+
 ```shell
 sudo apt update
 sudo apt install ./spark-store_4.8.2_amd64.deb
 ```
 
-## 🌊 Microsoft Edge
+## Microsoft Edge
 
-微软基于 Chromium 开发的浏览器。
+Microsoft's Chromium-based browser.
 
 ![](https://edgestatic.azureedge.net/shared/cms/lrs1c69a1j/section-images/b0ec664721b948bdb4de34621ba1ce25-png-w1920.avif)
 
-[官方下载 Microsoft Edge](https://www.microsoft.com/zh-cn/edge/download)
+[Official Microsoft Edge Download](https://www.microsoft.com/zh-cn/edge/download)
 
 ```shell
 paru -S microsoft-edge-stable-bin
 ```
 
-开始菜单搜索`默认应用程序`可以修改默认网页浏览器。
+Search for `Default Applications` in the launcher if you want to change the default web browser.
 
-## 🌐 Google Chrome
+## Google Chrome
 
-[Google Chrome 网络浏览器](https://www.google.com/chrome/)
+[Google Chrome web browser](https://www.google.com/chrome/)
 
 ```shell
 paru -S google-chrome
 ```
 
-## 🧅 Tor Browser
+## Tor Browser
 
-Tor 浏览器是一款基于隐私保护的开源浏览器，通过多层加密和中继网络匿名访问互联网，隐藏用户的身份和位置。
+Tor Browser is an open-source browser focused on privacy. It uses layered encryption and a relay network to let you browse anonymously while hiding your identity and location.
 
 ```shell
-# paru -S tor-browser-bin 时导入报错“gpg: 从公钥服务器接收失败：无数据 错误： 未能运行： gpg --recv-keys EF6E286DDA85EA2A4BA7DE684E2C6E8793298290”，所以手动导入
+# if paru -S tor-browser-bin fails to import the key, import it manually first
 curl -s https://keys.openpgp.org/vks/v1/by-fingerprint/EF6E286DDA85EA2A4BA7DE684E2C6E8793298290 | gpg --import
 paru -S tor-browser-bin
 ```

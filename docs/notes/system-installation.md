@@ -1,48 +1,48 @@
-# 系统安装
+# System Installation
 
-## 版本经历
+## Version History
 
-- Deepin 23.1：[GitHub - duanluan/deepin-notes at deepin23](https://github.com/duanluan/linux-notes/tree/deepin23)
-- Xubuntu 24.04.2：[GitHub - duanluan/linux-notes at xubuntu24](https://github.com/duanluan/linux-notes/tree/xubuntu24)
-- Manjaro：当前版本
+- Deepin 23.1: [GitHub - duanluan/deepin-notes at deepin23](https://github.com/duanluan/linux-notes/tree/deepin23)
+- Xubuntu 24.04.2: [GitHub - duanluan/linux-notes at xubuntu24](https://github.com/duanluan/linux-notes/tree/xubuntu24)
+- Manjaro: current version
 
-## 制作启动盘
+## Create the Installation USB
 
-U 盘安装 [Ventoy](https://www.ventoy.net/cn/index.html)。
+Install [Ventoy](https://www.ventoy.net/cn/index.html) on the USB drive.
 
 ![Ventoy2Disk](assets/20250308123342.png)
 
-[Manjaro Homepage](https://manjaro.org/) 点击`Download`按钮，选择`KDE Plasma`版本下的`Download`下载 ISO 放入 U 盘。
+On the [Manjaro Homepage](https://manjaro.org/), click `Download`, choose the `KDE Plasma` edition, download the ISO, and place it on the USB drive.
 
-## 安装系统
+## Install the System
 
-更多参考：[UEFI - 安装指南 - Manjaro](https://wiki.manjaro.org/index.php/UEFI_-_Install_Guide/zh-cn)
+For more details, see: [UEFI - Installation Guide - Manjaro](https://wiki.manjaro.org/index.php/UEFI_-_Install_Guide/zh-cn)
 
-开机按 `F2`/`Del` 进入 BIOS，`Save & Exit` - `Boot Override` 选择 U 盘。
+Press `F2` or `Del` during boot to enter the BIOS, then choose the USB drive under `Save & Exit` -> `Boot Override`.
 
-Ventoy 界面选择 Manjaro 镜像 - `Boot in normal mode`，如遇启动问题，尝试`Boot in grub2 mode`。
+In Ventoy, choose the Manjaro image and select `Boot in normal mode`. If you run into boot issues, try `Boot in grub2 mode`.
 
-设置 tz（时区）为`Asia/Shanghai`、lang（语言）为`zh_CN`，设置后 pacman 会换源。
+Set tz (time zone) to `Asia/Shanghai` and lang (language) to `zh_CN`. After that, pacman will switch to the corresponding mirrors automatically.
 
-选择`Boot with open source drivers`，进入桌面后在弹出的`Manjaro Hello`窗口中点击`Launch installer`按钮。
+Choose `Boot with open source drivers`. After the desktop loads, click `Launch installer` in the `Manjaro Hello` window.
 
-安装程序设置：
-- 位置（Location）
-  - 设置时区为 Asia/Shanghai。
-  - 系统语言设置为 简体中文（中国）。
-  - 数字和日期地域设置为 简体中文（中国）。
-- 键盘（Keyboard）
-  - 键盘型号设置为 Generic 105-key PC。
-  - 键盘布局设置为 Chinese/Default。
-- 分区（Partitions）
-  - 抹除磁盘
-  - 交换分区(无休眠)/交换分区(有休眠) + ext4，笔记本建议选有休眠的。
-- Office 套件（Office Suite）
+Installer settings:
+- Location
+  - Set the time zone to Asia/Shanghai.
+  - Set the system language to Simplified Chinese (China).
+  - Set the numbers and dates locale to Simplified Chinese (China).
+- Keyboard
+  - Set the keyboard model to Generic 105-key PC.
+  - Set the keyboard layout to Chinese/Default.
+- Partitions
+  - Erase disk
+  - Choose swap without hibernation, or swap with hibernation + ext4. For laptops, the hibernation option is recommended.
+- Office Suite
   - No Office Suite
 
-安装完成后，重启前拔掉 U 盘。
+After installation finishes, remove the USB drive before rebooting.
 
-## 参考
+## References
 
-- [无广告纯净 PE 启动盘多系统收录](https://blog.zhjh.top/?p=pe)
+- [Clean ad-free PE boot tools and multi-system collection](https://blog.zhjh.top/?p=pe)
 - [grub2boot . Ventoy](https://ventoy.net/cn/doc_grub2boot.html)
