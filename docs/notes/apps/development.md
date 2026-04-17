@@ -619,6 +619,18 @@ sudo zip localization-zh.jar META-INF/plugin.xml
 paru -S visual-studio-code-bin
 ```
 
+## Rebased
+
+一款基于 IntelliJ 平台的 Git 客户端。
+
+![](https://raw.githubusercontent.com/DetachHead/rebased/refs/heads/master/screenshot.png)
+
+[DetachHead/rebased - GitHub](https://github.com/DetachHead/rebased)
+
+```shell
+paru -S rebased-bin
+```
+
 ## FVM + Flutter 换源 + Dart
 
 ```shell
