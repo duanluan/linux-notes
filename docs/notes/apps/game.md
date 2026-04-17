@@ -49,9 +49,11 @@ sudo pacman -S lutris
 paru -S watt-toolkit-bin
 ```
 
-## HMCL：Minecraft 启动器
+## Minecraft 启动器
 
-HMCL 是一款开源、跨平台的 Minecraft 启动器，支持模组管理、游戏自定义、游戏自动安装 (Forge、NeoForge、Cleanroom、Fabric、Quilt、LiteLoader 和 OptiFine)、整合包创建、界面自定义等功能。
+### HMCL
+
+HMCL 是一款开源、跨平台的 Minecraft 启动器，支持模组管理、游戏自定义、游戏自动安装 (Forge、NeoForge、Cleanrooddm、Fabric、Quilt、LiteLoader 和 OptiFine)、整合包创建、界面自定义等功能。
 
 ![](https://cdn.bbsmc.net/bbsmc/data/s1TSUWSf/images/9a9563b4fdffce87a632c89752c1d7302beb2a12.png)
 
@@ -102,7 +104,7 @@ Categories=Game;
 StartupWMClass=org.jackhuang.hmcl.Launcher
 ```
 
-## LauncherX：Minecraft 启动器
+### LauncherX
 
 功能强大、界面优美的下一代 MineCraft 启动器。
 
@@ -114,3 +116,19 @@ StartupWMClass=org.jackhuang.hmcl.Launcher
 # 脚本安装
 curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install-launcherx-bin.sh | bash
 ```
+
+### SJMCL
+
+SJMC Launcher 是一款基于 Tauri 框架打造的现代化、跨平台 Minecraft 启动器，由上海交通大学 Minecraft 社成员发起，并与开源社区贡献者共同开发维护。
+
+![](https://mc.sjtu.cn/sjmcl/images/mod-loader-download-step2.png)
+
+[SJMC Launcher | 新一代开源跨平台 Minecraft 启动器](https://mc.sjtu.cn/sjmcl/)
+
+```shell
+paru -S sjmcl-bin
+```
+
+启动没有界面或有一根白线：
+
+开始菜单搜索`SJMCL`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`WEBKIT_DISABLE_DMABUF_RENDERER=1`，保存后重启软件。
