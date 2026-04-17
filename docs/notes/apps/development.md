@@ -581,6 +581,18 @@ which studio
 
 此处修改是最新版 IDEA 安装目录下的`plugins/localization-zh/lib/localization-zh.jar`，使用 [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/13710/versions) 下载的 [v242.152](https://plugins.jetbrains.com/plugin/download?rel=true&updateId=557305) 来修改也是差不多的。
 
+也可以直接使用 [prepare-jetbrains-zh-plugin.sh](https://github.com/duanluan/shell-scripts/blob/main/prepare-jetbrains-zh-plugin.sh) 自动安装中文插件：
+
+```shell
+# 使用 curl，自动检测 JetBrains IDE、Android Studio 的位置
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/prepare-jetbrains-zh-plugin.sh | bash
+
+# 使用 wget，也可以用 --jb、--as 分别指定 JetBrains IDE、Android Studio 的位置
+wget -qO- https://raw.githubusercontent.com/duanluan/shell-scripts/main/prepare-jetbrains-zh-plugin.sh | bash -s -- --jb /opt/jetbrains/intellij-idea-ultimate --as /opt/jetbrains/android-studio
+```
+
+下面是手动处理 `localization-zh.jar` 的方式。
+
 ```shell
 # 查看 Android Studio 版本
 $ cat /opt/jetbrains/android-studio/build.txt 
