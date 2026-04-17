@@ -58,9 +58,9 @@ paru -S clash-party-bin
 
 一款采用 Flutter 和 Rust 构建的现代跨平台 Clash 客户端，采用独特的 MD3M（Material Design 3 Modern）视觉风格。
 
-![](https://github.com/Kindness-Kismet/Stelliberty/blob/main/.github/screenshots/home-page-light.jpg)
+![](https://raw.githubusercontent.com/Kindness-Kismet/Stelliberty/refs/heads/main/.github/screenshots/home-page-light.jpg)
 
-[Releases · Kindness-Kismet/Stelliberty](https://github.com/Kindness-Kismet/Stelliberty/releases)
+[Kindness-Kismet/Stelliberty - GitHub](https://github.com/Kindness-Kismet/Stelliberty)
 
 ```shell
 paru -S stelliberty-bin
