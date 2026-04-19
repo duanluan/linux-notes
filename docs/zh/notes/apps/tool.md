@@ -845,6 +845,18 @@ paru -S gopeed-bin
 - [百度网盘下载](https://github.com/monkeyWie/gopeed-extension-baiduwp)
   ![](https://github.com/monkeyWie/gopeed-extension-baiduwp/raw/main/image/install.gif)
 
+## Motrix Next
+
+一款功能齐全的下载管理器。
+
+![](https://raw.githubusercontent.com/AnInsomniacy/motrix-next/main/docs/media/screenshot-light.png)
+
+[AnInsomniacy/motrix-next - GitHub](https://github.com/AnInsomniacy/motrix-next)
+
+```shell
+paru -S motrix-next-bin
+```
+
 ## qBittorrent Enhanced Edition
 
 基于 qBittorrent 的增强版 BT 下载工具。

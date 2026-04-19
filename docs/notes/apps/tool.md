@@ -811,6 +811,18 @@ Extensions:
 - [Baidu Netdisk download](https://github.com/monkeyWie/gopeed-extension-baiduwp)
   ![](https://github.com/monkeyWie/gopeed-extension-baiduwp/raw/main/image/install.gif)
 
+## Motrix Next
+
+A full-featured download manager.
+
+![](https://raw.githubusercontent.com/AnInsomniacy/motrix-next/main/docs/media/screenshot-light.png)
+
+[AnInsomniacy/motrix-next - GitHub](https://github.com/AnInsomniacy/motrix-next)
+
+```shell
+paru -S motrix-next-bin
+```
+
 ## qBittorrent Enhanced Edition
 
 An enhanced BT client based on qBittorrent.
