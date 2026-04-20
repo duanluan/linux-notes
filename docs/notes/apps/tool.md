@@ -1098,6 +1098,18 @@ paru -S obs-studio-tytan652
 paru -S obs-studio-liberty
 ```
 
+## Keyviz Chinese-localized build
+
+Keyviz is a free and open-source keystroke visualizer that shows your keyboard and mouse actions in real time.
+
+![](https://raw.githubusercontent.com/duanluan/keyviz/main/previews/settings.png)
+
+[mulaRahul/keyviz - GitHub](https://github.com/mulaRahul/keyviz)
+
+```shell
+paru -S keyviz-zh-bin
+```
+
 ## StartLive
 
 A Bilibili streaming helper.
