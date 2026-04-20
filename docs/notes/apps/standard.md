@@ -262,3 +262,19 @@ paru -S bilibili-bin
 ```shell
 paru -S baidunetdisk-bin
 ```
+
+## Nutstore
+
+[Nutstore Free Personal Network Disk](https://www.jianguoyun.com/s/downloads)
+
+```shell
+paru -S nutstore
+```
+
+If the Nutstore window is cut off after launch, temporarily disable the built-in web UI and restart it:
+
+```shell
+sudo sed -i 's/^webui.enable=true$/webui.enable=false/' /opt/nutstore/conf/nutstore.properties
+pkill -f nutstore || true
+nutstore
+```

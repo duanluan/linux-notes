@@ -258,3 +258,19 @@ paru -S bilibili-bin
 ```shell
 paru -S baidunetdisk-bin
 ```
+
+## 坚果云
+
+[坚果云网盘下载](https://www.jianguoyun.com/s/downloads)
+
+```shell
+paru -S nutstore
+```
+
+如果启动后 Nutstore 窗口显示不全，可以先临时关闭内置 web UI 再重启：
+
+```shell
+sudo sed -i 's/^webui.enable=true$/webui.enable=false/' /opt/nutstore/conf/nutstore.properties
+pkill -f nutstore || true
+nutstore
+```
