@@ -76,7 +76,7 @@ It covers system installation, post-install configuration, software setup, full-
 * **Email**: Thunderbird
 * **Office suites**: WPS Office (365 or CN) / LibreOffice / OnlyOffice
 * **Music players**: NetEase Cloud Music (including UnblockNeteaseMusic) / SPlayer / YesPlayMusic / VutronMusic / go-musicfox / MoeKoeMusic / LX Music
-* **Video and cloud storage**: Bilibili client / Baidu Netdisk
+* **Video and cloud storage**: Bilibili client / PiliPlus / Baidu Netdisk
 
 ---
 

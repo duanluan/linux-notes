@@ -242,13 +242,25 @@ paru -S lx-music-desktop-bin
 
 ![](https://raw.githubusercontent.com/msojocs/bilibili-linux/master/res/screenshots/1.png)
 
-[Releases · msojocs/bilibili-linux](https://github.com/msojocs/bilibili-linux/releases)
+[msojocs/bilibili-linux - GitHub](https://github.com/msojocs/bilibili-linux)
 
 先在 [AUR (en) - bilibili-bin](https://aur.archlinux.org/packages/bilibili-bin) 查看依赖的 electron 哪个版本。
 
 ```shell
 paru -S electron28-bin
 paru -S bilibili-bin
+```
+
+## PiliPlus
+
+使用 Flutter 开发的 BiliBili 第三方客户端。
+
+![](https://raw.githubusercontent.com/bggRGjQaUbCoE/PiliPlus/main/assets/screenshots/main_screen.png)
+
+[bggRGjQaUbCoE/PiliPlus - GitHub](https://github.com/bggRGjQaUbCoE/PiliPlus)
+
+```shell
+paru -S piliplus-bin
 ```
 
 ## 百度网盘

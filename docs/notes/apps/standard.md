@@ -246,13 +246,25 @@ A Linux port of the official Bilibili client, with roaming support.
 
 ![](https://raw.githubusercontent.com/msojocs/bilibili-linux/master/res/screenshots/1.png)
 
-[Releases · msojocs/bilibili-linux](https://github.com/msojocs/bilibili-linux/releases)
+[msojocs/bilibili-linux - GitHub](https://github.com/msojocs/bilibili-linux/releases)
 
 First check which Electron version is required on [AUR - bilibili-bin](https://aur.archlinux.org/packages/bilibili-bin).
 
 ```shell
 paru -S electron28-bin
 paru -S bilibili-bin
+```
+
+## PiliPlus
+
+A third-party BiliBili client built with Flutter.
+
+![](https://raw.githubusercontent.com/bggRGjQaUbCoE/PiliPlus/main/assets/screenshots/main_screen.png)
+
+[bggRGjQaUbCoE/PiliPlus - GitHub](https://github.com/bggRGjQaUbCoE/PiliPlus)
+
+```shell
+paru -S piliplus-bin
 ```
 
 ## Baidu Netdisk

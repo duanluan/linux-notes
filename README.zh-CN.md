@@ -76,7 +76,7 @@
 * **邮件**：Thunderbird
 * **办公套件**：WPS Office（365/CN）/ LibreOffice / OnlyOffice
 * **音乐**：网易云（含 UnblockNeteaseMusic）/ SPlayer / YesPlayMusic / VutronMusic / go-musicfox / MoeKoeMusic / LX Music
-* **影音/网盘**：哔哩哔哩客户端 / 百度网盘
+* **影音/网盘**：哔哩哔哩客户端 / PiliPlus / 百度网盘
 
 ---
 
