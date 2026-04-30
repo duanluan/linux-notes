@@ -556,6 +556,43 @@ sudo mv /etc/X11/xorg.conf.d/10-headless.conf.bak /etc/X11/xorg.conf.d/10-headle
 sudo reboot
 ```
 
+## Increase the File Descriptor Limit for User Services and `dbus-broker`
+
+To prevent the user-session `dbus-broker` from hitting the `1024` soft limit when many desktop applications are running, which can then cause most applications to exit at the same time.
+
+```shell
+$ mkdir -p ~/.config/systemd/user.conf.d ~/.config/systemd/user/dbus-broker.service.d
+
+$ cat > ~/.config/systemd/user.conf.d/90-nofile.conf <<'EOF'
+[Manager]
+DefaultLimitNOFILE=65536:65536
+EOF
+
+$ cat > ~/.config/systemd/user/dbus-broker.service.d/90-nofile.conf <<'EOF'
+[Service]
+LimitNOFILE=65536:65536
+EOF
+
+$ systemctl --user daemon-reload
+```
+
+After logging out and back in again, or after a reboot, verify it with:
+
+```shell
+$ systemctl --user show -p DefaultLimitNOFILE dbus-broker.service -p LimitNOFILE -p MainPID
+DefaultLimitNOFILE=65536
+MainPID=2838
+LimitNOFILE=65536
+
+$ pid=$(systemctl --user show dbus-broker.service -p MainPID --value)
+$ grep 'Max open files' /proc/$pid/limits
+Max open files            65536                65536                files
+
+$ systemd-run --user --wait --pipe /bin/sh -c 'ulimit -Sn; ulimit -Hn'
+65536
+65536
+```
+
 ## Increase the X11 Client Limit
 
 This fixes `Maximum number of clients reached` when launching new graphical applications.

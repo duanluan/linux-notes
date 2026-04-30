@@ -545,6 +545,43 @@ sudo mv /etc/X11/xorg.conf.d/10-headless.conf.bak /etc/X11/xorg.conf.d/10-headle
 sudo reboot
 ```
 
+## 提高用户服务和 `dbus-broker` 的文件描述符上限
+
+避免桌面程序较多时把用户会话里的 `dbus-broker` 顶到 `1024` 的 soft limit，随后出现大部分程序同时退出的情况。
+
+```shell
+$ mkdir -p ~/.config/systemd/user.conf.d ~/.config/systemd/user/dbus-broker.service.d
+
+$ cat > ~/.config/systemd/user.conf.d/90-nofile.conf <<'EOF'
+[Manager]
+DefaultLimitNOFILE=65536:65536
+EOF
+
+$ cat > ~/.config/systemd/user/dbus-broker.service.d/90-nofile.conf <<'EOF'
+[Service]
+LimitNOFILE=65536:65536
+EOF
+
+$ systemctl --user daemon-reload
+```
+
+注销重新登录或重启后检查：
+
+```shell
+$ systemctl --user show -p DefaultLimitNOFILE dbus-broker.service -p LimitNOFILE -p MainPID
+DefaultLimitNOFILE=65536
+MainPID=2838
+LimitNOFILE=65536
+
+$ pid=$(systemctl --user show dbus-broker.service -p MainPID --value)
+$ grep 'Max open files' /proc/$pid/limits
+Max open files            65536                65536                files
+
+$ systemd-run --user --wait --pipe /bin/sh -c 'ulimit -Sn; ulimit -Hn'
+65536
+65536
+```
+
 ## 调整 X11 客户端最大连接数
 
 解决 Maximum number of clients reached 无法启动新应用。
