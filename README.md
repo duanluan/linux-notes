@@ -26,7 +26,7 @@ It covers system installation, post-install configuration, software setup, full-
 * **System basics**: faillock policy / update precautions / NTP time sync
 * **Pacman and mirrors**: mirror switching / parallel downloads / temporary ArchLinuxCN enablement
 * **GitHub and AUR acceleration**: axel + makepkg `DLAGENTS` / URL rewrite / curl and wget wrappers / hosts acceleration
-* **Desktop experience**: DPI scaling / English home directories / global shortcut conflict cleanup / terminal paste `^[[200~`
+* **Input methods and desktop experience**: Fcitx5 / DPI scaling / English home directories / global shortcut conflict cleanup / terminal paste `^[[200~` / X11 client limit
 * **Remote setup**: virtual display setup (Intel or AMD GRUB injection + NVIDIA X11 EDID) / black-screen signal reset and rollback
 
 ### 3. 🛠️ Software Installation (classified by purpose)
@@ -35,28 +35,30 @@ It covers system installation, post-install configuration, software setup, full-
 * **Base packages**: `base-devel` / GPU drivers / X11 session recovery
 * **Package management**: `yay` / `paru` / `debtap` / Spark Store
 * **Performance and stability**: Zram + swappiness / EarlyOOM
-* **Input methods**: Rime setup and model configuration
+* **Input methods**: Fcitx5 + Rime setup and model configuration
 * **Terminal and productivity**: Tmux / Nushell / fzf / zoxide
 * **Wine ecosystem**: deepin-wine8 or 10-stable + spark-dwine-helper
 * **Fonts and browsers**: Chinese and coding fonts / Edge / Chrome / Tor Browser
 
 #### 🔧 [Tools and Productivity](docs/notes/apps/tool.md)
-* **Networking and proxy**: Clash Verge / FlClash / Brook / proxychains / EasyTier
-* **Virtualization and compatibility**: VMware / VirtualBox / Docker (Buildx, Compose, Portainer) / WinBoat / Wine / Proton-GE / Wine runners
-* **Writing and knowledge tools**: Sublime Text / Typora / Obsidian / Pandoc / XMind / Draw.io / uTools / Rubick
+* **Networking and proxy**: FlClash / Clash Verge / Clash Party / Brook / proxychains / EasyTier / cpolar / ngrok
+* **Virtualization and compatibility**: VMware / VirtualBox / Docker (Buildx, Compose, Portainer) / WinBoat / xDroid / Wine / Proton-GE / Wine runners
+* **Writing, knowledge, and utility tools**: Sublime Text / Typora / Obsidian / Pandoc / XMind / Draw.io / XnView MP / uTools / Rubick
 * **Screen capture and recording**: Snipaste / Flameshot / eSearch / SimpleScreenRecorder / OBS / StartLive
-* **Downloads and sync**: FDM / Gopeed / qBittorrent EE / Synology Drive / Syncthing / LocalSend / CopyQ
+* **Downloads and sync**: FDM / Gopeed / qBittorrent EE / Transmission / Xunlei / Synology Drive / Syncthing / LocalSend / CopyQ
 * **Remote desktop tools**: RustDesk / ToDesk / Sunlogin / TeamViewer / AnyDesk / Remote Desktop Manager + FreeRDP
-* **Other utilities**: Geekbench / KeePassXC / GnuPG + GpgFrontend / VLC / Calibre / Cherry Studio
+* **Other utilities**: Geekbench / KeePassXC / GnuPG + GpgFrontend / Sunshine + Moonlight / VLC / SMPlayer / PeaZip / Calibre
 
 #### 🤖 [AI and Assistants](docs/notes/apps/ai.md)
-* **Coding agents**: OpenCode / Claude Code / Cline CLI
-* **CLI switching**: CC Switch for multi-vendor and multi-model CLI management
-* **LLM desktop client**: Cherry Studio
+* **LLM desktop clients**: Cherry Studio / Chatbox
+* **Coding agents and desktops**: OpenCode / Claude Code / Codex CLI / OpenAI Codex Desktop / Cline CLI
+* **CLI management and context tools**: CC Switch / `rtk` / Cockpit Tools
+* **AI IDEs**: Cursor / Windsurf / Antigravity / Kiro / Trae / Qoder
 
 #### 👨‍💻 [Full-Stack Development Environment](docs/notes/apps/development.md)
-* **General tools**: Git (SSH) / `act` for local GitHub Actions runs
-* **Frontend and mobile**: nvm + Node.js + pnpm / Flutter (FVM) / VS Code / WeChat Developer Tools
+* **General tools**: Git (SSH keys / identity / useful defaults) / `act` for local GitHub Actions runs / Rebased
+* **Frontend and mobile**: nvm + Node.js + pnpm + nrm / Flutter (FVM) / Android Studio / VS Code / WeChat Developer Tools
+* **JetBrains tools**: Toolbox App / IntelliJ IDEA / WebStorm / PyCharm
 * **Backend and system-level tooling**: Java (JDK, Maven, Gradle, JMeter) / Python (pipx, uv, cnpip) / Rust (Cargo mirror setup)
 * **Database and API tooling**: DataGrip / Navicat / DBeaver EE / Redis Desktop / Offset Explorer / Apifox / Apipost / Postman
 * **Terminal clients**: MobaXterm / WindTerm / WoTerm
@@ -82,6 +84,7 @@ It covers system installation, post-install configuration, software setup, full-
 
 ### 4. 🚑 [Troubleshooting](docs/notes/questions.md)
 * Wi-Fi password prompt after KDE wallet is closed
+* KDE panel freezes
 * Forgot root password (Live CD + chroot)
 * AUR "validity check" failed (PKGBUILD `SKIP`)
 * Bluetooth missing from the tray / missing firmware fix

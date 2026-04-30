@@ -300,6 +300,63 @@ requires_openai_auth = true
 $ codex
 ```
 
+## OpenAI Codex Desktop
+
+Codex Desktop is a desktop experience focused on handling Codex threads in parallel, with built-in worktree support, automations, and Git features.
+
+![](https://developers.openai.com/images/codex/app/app-screenshot-light.webp)
+
+[App - Codex | OpenAI Developers](https://developers.openai.com/codex/app/)
+
+```shell
+# install the desktop app
+$ paru -S openai-codex-desktop
+
+# install or update Codex CLI
+$ npm i -g @openai/codex
+
+# check the Codex version in your terminal
+$ codex -V
+```
+
+When it starts, the desktop app calls the `codex` available in the system environment. If you installed a newer `codex` through `nvm`, `npm`, or another method in your terminal, but your graphical session `PATH` does not include that directory, the desktop app may still pick an older version.
+
+If the app shows:
+
+```text
+Codex on this environment is out of date. Update to 0.121.0 or newer. Current version: 0.114.0
+```
+
+If `codex -V` in your terminal already shows `0.121.0` or newer but the desktop app still fails, the usual cause is that the graphical session `PATH` differs from the terminal `PATH`. Check the `PATH` used by the graphical session:
+
+```shell
+$ systemctl --user show-environment | rg '^PATH='
+```
+
+If the output does not include the directory where your `codex` binary lives, such as `~/.nvm/versions/node/.../bin`, you can point the desktop app to that `codex` explicitly:
+
+```shell
+$ mkdir -p ~/.local/bin
+$ nano ~/.local/bin/codex-desktop
+```
+
+Add:
+
+```shell
+#!/bin/sh
+
+export CODEX_CLI_PATH="/home/your-name/.nvm/versions/node/v24.11.1/bin/codex"
+exec /usr/bin/codex-desktop "$@"
+```
+
+Then make it executable:
+
+```shell
+$ chmod +x ~/.local/bin/codex-desktop
+```
+
+Reopen Codex Desktop.
+
 ## Cline CLI
 
 Cline CLI runs an AI coding agent directly in your terminal. You can pipe `git diff` into it for automated code review in CI/CD, run multiple instances for parallel development, or integrate it into your existing shell workflows.

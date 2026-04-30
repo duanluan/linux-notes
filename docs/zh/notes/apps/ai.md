@@ -300,6 +300,63 @@ requires_openai_auth = true
 $ codex
 ```
 
+## OpenAI Codex Desktop
+
+Codex 应用是一个专注于并行处理 Codex 线程的桌面体验，内置工作树支持、自动化和 Git 功能。
+
+![](https://developers.openai.com/images/codex/app/app-screenshot-light.webp)
+
+[App - Codex | OpenAI Developers](https://developers.openai.com/codex/app/)
+
+```shell
+# 安装桌面版
+$ paru -S openai-codex-desktop
+
+# 安装或更新 Codex CLI
+$ npm i -g @openai/codex
+
+# 确认终端中的 Codex 版本
+$ codex -V
+```
+
+桌面版启动时会调用系统里的 `codex`，如果终端里通过 `nvm`、`npm` 或其他方式安装了新版 `codex`，而图形会话里的 `PATH` 没有包含对应目录，桌面版仍可能拿到旧版本。
+
+如果打开后提示：
+
+```text
+Codex on this environment is out of date. Update to 0.121.0 or newer. Current version: 0.114.0
+```
+
+如果这里已经是 `0.121.0` 或更高版本，但桌面版仍报错，通常是图形会话和终端的 `PATH` 不一致。检查图形会话里的 `PATH`：
+
+```shell
+$ systemctl --user show-environment | rg '^PATH='
+```
+
+如果输出中没有你的 `codex` 所在目录，例如 `~/.nvm/versions/node/.../bin`，可以给桌面版单独指定 `codex` 路径：
+
+```shell
+$ mkdir -p ~/.local/bin
+$ nano ~/.local/bin/codex-desktop
+```
+
+写入：
+
+```shell
+#!/bin/sh
+
+export CODEX_CLI_PATH="/home/your-name/.nvm/versions/node/v24.11.1/bin/codex"
+exec /usr/bin/codex-desktop "$@"
+```
+
+然后赋予执行权限：
+
+```shell
+$ chmod +x ~/.local/bin/codex-desktop
+```
+
+重新打开 Codex Desktop 即可。
+
 ## Cline CLI
 
 Cline CLI 直接在您的终端中运行 AI 编码代理。通过管道传输 git diff 以在 CI/CD 中进行自动代码审查，同时运行多个实例以进行并行开发，或将 Cline 集成到您现有的 shell 工作流程中。

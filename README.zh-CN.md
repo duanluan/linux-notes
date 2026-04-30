@@ -26,7 +26,7 @@
 * **系统基础**：faillock 锁定策略 / 系统更新注意事项 / NTP 时间同步
 * **Pacman & 源**：换源 / 并行下载 / ArchLinuxCN 临时启用
 * **GitHub/AUR 加速**：axel + makepkg `DLAGENTS` / URL rewrite / curl&wget wrapper / hosts 加速
-* **桌面体验**：DPI 缩放 / 个人目录英文 / 取消冲突全局快捷键 / 终端粘贴 `^[[200~`
+* **输入法与桌面体验**：Fcitx5 / DPI 缩放 / 个人目录英文 / 取消冲突全局快捷键 / 终端粘贴 `^[[200~` / X11 客户端数量上限
 * **远程必看**：虚拟屏（Intel/AMD GRUB 注入 + NVIDIA X11 EDID）/ 黑屏信号重置与回滚方案
 
 ### 3. 🛠️ 软件安装（按用途分类）
@@ -35,28 +35,30 @@
 * **必装基建**：`base-devel` / 显卡驱动 / 恢复 X11 会话
 * **包管理增强**：`yay` / `paru` / `debtap` / Spark Store（星火应用商店）
 * **性能与稳定**：Zram + Swappiness / EarlyOOM
-* **输入法方案**：Rime（oh-my-rime / 雾凇 / 万象）与模型配置
+* **输入法方案**：Fcitx5 + Rime（oh-my-rime / 雾凇 / 万象）与模型配置
 * **终端与效率**：Tmux / Nushell / fzf / zoxide
 * **Wine 生态**：deepin-wine8/10-stable + spark-dwine-helper
 * **字体 & 浏览器**：常用中文/编程字体 / Edge / Chrome / Tor Browser
 
 #### 🔧 [工具与生产力](docs/zh/notes/apps/tool.md)
-* **网络与代理**：Clash Verge / FlClash / Brook / proxychains / EasyTier
-* **虚拟化与兼容**：VMware / VirtualBox / Docker（Buildx/Compose/Portainer）/ WinBoat / Wine / Proton-GE / Wine 运行器
-* **效率办公**：Sublime Text / Typora / Obsidian / Pandoc / XMind / Draw.io / uTools / Rubick
+* **网络与代理**：FlClash / Clash Verge / Clash Party / Brook / proxychains / EasyTier / cpolar / ngrok
+* **虚拟化与兼容**：VMware / VirtualBox / Docker（Buildx/Compose/Portainer）/ WinBoat / xDroid / Wine / Proton-GE / Wine 运行器
+* **效率办公**：Sublime Text / Typora / Obsidian / Pandoc / XMind / Draw.io / XnView MP / uTools / Rubick
 * **截图录屏**：Snipaste / Flameshot / eSearch / SimpleScreenRecorder / OBS / StartLive
-* **下载与同步**：FDM / Gopeed / qBittorrent EE / Synology Drive / Syncthing / LocalSend / CopyQ
+* **下载与同步**：FDM / Gopeed / qBittorrent EE / Transmission / 迅雷 / Synology Drive / Syncthing / LocalSend / CopyQ
 * **远程工具**：RustDesk / ToDesk / 向日葵 / TeamViewer / AnyDesk / Remote Desktop Manager + FreeRDP
-* **其他**：Geekbench / KeePassXC / GnuPG + GpgFrontend / VLC / Calibre / Cherry Studio
+* **其他**：Geekbench / KeePassXC / GnuPG + GpgFrontend / Sunshine + Moonlight / VLC / SMPlayer / PeaZip / Calibre
 
 #### 🤖 [AI 与智能助手](docs/zh/notes/apps/ai.md)
-* **编码代理**：OpenCode / Claude Code / Cline CLI
-* **配置切换**：CC Switch 统一管理多 CLI 供应商与模型
-* **大模型客户端**：Cherry Studio
+* **大模型客户端**：Cherry Studio / Chatbox
+* **编码代理与桌面版**：OpenCode / Claude Code / Codex CLI / OpenAI Codex Desktop / Cline CLI
+* **CLI 管理与上下文工具**：CC Switch / `rtk` / Cockpit Tools
+* **AI IDE**：Cursor / Windsurf / Antigravity / Kiro / Trae / Qoder
 
 #### 👨‍💻 [全栈开发环境](docs/zh/notes/apps/development.md)
-* **通用**：Git（SSH）/ act（本地跑 GitHub Actions）
-* **前端与移动端**：nvm + Node.js + pnpm / Flutter（FVM）/ VS Code / 微信开发者工具
+* **通用**：Git（SSH Key / 用户信息 / 常用配置）/ act（本地跑 GitHub Actions）/ Rebased
+* **前端与移动端**：nvm + Node.js + pnpm + nrm / Flutter（FVM）/ Android Studio / VS Code / 微信开发者工具
+* **JetBrains 系**：Toolbox App / IntelliJ IDEA / WebStorm / PyCharm
 * **后端与系统级**：Java（JDK/Maven/Gradle/JMeter）/ Python（pipx/uv/cnpip）/ Rust（Cargo 换源）
 * **数据库与接口工具**：DataGrip / Navicat / DBeaver EE / Redis Desktop / Offset Explorer / Apifox / Apipost / Postman
 * **运维终端**：MobaXterm / WindTerm / WoTerm
@@ -82,6 +84,7 @@
 
 ### 4. 🚑 [问题解决](docs/zh/notes/questions.md)
 * KDE 钱包关闭后 Wi-Fi 密码提示
+* KDE 任务栏卡住
 * 忘记 root 密码（Live CD + chroot）
 * AUR “有效性检查”失败（PKGBUILD `SKIP`）
 * 托盘区蓝牙不显示 / 固件缺失修复
