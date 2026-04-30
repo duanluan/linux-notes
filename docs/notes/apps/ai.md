@@ -253,6 +253,16 @@ Security guide
   2. No, exit
 ```
 
+## Claude Desktop
+
+Chat, Claude Cowork, and Claude Code, all in one place.
+
+[Download Claude | Claude by Anthropic](https://claude.com/download)
+
+```shell
+paru -S claude-desktop-bin
+```
+
 ## Codex CLI
 
 Codex CLI is a coding assistant released by OpenAI.
@@ -313,6 +323,18 @@ Codex Desktop is a desktop experience focused on handling Codex threads in paral
 $ npm i -g @openai/codex
 # install
 $ paru -S openai-codex-desktop
+```
+
+## Paseo
+
+Manage all your Claude Code, Codex, and OpenCode agents from a single interface.
+
+![](https://camo.githubusercontent.com/a9f299d62effea920ab01596a63c38201a07cac0188ebaf53cc30e3d8a2dceba/68747470733a2f2f706173656f2e73682f6865726f2d6d6f636b75702e706e67)
+
+[Paseo - Run Claude Code, Codex, and OpenCode from everywhere](https://paseo.sh/)
+
+```shell
+paru -S paseo-desktop-bin
 ```
 
 ## Cline CLI
@@ -528,4 +550,16 @@ Qoder is an agentic programming platform built for real software projects.
 
 ```shell
 paru -S qoder-bin
+```
+
+## Superset
+
+A code editor for the age of AI agents. Run large numbers of Claude Code, Codex, and more on your machine.
+
+![](https://raw.githubusercontent.com/superset-sh/superset/main/apps/marketing/public/images/readme-hero.png)
+
+[Superset - Run 10+ parallel coding agents on your machine](https://superset.sh/)
+
+```shell
+paru -S superset-bin
 ```
