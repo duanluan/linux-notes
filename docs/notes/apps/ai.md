@@ -337,6 +337,22 @@ Manage all your Claude Code, Codex, and OpenCode agents from a single interface.
 paru -S paseo-desktop-bin
 ```
 
+If installation fails with output like this:
+
+```text
+==> Starting prepare()...
+zstd: /*stdin*\: xz/lzma file cannot be uncompressed (zstd compiled without HAVE_LZMA) -- ignored
+tar: Child died with signal 13
+tar: Error is not recoverable: exiting now
+==> ERROR: A failure occurred in prepare().
+```
+
+```shell
+cd ~/.cache/paru/clone/paseo-desktop-bin
+sed -i 's/tar --zstd -x/tar -xJ/' PKGBUILD
+makepkg -si
+```
+
 ## Cline CLI
 
 Cline CLI runs an AI coding agent directly in your terminal. You can pipe `git diff` into it for automated code review in CI/CD, run multiple instances for parallel development, or integrate it into your existing shell workflows.

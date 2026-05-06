@@ -337,6 +337,21 @@ paru -S openai-codex-desktop
 paru -S paseo-desktop-bin
 ```
 
+解决安装报错：
+```
+==> 正在开始 prepare()...
+zstd: /*stdin*\: xz/lzma file cannot be uncompressed (zstd compiled without HAVE_LZMA) -- ignored 
+tar: Child died with signal 13
+tar: Error is not recoverable: exiting now
+==> 错误： 在 prepare() 中发生一个错误。
+```
+
+```shell
+cd ~/.cache/paru/clone/paseo-desktop-bin
+sed -i 's/tar --zstd -x/tar -xJ/' PKGBUILD
+makepkg -si
+```
+
 ## Cline CLI
 
 Cline CLI 直接在您的终端中运行 AI 编码代理。通过管道传输 git diff 以在 CI/CD 中进行自动代码审查，同时运行多个实例以进行并行开发，或将 Cline 集成到您现有的 shell 工作流程中。
