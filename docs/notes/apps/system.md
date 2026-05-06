@@ -287,7 +287,7 @@ patch:
   "punctuator/half_shape/]": "】"
 ```
 
-### Option 2: [Rime Ice](https://dvel.me/posts/rime-ice/)
+### Option 2: [Rime Ice](https://dvel.me/posts/rime-ice/) + [Wanxiang Grammar Model](https://github.com/amzxyz/RIME-LMDG)
 
 ```shell
 # install a Rime Ice scheme
@@ -316,9 +316,16 @@ $ paru rime-ice
 
 [Apply patches via `patch` - Rime Ice](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
 
+Optionally download a Wanxiang grammar model:
+[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)
+or
+[wanxiang-mini-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-mini-zh-hans.gram).
+
 ```shell
 # create a global patch
 $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
+# optionally place the Wanxiang model into the Rime config directory
+mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
 
 patch:
   # import the rime_ice_suggestion.yaml config
@@ -332,6 +339,18 @@ patch:
       - { when: composing, accept: comma, send: Page_Up }
       # use period for the next page of candidates
       - { when: composing, accept: period, send: Page_Down }
+  # optional grammar model settings for Wanxiang
+  grammar:
+    language: wanxiang-lts-zh-hans
+    collocation_max_length: 8
+    collocation_min_length: 2
+    collocation_penalty: -10
+    non_collocation_penalty: -5
+    weak_collocation_penalty: -100
+    rear_penalty: -5
+  translator/contextual_suggestions: false
+  translator/max_homophones: 8
+  translator/max_homographs: 8
 ```
 
 ### Option 3: [Wanxiang Pinyin](https://github.com/amzxyz/rime_wanxiang)

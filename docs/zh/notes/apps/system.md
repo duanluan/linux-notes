@@ -284,7 +284,7 @@ patch:
 ```
 
 
-### 方案二：[雾凇拼音](https://dvel.me/posts/rime-ice/)
+### 方案二：[雾凇拼音](https://dvel.me/posts/rime-ice/) + [万象模型](https://github.com/amzxyz/RIME-LMDG)
 
 ```shell
 # 安装雾凇拼音方案
@@ -313,9 +313,13 @@ $ paru rime-ice
 
 [以 patch 的方式打补丁 - Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
 
+可选下载万象模型：[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram) 或 [wanxiang-mini-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-mini-zh-hans.gram)。
+
 ```shell
 # 创建全局补丁
 $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
+# 将万象模型放到 Rime 配置目录（可选）
+mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
 
 patch:
   # 引入雾凇拼音的 rime_ice_suggestion.yaml 配置
@@ -329,6 +333,18 @@ patch:
       - { when: composing, accept: comma, send: Page_Up }
       # . 键切换候选词到下页
       - { when: composing, accept: period, send: Page_Down }
+  # 语法模型配置，启用万象模型（可选）
+  grammar:
+    language: wanxiang-lts-zh-hans
+    collocation_max_length: 8
+    collocation_min_length: 2
+    collocation_penalty: -10
+    non_collocation_penalty: -5
+    weak_collocation_penalty: -100
+    rear_penalty: -5
+  translator/contextual_suggestions: false
+  translator/max_homophones: 8
+  translator/max_homographs: 8
 ```
 
 ### 方案三：[万象拼音](https://github.com/amzxyz/rime_wanxiang)
