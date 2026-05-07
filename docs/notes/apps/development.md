@@ -866,55 +866,38 @@ Postman is a leading API platform that turns API development from a fragmented m
 paru -S postman-bin
 ```
 
+## Navicat Premium
+
+Navicat Premium is a powerful all-in-one database development solution that can seamlessly connect to multiple databases from a single application, including MySQL, PostgreSQL, MongoDB, MariaDB, SQL Server, Oracle, SQLite, Redis, and Snowflake. It is also compatible with GaussDB, OceanBase, TiDB, PolarDB, and major cloud databases from Alibaba Cloud, Tencent Cloud, and Huawei Cloud.
+
+![](https://www.navicat.com.cn/images/product_screenshot/Screenshot_Navicat_17_Premium_Linux_Main_screen_CN.png)
+
+```shell
+paru -S navicat17-premium-en
+# Lite version
+paru -S navicat-premium-lite-en
+```
+
+For `ORA-12737:Instant Client Light:unsupported server character set ZHS16GBK`:
+
+Download the `Basic Package (ZIP)` under `Instant Client for Linux` from [Oracle Instant Client Downloads](https://www.oracle.com/database/technologies/instant-client/downloads.html).
+
+```shell
+unzip instantclient-basic-linux.x64-23.26.1.0.0.zip
+sudo mv instantclient_23_26 /opt/navicat17-premium-en/
+```
+
+In Navicat, go to `Tools` -> `Options` -> `Environment` -> `OCI Environment`, uncheck `Use bundled OCI libraries`, and change `OCI library (libclntsh.so)` to `/opt/navicat17-premium-en/instantclient_23_26/libclntsh.so`.
+
 ## JetBrains DataGrip
 
 A powerful cross-platform IDE for relational and NoSQL databases.
 
 ![](https://www.jetbrains.com/datagrip/inc/overview-content/parts/features-section/img/code-of-console.png)
 
-[Download DataGrip](https://www.jetbrains.com/zh-cn/datagrip/download/?section=linux)
+[Download DataGrip](https://www.jetbrains.com/datagrip/download/?section=linux)
 
 Install it through JetBrains Toolbox.
-
-## Navicat Premium (Lite)
-
-Navicat Premium is an all-in-one database development tool that can connect to MySQL, PostgreSQL, MongoDB, MariaDB, SQL Server, Oracle, SQLite, Redis, Snowflake, and several cloud databases.
-
-![](https://www.navicat.com.cn/images/product_screenshot/Screenshot_Navicat_17_Premium_Linux_Main_screen_CN.png)
-
-- AUR
-
-  ```shell
-  paru -S navicat-premium-lite-zh-cn
-  ```
-
-- Wine
-
-  [Download Navicat Premium for Windows](https://www.navicat.com.cn/download/navicat-premium#windows)
-
-  ```shell
-  # select a dedicated Wine prefix
-  export WINEPREFIX=~/.wine-navicat
-  # initialize the prefix
-  winecfg
-  # install Chinese fonts
-  proxychains -q winetricks cjkfonts
-  # install Navicat Premium
-  wine navicat17_premium_cs_x64.exe
-  ```
-
-- `ORA-12737:Instant Client Light:unsupported server character set ZHS16GBK`
- 
-  Download the `Basic Package` from [Oracle Instant Client Downloads](https://www.oracle.com/cn/database/technologies/instant-client/downloads.html), specifically from [Instant Client for Microsoft Windows (x64)](https://www.oracle.com/cn/database/technologies/instant-client/winx64-64-downloads.html).
-
-  ```shell
-  unzip instantclient-basic-windows.x64-23.9.0.25.07.zip
-  mv instantclient_23_9 /home/duanluan/.wine-navicat/drive_c/Program\ Files/PremiumSoft/Navicat\ Premium\ 17
-  ```
-
-  In Navicat, go to `Tools` -> `Options` -> `Environment` -> `OCI Environment`, and set `OCI library (oci.dll) *` to `C:\Program Files\PremiumSoft\Navicat Premium 17\instantclient_23_9\oci.dll`.
-
-  For the Linux version of Navicat, download the Linux edition of Instant Client instead.
 
 ## DBeaver Enterprise Edition
 
