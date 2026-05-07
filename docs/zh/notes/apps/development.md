@@ -577,7 +577,7 @@ echo $NDK_HOME
 which studio
 ```
 
-### 安装 IDEA 的中文插件
+### 安装中文插件
 
 此处修改是最新版 IDEA 安装目录下的`plugins/localization-zh/lib/localization-zh.jar`，使用 [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/13710/versions) 下载的 [v242.152](https://plugins.jetbrains.com/plugin/download?rel=true&updateId=557305) 来修改也是差不多的。
 
@@ -642,6 +642,20 @@ paru -S visual-studio-code-bin
 ```shell
 paru -S rebased-bin
 ```
+
+### 安装中文插件
+
+```shell
+# 使用 curl，自动检测 rebased 的位置，并优先复用已安装 JetBrains IDE 自带的中文插件
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/prepare-jetbrains-zh-plugin.sh | bash -s -- --ide rebased
+
+# 使用 wget，也可以显式指定 IDEA 作为来源，并指定 rebased 的位置
+wget -qO- https://raw.githubusercontent.com/duanluan/shell-scripts/main/prepare-jetbrains-zh-plugin.sh | bash -s -- --jb /opt/jetbrains/intellij-idea-ultimate --ide /opt/rebased
+```
+
+脚本执行完成后，重启 Rebased。
+
+`Settings`-`Appearance & Behavior`-`System Settings`-`Language and Region` 中 `Language` 选择 `Chinese (Simplified) 简体中文`。
 
 ## FVM + Flutter 换源 + Dart
 

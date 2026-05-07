@@ -556,7 +556,7 @@ echo $NDK_HOME
 which studio
 ```
 
-### Install the Chinese Language Plugin for IDEA
+### Install the Chinese Language Plugin
 
 The example below edits `plugins/localization-zh/lib/localization-zh.jar` from the installed IDEA directory. Using the package from [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/13710/versions), such as [v242.152](https://plugins.jetbrains.com/plugin/download?rel=true&updateId=557305), works similarly.
 
@@ -622,6 +622,20 @@ A Git client built on the IntelliJ Platform.
 ```shell
 paru -S rebased-bin
 ```
+
+### Install the Chinese Language Plugin
+
+```shell
+# with curl; auto-detect the rebased location and prefer the bundled plugin from an installed JetBrains IDE
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/prepare-jetbrains-zh-plugin.sh | bash -s -- --ide rebased
+
+# with wget; explicitly use IntelliJ IDEA as the source and specify the rebased location
+wget -qO- https://raw.githubusercontent.com/duanluan/shell-scripts/main/prepare-jetbrains-zh-plugin.sh | bash -s -- --jb /opt/jetbrains/intellij-idea-ultimate --ide /opt/rebased
+```
+
+After the script finishes, restart Rebased.
+
+Then go to `Settings` -> `Appearance & Behavior` -> `System Settings` -> `Language and Region` and choose `Chinese (Simplified) 简体中文` under `Language`.
 
 ## FVM + Flutter Mirrors + Dart
 
