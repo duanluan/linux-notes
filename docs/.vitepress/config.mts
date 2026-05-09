@@ -1,12 +1,28 @@
 import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
+const base = '/linux-notes/'
+
+const localeRedirectScript = `;(function () {
+  const base = ${JSON.stringify(base)}
+  const normalize = (value) => (value.length > 1 && value.endsWith('/') ? value.slice(0, -1) : value)
+  const root = normalize(base)
+  const path = normalize(window.location.pathname)
+  const cookieMatch = document.cookie.match(/(?:^|; )linux_notes_lang=([^;]+)/)
+  const cookieLang = cookieMatch ? decodeURIComponent(cookieMatch[1]).toLowerCase() : ''
+  const browserLang = cookieLang || String((Array.isArray(navigator.languages) && navigator.languages[0]) || navigator.language || '').toLowerCase()
+  if ((path === root || path === root + '/index.html') && browserLang.startsWith('zh')) {
+    window.location.replace(root === '/' ? '/zh/' : root + '/zh/')
+  }
+})()`
+
 export default defineConfig({
   title: 'Linux Notes (Arch / Manjaro KDE)',
   description: 'From installation and system setup to daily use',
   lang: 'en-US',
   // Use the repository name here: https://vitepress.dev/reference/site-config#base
-  base: '/linux-notes/',
+  base,
+  head: [['script', { id: 'linux-notes-locale-redirect' }, localeRedirectScript]],
   locales: {
     root: {
       label: 'English',
