@@ -109,6 +109,34 @@ sudo nano /etc/proxychains.conf
 socks5 127.0.0.1 7897
 ```
 
+## nc
+
+`nc` (netcat) is useful for checking TCP/UDP services, temporarily sending text, and debugging local or remote network services.
+
+```shell
+# Install
+sudo pacman -S openbsd-netcat
+
+# Verify after installation
+nc -h
+
+# Check whether a TCP service is reachable
+nc -vz -w 2 127.0.0.1 22
+nc -vz -w 2 example.com 80
+
+# Local TCP send/receive test:
+# Terminal 1: listen on 9000
+nc -lv 127.0.0.1 9000
+# Terminal 2: send text
+echo "hello nc" | nc -N 127.0.0.1 9000
+
+# Local UDP send/receive test:
+# Terminal 1: listen on UDP 9001
+nc -luv 127.0.0.1 9001
+# Terminal 2: send text
+echo "hello udp" | nc -u -w 1 127.0.0.1 9001
+```
+
 ## Brook
 
 A cross-platform programmable networking tool that can also be used as a proxy.
