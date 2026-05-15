@@ -960,14 +960,17 @@ paru -S navicat17-premium-cs
 paru -S navicat-premium-lite-zh-cn
 ```
 
-报错`ORA-12737:Instant Client Light:unsupported server character set ZHS16GBK`：
+- 报错`ORA-12737:Instant Client Light:unsupported server character set ZHS16GBK`：
  
-[Oracle Instant Client Downloads](https://www.oracle.com/cn/database/technologies/instant-client/downloads.html) 下载`Instant Client for Linux`中的`Basic Package (ZIP)`版本。
-```shell
-unzip instantclient-basic-linux.x64-23.26.1.0.0.zip
-sudo mv instantclient_23_26 /opt/navicat17-premium-cs/
-```
-Navicat 菜单栏`工具`-`选项`-`环境`-`OCI 环境`取消勾选`使用捆绑的 OCI 库`，`OCI 库 (libclntsh.so)`改成`/opt/navicat17-premium-cs/instantclient_23_26/libclntsh.so`。
+  [Oracle Instant Client Downloads](https://www.oracle.com/cn/database/technologies/instant-client/downloads.html) 下载`Instant Client for Linux`中的`Basic Package (ZIP)`版本。
+  ```shell
+  unzip instantclient-basic-linux.x64-23.26.1.0.0.zip
+  sudo mv instantclient_23_26 /opt/navicat17-premium-cs/
+  ```
+  Navicat 菜单栏`工具`-`选项`-`环境`-`OCI 环境`取消勾选`使用捆绑的 OCI 库`，`OCI 库 (libclntsh.so)`改成`/opt/navicat17-premium-cs/instantclient_23_26/libclntsh.so`。
+
+
+- **达梦 ODBC 注意**：**不要**执行达梦驱动目录里的`install_odbc.sh`，它会写`/etc/ld.so.conf.d/dameng_odbc.conf`、`/etc/ld.so.conf.d/dameng_odbc_flatpak.conf`，然后执行`ldconfig`。会导致系统基础程序加载到这些第三方库，严重时无法正常启动系统。修复方法见[Navicat + 达梦 ODBC 后系统无法启动](../questions.md#navicat-达梦-odbc-后系统无法启动)。
 
 ## JetBrains DataGrip
 

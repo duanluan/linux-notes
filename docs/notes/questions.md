@@ -51,6 +51,20 @@ References:
 - [Fix Manjaro Login Failure - personal article - SegmentFault](https://segmentfault.com/a/1190000021724837)
 - [Reset root password - Arch Linux Chinese Wiki](https://wiki.archlinuxcn.org/wiki/%E9%87%8D%E7%BD%AE_root_%E5%AF%86%E7%A0%81)
 
+## System Will Not Boot After Navicat + Dameng ODBC
+
+If startup shows `kmod: error while loading shared libraries: libodbc.so.3: cannot open shared 0`, boot from a Live USB and run:
+
+```shell
+sudo manjaro-chroot -a
+rm -f /etc/ld.so.conf.d/dameng_odbc.conf /etc/ld.so.conf.d/dameng_odbc_flatpak.conf /etc/profile.d/dm_home.sh
+ldconfig
+mkinitcpio -P
+ldd /usr/bin/udevadm | grep -E 'libcrypto|libssl|libodbc'
+exit
+reboot
+```
+
 ## Fix “One or More Files Did Not Pass the Validity Check” {#fix-one-or-more-files-did-not-pass-the-validity-check}
 
 First run `paru -Sc` to clear the cache and try again. If it still fails, you can download a helper script that fixes the checksums and continues `makepkg`, or edit `PKGBUILD` manually and skip the failing checksum.

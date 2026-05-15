@@ -878,16 +878,19 @@ paru -S navicat17-premium-en
 paru -S navicat-premium-lite-en
 ```
 
-For `ORA-12737:Instant Client Light:unsupported server character set ZHS16GBK`:
+- For `ORA-12737:Instant Client Light:unsupported server character set ZHS16GBK`:
 
-Download the `Basic Package (ZIP)` under `Instant Client for Linux` from [Oracle Instant Client Downloads](https://www.oracle.com/database/technologies/instant-client/downloads.html).
+  Download the `Basic Package (ZIP)` under `Instant Client for Linux` from [Oracle Instant Client Downloads](https://www.oracle.com/database/technologies/instant-client/downloads.html).
+  
+  ```shell
+  unzip instantclient-basic-linux.x64-23.26.1.0.0.zip
+  sudo mv instantclient_23_26 /opt/navicat17-premium-en/
+  ```
+  
+  In Navicat, go to `Tools` -> `Options` -> `Environment` -> `OCI Environment`, uncheck `Use bundled OCI libraries`, and change `OCI library (libclntsh.so)` to `/opt/navicat17-premium-en/instantclient_23_26/libclntsh.so`.
 
-```shell
-unzip instantclient-basic-linux.x64-23.26.1.0.0.zip
-sudo mv instantclient_23_26 /opt/navicat17-premium-en/
-```
 
-In Navicat, go to `Tools` -> `Options` -> `Environment` -> `OCI Environment`, uncheck `Use bundled OCI libraries`, and change `OCI library (libclntsh.so)` to `/opt/navicat17-premium-en/instantclient_23_26/libclntsh.so`.
+- **Dameng ODBC Note**: Do not run `install_odbc.sh` from the Dameng driver directory. It writes `/etc/ld.so.conf.d/dameng_odbc.conf` and `/etc/ld.so.conf.d/dameng_odbc_flatpak.conf`, then runs `ldconfig`, which can make core system programs load third-party libraries and prevent the system from booting normally. For the recovery steps, see [System Will Not Boot After Navicat + Dameng ODBC](../questions.md#system-will-not-boot-after-navicat-dameng-odbc).
 
 ## JetBrains DataGrip
 

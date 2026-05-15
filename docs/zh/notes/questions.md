@@ -51,6 +51,20 @@ passwd root
 - [解决manjaro登录失败问题 - 个人文章 - SegmentFault 思否](https://segmentfault.com/a/1190000021724837)
 - [重置 root 密码 - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/%E9%87%8D%E7%BD%AE_root_%E5%AF%86%E7%A0%81) 
 
+## Navicat + 达梦 ODBC 后系统无法启动
+
+开机提示`kmod: error while loading shared libraries: libodbc.so.3: cannot open shared 0`， 就用 Live USB 进入后执行：
+
+```shell
+sudo manjaro-chroot -a
+rm -f /etc/ld.so.conf.d/dameng_odbc.conf /etc/ld.so.conf.d/dameng_odbc_flatpak.conf /etc/profile.d/dm_home.sh
+ldconfig
+mkinitcpio -P
+ldd /usr/bin/udevadm | grep -E 'libcrypto|libssl|libodbc'
+exit
+reboot
+```
+
 ## 解决“一个或多个文件没有通过有效性检查”
 
 先执行`paru -Sc`清除缓存后重试，如果仍然失败，可以下载脚本自动修复校验值并继续执行`makepkg`；也可以手动编辑`PKGBUILD`跳过校验。
