@@ -728,13 +728,7 @@ paru -S rubick
 ![](https://keepassxc.org/assets/img/screenshots/database_view.png)
 
 ```shell
-# install
-paru -S keepassxc-qt6
-
-# if it fails to build with a missing Botan EC_Group type, add the header manually
-sed -i '/#include <botan\/rsa.h>/a #include <botan/ec_group.h>' ~/.cache/paru/clone/keepassxc-qt6/src/keepassxc/src/sshagent/OpenSSHKeyGen.cpp
-cd ~/.cache/paru/clone/keepassxc-qt6
-makepkg -efsi
+sudo pacman -S keepassxc
 ```
 
 In `KeePassXC`, go to `Tools` -> `Settings` -> `Browser Integration` -> `Advanced`, enable `Use custom proxy location`, and point it to `/usr/bin/keepassxc-proxy`.
