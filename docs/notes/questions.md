@@ -56,13 +56,25 @@ References:
 If startup shows `kmod: error while loading shared libraries: libodbc.so.3: cannot open shared 0`, boot from a Live USB and run:
 
 ```shell
-sudo manjaro-chroot -a
-rm -f /etc/ld.so.conf.d/dameng_odbc.conf /etc/ld.so.conf.d/dameng_odbc_flatpak.conf /etc/profile.d/dm_home.sh
-ldconfig
-mkinitcpio -P
-ldd /usr/bin/udevadm | grep -E 'libcrypto|libssl|libodbc'
-exit
-reboot
+# Enter the Manjaro system's chroot environment
+$ sudo manjaro-chroot -a
+
+# Inspect udevadm's shared library dependencies; libcrypto.so.3 is incorrectly linked to the Dameng ODBC version
+$ ldd /usr/bin/udevadm | grep -E 'libcrypto'
+    libcrypto.so.3 => /opt/dameng_odbc/libcrypto.so.3 (0x00007fa5d3800000)
+# Disable the dameng_odbc dynamic linker configuration
+$ mv /etc/ld.so.conf.d/dameng_odbc.conf /etc/ld.so.conf.d/dameng_odbc.conf.bak
+$ mv /etc/ld.so.conf.d/dameng_odbc_flatpak.conf /etc/ld.so.conf.d/dameng_odbc_flatpak.conf.bak
+# Refresh the dynamic linker cache
+$ ldconfig
+# Check again that udevadm now uses the system libcrypto
+$ ldd /usr/bin/udevadm | grep -E 'libcrypto'
+    libcrypto.so.3 => /usr/lib/libcrypto.so.3 (0x00007f45e3600000)
+# Regenerate initramfs images for all kernel presets
+$ mkinitcpio -P
+$ exit
+
+$ reboot
 ```
 
 ## Fix “One or More Files Did Not Pass the Validity Check” {#fix-one-or-more-files-did-not-pass-the-validity-check}

@@ -56,13 +56,25 @@ passwd root
 开机提示`kmod: error while loading shared libraries: libodbc.so.3: cannot open shared 0`， 就用 Live USB 进入后执行：
 
 ```shell
-sudo manjaro-chroot -a
-rm -f /etc/ld.so.conf.d/dameng_odbc.conf /etc/ld.so.conf.d/dameng_odbc_flatpak.conf /etc/profile.d/dm_home.sh
-ldconfig
-mkinitcpio -P
-ldd /usr/bin/udevadm | grep -E 'libcrypto|libssl|libodbc'
-exit
-reboot
+# 进入 Manjaro 系统的 chroot 环境
+$ sudo manjaro-chroot -a
+
+# 查看 udevadm 依赖的动态库，可以看到 libcrypto.so.3 被错误地链接到了达梦 ODBC 的版本
+$ ldd /usr/bin/udevadm | grep -E 'libcrypto'
+    libcrypto.so.3 => /opt/dameng_odbc/libcrypto.so.3 (0x00007fa5d3800000)
+# 停用 dameng_odbc 的动态库配置
+$ mv /etc/ld.so.conf.d/dameng_odbc.conf /etc/ld.so.conf.d/dameng_odbc.conf.bak
+$ mv /etc/ld.so.conf.d/dameng_odbc_flatpak.conf /etc/ld.so.conf.d/dameng_odbc_flatpak.conf.bak
+# 刷新动态链接器缓存
+$ ldconfig
+# 再次检查 udevadm 是否已改用系统自带的 libcrypto
+$ ldd /usr/bin/udevadm | grep -E 'libcrypto'
+    libcrypto.so.3 => /usr/lib/libcrypto.so.3 (0x00007f45e3600000)
+# 重新生成所有内核预设的 initramfs 镜像
+$ mkinitcpio -P
+$ exit
+
+$ reboot
 ```
 
 ## 解决“一个或多个文件没有通过有效性检查”
