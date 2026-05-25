@@ -873,9 +873,16 @@ Navicat Premium is a powerful all-in-one database development solution that can 
 ![](https://www.navicat.com.cn/images/product_screenshot/Screenshot_Navicat_17_Premium_Linux_Main_screen_CN.png)
 
 ```shell
+# Install
 paru -S navicat17-premium-en
-# Lite version
+# Install the Lite version
 paru -S navicat-premium-lite-en
+
+# Please support genuine software. Purchasing a legitimate license provides better technical support and helps developers keep improving the product.
+# Reset the trial
+curl -fsSLO https://raw.githubusercontent.com/duanluan/shell-scripts/main/navicat-manager.sh
+chmod +x navicat-manager.sh
+./navicat-manager.sh reset
 ```
 
 - For `ORA-12737:Instant Client Light:unsupported server character set ZHS16GBK`:
@@ -984,7 +991,7 @@ DBeaver Agent:
 
    Click `Import License`, paste the generated license string, and confirm.
 
-Please support commercial software with a legitimate license when possible.
+Please support genuine software. Purchasing a legitimate license provides better technical support and helps developers keep improving the product.
 
 ## Another Redis Desktop Manager
 

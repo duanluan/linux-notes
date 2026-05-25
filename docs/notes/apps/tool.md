@@ -661,7 +661,7 @@ License for you: ……
 
 Then in Typora, open `Help` -> `My License` -> `Enter serial number`. Use any email. If it later asks whether to try a China-domain activation fallback because the server cannot be reached, choose confirm.
 
-Please support paid software with legitimate licenses when possible.
+Please support genuine software. Purchasing a legitimate license provides better technical support and helps developers keep improving the product.
 
 ## Obsidian
 

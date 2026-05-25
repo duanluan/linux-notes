@@ -955,9 +955,16 @@ Navicat Premium 是强大的一体化数据库开发解决方案，可从单一�
 ![](https://www.navicat.com.cn/images/product_screenshot/Screenshot_Navicat_17_Premium_Linux_Main_screen_CN.png)
 
 ```shell
+# 安装
 paru -S navicat17-premium-cs
-# Lite 版
+# 安装 Lite 版
 paru -S navicat-premium-lite-zh-cn
+
+# 鼓励大家支持正版软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
+# 重置试用
+curl -fsSLO https://raw.githubusercontent.com/duanluan/shell-scripts/main/navicat-manager.sh
+chmod +x navicat-manager.sh
+./navicat-manager.sh reset
 ```
 
 - 报错`ORA-12737:Instant Client Light:unsupported server character set ZHS16GBK`：
