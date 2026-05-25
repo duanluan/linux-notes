@@ -325,6 +325,18 @@ $ npm i -g @openai/codex
 $ paru -S openai-codex-desktop
 ```
 
+## Desktop CC GUI
+
+ccgui is built for professional developers and works as an alternative to Cursor. It focuses on developer experience, with the long-term goal of becoming a next-generation, fully open source and transparent vibe-coding editor that supports engines such as Claude Code and Codex.
+
+![](https://raw.githubusercontent.com/zhukunpenglinyutong/desktop-cc-gui/main/docs/banner.png)
+
+[zhukunpenglinyutong/desktop-cc-gui](https://github.com/zhukunpenglinyutong/desktop-cc-gui)
+
+```shell
+paru -S ccgui-bin
+```
+
 ## Paseo
 
 Manage all your Claude Code, Codex, and OpenCode agents from a single interface.

@@ -325,6 +325,18 @@ npm i -g @openai/codex
 paru -S openai-codex-desktop
 ```
 
+## Desktop CC GUI
+
+ccgui 目标群体是专业开发者，可以替代Curosr使用。专注于开发者体验，我们最终目标是打造一个100%开源透明的 下一代VibeCoding编辑器（支持Claude Code，Codex等引擎）
+
+![](https://raw.githubusercontent.com/zhukunpenglinyutong/desktop-cc-gui/main/docs/banner.png)
+
+[zhukunpenglinyutong/desktop-cc-gui](https://github.com/zhukunpenglinyutong/desktop-cc-gui)
+
+```shell
+paru -S ccgui-bin
+```
+
 ## Paseo
 
 一个界面即可管理所有 Claude Code、Codex 和 OpenCode 代理。
