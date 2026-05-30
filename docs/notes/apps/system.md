@@ -322,10 +322,10 @@ or
 [wanxiang-mini-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-mini-zh-hans.gram).
 
 ```shell
+# optionally place the Wanxiang model into the Rime config directory
+$ mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
 # create a global patch
 $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
-# optionally place the Wanxiang model into the Rime config directory
-mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
 
 patch:
   # import the rime_ice_suggestion.yaml config

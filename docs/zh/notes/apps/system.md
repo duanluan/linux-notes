@@ -316,10 +316,10 @@ $ paru rime-ice
 可选下载万象模型：[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram) 或 [wanxiang-mini-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-mini-zh-hans.gram)。
 
 ```shell
+# 将万象模型放到 Rime 配置目录（可选）
+$ mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
 # 创建全局补丁
 $ nano ~/.local/share/fcitx5/rime/default.custom.yaml
-# 将万象模型放到 Rime 配置目录（可选）
-mv ~/Downloads/wanxiang-lts-zh-hans.gram ~/.local/share/fcitx5/rime/
 
 patch:
   # 引入雾凇拼音的 rime_ice_suggestion.yaml 配置
