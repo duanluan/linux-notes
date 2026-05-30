@@ -1,9 +1,11 @@
 # VuePress files
 /docs/.vitepress/cache/
 /docs/.vitepress/dist/
+/docs/.vitepress/.temp
 
 # Node modules
 node_modules/
+.pnpm-store
 
 # MacOS Desktop Services Store
 .DS_Store
@@ -11,4 +13,8 @@ node_modules/
 # Log files
 *.log
 
+# IDE
 .idea
+
+# AI
+.codex
