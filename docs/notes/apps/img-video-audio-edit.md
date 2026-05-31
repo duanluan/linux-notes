@@ -6,11 +6,25 @@ GIMP is a cross-platform image editor.
 
 ![](https://github.com/Diolinux/PhotoGIMP/raw/master/screenshots/photogimp_3_-_diolinux.png)
 
+[GIMP - GNU Image Manipulation Program](https://www.gimp.org/)
+
 ```shell
 sudo pacman -S gimp
 ```
 
 Download `PhotoGIMP-linux.zip` from [Releases · Diolinux/PhotoGIMP](https://github.com/Diolinux/PhotoGIMP/releases), then overwrite the `.conf` and `.local` directories in your home directory with the ones from the archive.
+
+## Paint.NET
+
+Paint.NET is image and photo editing software. It features an intuitive, innovative user interface with support for layers, unlimited undo, special effects, and a wide range of practical, powerful tools. An active and growing online community offers friendly help, tutorials, and plugins.
+
+![](https://www.getpaint.net/screenshots/pdn513_thumb.jpg)
+
+[Paint.NET - Free Software for Digital Photo Editing](https://www.getpaint.net/)
+
+```shell
+paru -S aur/pinta
+```
 
 ## Krita
 
@@ -18,7 +32,7 @@ Krita aims to provide first-class painting tools with no barriers, for anyone an
 
 ![](https://krita.org/images/pages/application-screenshot.webp)
 
-[Download | Krita](https://krita.org/zh-cn/download/)
+[Krita | Digital Painting. Creative Freedom.](https://krita.org/en/)
 
 ```shell
 sudo pacman -S krita

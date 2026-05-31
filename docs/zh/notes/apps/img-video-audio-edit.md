@@ -6,11 +6,25 @@ GIMP 是一款跨平台图像编辑器。
 
 ![](https://github.com/Diolinux/PhotoGIMP/raw/master/screenshots/photogimp_3_-_diolinux.png)
 
+[GIMP - GNU Image Manipulation Program](https://www.gimp.org/)
+
 ```shell
 sudo pacman -S gimp
 ```
 
 [Releases · Diolinux/PhotoGIMP](https://github.com/Diolinux/PhotoGIMP/releases) 下载`PhotoGIMP-linux.zip`，将压缩包中的`.conf`、`.local`覆盖到 home 下。
+
+## Paint.NET
+
+Paint.NET 是一款图像和照片编辑软件。它[拥有](https://www.getpaint.net/features.html)直观且创新的用户界面。支持图层、无限次撤销、特效以及各种各样的实用且强大的工具。一个活跃且不断发展的群体[在线社区](https://www.getpaint.net/redirect/forum.html)提供友好的帮助、[教程](https://www.getpaint.net/redirect/tutorials.html)，以及[插件](https://www.getpaint.net/redirect/plugins.html)。
+
+![](https://www.getpaint.net/screenshots/pdn513_thumb.jpg)
+
+[Paint.NET - Free Software for Digital Photo Editing](https://www.getpaint.net/)
+
+```shell
+paru -S aur/pinta
+```
 
 ## Krita
 
@@ -18,7 +32,7 @@ Krita 致力于提供一流的绘画工具，不设任何门槛，为任何人�
 
 ![](https://krita.org/images/pages/application-screenshot.webp)
 
-[下载软件 | Krita](https://krita.org/zh-cn/download/)
+[Krita | 自由开源的数字绘画软件](https://krita.org/zh-cn/)
 
 ```shell
 sudo pacman -S krita

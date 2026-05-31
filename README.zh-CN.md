@@ -64,7 +64,7 @@
 * **运维终端**：MobaXterm / WindTerm / WoTerm
 
 #### 🎨 [图影音编辑](docs/zh/notes/apps/img-video-audio-edit.md)
-* **图像/设计**：GIMP + PhotoGIMP / Krita / Blender / Figma Linux / Aseprite
+* **图像/设计**：GIMP + PhotoGIMP / Paint.NET / Krita / Blender / Figma Linux / Aseprite
 * **视频后期**：DaVinci Resolve（含 Studio 安装方案）/ Kdenlive / HandBrake
 * **音频处理**：Audacity
 

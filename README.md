@@ -64,7 +64,7 @@ It covers system installation, post-install configuration, software setup, full-
 * **Terminal clients**: MobaXterm / WindTerm / WoTerm
 
 #### 🎨 [Image, Video, and Audio Editing](docs/notes/apps/img-video-audio-edit.md)
-* **Image and design**: GIMP + PhotoGIMP / Krita / Blender / Figma Linux / Aseprite
+* **Image and design**: GIMP + PhotoGIMP / Paint.NET / Krita / Blender / Figma Linux / Aseprite
 * **Video post-production**: DaVinci Resolve (including Studio setup) / Kdenlive / HandBrake
 * **Audio editing**: Audacity
 
