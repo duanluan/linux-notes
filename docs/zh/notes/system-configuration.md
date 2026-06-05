@@ -354,7 +354,7 @@ Dolphin 中左侧常用位置项右键`编辑`，修改位置。
 
 ## 创建虚拟屏（远程必看）
 
-远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。通过以下配置强制创建一个虚拟屏幕即可解决。
+远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。开源驱动可以通过内核参数强制创建虚拟接口；NVIDIA 闭源驱动建议保留真实输出并加载真实 EDID，不再额外创建第二个假输出。
 
 ### 开源驱动（Intel/AMD）
 
@@ -396,7 +396,7 @@ $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ### NVIDIA 闭源驱动（X11）
 
-NVIDIA 驱动无法通过 GRUB 注入，需修改 Xorg 配置文件来实现“双屏并存”（真实屏+虚拟屏）。
+NVIDIA 驱动无法通过 GRUB 注入，需修改 Xorg 配置文件，让真实显示接口在屏幕关闭时仍保持可用。此写法只保留真实输出，例如 `DFP-4`，并为它加载真实显示器 EDID。
 
 ```shell
 # 查询显卡 PCI 地址，获取显卡 BusID
@@ -430,11 +430,6 @@ $ nvidia-settings
 $ sudo mv edid.bin /etc/X11/edid.bin
 $ sudo chmod 644 /etc/X11/edid.bin
 
-# 生成 1080P EDID 数据
-python -c "import binascii; open('virtual_1080p.bin', 'wb').write(binascii.unhexlify('00ffffffffffff0031d8000000000000051601036d3c2278ea5e03a1544c99260f5054a1080081800101010101010101010101010101023a801871382d40582c450056502100001e000000fc004c696e7578204648440a20202020000000fd00323c1e4611000a202020202020000000ff004c696e75782023300a2020202001ba02030400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000092'))"
-# 移动并授权
-$ sudo mv virtual_1080p.bin /etc/X11/virtual_1080p.bin
-$ sudo chmod 644 /etc/X11/virtual_1080p.bin
 
 # 创建 Xorg 配置文件
 $ sudo nano /etc/X11/xorg.conf.d/20-nvidia-headless.conf
@@ -452,17 +447,14 @@ Section "Device"
     # 根据 lspci 结果修改 BusID，例如 01:00.0 改为 PCI:1:0:0
     BusID          "PCI:1:0:0"
 
-    # --- 核心配置开始 ---
     # 1. 允许无显示器启动
     Option         "AllowEmptyInitialConfiguration" "True"
 
-    # 2. 强制开启双端口：填入 [真实接口], [虚拟空闲接口]
-    # 例如：DFP-4 是真实屏幕，DFP-0 是我们要生成的虚拟屏
-    Option         "ConnectedMonitor" "DFP-4, DFP-0"
+    # 2. 只强制保留真实输出
+    Option         "ConnectedMonitor" "DFP-4"
 
-    # 3. 分别加载不同的 EDID：真实屏用原厂数据，虚拟屏用生成的 1080P 数据
-    Option         "CustomEDID" "DFP-4:/etc/X11/edid.bin; DFP-0:/etc/X11/virtual_1080p.bin"
-    # --- 核心配置结束 ---
+    # 3. 为真实输出加载保存的真实 EDID
+    Option         "CustomEDID" "DFP-4:/etc/X11/edid.bin"
 EndSection
 
 Section "Screen"
@@ -472,7 +464,7 @@ Section "Screen"
     DefaultDepth    24
     SubSection     "Display"
         Depth       24
-        # 虚拟屏的默认参考分辨率
+        # 兜底参考分辨率
         Modes      "1920x1080"
     EndSubSection
 EndSection
@@ -489,6 +481,19 @@ EndSection
 $ sudo mv /etc/X11/xorg.conf.d/90-mhwd.conf /etc/X11/xorg.conf.d/90-mhwd.conf.bak
 # 禁用 dummy 驱动配置（如果存在）
 $ sudo mv /etc/X11/xorg.conf.d/10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf.bak
+```
+
+如果之前使用过双输出写法，例如同时配置 `DFP-4, DFP-0` 和 `virtual_1080p.bin`，可能会让 Xorg 反复写日志。检查日志大小：
+
+```shell
+$ ls -lh /var/log/Xorg.0.log
+```
+
+如果 `/var/log/Xorg.0.log` 已经非常大，先清空旧日志，再重启 SDDM 或重启电脑让新配置生效：
+
+```shell
+$ sudo truncate -s 0 /var/log/Xorg.0.log
+$ sudo systemctl restart sddm
 ```
 
 ### 解决物理显示器无法点亮/黑屏

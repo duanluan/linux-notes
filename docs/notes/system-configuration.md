@@ -367,7 +367,7 @@ In `System Settings` -> `Keyboard` -> `Shortcuts`, clear the active shortcut and
 
 ## Create a Virtual Display (Must Read for Remote Access)
 
-When connecting remotely, if no monitor is attached locally or the monitor is powered off, the session can fail to connect or show a black screen. Forcing a virtual display solves this.
+When connecting remotely, the session may fail to open or show a black screen if no local monitor is attached, or if the monitor is powered off. With open-source drivers, you can force a virtual output through a kernel parameter. With the NVIDIA proprietary driver, keep the real output available and load the real monitor EDID instead of creating a second fake output.
 
 ### Open-Source Drivers (Intel / AMD)
 
@@ -409,7 +409,7 @@ $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ### NVIDIA Proprietary Driver (X11)
 
-With the NVIDIA proprietary driver, GRUB injection does not work. You need to modify the Xorg config and create a real-display + virtual-display setup.
+With the NVIDIA proprietary driver, GRUB injection does not work. Modify the Xorg config so the real display connector remains available when the monitor is off. This setup keeps only the real output, such as `DFP-4`, and loads the saved EDID from the real monitor.
 
 ```shell
 # get the GPU PCI address and derive the BusID
@@ -418,7 +418,7 @@ $ lspci | grep -i vga
 # note 01:00.0; convert it to decimal notation PCI:1:0:0 in the config
 01:00.0 VGA compatible controller: NVIDIA Corporation AD107 [GeForce RTX 4060] (rev a1)
 
-# inspect the currently connected display outputs
+# inspect the currently connected display outputs, then note the connected names such as DFP-4 and HDMI-0
 $ nvidia-settings -q dpys
 
     [4] njcm-pc:0[dpy:4] (HDMI-0) (connected, enabled)
@@ -442,12 +442,6 @@ $ nvidia-settings
 $ sudo mv edid.bin /etc/X11/edid.bin
 $ sudo chmod 644 /etc/X11/edid.bin
 
-# generate a 1080p EDID file for the virtual display
-python -c "import binascii; open('virtual_1080p.bin', 'wb').write(binascii.unhexlify('00ffffffffffff0031d8000000000000051601036d3c2278ea5e03a1544c99260f5054a1080081800101010101010101010101010101023a801871382d40582c450056502100001e000000fc004c696e7578204648440a20202020000000fd00323c1e4611000a202020202020000000ff004c696e75782023300a2020202001ba02030400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000092'))"
-# move it into place and set permissions
-$ sudo mv virtual_1080p.bin /etc/X11/virtual_1080p.bin
-$ sudo chmod 644 /etc/X11/virtual_1080p.bin
-
 # create the Xorg config file
 $ sudo nano /etc/X11/xorg.conf.d/20-nvidia-headless.conf
 
@@ -464,16 +458,14 @@ Section "Device"
     # change BusID based on lspci, for example 01:00.0 becomes PCI:1:0:0
     BusID          "PCI:1:0:0"
 
-    # --- key settings start ---
     # 1. allow startup without a physical monitor
     Option         "AllowEmptyInitialConfiguration" "True"
 
-    # 2. force-enable two outputs: [real connector], [virtual connector]
-    Option         "ConnectedMonitor" "DFP-4, DFP-0"
+    # 2. keep only the real output forced on
+    Option         "ConnectedMonitor" "DFP-4"
 
-    # 3. load different EDID files for the real and virtual displays
-    Option         "CustomEDID" "DFP-4:/etc/X11/edid.bin; DFP-0:/etc/X11/virtual_1080p.bin"
-    # --- key settings end ---
+    # 3. load the saved real-monitor EDID for the real output
+    Option         "CustomEDID" "DFP-4:/etc/X11/edid.bin"
 EndSection
 
 Section "Screen"
@@ -483,7 +475,7 @@ Section "Screen"
     DefaultDepth    24
     SubSection     "Display"
         Depth       24
-        # default reference resolution for the virtual screen
+        # fallback/preferred reference resolution
         Modes      "1920x1080"
     EndSubSection
 EndSection
@@ -500,6 +492,19 @@ EndSection
 $ sudo mv /etc/X11/xorg.conf.d/90-mhwd.conf /etc/X11/xorg.conf.d/90-mhwd.conf.bak
 # disable any dummy driver config if it exists
 $ sudo mv /etc/X11/xorg.conf.d/10-headless.conf /etc/X11/xorg.conf.d/10-headless.conf.bak
+```
+
+If you previously used the two-output version, for example with both `DFP-4, DFP-0` and `virtual_1080p.bin`, Xorg may have been writing the same display messages repeatedly. Check the log size:
+
+```shell
+$ ls -lh /var/log/Xorg.0.log
+```
+
+If `/var/log/Xorg.0.log` is already huge, clear the old log and then restart SDDM, or reboot, so the new config is used:
+
+```shell
+$ sudo truncate -s 0 /var/log/Xorg.0.log
+$ sudo systemctl restart sddm
 ```
 
 ### Fix a Physical Monitor That Stays Black After Power Cycling or Resume
