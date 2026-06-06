@@ -43,7 +43,7 @@
 #### 🔧 [工具与生产力](docs/zh/notes/apps/tool.md)
 * **网络与代理**：FlClash / Clash Verge / Clash Party / Brook / proxychains / EasyTier / cpolar / ngrok
 * **虚拟化与兼容**：VMware / VirtualBox / Docker（Buildx/Compose/Portainer）/ WinBoat / xDroid / Wine / Proton-GE / Wine 运行器
-* **效率办公**：Sublime Text / Typora / Obsidian / Pandoc / XMind / Draw.io / XnView MP / uTools / Rubick
+* **效率办公**：Sublime Text / EmEditor / Typora / Obsidian / Pandoc / XMind / Draw.io / XnView MP / uTools / Rubick
 * **截图录屏**：Snipaste / Flameshot / eSearch / SimpleScreenRecorder / OBS / StartLive
 * **下载与同步**：FDM / Gopeed / qBittorrent EE / Transmission / 迅雷 / Synology Drive / Syncthing / LocalSend / CopyQ
 * **远程工具**：RustDesk / ToDesk / 向日葵 / TeamViewer / AnyDesk / Remote Desktop Manager + FreeRDP

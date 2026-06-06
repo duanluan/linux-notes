@@ -651,6 +651,26 @@ paru -S sublime-text-4
 
 - [Sublime Text 使用记录](https://blog.zhjh.top/?p=d42feMmERGrK8UUTXUWqu)
 
+## EmEditor（Wine）
+
+适用于超大文件的快速文本编辑器。
+
+[EmEditor (文本编辑器)](https://zh-cn.emeditor.com/)
+
+```shell
+paru -S emeditor-wine
+```
+
+[下载](https://ldqk.lanzouu.com/iZLF73qukwtg)`EmEditor.exe`。
+
+```shell
+WINEPREFIX="$HOME/.wine-emeditor" wineserver -k
+cp -a ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe.bak
+install -m755 ~/Downloads/EmEditor.exe ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe
+```
+
+鼓励大家[支持正版](https://zh-cn.emeditor.com/buy/)软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
+
 ## Typora
 
 ![](https://typoraio.cn/img/screen/Group-screen.png)

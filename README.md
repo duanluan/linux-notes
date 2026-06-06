@@ -43,7 +43,7 @@ It covers system installation, post-install configuration, software setup, full-
 #### 🔧 [Tools and Productivity](docs/notes/apps/tool.md)
 * **Networking and proxy**: FlClash / Clash Verge / Clash Party / Brook / proxychains / EasyTier / cpolar / ngrok
 * **Virtualization and compatibility**: VMware / VirtualBox / Docker (Buildx, Compose, Portainer) / WinBoat / xDroid / Wine / Proton-GE / Wine runners
-* **Writing, knowledge, and utility tools**: Sublime Text / Typora / Obsidian / Pandoc / XMind / Draw.io / XnView MP / uTools / Rubick
+* **Writing, knowledge, and utility tools**: Sublime Text / EmEditor / Typora / Obsidian / Pandoc / XMind / Draw.io / XnView MP / uTools / Rubick
 * **Screen capture and recording**: Snipaste / Flameshot / eSearch / SimpleScreenRecorder / OBS / StartLive
 * **Downloads and sync**: FDM / Gopeed / qBittorrent EE / Transmission / Xunlei / Synology Drive / Syncthing / LocalSend / CopyQ
 * **Remote desktop tools**: RustDesk / ToDesk / Sunlogin / TeamViewer / AnyDesk / Remote Desktop Manager + FreeRDP

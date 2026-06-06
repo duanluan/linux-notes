@@ -625,6 +625,26 @@ paru -S sublime-text-4
 
 - [Sublime Text notes](https://blog.zhjh.top/?p=d42feMmERGrK8UUTXUWqu)
 
+## EmEditor (Wine)
+
+A fast text editor for huge files.
+
+[EmEditor (Text Editor)](https://www.emeditor.com/)
+
+```shell
+paru -S emeditor-wine
+```
+
+[Download](https://ldqk.lanzouu.com/iZLF73qukwtg)`EmEditor.exe`.
+
+```shell
+WINEPREFIX="$HOME/.wine-emeditor" wineserver -k
+cp -a ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe.bak
+install -m755 ~/Downloads/EmEditor.exe ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe
+```
+
+Please [support genuine](https://www.emeditor.com/buy/) software. Purchasing a legitimate license provides better technical support and helps developers keep improving the product.
+
 ## Typora
 
 ![](https://typoraio.cn/img/screen/Group-screen.png)
