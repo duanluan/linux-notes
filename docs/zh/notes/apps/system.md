@@ -268,6 +268,8 @@ patch:
     # - schema: double_pinyin_sogou   # 搜狗双拼
     # - schema: double_pinyin_ziguang # 紫光双拼
     # - schema: double_pinyin         # 自然码双拼
+  # 取消数字后逗号强制英文逗号/小数点/冒号
+  punctuator/digit_separators: ""
 
 
 # 全拼配置 rime_mint.custom.yaml，小鹤双拼是 double_pinyin_flypy.custom.yaml
@@ -345,6 +347,8 @@ patch:
   translator/contextual_suggestions: false
   translator/max_homophones: 8
   translator/max_homographs: 8
+  # 取消数字后逗号强制英文逗号/小数点/冒号
+  punctuator/digit_separators: ""
 ```
 
 ### 方案三：[万象拼音](https://github.com/amzxyz/rime_wanxiang)
@@ -412,6 +416,8 @@ patch:
   
   # 下面是候选数量，未来7890分别代表1234声，请候选长度不要大于6避免冲突
   menu/page_size: 10
+  # 取消数字后逗号强制英文逗号/小数点/冒号
+  punctuator/digit_separators: ""
 ```
 
 ## 🔤 字体

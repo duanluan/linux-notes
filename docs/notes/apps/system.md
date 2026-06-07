@@ -272,6 +272,8 @@ patch:
     # - schema: double_pinyin_sogou
     # - schema: double_pinyin_ziguang
     # - schema: double_pinyin
+  # disable digit separator passthrough for comma, period, and colon
+  punctuator/digit_separators: ""
 
 
 # full pinyin uses rime_mint.custom.yaml; Xiaohe double pinyin uses double_pinyin_flypy.custom.yaml
@@ -351,6 +353,8 @@ patch:
   translator/contextual_suggestions: false
   translator/max_homophones: 8
   translator/max_homographs: 8
+  # disable digit separator passthrough for comma, period, and colon
+  punctuator/digit_separators: ""
 ```
 
 ### Option 3: [Wanxiang Pinyin](https://github.com/amzxyz/rime_wanxiang)
@@ -418,6 +422,8 @@ patch:
   
   # number of candidates; 7/8/9/0 map to tones 1/2/3/4, so keep the page size at 6 or lower if that matters to you
   menu/page_size: 10
+  # disable digit separator passthrough for comma, period, and colon
+  punctuator/digit_separators: ""
 ```
 
 ## Fonts
