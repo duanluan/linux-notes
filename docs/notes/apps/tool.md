@@ -632,15 +632,19 @@ A fast text editor for huge files.
 [EmEditor (Text Editor)](https://www.emeditor.com/)
 
 ```shell
+# install
 paru -S emeditor-wine
+# uninstall
+paru -R emeditor-wine
+rm -rf ~/.wine-emeditor
 ```
 
 [Download](https://ldqk.lanzouu.com/iZLF73qukwtg)`EmEditor.exe`.
 
 ```shell
-WINEPREFIX="$HOME/.wine-emeditor" wineserver -k
-cp -a ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe.bak
-install -m755 ~/Downloads/EmEditor.exe ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe
+emeditor_dir="$(find "$HOME/.wine-emeditor/drive_c/users" -mindepth 1 -maxdepth 1 -type d ! -name Public -exec test -d '{}/AppData/Local/Programs/EmEditor' ';' -print -quit)/AppData/Local/Programs/EmEditor"
+cp -a "$emeditor_dir/EmEditor.exe" "$emeditor_dir/EmEditor.exe.bak"
+cp ~/Downloads/EmEditor.exe "$emeditor_dir/EmEditor.exe"
 ```
 
 Please [support genuine](https://www.emeditor.com/buy/) software. Purchasing a legitimate license provides better technical support and helps developers keep improving the product.

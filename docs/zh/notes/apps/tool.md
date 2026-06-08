@@ -658,15 +658,19 @@ paru -S sublime-text-4
 [EmEditor (文本编辑器)](https://zh-cn.emeditor.com/)
 
 ```shell
+# 安装
 paru -S emeditor-wine
+# 卸载
+paru -Rns emeditor-wine
+rm -rf ~/.wine-emeditor
 ```
 
 [下载](https://ldqk.lanzouu.com/iZLF73qukwtg)`EmEditor.exe`。
 
 ```shell
-WINEPREFIX="$HOME/.wine-emeditor" wineserver -k
-cp -a ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe.bak
-install -m755 ~/Downloads/EmEditor.exe ~/.wine-emeditor/drive_c/users/duanluan/AppData/Local/Programs/EmEditor/EmEditor.exe
+emeditor_dir="$(find "$HOME/.wine-emeditor/drive_c/users" -mindepth 1 -maxdepth 1 -type d ! -name Public -exec test -d '{}/AppData/Local/Programs/EmEditor' ';' -print -quit)/AppData/Local/Programs/EmEditor"
+cp -a "$emeditor_dir/EmEditor.exe" "$emeditor_dir/EmEditor.exe.bak"
+cp ~/Downloads/EmEditor.exe "$emeditor_dir/EmEditor.exe"
 ```
 
 鼓励大家[支持正版](https://zh-cn.emeditor.com/buy/)软件，购买正版授权不仅能获得更好的技术支持，还能为软件开发者提供持续的创新动力。
