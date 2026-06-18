@@ -325,6 +325,18 @@ $ npm i -g @openai/codex
 $ paru -S openai-codex-desktop
 ```
 
+## ZCode Desktop
+
+ZCode combines powerful AI agents with your existing toolchain, so you can plan, code, review, and ship from the workflows you already know.
+
+![](https://zcode.z.ai/content/docs/v2/screenshots/zcode-welcome-new-task-20260613.webp)
+
+[ZCode - Simple, Fast, Vibe‑Ready](https://zcode.z.ai/en)
+
+```shell
+paru -S zcode-desktop-bin
+```
+
 ## Desktop CC GUI
 
 ccgui is built for professional developers and works as an alternative to Cursor. It focuses on developer experience, with the long-term goal of becoming a next-generation, fully open source and transparent vibe-coding editor that supports engines such as Claude Code and Codex.

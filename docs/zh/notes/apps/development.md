@@ -1173,3 +1173,15 @@ sudo chmod 1777 /usr/lib/windterm/temp
 ```shell
 paru -S woterm-bin
 ```
+
+## MasterGo
+
+对于产品经理而言，MasterGo 支持在线绘制原型，实时查看最新设计文件，一键生成高保真原型；对于设计师而言，MasterGo 支持设计文件云端存储实时更新，多人协作，创作从未如此得心应手；对于工程师而言，MasterGo 支持随时随地查看设计图，自动获取标注代码，下载多种格式切图。
+
+![](https://mastergo.com/images/home/develop2.png)
+
+[专业 UI/UX 协同设计工具软件 - MasterGo 产品介绍](https://mastergo.com/recommend)
+
+```shell
+paru -S mastergo-desktop-bin
+```

@@ -325,6 +325,18 @@ npm i -g @openai/codex
 paru -S openai-codex-desktop
 ```
 
+## ZCode Desktop
+
+ZCode 将最强大的 AI Agents 与现有工具链结合，让你在熟悉的流程中完成规划、编码、评审与上线。
+
+![](https://zcode.z.ai/content/docs/v2/screenshots/zcode-welcome-new-task-20260613.webp)
+
+[ZCode - 简单、迅捷、氛围十足](https://zcode.z.ai/cn)
+
+```shell
+paru -S zcode-desktop-bin
+```
+
 ## Desktop CC GUI
 
 ccgui 目标群体是专业开发者，可以替代Curosr使用。专注于开发者体验，我们最终目标是打造一个100%开源透明的 下一代VibeCoding编辑器（支持Claude Code，Codex等引擎）

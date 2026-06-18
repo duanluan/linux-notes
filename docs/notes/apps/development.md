@@ -1101,3 +1101,15 @@ WoTerm integrates the major remote communication protocols in a single client, i
 ```shell
 paru -S woterm-bin
 ```
+
+## MasterGo
+
+For product managers, MasterGo supports online prototype creation, live access to the latest design files, and one-click high-fidelity prototype generation. For designers, it keeps design files stored and updated in the cloud, supports real-time collaboration, and makes creative work smoother. For engineers, it provides anytime access to design files, automatically extracts annotated code, and exports sliced assets in multiple formats.
+
+![](https://mastergo.com/images/home/develop2.png)
+
+[Professional UI/UX collaborative design software - MasterGo product overview](https://mastergo.com/recommend)
+
+```shell
+paru -S mastergo-desktop-bin
+```
