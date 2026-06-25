@@ -60,7 +60,7 @@ The notes favor commands that can be copied directly, plus short explanations fo
 
 #### 🤖 [AI and Assistants](docs/notes/apps/ai.md)
 * **LLM desktop clients**: Cherry Studio / Chatbox
-* **Coding agents and desktops**: OpenCode / Claude Code / Claude Desktop / Codex CLI / Codex Desktop / ZCode / Desktop CC GUI / Paseo / Cline CLI
+* **Coding agents and desktops**: OpenCode / Claude Code / Claude Desktop / Codex CLI / Codex Desktop / ZCode Desktop /  Reasonix Desktop / Desktop CC GUI / Paseo / Cline CLI
 * **CLI management and context tools**: CC Switch / rtk / Cockpit Tools
 * **AI IDEs**: Cursor / Windsurf / Antigravity / Kiro / Trae / Qoder
 * **Data and analytics**: Superset

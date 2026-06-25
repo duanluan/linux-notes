@@ -337,6 +337,16 @@ ZCode combines powerful AI agents with your existing toolchain, so you can plan,
 paru -S zcode-desktop-bin
 ```
 
+## Reasonix Desktop
+
+A DeepSeek-native agent for your terminal. The loop is append-only, aligned to DeepSeek's byte-stable prefix cache — so long sessions hold 90%+ cache hit and input-token cost collapses to ~1/5. Terminal-first, with a local browser UI when you want one.
+
+[Reasonix — DeepSeek-native coding agent for your terminal](https://reasonix.io/)
+
+```shell
+paru -S reasonix-desktop-bin
+```
+
 ## Desktop CC GUI
 
 ccgui is built for professional developers and works as an alternative to Cursor. It focuses on developer experience, with the long-term goal of becoming a next-generation, fully open source and transparent vibe-coding editor that supports engines such as Claude Code and Codex.

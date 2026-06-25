@@ -60,7 +60,7 @@
 
 #### 🤖 [AI 与智能助手](docs/zh/notes/apps/ai.md)
 * **大模型客户端**：Cherry Studio / Chatbox
-* **编码代理与桌面版**：OpenCode / Claude Code / Claude Desktop / Codex CLI / Codex Desktop / ZCode / Desktop CC GUI / Paseo / Cline CLI
+* **编码代理与桌面版**：OpenCode / Claude Code / Claude Desktop / Codex CLI / Codex Desktop / ZCode Desktop /  Reasonix Desktop / Desktop CC GUI / Paseo / Cline CLI
 * **CLI 管理与上下文工具**：CC Switch / rtk：过滤压缩 LLM 上下文 / Cockpit Tools
 * **AI IDE**：Cursor / Windsurf / Antigravity / Kiro / Trae / Qoder
 * **数据分析**：Superset

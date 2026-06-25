@@ -337,6 +337,16 @@ ZCode 将最强大的 AI Agents 与现有工具链结合，让你在熟悉的流
 paru -S zcode-desktop-bin
 ```
 
+## Reasonix Desktop
+
+DeepSeek 原生的终端编码 Agent。运行循环 append-only, 对齐 DeepSeek 字节稳定的 prefix-cache —— 长会话缓存命中 90%+,输入 token 成本降到 约 1/5。
+
+[Reasonix — DeepSeek 原生的终端编码 Agent](https://reasonix.io/)
+
+```shell
+paru -S reasonix-desktop-bin
+```
+
 ## Desktop CC GUI
 
 ccgui 目标群体是专业开发者，可以替代Curosr使用。专注于开发者体验，我们最终目标是打造一个100%开源透明的 下一代VibeCoding编辑器（支持Claude Code，Codex等引擎）
