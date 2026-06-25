@@ -1,6 +1,6 @@
 # AI 类
 
-下文中`> `代表为 AI 应用内命令。
+**[AI Agent 教程](https://blog.zhjh.top/?p=bnMTnwHz)：Codex、Skills For Real Engineers、Superpowers、Lark CLI、Spec Kit、Trellis、gitnexus、Open Code Review、Headroom、rtk、Ponytail、ccusage、提示词技巧。**
 
 ## Cherry Studio：大语言模型客户端
 

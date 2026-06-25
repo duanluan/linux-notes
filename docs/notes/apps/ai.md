@@ -1,7 +1,5 @@
 # AI
 
-In the examples below, `> ` indicates a command entered inside the AI application itself.
-
 ## Cherry Studio: LLM Desktop Client
 
 Cherry Studio is a desktop client that supports multiple large language model providers.
