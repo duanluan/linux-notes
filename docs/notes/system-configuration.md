@@ -307,7 +307,7 @@ Search for `Software Update` in the launcher and click `Apply`.
 sudo pacman -Syu
 ```
 
-Reboot after updates. Otherwise, the running kernel and kernel modules may not match, and commands such as `modprobe tun` can fail.
+Reboot after updates. This also applies to KDE's built-in `Software Update`: finish the update, reboot first, and only then continue installing or opening other apps. Otherwise, the running kernel, graphics libraries, and kernel modules may get out of sync, and apps such as RustDesk can fail to open a window.
 
 ## DPI Scaling
 
