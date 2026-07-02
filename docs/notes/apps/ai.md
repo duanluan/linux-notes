@@ -212,6 +212,14 @@ $ opencode
 > /models
 ```
 
+## OpenCode Desktop
+
+[OpenCode | Download](https://opencode.ai/download)
+
+```shell
+paru -S opencode-desktop-bin
+```
+
 ## Claude Code
 
 Collaborate with Claude directly inside your codebase. You can build, debug, and ship from the terminal, IDE, Slack, or the web. Describe what you need, and let Claude handle the rest.

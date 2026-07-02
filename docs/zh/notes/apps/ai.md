@@ -214,6 +214,14 @@ $ opencode
 > /models
 ```
 
+## OpenCode Desktop
+
+[OpenCode | 下载](https://opencode.ai/download)
+
+```shell
+paru -S opencode-desktop-bin
+```
+
 ## Claude Code
 
 直接在您的代码库中与 Claude 协作。您可以在终端、IDE、Slack 或网页端进行构建、调试和发布。只需说明您的需求，剩下的就交给 Claude 来处理。
