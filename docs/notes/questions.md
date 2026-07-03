@@ -274,3 +274,42 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
 - WeChat cannot input Chinese
 
   Search for `WeChat` in the launcher, right-click `Edit Applications...`, and in the KDE menu editor add `GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx` under `General` -> `Environment Variables`. Save the entry and restart the app.
+
+## Fcitx5 Input Method Candidate Window Disappears
+
+You can switch to the Chinese input method, but the candidate window does not appear while typing.
+
+First, check the current input method environment and processes:
+
+```shell
+printenv XMODIFIERS GTK_IM_MODULE QT_IM_MODULE SDL_IM_MODULE GLFW_IM_MODULE DISPLAY WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+pgrep -a fcitx5
+fcitx5-remote
+fcitx5-remote -n
+```
+
+An output of `1` from `fcitx5-remote` means the input method is inactive, while `2` means it is active. `fcitx5-remote -n` shows the current input method name, such as `rime`.
+
+Restore the candidate window:
+
+```shell
+# Restart Fcitx5 in the background, replacing the running instance
+fcitx5 -r -d
+
+# Reload the configuration
+fcitx5-remote -r
+
+# Switch to Rime
+fcitx5-remote -s rime
+
+# Activate the input method
+fcitx5-remote -o
+
+# Verify the status and current input method
+fcitx5-remote
+fcitx5-remote -n
+```
+
+If `fcitx5-remote` outputs `2` and `fcitx5-remote -n` outputs `rime`, the candidate window will usually reappear after you refocus the input field.
+
+If it still does not appear, run `fcitx5-diagnose` and check whether `Classic User Interface` is enabled.

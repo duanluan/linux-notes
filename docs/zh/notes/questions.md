@@ -273,3 +273,42 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
 - 微信无法输入中文
 
   开始菜单搜索`微信`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx`，保存后重启软件。
+
+## Fcitx5 输入法候选栏消失
+
+能切换到中文输入法，但打字时不显示候选栏。
+
+先查看当前输入法环境和进程：
+
+```shell
+printenv XMODIFIERS GTK_IM_MODULE QT_IM_MODULE SDL_IM_MODULE GLFW_IM_MODULE DISPLAY WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+pgrep -a fcitx5
+fcitx5-remote
+fcitx5-remote -n
+```
+
+`fcitx5-remote`输出`1`表示输入法未激活，输出`2`表示输入法已激活。`fcitx5-remote -n`可以查看当前输入法名称，例如`rime`。
+
+恢复候选栏：
+
+```shell
+# 后台替换启动 fcitx5
+fcitx5 -r -d
+
+# 重新读取配置
+fcitx5-remote -r
+
+# 切换到 Rime
+fcitx5-remote -s rime
+
+# 激活输入法
+fcitx5-remote -o
+
+# 验证状态和当前输入法
+fcitx5-remote
+fcitx5-remote -n
+```
+
+如果`fcitx5-remote`输出`2`，并且`fcitx5-remote -n`输出`rime`，重新聚焦输入框后候选栏通常会恢复。
+
+如果仍然不显示，执行`fcitx5-diagnose`，检查`Classic User Interface`是否已启用。
