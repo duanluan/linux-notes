@@ -1464,3 +1464,25 @@ An ebook management, reading, editing, and conversion suite.
 # avoid calibre-bin from AUR; it cannot switch the UI language correctly
 sudo pacman -S calibre
 ```
+
+## QGIS
+
+Spatial visualization and decision-making tools for everyone, designed for map creation.
+
+![](https://hub.qgis.org/media/screenshots/2025/QGIS.png)
+
+[Download · QGIS](https://version.qgis.org/download/)
+
+```shell
+# Install the stable release
+pacman -S qgis
+
+# Or install the long-term release; it is newer, but takes a long time to compile
+# Leave the Conda environment; if Conda is not active, ignore the error
+conda deactivate 2>/dev/null || true
+# Put system program directories first to avoid picking up Python from Miniforge
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+# Clear variables that affect Python library lookup and environment selection
+unset PYTHONHOME PYTHONPATH CONDA_PREFIX CONDA_DEFAULT_ENV VIRTUAL_ENV
+paru -S qgis-ltr
+```

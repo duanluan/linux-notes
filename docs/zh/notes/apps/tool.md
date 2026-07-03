@@ -1512,3 +1512,25 @@ paru -S localsend-bin
 # 不用 AUR 中的 calibre-bin，会无法切换中文
 sudo pacman -S calibre
 ```
+
+## QGIS
+
+面向所有人的空间可视化与决策工具，用于地图制作。
+
+![](https://hub.qgis.org/media/screenshots/2025/QGIS.png)
+
+[Download · QGIS](https://version.qgis.org/download/)
+
+```shell
+# 安装稳定版
+pacman -S qgis
+
+# 或安装长期版本，版本更高但需长时间编译
+# 退出 Conda 环境；如果本来没启用 Conda，也不要报错中断
+conda deactivate 2>/dev/null || true
+# 让系统程序目录排在前面，避免先找到 Miniforge 里的 python
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
+# 清掉会影响 Python 查找库和环境选择的变量
+unset PYTHONHOME PYTHONPATH CONDA_PREFIX CONDA_DEFAULT_ENV VIRTUAL_ENV
+paru -S qgis-ltr
+```
