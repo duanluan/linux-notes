@@ -379,8 +379,33 @@ paru -S virtualbox-ext-oracle
   `VirtualBox can't operate in VMX root mode. Please disable the KVM kernel extension, recompile your kernel and reboot (VERR_VMX_IN_VMX_ROOT_MODE).`
 
   Linux 内核自带的 KVM (Kernel-based Virtual Machine) 模块抢占了 CPU 的虚拟化硬件资源（VT-x/AMD-V），导致 VirtualBox 无法进入 VMX Root Mode。
-    
-  需要停止 QEMU / libvirt、Android Emulator、Docker 等使用 KVM 的服务。
+
+  ```shell
+  # 先确认是否已经加载 KVM 模块
+  lsmod | grep -E '^(kvm|kvm_intel|kvm_amd)'
+
+  # 如果没有正在运行 QEMU / libvirt / GNOME Boxes / Android Emulator 等依赖 KVM 的程序，可以临时卸载 KVM 模块后再启动 VirtualBox
+  # Intel CPU
+  sudo modprobe -r kvm_intel kvm
+  # AMD CPU
+  sudo modprobe -r kvm_amd kvm
+
+  # 如果系统升级后每次重启都会自动加载 KVM，且本机主要使用 VirtualBox，可以把 KVM 加入黑名单
+  sudo tee /etc/modprobe.d/disable-kvm-for-virtualbox.conf > /dev/null <<'EOF'
+  blacklist kvm
+  blacklist kvm_intel
+  blacklist kvm_amd
+  EOF
+  # 重新生成所有已安装内核的 initramfs 启动镜像
+  sudo mkinitcpio -P
+  # 重启
+  sudo reboot
+
+  # 如果之后要重新使用 QEMU / libvirt / GNOME Boxes / Android Emulator
+  sudo rm /etc/modprobe.d/disable-kvm-for-virtualbox.conf
+  sudo mkinitcpio -P
+  sudo reboot
+  ```
 
 
 ## Docker + Docker Buildx + Docker Componse + lazydocker + Portainer

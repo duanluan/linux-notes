@@ -370,7 +370,38 @@ paru -S virtualbox-ext-oracle
 
 - `VT-x is being used by another hypervisor (VERR_VMX_IN_VMX_ROOT_MODE)`
 
-  KVM is occupying the virtualization extensions (VT-x / AMD-V). Stop QEMU / libvirt, Android Emulator, Docker, or anything else currently using KVM.
+  `VirtualBox can't operate in VMX root mode. Please disable the KVM kernel extension, recompile your kernel and reboot (VERR_VMX_IN_VMX_ROOT_MODE).`
+
+  The KVM (Kernel-based Virtual Machine) modules built into the Linux kernel have taken over the CPU virtualization extensions (VT-x / AMD-V), so VirtualBox cannot enter VMX Root Mode.
+
+  ```shell
+  # Check whether KVM modules are already loaded
+  lsmod | grep -E '^(kvm|kvm_intel|kvm_amd)'
+
+  # If no QEMU / libvirt / GNOME Boxes / Android Emulator process that depends on KVM is running,
+  # temporarily unload the KVM modules before starting VirtualBox
+  # Intel CPU
+  sudo modprobe -r kvm_intel kvm
+  # AMD CPU
+  sudo modprobe -r kvm_amd kvm
+
+  # If KVM is automatically loaded after every reboot following a system upgrade,
+  # and this machine mainly uses VirtualBox, add KVM to the module blacklist
+  sudo tee /etc/modprobe.d/disable-kvm-for-virtualbox.conf > /dev/null <<'EOF'
+  blacklist kvm
+  blacklist kvm_intel
+  blacklist kvm_amd
+  EOF
+  # Regenerate initramfs boot images for all installed kernels
+  sudo mkinitcpio -P
+  # Reboot
+  sudo reboot
+
+  # If you later need to use QEMU / libvirt / GNOME Boxes / Android Emulator again
+  sudo rm /etc/modprobe.d/disable-kvm-for-virtualbox.conf
+  sudo mkinitcpio -P
+  sudo reboot
+  ```
 
 ## Docker + Buildx + Compose + lazydocker + Portainer
 
