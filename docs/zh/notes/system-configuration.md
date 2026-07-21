@@ -295,12 +295,35 @@ nano /etc/hosts
 
 ![](assets/20250702011829.png)
 
+更新后要重启系统，否则系统内核和内核模块版本对不上，导致`modprobe tun`等命令运行失败。
+这也包括 KDE 自带的`Software Update`：更新完成后先重启，再继续安装或打开其他软件。否则显卡库和内核模块可能不同步，像 RustDesk 这类依赖图形上下文的软件会直接打不开窗口。
+
 ```shell
 sudo pacman -Syu
 ```
 
-更新后要重启系统，否则系统内核和内核模块版本对不上，导致`modprobe tun`等命令运行失败。
-这也包括 KDE 自带的`Software Update`：更新完成后先重启，再继续安装或打开其他软件。否则显卡库和内核模块可能不同步，像 RustDesk 这类依赖图形上下文的软件会直接打不开窗口。
+建议使用带睡眠和关机保护的命令升级系统。这样在升级内核、生成 initramfs 启动镜像、更新 GRUB 和写入`/boot`文件期间，合盖、电源键短按、桌面环境请求睡眠或关机都会被系统临时拦住。
+
+```shell
+# 阻止睡眠和正常关机，执行系统升级、重建启动镜像、更新 GRUB，并将刚写入的文件刷到磁盘
+systemd-inhibit --what=sleep:shutdown --why="system update" sudo bash -lc 'pacman -Syu && mkinitcpio -P && update-grub && sync'
+# 重启
+sudo reboot
+```
+
+建议额外安装一个 LTS 备用内核。当前内核或它的 initramfs 启动镜像损坏时，可以在 GRUB 的`Advanced options for Manjaro`中选择备用内核启动进系统，再重新生成启动镜像或修复 GRUB，避免只能依赖 Live USB。
+
+```shell
+# 查看当前已安装内核
+mhwd-kernel -li
+# 查看 Manjaro 当前可安装的内核
+mhwd-kernel -l
+
+# 安装 Manjaro 管理的 Linux 6.6 LTS 备用内核
+sudo mhwd-kernel -i linux66
+# 重新生成 GRUB 启动菜单，让备用内核出现在高级启动项中
+sudo update-grub
+```
 
 ## DPI 缩放
 

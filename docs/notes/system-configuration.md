@@ -303,11 +303,34 @@ Search for `Software Update` in the launcher and click `Apply`.
 
 ![](assets/20250702011829.png)
 
+Reboot after updates. This also applies to KDE's built-in `Software Update`: finish the update, reboot first, and only then continue installing or opening other apps. Otherwise, the running kernel, graphics libraries, and kernel modules may get out of sync, and apps such as RustDesk can fail to open a window.
+
 ```shell
 sudo pacman -Syu
 ```
 
-Reboot after updates. This also applies to KDE's built-in `Software Update`: finish the update, reboot first, and only then continue installing or opening other apps. Otherwise, the running kernel, graphics libraries, and kernel modules may get out of sync, and apps such as RustDesk can fail to open a window.
+Use a sleep- and shutdown-inhibited command for system upgrades. While the kernel is being upgraded, the initramfs boot image is being generated, GRUB is being updated, and files under `/boot` are being written, this prevents lid-close events, short power-button presses, and sleep or shutdown requests from the desktop environment from interrupting the upgrade.
+
+```shell
+# Inhibit sleep and normal shutdown, then upgrade the system, rebuild boot images, update GRUB, and flush newly written files to disk
+systemd-inhibit --what=sleep:shutdown --why="system update" sudo bash -lc 'pacman -Syu && mkinitcpio -P && update-grub && sync'
+# Reboot
+sudo reboot
+```
+
+Install an extra LTS fallback kernel. If the current kernel or its initramfs boot image is damaged, you can choose the fallback kernel from GRUB's `Advanced options for Manjaro`, boot into the system, and rebuild the boot image or repair GRUB instead of relying only on a Live USB.
+
+```shell
+# List currently installed kernels
+mhwd-kernel -li
+# List kernels currently available in Manjaro
+mhwd-kernel -l
+
+# Install the Manjaro-managed Linux 6.6 LTS fallback kernel
+sudo mhwd-kernel -i linux66
+# Regenerate the GRUB boot menu so the fallback kernel appears in advanced boot options
+sudo update-grub
+```
 
 ## DPI Scaling
 
