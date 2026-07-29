@@ -979,6 +979,18 @@ chmod +x navicat-manager.sh
 
 - **达梦 ODBC 注意**：**不要**执行达梦驱动目录里的`install_odbc.sh`，它会写`/etc/ld.so.conf.d/dameng_odbc.conf`、`/etc/ld.so.conf.d/dameng_odbc_flatpak.conf`，然后执行`ldconfig`。会导致系统基础程序加载到这些第三方库，严重时无法正常启动系统。修复方法见[Navicat + 达梦 ODBC 后系统无法启动](../questions.md#navicat-达梦-odbc-后系统无法启动)。
 
+## DBX
+
+轻量级跨平台数据库管理工具，支持 MySQL、PostgreSQL、SQLite、Redis、MongoDB、达梦等 70+ 数据库，提供桌面端、Docker、CLI、内置 AI 助手和 MCP Server。
+
+![](https://dl.dbxio.com/assets/screenshot-grid.png)
+
+[DBX - 20MB，管理70+种数据库！ | DBX](https://dbxio.com/cn)
+
+```shell
+paru -S dbx-bin
+```
+
 ## JetBrains DataGrip
 
 适用于关系型和 NoSQL 数据库的强大跨平台 IDE。

@@ -899,6 +899,18 @@ chmod +x navicat-manager.sh
 
 - **Dameng ODBC Note**: Do not run `install_odbc.sh` from the Dameng driver directory. It writes `/etc/ld.so.conf.d/dameng_odbc.conf` and `/etc/ld.so.conf.d/dameng_odbc_flatpak.conf`, then runs `ldconfig`, which can make core system programs load third-party libraries and prevent the system from booting normally. For the recovery steps, see [System Will Not Boot After Navicat + Dameng ODBC](../questions.md#system-will-not-boot-after-navicat-dameng-odbc).
 
+## DBX
+
+20 MB lightweight cross-platform database client for 70+ databases, including MySQL, PostgreSQL, SQLite, Redis, MongoDB, DuckDB, SQL Server, and Dameng. Built-in AI, MCP Server, CLI, desktop and Docker.
+
+![](https://dl.dbxio.com/assets/screenshot-grid.png)
+
+[DBX - 20 MB to manage 70+ databases! | DBX](https://dbxio.com/en)
+
+```shell
+paru -S dbx-bin
+```
+
 ## JetBrains DataGrip
 
 A powerful cross-platform IDE for relational and NoSQL databases.

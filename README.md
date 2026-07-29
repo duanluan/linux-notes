@@ -70,7 +70,7 @@ The notes favor commands that can be copied directly, plus short explanations fo
 * **Frontend and mobile**: nvm + Node.js + pnpm + nrm / FVM + Flutter Mirrors + Dart / Android Studio / Visual Studio Code / WeChat Dev Tools
 * **JetBrains tools**: Toolbox App / IntelliJ IDEA / WebStorm / PyCharm
 * **Backend and system-level tooling**: JDK / Maven and Maven Daemon / Gradle / Apache JMeter / Python + pipx + cnpip + Miniforge + uv / Rust + Cargo Mirrors
-* **Database and API tooling**: JetBrains DataGrip / Navicat Premium / DBeaver Enterprise Edition / Another Redis Desktop Manager / Offset Explorer / Apifox / Apipost / Postman
+* **Database and API tooling**: JetBrains DataGrip / Navicat Premium / DBX / DBeaver Enterprise Edition / Another Redis Desktop Manager / Offset Explorer / Apifox / Apipost / Postman
 * **Terminal clients**: MobaXterm / WindTerm / WoTerm
 * **Design collaboration**: MasterGo
 
