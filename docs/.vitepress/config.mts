@@ -38,7 +38,8 @@ export default defineConfig({
       description: '从系统安装到环境配置再到日常使用',
       themeConfig: {
         nav: [
-          { text: '文档', link: '/zh/notes/system-installation.md' }
+          { text: '文档', link: '/zh/notes/system-installation.md', activeMatch: '^/zh/notes/' },
+          { text: '博客', link: '/zh/blog/', activeMatch: '^/zh/blog/' }
         ],
         sidebar: [
           {
@@ -81,7 +82,8 @@ export default defineConfig({
   },
   themeConfig: {
     nav: [
-      { text: 'Docs', link: '/notes/system-installation.md' }
+      { text: 'Docs', link: '/notes/system-installation.md', activeMatch: '^/notes/' },
+      { text: 'Blog', link: '/blog/', activeMatch: '^/blog/' }
     ],
     sidebar: [
       {
