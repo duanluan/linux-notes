@@ -19,6 +19,60 @@ killall -9 plasmashell
 
 `plasmashell` usually restarts automatically, and the panel returns to normal.
 
+## Alt+Tab Does Not Work in KDE
+
+In a Plasma X11 session, if regular keystrokes and application shortcuts still work but KWin global shortcuts such as `Alt+Tab` do not respond, first check whether KWin is still registered with the KDE global shortcuts service:
+
+```shell
+$ qdbus6 org.kde.kglobalaccel /component/kwin isActive
+false
+```
+
+A result of `false` means that KWin's global shortcut component is inactive. Restart the global shortcuts service:
+
+```shell
+$ systemctl --user restart plasma-kglobalaccel.service
+
+$ qdbus6 org.kde.kglobalaccel /component/kwin isActive
+true
+```
+
+Once the command returns `true`, `Alt+Tab` should work again. This restarts only the current user's global shortcuts service; it does not require restarting Plasma or rebooting the computer.
+
+## Meta+D Does Not Minimize All Windows in KDE
+
+In KWin, `MinimizeAll` is not a built-in window command. It is provided by the bundled `minimizeall` script. Even if `Meta+D` is assigned to `MinimizeAll`, nothing will happen while the script is not loaded. In some cases, after releasing `Meta`, the current application may receive `D` as ordinary text input.
+
+Check whether the script is loaded:
+
+```shell
+$ qdbus6 org.kde.KWin /Scripting org.kde.kwin.Scripting.isScriptLoaded minimizeall
+false
+```
+
+Enable the script and tell KWin to reload its configuration:
+
+```shell
+$ kwriteconfig6 --file kwinrc --group Plugins --key minimizeallEnabled --type bool true
+$ qdbus6 org.kde.KWin /KWin reconfigure
+
+$ qdbus6 org.kde.KWin /Scripting org.kde.kwin.Scripting.isScriptLoaded minimizeall
+true
+```
+
+Then open `System Settings` -> `Shortcuts` -> `KWin` and assign `Meta+D` to `MinimizeAll`. If `Meta+D` was previously assigned to `Show Desktop`, remove that assignment to avoid a conflict.
+
+The two actions behave differently:
+
+- `Show Desktop` only hides the windows temporarily. Exiting Show Desktop mode or selecting an application from the taskbar makes the other windows visible again.
+- `MinimizeAll` actually minimizes the windows. Selecting an application from the taskbar then restores only that application. Triggering `MinimizeAll` again restores the windows that the script minimized.
+
+To test the script action directly without using the keyboard shortcut, run:
+
+```shell
+qdbus6 org.kde.kglobalaccel /component/kwin invokeShortcut MinimizeAll
+```
+
 ## Forgot the Root Password
 
 If the correct root password suddenly stops working, reset it from a Live CD.

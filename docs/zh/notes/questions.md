@@ -19,6 +19,60 @@ killall -9 plasmashell
 
 `plasmashell`通常会自动重新拉起，任务栏会恢复正常。
 
+## KDE 下 Alt+Tab 无效
+
+在 Plasma X11 会话中，单独按键和应用内快捷键正常，但`Alt+Tab`等 KWin 全局快捷键没有反应时，先检查 KWin 是否仍注册在 KDE 全局快捷键服务中：
+
+```shell
+$ qdbus6 org.kde.kglobalaccel /component/kwin isActive
+false
+```
+
+返回`false`表示 KWin 的全局快捷键组件当前未激活。重启全局快捷键服务：
+
+```shell
+$ systemctl --user restart plasma-kglobalaccel.service
+
+$ qdbus6 org.kde.kglobalaccel /component/kwin isActive
+true
+```
+
+返回`true`后，`Alt+Tab`即可恢复。这个操作只重启当前用户的全局快捷键服务，不需要重启桌面或电脑。
+
+## KDE 下 Meta+D 无法最小化所有窗口
+
+KWin 中的`MinimizeAll`并不是内置窗口命令，而是由系统自带的`minimizeall`脚本提供。即使`Meta+D`已经绑定到`MinimizeAll`，脚本未加载时也不会执行任何动作；有时松开`Meta`后，`D`还会被当前应用当作普通字符输入。
+
+先检查脚本状态：
+
+```shell
+$ qdbus6 org.kde.KWin /Scripting org.kde.kwin.Scripting.isScriptLoaded minimizeall
+false
+```
+
+启用脚本并让 KWin 重新读取配置：
+
+```shell
+$ kwriteconfig6 --file kwinrc --group Plugins --key minimizeallEnabled --type bool true
+$ qdbus6 org.kde.KWin /KWin reconfigure
+
+$ qdbus6 org.kde.KWin /Scripting org.kde.kwin.Scripting.isScriptLoaded minimizeall
+true
+```
+
+然后在`系统设置`-`键盘`-`快捷键`-`KWin`中，将`最小化全部（MinimizeAll）`绑定为`Meta+D`。如果之前把这个组合键分配给了`暂时显示桌面（Show Desktop）`，需要清除后者的绑定，避免冲突。
+
+两者行为不同：
+
+- `Show Desktop`只是暂时隐藏窗口。退出该状态或点击任务栏应用时，其他窗口也会再次显示。
+- `MinimizeAll`会真正最小化窗口。随后点击任务栏中的某个应用时，只恢复所选应用；再次触发`MinimizeAll`会恢复由该脚本最小化的窗口。
+
+可用以下命令绕过键盘绑定，直接验证脚本动作：
+
+```shell
+qdbus6 org.kde.kglobalaccel /component/kwin invokeShortcut MinimizeAll
+```
+
 ## 忘记 root 密码
 
 正常使用突然正确的 root 密码无效了。
