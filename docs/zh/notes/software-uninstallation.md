@@ -9,7 +9,7 @@
 sudo pacman -Rns xxx
 # yay 卸载软件
 yay -Rns xxx
-# yaru 卸载软件
+# paru 卸载软件
 paru -Rns xxx
 ```
 

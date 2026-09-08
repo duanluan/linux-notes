@@ -37,7 +37,7 @@ mhwd -li
 
 For other GPUs, see:
 
-- [Configure Graphics Cards - Manjaro](https://wiki.manjaro.org/index.php/Configure_Graphics_Cards/zh-cn) (recommended)
+- [Configure Graphics Cards - Manjaro](https://wiki.manjaro.org/index.php?title=Configure_Graphics_Cards) (recommended)
 - [Graphics Drivers | Arch Linux Simple Guide](https://arch.icekylin.online/guide/rookie/graphic-driver) (recommended)
 - [Intel graphics - Arch Linux Chinese Wiki](https://wiki.archlinuxcn.org/wiki/Intel_%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E5%99%A8)
 - [ATI - Arch Linux Chinese Wiki](https://wiki.archlinuxcn.org/wiki/ATI)
@@ -319,9 +319,7 @@ $ paru rime-ice
 [Apply patches via `patch` - Rime Ice](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
 
 Optionally download a Wanxiang grammar model:
-[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)
-or
-[wanxiang-mini-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-mini-zh-hans.gram).
+[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram).
 
 ```shell
 # optionally place the Wanxiang model into the Rime config directory
@@ -559,7 +557,7 @@ zoxide is a smarter `cd` command inspired by `z` and `autojump`. It remembers th
 
 Fuzzy jumping with zoxide requires `fzf`.
 
-![](https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/tutorial.webp)
+![](https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/tutorial.gif)
 
 [Installation - ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
 

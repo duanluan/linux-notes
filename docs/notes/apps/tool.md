@@ -94,8 +94,9 @@ paru -S koala-clash-bin
 
 `proxychains` inserts a proxy chain between an application and the network, allowing traffic to be forwarded through the configured proxy server.
 
+Install proxychains-ng:
 ```shell
-sudo pacman -S proxychains
+sudo pacman -S proxychains-ng
 ```
 
 Edit `/etc/proxychains.conf`, comment out the default entries after `[ProxyList]`, and add your own:
@@ -551,7 +552,7 @@ The solution is to inject VirtIO drivers into the ISO.
 # -----------------------------------------------------------------------------
 
 # 1. Install the required tools
-sudo pacman -S p7zip libisoburn mtools dosfstools
+sudo pacman -S 7zip libisoburn mtools dosfstools
 
 # 2. Create the workspace
 mkdir -p ~/win11_mod/drivers
@@ -666,7 +667,7 @@ A fast text editor for huge files.
 # install
 paru -S emeditor-wine
 # uninstall
-paru -R emeditor-wine
+paru -Rns emeditor-wine
 rm -rf ~/.wine-emeditor
 ```
 
@@ -941,7 +942,7 @@ A free archive manager that supports opening and extracting RAR, TAR, ZIP, and m
 [Download PeaZip for Linux x86_64](https://peazip.github.io/peazip-linux.html)
 
 ```shell
-paru -S peazip-qt-bin
+sudo pacman -S peazip
 ```
 
 ## Synology Drive Client
@@ -1184,14 +1185,14 @@ Keyviz is a free and open-source keystroke visualizer that shows your keyboard a
 [mulaRahul/keyviz - GitHub](https://github.com/mulaRahul/keyviz)
 
 ```shell
-paru -S keyviz-zh-bin
+paru -S keyviz-zh
 ```
 
 ## StartLive
 
 A Bilibili streaming helper.
 
-![](https://private-user-images.githubusercontent.com/93813543/445881146-974b0dbb-fcd5-4b26-be76-42db728b8942.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjYxNDY4NTAsIm5iZiI6MTc2NjE0NjU1MCwicGF0aCI6Ii85MzgxMzU0My80NDU4ODExNDYtOTc0YjBkYmItZmNkNS00YjI2LWJlNzYtNDJkYjcyOGI4OTQyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEyMTklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMjE5VDEyMTU1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk1ZWIwMWIxOTQ5MjgyYjA5YzMwYWVlNDUyMTVhNmQ2NDA5YzFjNzkwNThkOTgxZTk4Y2ZkOTJmZDI0MjYwZmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.PaHrRXQpfJw5afCtihUwsO9iXS9XX4xjv08uQqylP7c)
+![](https://docimg1.docs.qq.com/image/AgAABWcFuYvuARfhZlBJtL6oskj_FB2K.png?w=919&h=752)
 
 - [Releases · Radekyspec/StartLive](https://github.com/Radekyspec/StartLive/releases)
 - [StartLive usage notes](https://docs.qq.com/doc/DTHVMdkhtUWJjRFhv)
@@ -1421,9 +1422,9 @@ sudo systemctl enable runsunloginclient.service
 
 ## ToDesk
 
-![](https://www.todesk1.com/images/dl-bg.png)
+![](https://www.todesk.com/dist/img/3325295.png)
 
-[ToDesk Download](https://www.todesk1.com/download)
+[ToDesk Download](https://www.todesk.com/download)
 
 ```shell
 # install ToDesk

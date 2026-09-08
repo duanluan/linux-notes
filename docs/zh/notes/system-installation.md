@@ -16,7 +16,7 @@ U 盘安装 [Ventoy](https://www.ventoy.net/cn/index.html)。
 
 ## 安装系统
 
-更多参考：[UEFI - 安装指南 - Manjaro](https://wiki.manjaro.org/index.php/UEFI_-_Install_Guide/zh-cn)
+更多参考：[UEFI - 安装指南 - Manjaro](https://wiki.manjaro.org/index.php?title=UEFI_-_Install_Guide)
 
 开机按 `F2`/`Del` 进入 BIOS，`Save & Exit` - `Boot Override` 选择 U 盘。
 

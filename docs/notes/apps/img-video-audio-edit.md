@@ -16,7 +16,7 @@ Download `PhotoGIMP-linux.zip` from [Releases · Diolinux/PhotoGIMP](https://git
 
 ## Paint.NET
 
-Paint.NET is image and photo editing software. It features an intuitive, innovative user interface with support for layers, unlimited undo, special effects, and a wide range of practical, powerful tools. An active and growing online community offers friendly help, tutorials, and plugins.
+Paint.NET is image and photo editing software. It [features](https://www.getpaint.net/features.html) an intuitive, innovative user interface with support for layers, unlimited undo, special effects, and a wide range of practical, powerful tools. An active and growing [online community](https://www.getpaint.net/redirect/forum.html) offers friendly help, [tutorials](https://www.getpaint.net/redirect/tutorials.html), and [plugins](https://www.getpaint.net/redirect/plugins.html).
 
 ![](https://www.getpaint.net/screenshots/pdn513_thumb.jpg)
 
@@ -113,7 +113,7 @@ DaVinci Resolve combines editing, color grading, visual effects, motion graphics
 
 ## Blender
 
-Blender is a free and open-source 3D creation suite. It supports the full 3D pipeline, including modeling, rigging, animation, simulation, rendering, compositing, motion tracking, video editing, and even game asset creation. Advanced users can customize Blender and build their own tools through its Python API.
+Blender is a free and open-source 3D creation suite. It supports the full 3D pipeline, including modeling, rigging, animation, simulation, rendering, compositing, motion tracking, video editing, and even game asset creation. Advanced users can customize Blender and build their own tools through its Python API; such tools are often included in future versions of Blender.
 
 ![](https://docs.blender.org/manual/en/2.80/_images/interface_window-system_introduction_default-startup.png)
 

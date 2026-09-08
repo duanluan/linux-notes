@@ -18,9 +18,15 @@ paru -S linuxqq
 paru -S wechat-bin
 ```
 
-Download [activate-wechat.sh](https://github.com/duanluan/shell-scripts/blob/main/activate-wechat.sh).
+On Wayland, WeChat cannot be activated by global shortcuts. It is recommended to install [wechat-xwayland](https://aur.archlinux.org/packages/wechat-xwayland), which launches WeChat through XWayland to fix this:
 
-Search for `Shortcuts` in the launcher, then go to `Add New` -> `Command or Script`, and set the command to `the-directory-where-you-saved-the-script/activate-wechat.sh`.
+```shell
+paru -S wechat-xwayland
+```
+
+With wechat-xwayland installed, use the activation command it provides, `/usr/bin/activate-wechat-xwayland`; otherwise download [activate-wechat.sh](https://github.com/duanluan/shell-scripts/blob/main/activate-wechat.sh).
+
+Search for `Shortcuts` in the launcher, then go to `Add New` -> `Command or Script`, and set the command to the activation command or script above.
 
 Click `Add` on the right, assign the shortcut `Ctrl` `Alt` `W`, then click `Apply`.
 
@@ -177,6 +183,16 @@ A minimalist music player that supports word-by-word lyrics, NetEase Cloud Music
 paru -S splayer
 ```
 
+## SPlayer Next
+
+The next-generation version of SPlayer, a cross-platform desktop music player with rich lyric support and wide audio format compatibility. It supports word-by-word lyrics, desktop and taskbar lyrics, streaming from Subsonic, Navidrome, Jellyfin, and Emby, and audio spectrum display.
+
+[Releases · SPlayer-Dev/SPlayer-Next](https://github.com/SPlayer-Dev/SPlayer-Next/releases)
+
+```shell
+paru -S splayer-next-bin
+```
+
 ## YesPlayMusic
 
 A visually polished third-party NetEase Cloud Music player.
@@ -251,7 +267,7 @@ A Linux port of the official Bilibili client, with roaming support.
 First check which Electron version is required on [AUR - bilibili-bin](https://aur.archlinux.org/packages/bilibili-bin).
 
 ```shell
-paru -S electron28-bin
+paru -S electron43
 paru -S bilibili-bin
 ```
 

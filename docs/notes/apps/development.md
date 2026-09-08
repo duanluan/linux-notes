@@ -68,6 +68,8 @@ bash install.sh
 \. "$HOME/.nvm/nvm.sh"
 # install Node.js
 nvm install 24
+# set the default version so new shells use it automatically
+nvm alias default 24
 # method 1: enable pnpm through corepack
 corepack enable pnpm
 # method 2: install pnpm directly
@@ -234,6 +236,10 @@ In `Settings` -> `Keymap` -> `Main menu` -> `Navigate` -> `Declaration or Usages
 
 If IDEA keeps consuming more memory without releasing it:
 
+With IDEA 2025.3.1.1, memory usage kept climbing (>20G) and was not released even after closing IDEA; `ps aux | grep idea` showed many lingering `ExternalJavacProcess` processes.
+
+Fix:
+
 - `pkill -f "ExternalJavacProcess"` to kill all lingering `ExternalJavacProcess` processes.
 - Open `Settings` / `Settings (Ctrl+Alt+S)`.
 - Go to `Build, Execution, Deployment` -> `Compiler`.
@@ -266,6 +272,8 @@ If IDEA keeps consuming more memory without releasing it:
 - Maven Daemon
 
   [Maven Daemon](https://maven.apache.org/tools/mvnd.html) (`mvnd`) keeps a JVM running in the background, manages a pool of Maven processes, and reuses them across builds.
+
+  Features: **significantly faster builds**, **compatibility with existing Maven plugins and extensions**, **daemon management**, **smart memory management**, and **native executables**.
   
   [Download Apache Maven Daemon](https://maven.apache.org/download.cgi#Maven_Daemon)
   
@@ -339,7 +347,9 @@ GenericName=IDE
 Exec=/opt/jetbrains/webstorm/bin/webstorm %F
 Icon=/opt/jetbrains/webstorm/bin/webstorm.svg
 Type=Application
+# disable startup progress notifications
 StartupNotify=false
+# WM_CLASS for window association
 StartupWMClass=jetbrains-webstorm
 Categories=TextEditor;Development;IDE;
 MimeType=application/xhtml+xml;text/javascript;text/css;
@@ -373,10 +383,12 @@ GenericName=IDE
 Exec=/opt/jetbrains/pycharm/bin/pycharm %F
 Icon=/opt/jetbrains/pycharm/bin/pycharm.svg
 Type=Application
+# disable startup progress notifications
 StartupNotify=false
-StartupWMClass=jetbrains-webstorm
+# WM_CLASS for window association
+StartupWMClass=jetbrains-pycharm
 Categories=TextEditor;Development;IDE;
-MimeType=application/xhtml+xml;text/javascript;text/css;
+MimeType=text/x-python;application/x-python;
 Keywords=pycharm;
 ```
 
@@ -388,7 +400,23 @@ The system Python is available by default, but global `pip install` runs into th
 $ pip install cnpip
 
 error: externally-managed-environment
-...
+
+× This environment is externally managed
+╰─> To install Python packages system-wide, try 'pacman -S
+    python-xyz', where xyz is the package you are trying to
+    install.
+
+    If you wish to install a non-Arch-packaged Python package,
+    create a virtual environment using 'python -m venv path/to/venv'.
+    Then use path/to/venv/bin/python and path/to/venv/bin/pip.
+
+    If you wish to install a non-Arch packaged Python application,
+    it may be easiest to use 'pipx install xyz', which will manage a
+    virtual environment for you. Make sure you have python-pipx
+    installed via pacman.
+
+note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+hint: See PEP 668 for the detailed specification.
 ```
 
 Use the officially suggested solution, `pipx`:
@@ -507,7 +535,9 @@ GenericName=IDE
 Exec=/opt/jetbrains/android-studio/bin/studio %F
 Icon=/opt/jetbrains/android-studio/bin/studio.png
 Type=Application
+# disable startup progress notifications
 StartupNotify=false
+# WM_CLASS for window association
 StartupWMClass=jetbrains-studio
 Categories=TextEditor;Development;IDE;
 MimeType=text/x-java;text/x-kotlin;text/x-groovy;application/xml;text/xml;application/vnd.android.package-archive;inode/directory;
@@ -664,7 +694,9 @@ Directory Size: 739.33 MB
 # check the Flutter version through FVM
 $ fvm flutter --version
 Flutter 3.38.5 • channel stable • https://github.com/flutter/flutter.git
-...
+Framework • revision f6ff1529fd (4 weeks ago) • 2025-12-11 11:50:07 -0500
+Engine • hash c108a94d7a8273e112339e6c6833daa06e723a54 (revision 1527ae0ec5) (27 days ago) • 2025-12-11 15:04:31.000Z
+Tools • Dart 3.10.4 • DevTools 2.51.1
 
 # check the Dart SDK version through FVM
 $ fvm dart --version
@@ -679,7 +711,72 @@ Check the environment and fix common issues:
 ```shell
 # inspect the current environment
 $ proxychains -q fvm flutter doctor -v
-...
+
+[!] Flutter (Channel stable, 3.35.7, on Manjaro Linux 6.12.48-1-MANJARO, locale zh_CN.UTF-8) [29ms]
+    • Flutter version 3.35.7 on channel stable at /home/duanluan/fvm/versions/stable
+    ! Upstream repository https://gh-proxy.com/https://github.com/flutter/flutter.git is not a standard remote.
+      Set environment variable "FLUTTER_GIT_URL" to https://gh-proxy.com/https://github.com/flutter/flutter.git to dismiss this
+      error.
+    • Framework revision adc9010625 (3 weeks ago), 2025-10-21 14:16:03 -0400
+    • Engine revision 035316565a
+    • Dart version 3.9.2
+    • DevTools version 2.48.0
+    • Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android,
+      enable-ios, cli-animations, enable-lldb-debugging
+    • If those were intentional, you can disregard the above warnings; however it is recommended to use "git" directly to
+      perform update checks and upgrades.
+
+[!] Android toolchain - develop for Android devices (Android SDK version 36.1.0) [193ms]
+    • Android SDK at /home/duanluan/Android/Sdk
+    • Emulator version 36.2.12.0 (build_id 14214601) (CL:N/A)
+    ✗ cmdline-tools component is missing.
+      Try installing or updating Android Studio.
+      Alternatively, download the tools from https://developer.android.com/studio#command-line-tools-only and make sure to set
+      the ANDROID_HOME environment variable.
+      See https://developer.android.com/studio/command-line for more details.
+    ✗ Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/to/linux-android-setup for more details.
+
+[✗] Chrome - develop for the web (Cannot find Chrome executable at google-chrome) [9ms]
+    ! Cannot find Chrome. Try setting CHROME_EXECUTABLE to a Chrome executable.
+
+[✓] Linux toolchain - develop for Linux desktop [257ms]
+    • clang version 20.1.8
+    • cmake version 4.1.1
+    • ninja version 1.12.1
+    • pkg-config version 2.5.1
+    • OpenGL core renderer: AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.8, DRM 3.61, 6.12.48-1-MANJARO) (X11)
+    • OpenGL core version: 4.6 (Core Profile) Mesa 25.2.3-arch1.2 (X11)
+    • OpenGL core shading language version: 4.60 (X11)
+    • OpenGL ES renderer: AMD Radeon 780M Graphics (radeonsi, phoenix, LLVM 20.1.8, DRM 3.61, 6.12.48-1-MANJARO) (X11)
+    • OpenGL ES version: OpenGL ES 3.2 Mesa 25.2.3-arch1.2 (X11)
+    • OpenGL ES shading language version: OpenGL ES GLSL ES 3.20 (X11)
+    • GL_EXT_framebuffer_blit: yes (X11)
+    • GL_EXT_texture_format_BGRA8888: yes (X11)
+
+[✓] Android Studio (version 2025.2.1) [8ms]
+    • Android Studio at /opt/jetbrains/android-studio
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 21.0.8+-14196175-b1038.72)
+
+[✓] IntelliJ IDEA Ultimate Edition (version 2025.2) [7ms]
+    • IntelliJ at /opt/jetbrains/intellij-idea-ultimate
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+
+[✓] Connected device (1 available) [56ms]
+    • Linux (desktop) • linux • linux-x64 • Manjaro Linux 6.12.48-1-MANJARO
+
+[✓] Network resources [1,696ms]
+    • All expected network resources are available.
+
+! Doctor found issues in 3 categories.
 ```
 
 - Change the Flutter SDK mirror:
@@ -754,7 +851,9 @@ $ sudo nano /usr/share/applications/wechat-web-devtools.desktop
 
 [Desktop Entry]
 Name=WeChat Dev Tools
+Name[zh_CN]=微信开发者工具
 Comment=The development tools for wechat projects
+Comment[zh_CN]=提供微信开发相关项目的开发IDE支持
 Categories=Development;WebDevelopment;IDE;
 Exec=/opt/wechat-web-devtools-linux/bin/wechat-devtools
 Icon=/opt/wechat-web-devtools-linux/res/icons/wechat-devtools.svg
@@ -839,7 +938,7 @@ An all-in-one collaboration platform for API design, development, and testing.
 [Download Apifox](https://docs.apifox.com/download)
 
 ```shell
-paru -S apifox-bin
+paru -S apifox
 ```
 
 ## Apipost
@@ -1123,5 +1222,5 @@ For product managers, MasterGo supports online prototype creation, live access t
 [Professional UI/UX collaborative design software - MasterGo product overview](https://mastergo.com/recommend)
 
 ```shell
-paru -S mastergo-desktop-bin
+paru -S mastergo
 ```

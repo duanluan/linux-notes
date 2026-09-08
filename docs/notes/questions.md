@@ -60,7 +60,7 @@ $ qdbus6 org.kde.KWin /Scripting org.kde.kwin.Scripting.isScriptLoaded minimizea
 true
 ```
 
-Then open `System Settings` -> `Shortcuts` -> `KWin` and assign `Meta+D` to `MinimizeAll`. If `Meta+D` was previously assigned to `Show Desktop`, remove that assignment to avoid a conflict.
+Then open `System Settings` -> `Keyboard` -> `Shortcuts` -> `KWin` and assign `Meta+D` to `MinimizeAll`. If `Meta+D` was previously assigned to `Show Desktop`, remove that assignment to avoid a conflict.
 
 The two actions behave differently:
 

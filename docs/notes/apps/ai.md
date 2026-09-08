@@ -1,12 +1,14 @@
 # AI
 
+**[AI Agent tutorials](https://blog.zhjh.top/?p=bnMTnwHz): Codex, Skills For Real Engineers, Superpowers, Lark CLI, Spec Kit, Trellis, gitnexus, Open Code Review, Headroom, rtk, Ponytail, ccusage, prompting tips.**
+
 ## Cherry Studio: LLM Desktop Client
 
 Cherry Studio is a desktop client that supports multiple large language model providers.
 
-![](https://docs.cherry-ai.com/~gitbook/image?url=https%3A%2F%2F3562065924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F0Ut5BptC3t8CtSU1UWpM%252Fuploads%252Fgit-blob-1d8f30028704ce0a78a9e2bcff6d1dd0326e41f9%252Fimage.png%3Falt%3Dmedia&width=400&dpr=3&quality=100&sign=536c0510&sv=2)
+![](https://cherryai.com/assets/chat-light-en-J5edljxW.webp)
 
-[Download Client | Cherry Studio](https://docs.cherry-ai.com/cherry-studio/download)
+[Download Client | Cherry Studio](https://cherryai.com/)
 
 ```shell
 paru -S cherry-studio-bin
@@ -266,7 +268,7 @@ Chat, Claude Cowork, and Claude Code, all in one place.
 [Download Claude | Claude by Anthropic](https://claude.com/download)
 
 ```shell
-paru -S claude-desktop-bin
+paru -S claude-desktop
 ```
 
 ## Codex CLI
@@ -328,7 +330,7 @@ Codex Desktop is a desktop experience focused on handling Codex threads in paral
 # Codex CLI installed with npm when required
 $ npm i -g @openai/codex
 # install
-$ paru -S openai-codex-desktop
+$ paru -S chatgpt-desktop
 ```
 
 ## ZCode Desktop
@@ -340,7 +342,7 @@ ZCode combines powerful AI agents with your existing toolchain, so you can plan,
 [ZCode - Simple, Fast, Vibe‑Ready](https://zcode.z.ai/en)
 
 ```shell
-paru -S zcode-desktop-bin
+paru -S zcode
 ```
 
 ## Reasonix Desktop
@@ -550,14 +552,14 @@ Cursor is built to make you dramatically more productive and is one of the stron
 paru -S cursor-bin
 ```
 
-## Windsurf
+## Devin Desktop (formerly Windsurf)
 
-Windsurf is an intuitive AI coding tool designed to keep you and your team productive.
+Windsurf has been renamed to Devin Desktop, an intuitive AI coding tool designed to keep you and your team productive.
 
-[Download Windsurf Editor and Plugins | Windsurf](https://windsurf.com/download)
+[Download | Devin](https://devin.ai/download)
 
 ```shell
-paru -S windsurf
+paru -S devin-desktop-next
 ```
 
 ## Antigravity
@@ -612,7 +614,7 @@ paru -S qoder-bin
 
 A code editor for the age of AI agents. Run large numbers of Claude Code, Codex, and more on your machine.
 
-![](https://raw.githubusercontent.com/superset-sh/superset/main/apps/marketing/public/images/readme-hero.png)
+![](https://raw.githubusercontent.com/superset-sh/superset/main/apps/marketing/public/images/readme-hero.gif)
 
 [Superset - Run 10+ parallel coding agents on your machine](https://superset.sh/)
 

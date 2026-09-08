@@ -94,12 +94,12 @@ paru -S koala-clash-bin
 
 通过在应用程序与网络之间插入代理链，允许用户将所有流量通过指定的代理服务器进行转发，实现隐匿性和访问受限网络的目的。
 
-安装 proxychains：
+安装 proxychains-ng：
 ```shell
-sudo pacman -S proxychains
+sudo pacman -S proxychains-ng
 ```
 
-在配置文件`/etc/proxychain.conf`末尾 [ProxyList] 后注释默认代理并添加新代理。
+在配置文件`/etc/proxychains.conf`末尾 [ProxyList] 后注释默认代理并添加新代理。
 ```shell
 sudo nano /etc/proxychains.conf
 ```
@@ -129,7 +129,7 @@ nc -lv 127.0.0.1 9000
 # 终端 2：发送文本
 echo "hello nc" | nc -N 127.0.0.1 9000
 
-本机 UDP 收发测试：
+# 本机 UDP 收发测试：
 # 终端 1：监听 UDP 9001
 nc -luv 127.0.0.1 9001
 # 终端 2：发送文本
@@ -293,7 +293,7 @@ paru -S vmware-keymaps vmware-workstation
   ```
 
 - Fail Network configuration is missing. Ensure that /etc/vmware/networking exists
-  ```shell                                                      INT ✘ 
+  ```shell
   systemctl enable --now vmware-networks-configuration.service
   ```
 
@@ -407,12 +407,12 @@ paru -S virtualbox-ext-oracle
   sudo reboot
   ```
 
+## Docker + Docker Buildx + Docker Compose + lazydocker + Portainer
 
-## Docker + Docker Buildx + Docker Componse + lazydocker + Portainer
 
-- **Docker** + **Docker Buildx** + **Docker Componse**
+- **Docker** + **Docker Buildx** + **Docker Compose**
   ```shell
-  # 更新系统并安装 Docker + Docker Buildx + Docker Componse
+  # 更新系统并安装 Docker + Docker Buildx + Docker Compose
   sudo pacman -Syu --noconfirm docker docker-buildx docker-compose
   # 启动 Docker 服务并设置为开机自启
   sudo systemctl enable --now docker
@@ -558,10 +558,10 @@ paru -S winboat-bin
 # -----------------------------------------------------------------------------
 
 # 1. 安装必要工具
-# p7zip: 解压 Windows ISO
+# 7zip: 解压 Windows ISO
 # libisoburn: 提供 xorriso 命令用于打包
 # mtools/dosfstools: 用于后续手动制作 efisys.bin 引导镜像
-sudo pacman -S p7zip libisoburn mtools dosfstools
+sudo pacman -S 7zip libisoburn mtools dosfstools
 
 # 2. 创建工作目录结构
 mkdir -p ~/win11_mod/drivers
@@ -969,7 +969,7 @@ PeaZip 免费文件压缩工具。支持打开、解压 RAR、TAR、ZIP 格式�
 [Download PeaZip archive manager for Linux x86_64](https://peazip.github.io/peazip-linux.html)
 
 ```shell
-paru -S peazip-qt-bin
+sudo pacman -S peazip
 ```
 
 ## Synology Drive Client
@@ -1213,12 +1213,12 @@ Keyviz 是一款免费开源的按键可视化软件，可以实时显示您的�
 [mulaRahul/keyviz - GitHub](https://github.com/mulaRahul/keyviz)
 
 ```shell
-paru -S keyviz-zh-bin
+paru -S keyviz-zh
 ```
 
 ## StartLive：B 站推流开播
 
-![](https://private-user-images.githubusercontent.com/93813543/445881146-974b0dbb-fcd5-4b26-be76-42db728b8942.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjYxNDY4NTAsIm5iZiI6MTc2NjE0NjU1MCwicGF0aCI6Ii85MzgxMzU0My80NDU4ODExNDYtOTc0YjBkYmItZmNkNS00YjI2LWJlNzYtNDJkYjcyOGI4OTQyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEyMTklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMjE5VDEyMTU1MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk1ZWIwMWIxOTQ5MjgyYjA5YzMwYWVlNDUyMTVhNmQ2NDA5YzFjNzkwNThkOTgxZTk4Y2ZkOTJmZDI0MjYwZmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.PaHrRXQpfJw5afCtihUwsO9iXS9XX4xjv08uQqylP7c)
+![](https://docimg1.docs.qq.com/image/AgAABWcFuYvuARfhZlBJtL6oskj_FB2K.png?w=919&h=752)
 
 - [Releases · Radekyspec/StartLive](https://github.com/Radekyspec/StartLive/releases)
 - [【腾讯文档】StartLive开播器使用说明](https://docs.qq.com/doc/DTHVMdkhtUWJjRFhv)
@@ -1460,9 +1460,9 @@ sudo systemctl enable runsunloginclient.service
 
 ## ToDesk
 
-![](https://www.todesk1.com/images/dl-bg.png)
+![](https://www.todesk.com/dist/img/3325295.png)
 
-[ToDesk下载 - ToDesk官网_Todesk下载](https://www.todesk1.com/download)
+[ToDesk下载 - ToDesk官网_Todesk下载](https://www.todesk.com/download)
 
 ```shell
 # 安装 ToDesk

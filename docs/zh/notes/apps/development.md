@@ -68,6 +68,8 @@ bash install.sh
 \. "$HOME/.nvm/nvm.sh"
 # 下载并安装 Node.js
 nvm install 24
+# 设置默认版本，新开的 shell 自动使用该版本
+nvm alias default 24
 # 安装 pnpm 方法一
 corepack enable pnpm
 # 安装 pnpm 方法二
@@ -376,7 +378,7 @@ $ sudo nano /usr/share/applications/pycharm.desktop
 
 [Desktop Entry]
 Name=PyCharm
-Comment=Pycharm is a Python IDE for professional developers by JetBrains.
+Comment=PyCharm is a Python IDE for professional developers by JetBrains.
 GenericName=IDE
 Exec=/opt/jetbrains/pycharm/bin/pycharm %F
 Icon=/opt/jetbrains/pycharm/bin/pycharm.svg
@@ -384,9 +386,9 @@ Type=Application
 # 禁用启动时进度通知
 StartupNotify=false
 # 与应用程序窗口关联的 WM_CLASS 属性
-StartupWMClass=jetbrains-webstorm
+StartupWMClass=jetbrains-pycharm
 Categories=TextEditor;Development;IDE;
-MimeType=application/xhtml+xml;text/javascript;text/css;
+MimeType=text/x-python;application/x-python;
 Keywords=pycharm;
 ```
 
@@ -856,7 +858,7 @@ MimeType=x-scheme-handler/wechatide
 
 ```shell
 # 安装基础开发包和 rustup
-$ sudo pacman -S base-devel rustup                                                                                                                                         1 ✘ 
+$ sudo pacman -S base-devel rustup
 
 :: rustup-1.28.2-3 与 rust-1:1.89.0-1 有冲突。删除 rust 吗？ [y/N] y
 
@@ -884,7 +886,7 @@ EOF
 ```
 验证安装：
 ```shell
-$ rustc --version                                                                                                                                                            ✔ 
+$ rustc --version
 rustc 1.91.1 (ed61e7d7e 2025-11-07)
 ```
 
@@ -921,7 +923,7 @@ API 设计、开发、测试一体化协作平台
 [下载 Apifox - Apifox 帮助文档](https://docs.apifox.com/download)
 
 ```shell
-paru -S apifox-bin
+paru -S apifox
 ```
 
 ## Apipost
@@ -1135,7 +1137,6 @@ wget -O "/home/duanluan/.wine-mobaxterm/drive_c/Program Files/MobaXterm/mobaxter
 # 创建快捷方式
 $ nano /home/duanluan/.local/share/applications/mobaxterm.desktop
 
-# 创建快捷方式
 [Desktop Entry]
 Categories=Network;TerminalEmulator;
 Comment=
@@ -1195,5 +1196,5 @@ paru -S woterm-bin
 [专业 UI/UX 协同设计工具软件 - MasterGo 产品介绍](https://mastergo.com/recommend)
 
 ```shell
-paru -S mastergo-desktop-bin
+paru -S mastergo
 ```

@@ -85,6 +85,7 @@ sudo nano /etc/pacman.conf
 sudo timedatectl set-ntp true
 
 # on dual-boot systems with Windows, use local RTC time to avoid an 8-hour offset when switching systems
+# the warning it prints is expected and safe to ignore: local RTC cannot handle DST changes, and China has no DST
 sudo timedatectl set-local-rtc 1 --adjust-system-clock
 
 # check the status
@@ -250,16 +251,14 @@ $ source ~/.zshrc
 sudo cp /etc/hosts /etc/hosts.bak
 ```
 
-Visit [https://github-hosts.tinsfox.com/hosts](https://github-hosts.tinsfox.com/hosts) and copy the generated hosts entries.
+Update hosts automatically with the script: [shell-scripts/update-github-hosts.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/update-github-hosts.sh)
+
+Or visit [ittuann/GitHub-IP-hosts](https://github.com/ittuann/GitHub-IP-hosts) and copy the entries manually:
 
 ```shell
 # append them to the end of /etc/hosts
 nano /etc/hosts
 ```
-
-Reference: [GitHub Host - Accelerate GitHub access](https://github-hosts.tinsfox.com/)
-
-Or use the script: [shell-scripts/update-github-hosts.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/update-github-hosts.sh)
 
 ## Install Fcitx5 (Must Read)
 
@@ -286,7 +285,7 @@ Optional shortcuts to clear:
 
 - `Configure global options` -> `Shortcuts`
   - `Toggle embedded preedit`
-- `Keyboard - Chinese` -> right-side configure icon
+- `Keyboard - Chinese` (may also appear as `English (US)`) -> right-side configure icon
   - `Switch Hint Mode`
   - `Trigger Hint Mode Once`
 - `Configure Addons`
@@ -303,7 +302,7 @@ Search for `Software Update` in the launcher and click `Apply`.
 
 ![](assets/20250702011829.png)
 
-Reboot after updates. This also applies to KDE's built-in `Software Update`: finish the update, reboot first, and only then continue installing or opening other apps. Otherwise, the running kernel, graphics libraries, and kernel modules may get out of sync, and apps such as RustDesk can fail to open a window.
+Reboot after updates, otherwise the kernel and kernel module versions get out of sync and commands such as `modprobe tun` fail. This also applies to KDE's built-in `Software Update`: finish the update, reboot first, and only then continue installing or opening other apps. Otherwise, the running kernel, graphics libraries, and kernel modules may get out of sync, and apps such as RustDesk can fail to open a window.
 
 ```shell
 sudo pacman -Syu

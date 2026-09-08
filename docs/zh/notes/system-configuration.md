@@ -84,6 +84,7 @@ sudo nano /etc/pacman.conf
 sudo timedatectl set-ntp true
 
 # 如果是 Windows 双系统，建议设置 RTC 使用本地时间，防止切换系统后时间相差 8 小时
+# 执行时输出的 Warning 属正常现象，无需处理：本地时间 RTC 无法处理夏令时切换，而中国没有夏令时
 sudo timedatectl set-local-rtc 1 --adjust-system-clock
 
 # 检查状态
@@ -140,7 +141,7 @@ $ chmod +x ~/.local/bin/github-mirror-axel.sh
 
 修改`makepkg.conf`：
 ```shell
-# 复制 /etc/pacman.conf 到个人目录，避免系统更新 pacman 包时覆盖
+# 复制 /etc/makepkg.conf 到个人目录，避免系统更新时被覆盖
 cp /etc/makepkg.conf ~/.makepkg.conf
 
 # 修改 ~/.makepkg.conf
@@ -244,16 +245,14 @@ $ source ~/.zshrc
 sudo cp /etc/hosts /etc/hosts.bak
 ```
 
-访问 [https://github-hosts.tinsfox.com/hosts](https://github-hosts.tinsfox.com/hosts)，复制内容
+使用脚本自动更新 hosts：[shell-scripts/update-github-hosts.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/update-github-hosts.sh)
+
+或者访问 [ittuann/GitHub-IP-hosts](https://github.com/ittuann/GitHub-IP-hosts) 手动复制内容：
 
 ```shell
 # 内容追加到 /etc/hosts 末尾
 nano /etc/hosts
 ```
-
-参考：[GitHub Host - 加速访问 GitHub | 自动更新的 Hosts 工具](https://github-hosts.tinsfox.com/)
-
-或者使用脚本：[shell-scripts/update-github-hosts.sh at main · duanluan/shell-scripts](https://github.com/duanluan/shell-scripts/blob/main/update-github-hosts.sh)
 
 ## 安装 Fcitx5（必看）
 
@@ -278,7 +277,7 @@ nano /etc/hosts
 可选删除快捷键：
 - `配置全局选项`-`快捷键`：
   - `切换是否使用嵌入预编辑`
-- `键盘-汉语`-右侧配置图标：
+- `键盘-汉语`（也可能是`英语（美国）`）-右侧配置图标：
   - `切换提示模式`
   - `触发一次提示模式`
 - `配置附加组件`
@@ -366,7 +365,7 @@ Dolphin 中左侧常用位置项右键`编辑`，修改位置。
 - **切换到桌面1**：Ctrl+F1
 - **切换到桌面2**：Ctrl+F2
 - **切换到桌面3**：Ctrl+F3
-- **切换到a桌面4**：Ctrl+F4
+- **切换到桌面4**：Ctrl+F4
 - **显示隐藏窗口平铺(窗口类)**：Ctrl+F7
 - **显示隐藏窗口平铺(当前桌面)**：Ctrl+F9
 - **显示隐藏窗口平铺(全部桌面)**：Ctrl+F10

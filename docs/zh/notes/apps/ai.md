@@ -6,9 +6,9 @@
 
 Cherry Studio 是一款支持多个大语言模型（LLM）服务商的桌面客户端。
 
-![](https://docs.cherry-ai.com/~gitbook/image?url=https%3A%2F%2F3562065924-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F0Ut5BptC3t8CtSU1UWpM%252Fuploads%252Fgit-blob-1d8f30028704ce0a78a9e2bcff6d1dd0326e41f9%252Fimage.png%3Falt%3Dmedia&width=400&dpr=3&quality=100&sign=536c0510&sv=2)
+![](https://cherryai.com.cn/assets/agent-light-zh-buAb0bFD.webp)
 
-[客户端下载 | Cherry Studio](https://docs.cherry-ai.com/cherry-studio/download)
+[客户端下载 | Cherry Studio](https://cherryai.com.cn/)
 
 ```shell
 paru -S cherry-studio-bin
@@ -268,7 +268,7 @@ Chat、Claude Cowork 和 Claude Code，都集中在一个地方。
 [Download Claude | Claude by Anthropic](https://claude.com/download)
 
 ```shell
-paru -S claude-desktop-bin
+paru -S claude-desktop
 ```
 
 ## Codex CLI
@@ -330,7 +330,7 @@ Codex 应用是一个专注于并行处理 Codex 线程的桌面体验，内置�
 # 必须时用 npm 安装的 Codex CLI
 npm i -g @openai/codex
 # 安装
-paru -S openai-codex-desktop
+paru -S chatgpt-desktop
 ```
 
 ## ZCode Desktop
@@ -342,7 +342,7 @@ ZCode 将最强大的 AI Agents 与现有工具链结合，让你在熟悉的流
 [ZCode - 简单、迅捷、氛围十足](https://zcode.z.ai/cn)
 
 ```shell
-paru -S zcode-desktop-bin
+paru -S zcode
 ```
 
 ## Reasonix Desktop
@@ -547,14 +547,14 @@ Cursor 旨在大幅提升您的生产力，是使用 AI 编码的最佳方式。
 paru -S cursor-bin
 ```
 
-## Windsurf
+## Devin Desktop（原 Windsurf）
 
-Windsurf 是一款直观的 AI 编程工具，旨在让您和您的团队始终保持高效的工作状态。
+Windsurf 现已更名为 Devin Desktop，是一款直观的 AI 编程工具，旨在让您和您的团队始终保持高效的工作状态。
 
-[Download Windsurf Editor and Plugins | Windsurf](https://windsurf.com/download)
+[Download | Devin](https://devin.ai/download)
 
 ```shell
-paru -S windsurf
+paru -S devin-desktop-next
 ```
 
 ## Antigravity
@@ -609,7 +609,7 @@ paru -S qoder-bin
 
 面向人工智能代理时代的代码编辑器 - 在您的计算机上运行大量 Claude Code、Codex 等程序。
 
-![](https://raw.githubusercontent.com/superset-sh/superset/main/apps/marketing/public/images/readme-hero.png)
+![](https://raw.githubusercontent.com/superset-sh/superset/main/apps/marketing/public/images/readme-hero.gif)
 
 [Superset - Run 10+ parallel coding agents on your machine](https://superset.sh/)
 

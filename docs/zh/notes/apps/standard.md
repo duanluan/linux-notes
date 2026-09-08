@@ -18,9 +18,15 @@ paru -S linuxqq
 paru -S wechat-bin
 ```
 
-下载 [activate-wechat.sh](https://github.com/duanluan/shell-scripts/blob/main/activate-wechat.sh)。
+Wayland 下微信无法通过全局快捷键激活，推荐安装 [wechat-xwayland](https://aur.archlinux.org/packages/wechat-xwayland)，通过 XWayland 启动微信解决该问题：
 
-开始菜单搜索`快捷键`-`新增`-`命令或脚本`，命令：`上面脚本存放的目录/activate-wechat.sh`。
+```shell
+paru -S wechat-xwayland
+```
+
+安装了 wechat-xwayland 的话，使用其提供的激活命令`/usr/bin/activate-wechat-xwayland`；否则下载 [activate-wechat.sh](https://github.com/duanluan/shell-scripts/blob/main/activate-wechat.sh)。
+
+开始菜单搜索`快捷键`-`新增`-`命令或脚本`，命令：`上面的激活命令或脚本`。
 
 右侧`添加`，输入快捷键`Ctrl` `Alt` `W`，右下角`应用`。
 
@@ -173,6 +179,16 @@ paru -S electron-netease-cloud-music-bin
 paru -S splayer
 ```
 
+## SPlayer Next
+
+SPlayer 的下一代版本，跨平台桌面音乐播放器，支持丰富歌词与多种音频格式。支持逐字歌词、桌面歌词、任务栏歌词，流媒体 Subsonic / Navidrome / Jellyfin / Emby 播放，音乐频谱。
+
+[Releases · SPlayer-Dev/SPlayer-Next](https://github.com/SPlayer-Dev/SPlayer-Next/releases)
+
+```shell
+paru -S splayer-next-bin
+```
+
 ## YesPlayMusic
 
 高颜值的第三方网易云播放器
@@ -242,12 +258,12 @@ paru -S lx-music-desktop-bin
 
 ![](https://raw.githubusercontent.com/msojocs/bilibili-linux/master/res/screenshots/1.png)
 
-[msojocs/bilibili-linux - GitHub](https://github.com/msojocs/bilibili-linux)
+[msojocs/bilibili-linux - GitHub](https://github.com/msojocs/bilibili-linux/releases)
 
 先在 [AUR (en) - bilibili-bin](https://aur.archlinux.org/packages/bilibili-bin) 查看依赖的 electron 哪个版本。
 
 ```shell
-paru -S electron28-bin
+paru -S electron43
 paru -S bilibili-bin
 ```
 

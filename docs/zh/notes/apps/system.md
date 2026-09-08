@@ -35,7 +35,7 @@ mhwd -li
 ```
 
 其他显卡参考：
-- [配置显卡 - Manjaro](https://wiki.manjaro.org/index.php/Configure_Graphics_Cards/zh-cn)（推荐）
+- [配置显卡 - Manjaro](https://wiki.manjaro.org/index.php?title=Configure_Graphics_Cards)（推荐）
 - [archlinux 显卡驱动 | archlinux 简明指南](https://arch.icekylin.online/guide/rookie/graphic-driver)（推荐）
 - [Intel 图形处理器 - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/Intel_%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E5%99%A8)
 - [ATI - Arch Linux 中文维基](https://wiki.archlinuxcn.org/wiki/ATI)
@@ -315,7 +315,7 @@ $ paru rime-ice
 
 [以 patch 的方式打补丁 - Rime 配置：雾凇拼音](https://dvel.me/posts/rime-ice/#%E4%BB%A5-patch-%E7%9A%84%E6%96%B9%E5%BC%8F%E6%89%93%E8%A1%A5%E4%B8%81)
 
-可选下载万象模型：[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram) 或 [wanxiang-mini-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-mini-zh-hans.gram)。
+可选下载万象模型：[wanxiang-lts-zh-hans.gram](https://github.com/amzxyz/RIME-LMDG/releases/download/LTS/wanxiang-lts-zh-hans.gram)。
 
 ```shell
 # 将万象模型放到 Rime 配置目录（可选）
@@ -554,7 +554,7 @@ zoxide 是一个 更智能的 cd 命令，灵感来自 z 和 autojump。它记�
 
 zoxide 模糊跳转需要先安装 fzf。
 
-![](https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/tutorial.webp)
+![](https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/contrib/tutorial.gif)
 
 [Installation - ajeetdsouza/zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
 

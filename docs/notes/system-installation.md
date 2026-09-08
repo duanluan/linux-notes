@@ -16,7 +16,7 @@ On the [Manjaro Homepage](https://manjaro.org/), click `Download`, choose the `K
 
 ## Install the System
 
-For more details, see: [UEFI - Installation Guide - Manjaro](https://wiki.manjaro.org/index.php/UEFI_-_Install_Guide/zh-cn)
+For more details, see: [UEFI - Install Guide - Manjaro](https://wiki.manjaro.org/index.php?title=UEFI_-_Install_Guide)
 
 Press `F2` or `Del` during boot to enter the BIOS, then choose the USB drive under `Save & Exit` -> `Boot Override`.
 
