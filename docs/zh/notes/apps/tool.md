@@ -1102,7 +1102,7 @@ sudo pacman -S flameshot
 | Flameshot 区域截图    | `flameshot gui`                     | Print                |
 | Flameshot 延时区域截图  | `flameshot gui -d 3000`             | Ctrl + Print         |
 | Flameshot 区域截图并贴图 | `flameshot gui --pin`               | Shift + Print        |
-| Flameshot 全屏截图    | `flameshot full -p ~/Pictures/屏幕截图` | Ctrl + Shift + Print |
+| Flameshot 全屏截图    | `flameshot full -p ~/Pictures/screenshot` | Ctrl + Shift + Print |
 
 - 解决 Wayland 下截图黑屏：
 
