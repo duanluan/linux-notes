@@ -94,25 +94,11 @@ nrm use xxx
 
 ## JDK
 
-[Java 8, 11, 17, 21, 23 Download for Linux, Windows and macOS](https://www.azul.com/downloads/?os=debian&architecture=x86-64-bit&package=jdk#zulu)
+Script installation: interactively choose a distribution (Azul Zulu, Eclipse Temurin, Amazon Corretto, Alibaba Dragonwell, BellSoft Liberica, Tencent Kona, Bisheng JDK) and version; creates a stable `jdk<major>` symlink by default, optionally configures `JAVA_HOME`, and supports checking and updating installed versions.
 
 ```shell
-tar zxvf zulu17.64.17-ca-jdk17.0.18-linux_x64.tar.gz
-sudo mkdir /opt/java
-sudo mv zulu17.64.17-ca-jdk17.0.18-linux_x64 /opt/java/zulu17.64.17-ca-jdk17.0.18
-# create a stable symlink so future upgrades only need to update the symlink
-sudo ln -sfn /opt/java/zulu17.64.17-ca-jdk17.0.18 /opt/java/jdk17
-# append the environment variables to ~/.zshrc
-$ nano ~/.zshrc
-# JDK
-export JAVA_HOME="/opt/java/jdk17"
-export PATH=$JAVA_HOME/bin:$PATH
-
-$ source ~/.zshrc
-$ java -version
-openjdk version "17.0.18" 2026-01-20 LTS
-OpenJDK Runtime Environment Zulu17.64+17-CA (build 17.0.18+8-LTS)
-OpenJDK 64-Bit Server VM Zulu17.64+17-CA (build 17.0.18+8-LTS, mixed mode, sharing)
+# install or update
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install-jdk.sh | bash
 ```
 
 ## Gradle

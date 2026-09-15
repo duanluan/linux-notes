@@ -94,25 +94,11 @@ nrm use xxx
 
 ## JDK
 
-[Java 8, 11, 17, 21, 23 Download for Linux, Windows and macOS](https://www.azul.com/downloads/?os=debian&architecture=x86-64-bit&package=jdk#zulu)
+脚本安装：交互式选择发行版（Azul Zulu、Eclipse Temurin、Amazon Corretto、Alibaba Dragonwell、BellSoft Liberica、Tencent Kona、毕昇 JDK）和版本，默认创建 `jdk<大版本>` 稳定软链接，可选配置 `JAVA_HOME`，支持已装版本检查与更新。
 
 ```shell
-tar zxvf zulu17.64.17-ca-jdk17.0.18-linux_x64.tar.gz
-sudo mkdir /opt/java
-sudo mv zulu17.64.17-ca-jdk17.0.18-linux_x64 /opt/java/zulu17.64.17-ca-jdk17.0.18
-# 创建固定别名，后续升级只改软链接
-sudo ln -sfn /opt/java/zulu17.64.17-ca-jdk17.0.18 /opt/java/jdk17
-# 末尾追加环境变量
-$ nano ~/.zshrc
-# JDK
-export JAVA_HOME="/opt/java/jdk17"
-export PATH=$JAVA_HOME/bin:$PATH
-
-$ source ~/.zshrc
-$ java -version
-openjdk version "17.0.18" 2026-01-20 LTS
-OpenJDK Runtime Environment Zulu17.64+17-CA (build 17.0.18+8-LTS)
-OpenJDK 64-Bit Server VM Zulu17.64+17-CA (build 17.0.18+8-LTS, mixed mode, sharing)
+# 安装或更新
+curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install-jdk.sh | bash
 ```
 
 ## Gradle
