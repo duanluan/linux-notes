@@ -259,7 +259,7 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
 
 ## Issues After Switching From X11 to Wayland
 
-- Warning:
+- Notification (advisory, not an error):
   `Detected GTK_IM_MODULE and QT_IM_MODULE while the Wayland input method frontend is working normally. The Wayland input method frontend is recommended. See https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma for details.`
   
   ```shell
@@ -272,10 +272,6 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
   
   # locate where those variables are being set
   $ grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null 
-  /home/duanluan/.zhistory:415:echo $GTK_IM_MODULE
-  /home/duanluan/.zhistory:416:env | grep -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS'
-  /home/duanluan/.zhistory:422:printenv | grep -E '^(GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS|SDL_IM_MODULE|GLFW_IM_MODULE)='
-  /home/duanluan/.zhistory:423:grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null
   /etc/profile.d/input-support.sh:6:    export GTK_IM_MODULE=$im
   /etc/profile.d/input-support.sh:7:    export QT_IM_MODULE=$im
   /etc/profile.d/input-support.sh:8:    export XMODIFIERS=@im=$im
@@ -286,14 +282,18 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
   /etc/profile.d/input-support.sh:27:    export GTK_IM_MODULE=$im
   ```
 
-  `99-immodule-bridge.sh` is a KDE environment initialization script. It detects whether the session is Wayland or X11 at login, then clears the input method environment variables on Wayland or sets them on X11 to avoid the Fcitx 5 warning:
+  These variables are not set by the user: `/etc/profile.d/input-support.sh` ships with the `manjaro-asian-input-support-fcitx5` package (installed when you check `Manjaro Asian Input Support Fcitx5` in Manjaro Hello) and exports them automatically at every login. On KDE Wayland it deliberately sets `QT_IM_MODULE`/`GTK_IM_MODULE` as well (the function comment says `change from waylandui to classicui`), which is exactly what triggers the Fcitx 5 warning. The script comes back after every system reinstall; that is expected.
+
+  Field-tested conclusion (2026-10, Plasma 6 + Fcitx5 5.1.22): keep the Manjaro default, no changes needed. The global variables effectively configure the immodule for every application, and Chinese input works fine in QQ (3.2.34) and WeChat; click `Do not show again` on the notification to dismiss it permanently. The trade-off is that native Wayland apps cannot know their absolute window coordinates, so candidate window positioning may be inaccurate on scaled screens, and it is not the Fcitx 5 recommended Wayland input method frontend — ignorable if nothing feels off.
+
+  To switch to the officially recommended Wayland input method frontend (no more notification, candidate window positioned by KWin), you may optionally create `99-immodule-bridge.sh`. It is sourced by KDE when the user session starts and clears (Wayland) or sets (X11) the input method environment variables depending on the session type:
   ```shell
   $ kate ~/.config/plasma-workspace/env/99-immodule-bridge.sh
   
   #!/usr/bin/env bash
   # KDE Plasma sources scripts in this directory when the user session starts.
   
-  # Debug log: use this line to confirm that the script actually ran (check /tmp/fcitx-bridge.log)
+  # Debug log: use this line to confirm that the script actually ran (check /tmp/fcitx-bridge.log); comment it out after verifying
   echo "$(date): script started, current session type: $XDG_SESSION_TYPE" > /tmp/fcitx-bridge.log
   
   case "${XDG_SESSION_TYPE}" in
@@ -317,15 +317,17 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
   esac
   ```
 
+  Log out and back in after creating it, then verify with `printenv | grep -E '^(GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS|SDL_IM_MODULE)='` that only `XMODIFIERS=@im=fcitx` remains. Note that with the global variables gone, QQ/DingTalk/WeChat then need the per-app environment variables from the entries below (required on the old machine); to stop using it, delete the script and log out and back in to return to the Manjaro default.
+
 - WeChat and DingTalk do not scale correctly
   
   Search for the app in the launcher, right-click `Edit Applications...`, and in the KDE menu editor add `QT_SCALE_FACTOR=1.5` under `General` -> `Environment Variables`. If that field already has a value, append ` QT_SCALE_FACTOR=1.5`. Save the entry and restart the app.
 
-- QQ candidate popups crash and DingTalk cannot receive input
+- QQ candidate popups crash and DingTalk cannot receive input (encountered on the old machine after switching to Wayland; not encountered on the 2026-10 reinstall with the default setup)
 
   Search for `QQ` or `DingTalk` in the launcher, right-click `Edit Applications...`, and in the KDE menu editor add `QT_IM_MODULE=fcitx XMODIFIERS="@im=fcitx" GTK_IM_MODULE=fcitx SDL_IM_MODULE=fcitx QT_QPA_PLATFORM=xcb` under `General` -> `Environment Variables`. Save the entry and restart the app.
 
-- WeChat cannot input Chinese
+- WeChat cannot input Chinese (encountered on the old machine after switching to Wayland; not encountered on the reinstall with the default setup)
 
   Search for `WeChat` in the launcher, right-click `Edit Applications...`, and in the KDE menu editor add `GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx` under `General` -> `Environment Variables`. Save the entry and restart the app.
 
@@ -343,6 +345,8 @@ fcitx5-remote -n
 ```
 
 An output of `1` from `fcitx5-remote` means the input method is inactive, while `2` means it is active. `fcitx5-remote -n` shows the current input method name, such as `rime`.
+
+Note: the first two commands in the block below (`fcitx5 -r -d`, `fcitx5-remote -r`) only apply to X11 sessions or manually launched Fcitx5. On KDE Wayland, Fcitx5 is launched through KWin's virtual keyboard mechanism (System Settings -> Virtual Keyboard -> Fcitx 5); after a restart the socket passed by KWin cannot be reused by the new process, so restarting actually breaks the input method. Log out and back in instead (see https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma ).
 
 Restore the candidate window:
 

@@ -272,6 +272,8 @@ Choose `fcitx5-chinese-addons: Simplified Chinese` and install it.
 
 Log out from `Leave` -> `Log Out`, then sign in again. Use `Ctrl` `Space` to switch input methods.
 
+If a Fcitx `Wayland diagnostic` notification pops up after logging back in, it is a normal advisory message (not an error); just click `Do not show again`. See the `Issues After Switching From X11 to Wayland` section in `questions.md` for details.
+
 Search for `Input Method` from the launcher.
 
 Optional configuration changes:

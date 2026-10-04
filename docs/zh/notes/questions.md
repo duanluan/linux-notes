@@ -259,7 +259,7 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
 
 ## X11 切换到 Wayland 问题
 
-- 提示“`检测到设置了 GTK_IM_MODULE 和 QT_IM_MODULE 而且 Wayland 输入法前端正在正常工作。推荐使用 Wayland 输入法前端。更多信息请参见 https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma `”
+- Fcitx 5 开机通知（建议性提示，不是错误）："`检测到设置了 GTK_IM_MODULE 和 QT_IM_MODULE 而且 Wayland 输入法前端正在正常工作。推荐使用 Wayland 输入法前端。更多信息请参见 https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma`"
   
   ```shell
   # 查看环境变量
@@ -271,10 +271,6 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
   
   # 查找环境变量位置
   $ grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null 
-  /home/duanluan/.zhistory:415:echo $GTK_IM_MODULE
-  /home/duanluan/.zhistory:416:env | grep -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS'
-  /home/duanluan/.zhistory:422:printenv | grep -E '^(GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS|SDL_IM_MODULE|GLFW_IM_MODULE)='
-  /home/duanluan/.zhistory:423:grep -R --line-number -E 'GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS' ~/.config/environment.d ~/.pam_environment ~/.profile ~/.xprofile ~/.bash* ~/.z* /etc/environment /etc/profile.d /etc/X11/xinit 2>/dev/null
   /etc/profile.d/input-support.sh:6:    export GTK_IM_MODULE=$im
   /etc/profile.d/input-support.sh:7:    export QT_IM_MODULE=$im
   /etc/profile.d/input-support.sh:8:    export XMODIFIERS=@im=$im
@@ -285,14 +281,18 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
   /etc/profile.d/input-support.sh:27:    export GTK_IM_MODULE=$im
   ```
 
-  `99-immodule-bridge.sh`是 KDE 的环境初始化脚本，目的是让系统在登录时自动检测当前是 Wayland 还是 X11，并据此动态清除（Wayland 下）或设置（X11 下）输入法环境变量，解决 Fcitx 5 的冲突警告：
+  这些变量不是用户设置的：`/etc/profile.d/input-support.sh`是`manjaro-asian-input-support-fcitx5`包自带的脚本（在 Manjaro Hello 勾选`Manjaro Asian Input Support Fcitx5`时就会装上），每次登录都会自动 export。它在 KDE Wayland 下也故意设置`QT_IM_MODULE`/`GTK_IM_MODULE`（函数注释写着`change from waylandui to classicui`），这正是 Fcitx 5 警告的来源；重装系统后该脚本会重新出现，属正常现象。
+
+  实测结论（2026-10，Plasma 6 + Fcitx5 5.1.22）：保留 Manjaro 默认即可，无需任何修改。全局变量相当于已经替每个应用设好 immodule，QQ（3.2.34）、微信中文输入实测正常，在通知上点`不要再显示`可永久关闭提示。代价是原生 Wayland 应用拿不到窗口绝对坐标，候选框定位在缩放屏上可能不准，且不符合 Fcitx 5 推荐的 Wayland 输入法前端，如无体感问题可忽略。
+
+  如果想切换到官方推荐的 Wayland 输入法前端（消除通知、候选框定位由 KWin 负责），可选建`99-immodule-bridge.sh`。它由 KDE 在用户会话启动时 source，按当前会话类型动态清除（Wayland 下）或设置（X11 下）输入法环境变量：
   ```shell
   $ kate ~/.config/plasma-workspace/env/99-immodule-bridge.sh
   
   #!/usr/bin/env bash
   # KDE Plasma 会在用户会话启动时 source 这个目录下的脚本。
   
-  # 调试日志：这一行可以确认脚本是否真的被执行了 (查看 /tmp/fcitx-bridge.log)
+  # 调试日志：这一行可以确认脚本是否真的被执行了 (查看 /tmp/fcitx-bridge.log)，确认后可注释掉
   echo "$(date): 脚本开始执行，当前 Session 类型: $XDG_SESSION_TYPE" > /tmp/fcitx-bridge.log
   
   case "${XDG_SESSION_TYPE}" in
@@ -316,15 +316,17 @@ $ python -c "import mesonbuild; print(mesonbuild.__file__)"
   esac
   ```
 
+  建好后注销重登生效，用`printenv | grep -E '^(GTK_IM_MODULE|QT_IM_MODULE|XMODIFIERS|SDL_IM_MODULE)='`验证只剩`XMODIFIERS=@im=fcitx`。注意：启用后全局变量被清除，届时 QQ/钉钉/微信需按下方对应条目单独设置环境变量（旧机器实测需要）；不想用时删除该脚本并注销重登，即回到 Manjaro 默认。
+
 - 微信、钉钉没有缩放
   
   开始菜单搜索软件名，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_SCALE_FACTOR=1.5`（1.5 为缩放比例），如果环境变量已经有值，添加` QT_SCALE_FACTOR=1.5`，保存后重启软件。
 
-- QQ 中输入法打字候选栏闪退、钉钉无法输入
+- QQ 中输入法打字候选栏闪退、钉钉无法输入（旧机器切到 Wayland 后遇到；2026-10 新装机保留默认配置未遇到）
 
   开始菜单搜索`QQ`/`钉钉`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`QT_IM_MODULE=fcitx XMODIFIERS="@im=fcitx" GTK_IM_MODULE=fcitx SDL_IM_MODULE=fcitx QT_QPA_PLATFORM=xcb`，保存后重启软件。
 
-- 微信无法输入中文
+- 微信无法输入中文（旧机器切到 Wayland 后遇到；新装机保留默认配置未遇到）
 
   开始菜单搜索`微信`，右键`编辑应用程序`，在 KDE 菜单编辑器对应软件的`常规`-`环境变量`中添加`GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx`，保存后重启软件。
 
@@ -342,6 +344,8 @@ fcitx5-remote -n
 ```
 
 `fcitx5-remote`输出`1`表示输入法未激活，输出`2`表示输入法已激活。`fcitx5-remote -n`可以查看当前输入法名称，例如`rime`。
+
+注意：下面块中的前两条命令（`fcitx5 -r -d`、`fcitx5-remote -r`）只适用于 X11 会话或手动启动的 Fcitx5。KDE Wayland 下 Fcitx5 由 KWin 的虚拟键盘机制拉起（系统设置`虚拟键盘`选择 Fcitx 5），重启后 KWin 传入的 socket 无法被新进程复用，输入法反而会失效，应改为注销后重新登录（参考 https://fcitx-im.org/wiki/Using_Fcitx_5_on_Wayland#KDE_Plasma ）。
 
 恢复候选栏：
 
