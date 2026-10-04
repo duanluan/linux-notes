@@ -389,6 +389,72 @@ In `System Settings` -> `Keyboard` -> `Shortcuts`, clear the active shortcut and
 - **Activate Application Launcher**: Alt+F1
 - **Show Desktop**: Ctrl+F12
 
+## Remap Keys at the Kernel Level (udev hwdb)
+
+The laptop keyboard has no PrtSc (screenshot) key and no Insert key. The udev hwdb that ships with systemd remaps keys at the kernel input layer: PageDown -> screenshot/SysRq, PageUp -> Insert. The `keyboard` builtin of udev reads `KEYBOARD_KEY_<scancode>=<keycode-name>` rules and writes them into the kernel keymap, so the remap works in TTY, on the desktop, and under both Wayland and X11 (xmodmap, xkb, and KDE shortcuts only change the desktop layer and cannot reach the kernel's SysRq).
+
+### Finding the Scancodes
+
+The keyboard emits scancodes and the kernel translates them into keycodes (KEY_SYSRQ=99, KEY_INSERT=110, KEY_PAGEUP=104, KEY_PAGEDOWN=109). Remapping means editing that translation table. Do not guess the scancodes - measure them:
+
+```shell
+# identify the keyboard; the match line of the rule file comes from this (input:b0011v0001p0001eAB83)
+cat /sys/class/input/event3/device/modalias
+
+# run it, press the target key, and the value of EV_MSC / MSC_SCAN is the scancode for the rule; Ctrl+C to quit
+sudo pacman -S evtest
+sudo evtest /dev/input/event3
+```
+
+Measured on this machine (AT Translated Set 2 keyboard, internal keyboard over PS/2 emulation):
+
+| Physical key | XT scancode | Scancode in the rule |
+|---|---|---|
+| PageUp | E0 49 | c9 |
+| PageDown | E0 51 | d1 |
+| Insert | E0 52 | d2 (derived; no physical key here) |
+
+The pattern: plain keys use the XT code as-is (Esc=01); extended keys (E0-prefixed) use the byte with E0 folded into bit 7 (0x49 -> c9, 0x51 -> d1).
+
+### Configuration and Activation
+
+```shell
+# write the rule file: PageUp(c9) becomes Insert, PageDown(d1) becomes screenshot/SysRq
+sudo tee /etc/udev/hwdb.d/90-keyboard-remap.hwdb >/dev/null <<'EOF'
+evdev:input:b0011v0001p0001eAB83*
+ KEYBOARD_KEY_c9=insert
+ KEYBOARD_KEY_d1=sysrq
+EOF
+
+# compile into hwdb.bin - this step is mandatory
+sudo systemd-hwdb update
+
+# make the keyboard re-read the rules (replug or reboot also works)
+sudo udevadm trigger /sys/class/input/event3
+
+# verify: entries like KEYBOARD_KEY_d1=sysrq mean it worked
+udevadm test /sys/class/input/event3 2>&1 | grep KEYBOARD_KEY
+```
+
+### Notes
+
+- **The SysRq key is the PrtSc key** (KEY_SYSRQ=99): pressed alone it takes a desktop screenshot (KDE launches Spectacle); held with Alt it enters SysRq emergency mode. Attach sysrq to a rarely used key, never to a daily-driver key - it would turn into a screenshot key. PageDown serves both jobs: screenshot and emergency.
+- **A rule file that is not compiled does nothing**, with no error at all. To check the compile: `stat -c '%y %n' /usr/lib/udev/hwdb.bin /etc/udev/hwdb.d/*.hwdb`. If hwdb.bin is older than the rule file it was not compiled; re-run `systemd-hwdb update`.
+- udev rules apply on device add/change events; always run `sudo udevadm trigger /sys/class/input/event3` after editing (or replug/reboot).
+- The `k71,72,73...` entries in the modalias printed by `udevadm test` are controller capability bits, not proof that those physical keys exist.
+- Remapping has a cost: the original PageUp/PageDown paging function is gone.
+
+### Emergency Reboot on a Frozen Screen (REISUB)
+
+Make sure SysRq is enabled first:
+
+```shell
+echo 'kernel.sysrq = 1' | sudo tee /etc/sysctl.d/98-sysrq.conf
+sudo sysctl --system
+```
+
+When the screen freezes, hold **Alt+PageDown** and press **R -> E -> I -> S -> U -> B** one per second: R grabs the keyboard, E kills the foreground process, I kills all processes, S flushes memory to disk, U remounts filesystems read-only, B reboots. The kernel handles all of it directly - no desktop or GPU driver involved.
+
 ## Create a Virtual Display (Must Read for Remote Access)
 
 When connecting remotely, the session may fail to open or show a black screen if no local monitor is attached, or if the monitor is powered off. With open-source drivers, you can force a virtual output through a kernel parameter. With the NVIDIA proprietary driver, keep the real output available and load the real monitor EDID instead of creating a second fake output.

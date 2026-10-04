@@ -377,6 +377,72 @@ Dolphin 中左侧常用位置项右键`编辑`，修改位置。
 - **激活应用程序启动器**：Alt+F1
 - **显示桌面**：Ctrl+F12
 
+## 键盘改键（udev hwdb）
+
+笔记本键盘没有 PrtSc（截屏）键和 Insert 键，用系统自带的 udev hwdb 在内核输入层改键：PageDown → 截屏/SysRq，PageUp → Insert。udev hwdb 是 systemd 自带的映射机制：udev 的 keyboard 组件读取规则里的 `KEYBOARD_KEY_<扫描码>=<键值名>`，写进内核键盘映射表，TTY、桌面、Wayland/X11 全部生效（xmodmap、xkb、KDE 快捷键只改桌面层，够不到内核的 SysRq）。
+
+### 扫描码（scancode）怎么查
+
+键盘发出扫描码，内核翻译成键值（keycode，如 KEY_SYSRQ=99、KEY_INSERT=110、KEY_PAGEUP=104、KEY_PAGEDOWN=109）。改键就是改这张翻译表。扫描码不要靠推算，直接实测：
+
+```shell
+# 查看键盘类型，规则文件的匹配行就来自它（input:b0011v0001p0001eAB83）
+cat /sys/class/input/event3/device/modalias
+
+# 运行后按目标键，EV_MSC / MSC_SCAN 的 value 就是规则里要写的扫描码，Ctrl+C 退出
+sudo pacman -S evtest
+sudo evtest /dev/input/event3
+```
+
+本机实测（AT Translated Set 2 keyboard，内置键盘走 PS/2 仿真）：
+
+| 物理键 | XT 扫描码 | 规则里写的扫描码 |
+|---|---|---|
+| PageUp | E0 49 | c9 |
+| PageDown | E0 51 | d1 |
+| Insert | E0 52 | d2（推算，本机无实体键） |
+
+规律：普通键 XT 码直接用（Esc=01）；扩展键（E0 开头）是 E0 折叠进 bit7 后的字节本身（0x49 → c9、0x51 → d1）。
+
+### 配置与生效
+
+```shell
+# 写规则文件：PageUp(c9) 改成 Insert，PageDown(d1) 改成截屏/SysRq
+sudo tee /etc/udev/hwdb.d/90-keyboard-remap.hwdb >/dev/null <<'EOF'
+evdev:input:b0011v0001p0001eAB83*
+ KEYBOARD_KEY_c9=insert
+ KEYBOARD_KEY_d1=sysrq
+EOF
+
+# 编译进 hwdb.bin，必须执行
+sudo systemd-hwdb update
+
+# 让键盘重新读取规则（重新插拔或重启也可以）
+sudo udevadm trigger /sys/class/input/event3
+
+# 验证：能看到 KEYBOARD_KEY_d1=sysrq 等条目即生效
+udevadm test /sys/class/input/event3 2>&1 | grep KEYBOARD_KEY
+```
+
+### 注意事项
+
+- **SysRq 键就是 PrtSc 键**（KEY_SYSRQ=99）：单独按 = 桌面截屏（KDE 拉起 Spectacle），Alt+按住 = SysRq 急救。所以 sysrq 要改在不常用的键上，别用常用键，否则那个键会变成截屏键。PageDown 一键两用：截屏 + 急救。
+- **只写规则文件不编译不会生效**，且没有任何报错。检查是否编译进去了：`stat -c '%y %n' /usr/lib/udev/hwdb.bin /etc/udev/hwdb.d/*.hwdb`，hwdb.bin 的时间比规则文件旧就说明没编译，重跑 `systemd-hwdb update`。
+- udev 规则在设备添加/变更时才应用，改完必须 `udevadm trigger`（或重新插拔、重启）。
+- `udevadm test` 输出里 modalias 的 `k71,72,73...` 是控制器能力位，不代表键盘上真有这些物理键。
+- 改键有取舍：PageUp/PageDown 原来的翻页功能就没有了。
+
+### 屏幕卡死急救（REISUB）
+
+先确认 SysRq 已启用：
+
+```shell
+echo 'kernel.sysrq = 1' | sudo tee /etc/sysctl.d/98-sysrq.conf
+sudo sysctl --system
+```
+
+卡死时按住 **Alt+PageDown**，依次敲 **R → E → I → S → U → B**（每下间隔 1 秒）：R 拿回键盘、E 结束前台进程、I 杀掉全部进程、S 内存写盘、U 磁盘转只读、B 重启。内核直接处理，不依赖桌面和显卡。
+
 ## 创建虚拟屏（远程必看）
 
 远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。开源驱动可以通过内核参数强制创建虚拟接口；NVIDIA 闭源驱动建议保留真实输出并加载真实 EDID，不再额外创建第二个假输出。
