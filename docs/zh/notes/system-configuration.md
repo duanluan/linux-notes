@@ -443,6 +443,65 @@ sudo sysctl --system
 
 卡死时按住 **Alt+PageDown**，依次敲 **R → E → I → S → U → B**（每下间隔 1 秒）：R 拿回键盘、E 结束前台进程、I 杀掉全部进程、S 内存写盘、U 磁盘转只读、B 重启。内核直接处理，不依赖桌面和显卡。
 
+## 设置电池充电上限（重启后保持）
+
+电池长期充到 100% 会加速老化，值得设个充电上限。KDE 电源设置里的充电上限（高级电源设置 → 高于此电量时停止充电）能写进去，但总是失效：重启后又变回 100%，电池照样充满。原因有两个。一是 KDE 的电源守护进程 PowerDevil 根本不保存这个值（相关缺陷至今未修，开发者的原话是「PowerDevil 没有持久化机制」）；二是华硕的内核驱动没法从固件读回真实阈值（固件没提供读取方法），所以每次开机都把缓存值重置成 100。
+
+真正管用的是内核属性 `charge_control_end_threshold`（充电截止阈值），位于 `/sys/class/power_supply/BAT0`。往里写百分比，就是设置固件的最大充电百分比（WMI `ASUS_WMI_DEVID_RSOC`，即「最大充电百分比」），充到该值就停止。华硕只有截止阈值（停止充电），没有起始阈值。
+
+注意区分干扰项 `charge_mode`（取值 0/1/2）：它在华硕固件属性里是只读的，只反映充电方式（1=圆口/DC、2=USB-C），不是充电上限。
+
+### 开机和唤醒后自动写入
+
+阈值存放在 EC（笔记本的电源管理芯片）里，没有任何机制自动恢复它：完全断电后固件会重置，驱动开机又假报 100。所以要自己写回去——用 systemd 服务在开机写，再用睡眠钩子在唤醒后写：
+
+```shell
+# 每次开机写入阈值，把 60 改成你要的百分比
+sudo tee /etc/systemd/system/battery-charge-threshold.service >/dev/null <<'EOF'
+[Unit]
+Description=Set battery charge threshold to 60%
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo 60 > /sys/class/power_supply/BAT0/charge_control_end_threshold'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# 睡眠/休眠唤醒后重写阈值（$2 是 pre|post）
+sudo tee /usr/lib/systemd/system-sleep.d/99-battery-charge-threshold >/dev/null <<'EOF'
+#!/bin/sh
+case "$2" in
+  post)
+    echo 60 > /sys/class/power_supply/BAT0/charge_control_end_threshold 2>/dev/null
+    ;;
+esac
+EOF
+sudo chmod +x /usr/lib/systemd/system-sleep.d/99-battery-charge-threshold
+
+# 启用服务：立即写一次，并随开机写入
+sudo systemctl daemon-reload
+sudo systemctl enable --now battery-charge-threshold.service
+```
+
+### 验证
+
+```shell
+# 应输出目标值（60），而不是 100
+cat /sys/class/power_supply/BAT0/charge_control_end_threshold
+```
+
+然后把电量用到低于上限（比如 45%），插上电源，确认充到上限就停。完整验证需要一次真实充电周期。
+
+### 注意事项
+
+- **如果 50% 看似无效，改用 60% 或 80%。** 部分华硕型号会悄悄忽略 40、60、80 以外的任何截止阈值：写入成功，但 EC 不执行。要是电池充过了你设的上限，就从这三个值里选。
+- **KDE 设置界面可能仍显示 100%**：PowerDevil 读不到真实值、开机按 100 处理。以上面 sysfs 的值为准，别信界面；服务照样会在后台守住上限。
+- **改百分比要改两处**（服务文件和睡眠钩子），改完执行 `sudo systemctl daemon-reload && sudo systemctl restart battery-charge-threshold.service`。
+- 华硕只有截止阈值（停止充电），没有起始阈值。如果改用 TLP，需要补一个占位的 `START_CHARGE_THRESH_BAT0=0`。
+
 ## 创建虚拟屏（远程必看）
 
 远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。开源驱动可以通过内核参数强制创建虚拟接口；NVIDIA 闭源驱动建议保留真实输出并加载真实 EDID，不再额外创建第二个假输出。

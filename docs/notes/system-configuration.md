@@ -455,6 +455,65 @@ sudo sysctl --system
 
 When the screen freezes, hold **Alt+PageDown** and press **R -> E -> I -> S -> U -> B** one per second: R grabs the keyboard, E kills the foreground process, I kills all processes, S flushes memory to disk, U remounts filesystems read-only, B reboots. The kernel handles all of it directly - no desktop or GPU driver involved.
 
+## Set a Battery Charge Limit (Persist Across Reboots)
+
+A battery held at 100% ages faster, so it is worth capping the charge level. The KDE power settings ("Advanced Power Settings" -> "Stop charging above this level") do write a limit, but it never sticks: after a reboot the value is back to 100% and the battery still charges full. Two reasons. PowerDevil (the KDE power daemon) never persists the value - upstream bug is still open, in the developer's words "there is no persistency in PowerDevil". And the ASUS kernel driver cannot read the threshold back from the firmware (the firmware has no method for it), so the driver re-initializes its cached value to 100 at every boot.
+
+The real control is the kernel attribute `charge_control_end_threshold` (charge cutoff threshold) under `/sys/class/power_supply/BAT0`. Writing a percentage there sets the firmware's maximum charge level (WMI `ASUS_WMI_DEVID_RSOC`, "maximum charging percentage") and charging stops at that level. ASUS exposes only a stop threshold, no start threshold.
+
+Do not confuse this with `charge_mode` (values 0/1/2) on the ASUS firmware attributes: that one is read-only and only reports the charging input type (1 = barrel/DC, 2 = USB-C). It is not a charge limit.
+
+### Apply at Boot and on Resume
+
+The threshold lives in the EC (the laptop's power-management chip) and nothing restores it automatically: a full power cycle resets it, and the driver fakes 100 at boot. So write it back yourself - a systemd service at boot, plus a sleep hook after resume:
+
+```shell
+# write the threshold at every boot; change 60 to your target percentage
+sudo tee /etc/systemd/system/battery-charge-threshold.service >/dev/null <<'EOF'
+[Unit]
+Description=Set battery charge threshold to 60%
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'echo 60 > /sys/class/power_supply/BAT0/charge_control_end_threshold'
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# rewrite the threshold after resume from suspend/hibernate ($2 is pre|post)
+sudo tee /usr/lib/systemd/system-sleep.d/99-battery-charge-threshold >/dev/null <<'EOF'
+#!/bin/sh
+case "$2" in
+  post)
+    echo 60 > /sys/class/power_supply/BAT0/charge_control_end_threshold 2>/dev/null
+    ;;
+esac
+EOF
+sudo chmod +x /usr/lib/systemd/system-sleep.d/99-battery-charge-threshold
+
+# enable the service: writes once now and again at every boot
+sudo systemctl daemon-reload
+sudo systemctl enable --now battery-charge-threshold.service
+```
+
+### Verify
+
+```shell
+# should print your target (60), not 100
+cat /sys/class/power_supply/BAT0/charge_control_end_threshold
+```
+
+Then discharge below the limit (for example to 45%), plug in, and confirm charging stops at the limit. Fully confirming it takes one real charge cycle.
+
+### Notes
+
+- **If 50% seems ignored, use 60% or 80%.** Some ASUS models silently disregard any stop threshold other than 40, 60, or 80: the write succeeds but the EC never enforces it. If the battery charges past your limit, pick one of those three.
+- **The KDE settings dialog may still show 100%.** PowerDevil cannot read the real value and assumes 100 at boot. Trust the sysfs value above, not the dialog - the service keeps enforcing the limit either way.
+- **Changing the percentage means editing two files** (the service and the sleep hook), then running `sudo systemctl daemon-reload && sudo systemctl restart battery-charge-threshold.service`.
+- ASUS has only a stop threshold, no start threshold. If you use TLP instead, it needs a dummy `START_CHARGE_THRESH_BAT0=0` alongside the stop value.
+
 ## Create a Virtual Display (Must Read for Remote Access)
 
 When connecting remotely, the session may fail to open or show a black screen if no local monitor is attached, or if the monitor is powered off. With open-source drivers, you can force a virtual output through a kernel parameter. With the NVIDIA proprietary driver, keep the real output available and load the real monitor EDID instead of creating a second fake output.
