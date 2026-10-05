@@ -657,7 +657,7 @@ Windows 安装完成进入桌面后，打开**设备管理器**，找到带有�
 
 关闭 WinBoat 重新打开，理论上可以正常运行。
 
-## 安卓模拟器 麟卓卓懿
+## 安卓模拟器 麟卓卓奕
 
 [下载 | 北京麟卓信息科技有限公司](https://www.linzhuotech.com/Product/download) 下载。
 
@@ -1217,8 +1217,6 @@ paru -S keyviz-zh
 ```
 
 ## StartLive：B 站推流开播
-
-![](https://docimg1.docs.qq.com/image/AgAABWcFuYvuARfhZlBJtL6oskj_FB2K.png?w=919&h=752)
 
 - [Releases · Radekyspec/StartLive](https://github.com/Radekyspec/StartLive/releases)
 - [【腾讯文档】StartLive开播器使用说明](https://docs.qq.com/doc/DTHVMdkhtUWJjRFhv)
