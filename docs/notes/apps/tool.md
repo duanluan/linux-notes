@@ -1121,7 +1121,7 @@ makepkg -si
 
 [Releases · henryau53/xmind-crack-patch](https://github.com/henryau53/xmind-crack-patch/releases)
 
-Install `nvm + Node.js + pnpm + nrm` first as described in the development section.
+Install `mise + Node.js + pnpm + nrm` first as described in the development section.
 
 ```shell
 pnpm add -g asar

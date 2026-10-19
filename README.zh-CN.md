@@ -67,7 +67,7 @@
 
 #### 👨‍💻 [全栈开发环境](docs/zh/notes/apps/development.md)
 * **通用**：Git（SSH Key / 用户信息 / 常用配置）/ act（本地跑 GitHub Actions）/ Rebased
-* **前端与移动端**：nvm + Node.js + pnpm + nrm / FVM + Flutter 换源 + Dart / Android Studio / Visual Studio Code / 微信开发者工具
+* **前端与移动端**：mise + Node.js + pnpm + nrm / FVM + Flutter 换源 + Dart / Android Studio / Visual Studio Code / 微信开发者工具
 * **JetBrains 系**：Toolbox App / IntelliJ IDEA / WebStorm / PyCharm
 * **后端与系统级**：JDK / Maven (Daemon) / Gradle / Apache JMeter / Python + pipx + cnpip 切换最快 pip 镜像源 + Miniforge + uv / Rust + Cargo 换源
 * **数据库与接口工具**：JetBrains DataGrip / Navicat Premium / DBX / DBeaver Enterprise Edition / Another Redis Desktop Manager / Offset Explorer / Apifox / Apipost / Postman

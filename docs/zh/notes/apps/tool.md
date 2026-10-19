@@ -1149,7 +1149,7 @@ makepkg -si
 
 [Releases · henryau53/xmind-crack-patch](https://github.com/henryau53/xmind-crack-patch/releases)
 
-先按照开发类中安装 nvm + Node.js + pnpm + nrm。
+先按照开发类中安装 mise + Node.js + pnpm + nrm。
 
 ```shell
 pnpm add -g asar

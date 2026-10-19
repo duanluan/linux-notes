@@ -52,24 +52,26 @@ Stage  Job ID           Job name         Workflow name  Workflow file    Events
 $ sudo act -j deploy-gh-pages
 ```
 
-## nvm + Node.js + pnpm + nrm
+## mise + Node.js + pnpm + nrm
 
-- [脚本安装 nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)
+- [mise – 开发工具版本管理（nvm 的替代）](https://mise.jdx.dev/)
 - [Node.js — Download Node.js®](https://nodejs.org/zh-cn/download)
 
+2026-10 起，Node 版本管理从 nvm 换成了 mise，迁移过程见本节末尾的「从 nvm 迁移到 mise」。
+
 ```shell
-# 代理下载安装脚本
-proxychains wget https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
-# 替换安装脚本中 git clone 为 proxychains git clone（可选）
-sed -i 's/command git clone/command proxychains git clone/g' install.sh
-# 执行脚本
-bash install.sh
-# 代替重启 shell
-\. "$HOME/.nvm/nvm.sh"
-# 下载并安装 Node.js
-nvm install 24
-# 设置默认版本，新开的 shell 自动使用该版本
-nvm alias default 24
+# 安装（装到 ~/.local/bin，不需要 sudo；脚本从 GitHub 下载，慢时前面加 proxychains）
+curl -fsSL https://mise.run | sh
+# 在 ~/.zshrc 末尾追加激活行（安装完终端会打印这条，保持是最后一行）
+echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+# 重新加载
+source ~/.zshrc
+# 下载并安装 Node.js（写大版本号会装该系列最新小版本，精确版本写 node@24.x.y）
+mise install node@24
+# 设置全局默认版本，新开的 shell 自动使用该版本
+mise use -g node@24
+# 识别项目目录里的 .nvmrc / .node-version，cd 进去自动切换
+mise settings add idiomatic_version_file_enable_tools node
 # 安装 pnpm 方法一
 corepack enable pnpm
 # 安装 pnpm 方法二
@@ -91,6 +93,51 @@ nrm ls
 # 使用镜像源
 nrm use xxx
 ```
+
+### 从 nvm 迁移到 mise
+
+```shell
+# 1. 记录 nvm 现状：装了哪些版本、默认版本
+nvm ls
+cat ~/.nvm/alias/default 2>/dev/null
+# 2. 记录每个版本下全局装了哪些 npm 包，后面照着重装
+ls ~/.nvm/versions/node/
+~/.nvm/versions/node/v<版本>/bin/npm ls -g --depth=0
+# 3. 安装 mise（见本节开头），装同样的 Node 版本并设全局默认
+mise install node@24
+mise use -g node@24
+# 也可用 mise sync node --nvm 把 nvm 已装的版本直接链接过来，省去重新下载；
+# 但链接指向 ~/.nvm，之后删 ~/.nvm 会把这些版本变成死链接，
+# 想彻底卸载 nvm 仍需 mise uninstall 后重新 mise install 改为真实安装
+# 4. 重装全局 npm 包（按第 2 步的记录，pnpm、nrm 等）
+mise x node@24 -- npm install -g pnpm nrm
+# 多个包写在一条命令里时，有一个包失败会整条回滚，拿不准就分开装；
+# 个别包的安装脚本失败（如 onnxruntime-node 把下载时的 302 当错误）时，跳过脚本单独装：
+# mise x node@24 -- npm install -g <包名> --ignore-scripts
+# 5. 为新装的全局包生成 shims（命令入口）
+mise reshim
+# 6. 删掉 ~/.zshrc 里 nvm 的三行配置：
+#    export NVM_DIR="$HOME/.nvm"
+#    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# 7. 重开终端，确认 node 来自 mise、全局工具可用
+which node && node -v
+mise ls
+# 8. 全部正常后卸载：nvm 本体和它装的所有 Node 都在 ~/.nvm，删掉即可
+rm -rf ~/.nvm
+```
+
+常用 nvm 命令与 mise 的对应关系：
+
+| nvm | mise | 说明 |
+| --- | --- | --- |
+| `nvm install 24` | `mise install node@24` | 精确版本写 `node@24.x.y` |
+| `nvm alias default 24` | `mise use -g node@24` | 全局默认版本 |
+| `nvm use 24` | `mise x node@24 -- <命令>` | `mise use node@24` 不带 `-g` 是写进当前目录的 `.mise.toml` |
+| `nvm ls` / `nvm ls-remote` | `mise ls` / `mise ls-remote node` | |
+| `nvm uninstall 24` | `mise uninstall node@24` | |
+
+桌面快捷方式等位置若写死了 `~/.nvm/versions/node/...` 路径，要一并改掉；推荐改成 mise 的 shims 路径（如 `~/.local/share/mise/shims/zcode-pro`），该路径不随 Node 版本变化，以后升级不用再改。
 
 ## JDK
 

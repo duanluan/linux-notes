@@ -52,24 +52,26 @@ Stage  Job ID           Job name         Workflow name  Workflow file    Events
 $ sudo act -j deploy-gh-pages
 ```
 
-## nvm + Node.js + pnpm + nrm
+## mise + Node.js + pnpm + nrm
 
-- [Install nvm with the official script](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script)
+- [mise – dev tools version manager (successor to nvm)](https://mise.jdx.dev/)
 - [Node.js Downloads](https://nodejs.org/zh-cn/download)
 
+Node version management moved from nvm to mise in Oct 2026; see "Migrating from nvm to mise" at the end of this section for the migration steps.
+
 ```shell
-# download the install script through the proxy
-proxychains wget https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh
-# optionally replace git clone with proxychains git clone inside the script
-sed -i 's/command git clone/command proxychains git clone/g' install.sh
-# run the script
-bash install.sh
-# reload nvm without restarting the shell
-\. "$HOME/.nvm/nvm.sh"
-# install Node.js
-nvm install 24
-# set the default version so new shells use it automatically
-nvm alias default 24
+# install (to ~/.local/bin, no sudo needed; the script downloads from GitHub, prefix proxychains if slow)
+curl -fsSL https://mise.run | sh
+# append the activation line to ~/.zshrc (printed after install; keep it as the last line)
+echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+# reload
+source ~/.zshrc
+# install Node.js (a major version resolves to its latest minor; pin exactly with node@24.x.y)
+mise install node@24
+# set the global default version so new shells use it automatically
+mise use -g node@24
+# recognize .nvmrc / .node-version in project directories and switch automatically on cd
+mise settings add idiomatic_version_file_enable_tools node
 # method 1: enable pnpm through corepack
 corepack enable pnpm
 # method 2: install pnpm directly
@@ -91,6 +93,51 @@ nrm ls
 # switch to a mirror
 nrm use xxx
 ```
+
+### Migrating from nvm to mise
+
+```shell
+# 1. Record the current nvm state: installed versions and the default alias
+nvm ls
+cat ~/.nvm/alias/default 2>/dev/null
+# 2. Record the global npm packages of each version; they must be reinstalled later
+ls ~/.nvm/versions/node/
+~/.nvm/versions/node/v<version>/bin/npm ls -g --depth=0
+# 3. Install mise (see the top of this section), install the same Node versions and set the global default
+mise install node@24
+mise use -g node@24
+# Alternatively, `mise sync node --nvm` links the versions nvm installed without re-downloading;
+# but those links point into ~/.nvm, so deleting ~/.nvm later turns them into dead links —
+# to fully remove nvm you must mise uninstall them and mise install again as real installs
+# 4. Reinstall the global npm packages (pnpm, nrm, etc. as recorded in step 2)
+mise x node@24 -- npm install -g pnpm nrm
+# Installing several packages in one command rolls back everything if one fails, so split them when in doubt;
+# if a package's install script fails (e.g. onnxruntime-node treats a download 302 as an error), skip scripts for that one:
+# mise x node@24 -- npm install -g <package> --ignore-scripts
+# 5. Generate shims for the newly installed global packages
+mise reshim
+# 6. Remove the three nvm lines from ~/.zshrc:
+#    export NVM_DIR="$HOME/.nvm"
+#    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+#    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+# 7. Open a new terminal and confirm node comes from mise and the global tools work
+which node && node -v
+mise ls
+# 8. Once everything works, uninstall: nvm itself and every Node version it installed live in ~/.nvm
+rm -rf ~/.nvm
+```
+
+Handy nvm to mise command mapping:
+
+| nvm | mise | Notes |
+| --- | --- | --- |
+| `nvm install 24` | `mise install node@24` | Pin an exact version with `node@24.x.y` |
+| `nvm alias default 24` | `mise use -g node@24` | Global default version |
+| `nvm use 24` | `mise x node@24 -- <command>` | `mise use node@24` without `-g` writes the current directory's `.mise.toml` |
+| `nvm ls` / `nvm ls-remote` | `mise ls` / `mise ls-remote node` | |
+| `nvm uninstall 24` | `mise uninstall node@24` | |
+
+If a desktop entry or other config hardcodes a `~/.nvm/versions/node/...` path, update it too; point it at the mise shims path (e.g. `~/.local/share/mise/shims/zcode-pro`), which stays stable across Node upgrades.
 
 ## JDK
 

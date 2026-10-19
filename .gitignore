@@ -18,3 +18,10 @@ node_modules/
 
 # AI
 .codex
+
+# AUR / makepkg 构建产物
+packaging/**/pkg/
+packaging/**/src/
+# Python 缓存
+__pycache__/
+*.pyc
