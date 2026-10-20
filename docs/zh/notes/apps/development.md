@@ -52,26 +52,45 @@ Stage  Job ID           Job name         Workflow name  Workflow file    Events
 $ sudo act -j deploy-gh-pages
 ```
 
-## mise + Node.js + pnpm + nrm
+## mise
 
-- [mise – 开发工具版本管理（nvm 的替代）](https://mise.jdx.dev/)
-- [Node.js — Download Node.js®](https://nodejs.org/zh-cn/download)
-
-2026-10 起，Node 版本管理从 nvm 换成了 mise，迁移过程见本节末尾的「从 nvm 迁移到 mise」。
+- [mise – 开发工具版本管理](https://mise.jdx.dev/)
 
 ```shell
 # 安装（装到 ~/.local/bin，不需要 sudo；脚本从 GitHub 下载，慢时前面加 proxychains）
 curl -fsSL https://mise.run | sh
 # 在 ~/.zshrc 末尾追加激活行（安装完终端会打印这条，保持是最后一行）
-echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+echo 'eval "$($HOME/.local/bin/mise activate zsh)"' >> ~/.zshrc
 # 重新加载
 source ~/.zshrc
+```
+
+常用命令：
+
+```shell
+mise use -g <工具>@<版本>       # 安装并设为全局默认
+mise install <工具>@<版本>      # 只安装，不改默认
+mise use <工具>@<版本>          # 写入当前目录的 ./mise.toml，进入目录自动切换
+mise ls                         # 查看已安装的工具与全局默认
+mise ls-remote <工具>           # 查看可安装的版本
+mise x <工具>@<版本> -- <命令>   # 临时用指定版本执行一条命令
+mise uninstall <工具>@<版本>    # 卸载某个版本
+mise self-update                # 更新 mise 本体
+```
+
+## mise + Node.js + pnpm + nrm
+
+- [Node.js — Download Node.js®](https://nodejs.org/zh-cn/download)
+
+```shell
 # 下载并安装 Node.js（写大版本号会装该系列最新小版本，精确版本写 node@24.x.y）
 mise install node@24
 # 设置全局默认版本，新开的 shell 自动使用该版本
 mise use -g node@24
+
 # 识别项目目录里的 .nvmrc / .node-version，cd 进去自动切换
 mise settings add idiomatic_version_file_enable_tools node
+
 # 安装 pnpm 方法一
 corepack enable pnpm
 # 安装 pnpm 方法二
@@ -79,6 +98,7 @@ npm install -g pnpm
 # 自动安装配置 pnpm
 pnpm setup
 source ~/.zshrc
+
 # 安装 nrm
 pnpm add -g nrm
 # 查看所有镜像源
@@ -100,29 +120,36 @@ nrm use xxx
 # 1. 记录 nvm 现状：装了哪些版本、默认版本
 nvm ls
 cat ~/.nvm/alias/default 2>/dev/null
+
 # 2. 记录每个版本下全局装了哪些 npm 包，后面照着重装
 ls ~/.nvm/versions/node/
 ~/.nvm/versions/node/v<版本>/bin/npm ls -g --depth=0
+
 # 3. 安装 mise（见本节开头），装同样的 Node 版本并设全局默认
 mise install node@24
 mise use -g node@24
 # 也可用 mise sync node --nvm 把 nvm 已装的版本直接链接过来，省去重新下载；
 # 但链接指向 ~/.nvm，之后删 ~/.nvm 会把这些版本变成死链接，
 # 想彻底卸载 nvm 仍需 mise uninstall 后重新 mise install 改为真实安装
+
 # 4. 重装全局 npm 包（按第 2 步的记录，pnpm、nrm 等）
 mise x node@24 -- npm install -g pnpm nrm
 # 多个包写在一条命令里时，有一个包失败会整条回滚，拿不准就分开装；
 # 个别包的安装脚本失败（如 onnxruntime-node 把下载时的 302 当错误）时，跳过脚本单独装：
 # mise x node@24 -- npm install -g <包名> --ignore-scripts
+
 # 5. 为新装的全局包生成 shims（命令入口）
 mise reshim
+
 # 6. 删掉 ~/.zshrc 里 nvm 的三行配置：
 #    export NVM_DIR="$HOME/.nvm"
 #    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 #    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 # 7. 重开终端，确认 node 来自 mise、全局工具可用
 which node && node -v
 mise ls
+
 # 8. 全部正常后卸载：nvm 本体和它装的所有 Node 都在 ~/.nvm，删掉即可
 rm -rf ~/.nvm
 ```
@@ -133,7 +160,7 @@ rm -rf ~/.nvm
 | --- | --- | --- |
 | `nvm install 24` | `mise install node@24` | 精确版本写 `node@24.x.y` |
 | `nvm alias default 24` | `mise use -g node@24` | 全局默认版本 |
-| `nvm use 24` | `mise x node@24 -- <命令>` | `mise use node@24` 不带 `-g` 是写进当前目录的 `.mise.toml` |
+| `nvm use 24` | `mise x node@24 -- <命令>` | `mise use node@24` 不带 `-g` 是写进当前目录的 `mise.toml` |
 | `nvm ls` / `nvm ls-remote` | `mise ls` / `mise ls-remote node` | |
 | `nvm uninstall 24` | `mise uninstall node@24` | |
 
@@ -141,7 +168,28 @@ rm -rf ~/.nvm
 
 ## JDK
 
-脚本安装：交互式选择发行版（Azul Zulu、Eclipse Temurin、Amazon Corretto、Alibaba Dragonwell、BellSoft Liberica、Tencent Kona、毕昇 JDK）和版本，默认创建 `jdk<大版本>` 稳定软链接，可选配置 `JAVA_HOME`，支持已装版本检查与更新。
+方式一：mise 管理。java 后端支持 Azul Zulu、Eclipse Temurin 等发行版，无需手动解压和配置环境变量。
+
+```shell
+# 安装 zulu 8、24 备用（不设为默认）
+mise install java@zulu-8 java@zulu-24
+# 安装 zulu 17 并设为全局默认
+mise use -g java@zulu-17
+# 验证（mise activate 会同时设置 JAVA_HOME）
+$ java -version
+openjdk version "17.0.20.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu17.68+203-CA (build 17.0.20.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu17.68+203-CA (build 17.0.20.1+1-LTS, mixed, sharing)
+
+# 查看已安装的 JDK
+mise ls java
+# 项目级切换：在项目根目录执行（写入 ./mise.toml，进入目录自动切换）
+mise use java@zulu-8
+```
+
+注意：IDE（IntelliJ IDEA、Android Studio）不读取 shell 的 `PATH`，`Project SDK` 仍需在 IDE 设置中选择，可指向 `~/.local/share/mise/installs/java/<版本>` 目录。
+
+方式二：脚本安装。交互式选择发行版（Azul Zulu、Eclipse Temurin、Amazon Corretto、Alibaba Dragonwell、BellSoft Liberica、Tencent Kona、毕昇 JDK）和版本，默认创建 `jdk<大版本>` 稳定软链接，可选配置 `JAVA_HOME`，支持已装版本检查与更新。
 
 ```shell
 # 安装或更新
@@ -149,6 +197,23 @@ curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install
 ```
 
 ## Gradle
+
+方式一：mise 管理。`services.gradle.org` 直连在国内基本不通，先给 mise 设置代理再安装。
+
+```shell
+# 设置代理（端口按本机代理实际调整）
+export https_proxy=http://127.0.0.1:7897
+# 安装 Gradle 9 备用（不设为默认）
+mise install gradle@9
+# 安装 Gradle 8 并设为全局默认
+mise use -g gradle@8
+$ gradle -v
+
+Welcome to Gradle 8.14.6!
+……
+```
+
+方式二：手动安装。
 
 [Gradle | Releases](https://gradle.org/releases/) 下载`binary-only`。
 
@@ -170,7 +235,11 @@ $ gradle -v
 
 Welcome to Gradle 8.14.3!
 ……
+```
 
+镜像源配置（两种安装方式通用）：
+
+```shell
 # 创建全局脚本
 $ nano ~/.gradle/init.gradle
 
@@ -284,7 +353,20 @@ Keywords=idea;
 
 - Maven
 
-  此处用的是 IDEA 自带的。也可以自己下载：[Download Apache Maven – Maven](https://maven.apache.org/download.cgi)
+  方式一：mise 管理。
+
+  ```shell
+  # 安装 Maven 并设为全局默认
+  mise use -g maven
+  $ mvn -v
+  Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)
+  Maven home: /home/njcm/.local/share/mise/installs/maven/3.10.0/apache-maven-3.10.0
+  Java version: 17.0.20.1, vendor: Azul Systems, Inc., runtime: /home/njcm/.local/share/mise/installs/java/zulu-17.68.203.0
+  Default locale: zh_CN, platform encoding: UTF-8
+  OS name: "linux", version: "6.18.49-1-MANJARO", arch: "amd64", family: "unix"
+  ```
+
+  方式二：手动安装。此处用的是 IDEA 自带的。也可以自己下载：[Download Apache Maven – Maven](https://maven.apache.org/download.cgi)
   
   ```shell
   # 末尾追加环境变量
@@ -310,6 +392,19 @@ Keywords=idea;
   
   功能：**构建速度显著更快**、**兼容现有的 Maven 插件和扩展**、**守护进程管理**、**智能内存管理**、**原生可执行文件可用**。
   
+  方式一：mise 管理。
+
+  ```shell
+  # 安装 mvnd 并设为全局默认（内嵌一份 Maven，独立于上面的 maven）
+  mise use -g mvnd
+  $ mvnd -v
+  Apache Maven Daemon (mvnd) 1.0.6 linux-amd64 native client (e0df65807439de579e16632881cf4be14b5a3cca)
+  Terminal: org.jline.terminal.impl.PosixSysTerminal with pty org.jline.terminal.impl.jni.linux.LinuxNativePty
+  ……
+  ```
+
+  方式二：手动安装。
+
   [Download Apache Maven Daemon – Maven](https://maven.apache.org/download.cgi#Maven_Daemon)
   
   ```shell

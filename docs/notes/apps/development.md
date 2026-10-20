@@ -52,26 +52,45 @@ Stage  Job ID           Job name         Workflow name  Workflow file    Events
 $ sudo act -j deploy-gh-pages
 ```
 
-## mise + Node.js + pnpm + nrm
+## mise
 
-- [mise – dev tools version manager (successor to nvm)](https://mise.jdx.dev/)
-- [Node.js Downloads](https://nodejs.org/zh-cn/download)
-
-Node version management moved from nvm to mise in Oct 2026; see "Migrating from nvm to mise" at the end of this section for the migration steps.
+- [mise – dev tools version manager](https://mise.jdx.dev/)
 
 ```shell
 # install (to ~/.local/bin, no sudo needed; the script downloads from GitHub, prefix proxychains if slow)
 curl -fsSL https://mise.run | sh
-# append the activation line to ~/.zshrc (printed after install; keep it as the last line)
-echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+# append the activation line to the end of ~/.zshrc (printed after install; keep it as the last line)
+echo 'eval "$($HOME/.local/bin/mise activate zsh)"' >> ~/.zshrc
 # reload
 source ~/.zshrc
+```
+
+Common commands:
+
+```shell
+mise use -g <tool>@<version>       # install and set as the global default
+mise install <tool>@<version>      # install only, does not change the default
+mise use <tool>@<version>          # write ./mise.toml in the current directory (auto-switch on cd)
+mise ls                            # list installed tools and global defaults
+mise ls-remote <tool>              # list installable versions
+mise x <tool>@<version> -- <cmd>   # run one command with a specific version
+mise uninstall <tool>@<version>    # uninstall one version
+mise self-update                   # update mise itself
+```
+
+## mise + Node.js + pnpm + nrm
+
+- [Node.js Downloads](https://nodejs.org/zh-cn/download)
+
+```shell
 # install Node.js (a major version resolves to its latest minor; pin exactly with node@24.x.y)
 mise install node@24
 # set the global default version so new shells use it automatically
 mise use -g node@24
+
 # recognize .nvmrc / .node-version in project directories and switch automatically on cd
 mise settings add idiomatic_version_file_enable_tools node
+
 # method 1: enable pnpm through corepack
 corepack enable pnpm
 # method 2: install pnpm directly
@@ -88,7 +107,7 @@ nrm ls
   tencent ------ https://mirrors.tencent.com/npm/
   cnpm --------- https://r.cnpmjs.org/
   taobao ------- https://registry.npmmirror.com/
-  npmMirror ---- https://skimdb.npmjs.com/registry/
+  npmMirror ---- https://skimdb.npmjs.org/registry/
   huawei ------- https://repo.huaweicloud.com/repository/npm/
 # switch to a mirror
 nrm use xxx
@@ -133,7 +152,7 @@ Handy nvm to mise command mapping:
 | --- | --- | --- |
 | `nvm install 24` | `mise install node@24` | Pin an exact version with `node@24.x.y` |
 | `nvm alias default 24` | `mise use -g node@24` | Global default version |
-| `nvm use 24` | `mise x node@24 -- <command>` | `mise use node@24` without `-g` writes the current directory's `.mise.toml` |
+| `nvm use 24` | `mise x node@24 -- <command>` | `mise use node@24` without `-g` writes the current directory's `mise.toml` |
 | `nvm ls` / `nvm ls-remote` | `mise ls` / `mise ls-remote node` | |
 | `nvm uninstall 24` | `mise uninstall node@24` | |
 
@@ -141,7 +160,29 @@ If a desktop entry or other config hardcodes a `~/.nvm/versions/node/...` path, 
 
 ## JDK
 
-Script installation: interactively choose a distribution (Azul Zulu, Eclipse Temurin, Amazon Corretto, Alibaba Dragonwell, BellSoft Liberica, Tencent Kona, Bisheng JDK) and version; creates a stable `jdk<major>` symlink by default, optionally configures `JAVA_HOME`, and supports checking and updating installed versions.
+Option 1: managed with mise. The java backend supports distributions such as Azul Zulu and Eclipse Temurin — no manual extraction or environment variables needed.
+
+```shell
+# install zulu 8 and 24 as spares (not the default)
+mise install java@zulu-8 java@zulu-24
+# install zulu 17 and set it as the global default
+mise use -g java@zulu-17
+# verify (mise activate also sets JAVA_HOME)
+$ java -version
+openjdk version "17.0.20.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Zulu17.68+203-CA (build 17.0.20.1+1-LTS)
+OpenJDK 64-Bit Server VM Zulu17.68+203-CA (build 17.0.20.1+1-LTS, mixed, sharing)
+
+# list installed JDKs
+mise ls java
+# per-project switch: run inside the project root
+# (writes ./mise.toml and auto-switches when you cd into the directory)
+mise use java@zulu-8
+```
+
+Note: IDEs (IntelliJ IDEA, Android Studio) do not read the shell `PATH`; the Project SDK still has to be selected in the IDE settings and can point to `~/.local/share/mise/installs/java/<version>`.
+
+Option 2: script installation. Interactively choose a distribution (Azul Zulu, Eclipse Temurin, Amazon Corretto, Alibaba Dragonwell, BellSoft Liberica, Tencent Kona, Bisheng JDK) and version; creates a stable `jdk<major>` symlink by default, optionally configures `JAVA_HOME`, and supports checking and updating installed versions.
 
 ```shell
 # install or update
@@ -149,6 +190,23 @@ curl -fsSL https://raw.githubusercontent.com/duanluan/shell-scripts/main/install
 ```
 
 ## Gradle
+
+Option 1: managed with mise. `services.gradle.org` is mostly unreachable from mainland China without a proxy, so configure the proxy for mise first.
+
+```shell
+# set the proxy (adjust the port to your local proxy)
+export https_proxy=http://127.0.0.1:7897
+# install Gradle 9 as a spare (not the default)
+mise install gradle@9
+# install Gradle 8 and set it as the global default
+mise use -g gradle@8
+$ gradle -v
+
+Welcome to Gradle 8.14.6!
+……
+```
+
+Option 2: manual installation.
 
 Download the `binary-only` package from [Gradle Releases](https://gradle.org/releases/).
 
@@ -170,7 +228,11 @@ $ gradle -v
 
 Welcome to Gradle 8.14.3!
 ……
+```
 
+Mirror configuration (shared by both install options):
+
+```shell
 # create a global init script
 $ nano ~/.gradle/init.gradle
 
@@ -284,7 +346,20 @@ Fix:
 
 - Maven
 
-  Here I use the copy bundled with IDEA. You can also download Maven yourself: [Download Apache Maven](https://maven.apache.org/download.cgi)
+  Option 1: managed with mise.
+
+  ```shell
+  # install Maven and set it as the global default
+  mise use -g maven
+  $ mvn -v
+  Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)
+  Maven home: /home/njcm/.local/share/mise/installs/maven/3.10.0/apache-maven-3.10.0
+  Java version: 17.0.20.1, vendor: Azul Systems, Inc., runtime: /home/njcm/.local/share/mise/installs/java/zulu-17.68.203.0
+  Default locale: zh_CN, platform encoding: UTF-8
+  OS name: "linux", version: "6.18.49-1-MANJARO", arch: "amd64", family: "unix"
+  ```
+
+  Option 2: manual installation. Here I use the copy bundled with IDEA. You can also download Maven yourself: [Download Apache Maven](https://maven.apache.org/download.cgi)
 
   ```shell
   # append environment variables to ~/.zshrc
@@ -308,6 +383,20 @@ Fix:
 
   Features: **significantly faster builds**, **compatibility with existing Maven plugins and extensions**, **daemon management**, **smart memory management**, and **native executables**.
   
+  Option 1: managed with mise.
+
+  ```shell
+  # install mvnd and set it as the global default
+  # (it embeds its own Maven, independent of the maven above)
+  mise use -g mvnd
+  $ mvnd -v
+  Apache Maven Daemon (mvnd) 1.0.6 linux-amd64 native client (e0df65807439de579e16632881cf4be14b5a3cca)
+  Terminal: org.jline.terminal.impl.PosixSysTerminal with pty org.jline.terminal.impl.jni.linux.LinuxNativePty
+  ……
+  ```
+
+  Option 2: manual installation.
+
   [Download Apache Maven Daemon](https://maven.apache.org/download.cgi#Maven_Daemon)
   
   ```shell
