@@ -514,6 +514,26 @@ Then discharge below the limit (for example to 45%), plug in, and confirm chargi
 - **Changing the percentage means editing two files** (the service and the sleep hook), then running `sudo systemctl daemon-reload && sudo systemctl restart battery-charge-threshold.service`.
 - ASUS has only a stop threshold, no start threshold. If you use TLP instead, it needs a dummy `START_CHARGE_THRESH_BAT0=0` alongside the stop value.
 
+## Alt+Tab Takes Several Seconds to Show the Task Switcher
+
+After pressing Alt+Tab, the switcher list took several seconds to appear; switching the visualization to "icons and names only" did not help, because the layout is not the source of the problem. The cause is the `Show selected window` option (kwin's highlightwindow effect): when the switcher opens, it temporarily highlights the selected window and brings it to the front, and the wait happens in that step. It is unrelated to the GPU vendor or display protocol, and grows worse the longer the session runs ([KDE forum thread](https://discuss.kde.org/t/alt-tab-is-very-slow-1s-and-freezes-up-the-desktop/19756)).
+
+Fix 1 (graphical settings, what was actually used): in `System Settings` -> `Window Management` -> `Task Switcher`, uncheck `Show selected window`. Takes effect immediately, no logout needed.
+
+Fix 2 (command line, equivalent to the graphical option):
+
+```shell
+# Turn off "Show selected window" and make kwin reload its config
+kwriteconfig6 --file kwinrc --group TabBox --key HighlightWindows false
+qdbus org.kde.KWin /KWin reconfigure
+
+# Restore
+# kwriteconfig6 --file kwinrc --group TabBox --key HighlightWindows true
+# qdbus org.kde.KWin /KWin reconfigure
+```
+
+If a small delay (one or two hundred milliseconds) remains, that is the intentional popup delay; remove it with `kwriteconfig6 --file kwinrc --group TabBox --key DelayTime 0`. Without changing the config, logging out and back in or restarting the window manager with `kwin_x11 --replace` only restores the speed temporarily; the problem returns as the session runs longer.
+
 ## Create a Virtual Display (Must Read for Remote Access)
 
 When connecting remotely, the session may fail to open or show a black screen if no local monitor is attached, or if the monitor is powered off. With open-source drivers, you can force a virtual output through a kernel parameter. With the NVIDIA proprietary driver, keep the real output available and load the real monitor EDID instead of creating a second fake output.

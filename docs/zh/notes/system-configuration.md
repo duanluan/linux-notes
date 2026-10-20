@@ -502,6 +502,26 @@ cat /sys/class/power_supply/BAT0/charge_control_end_threshold
 - **改百分比要改两处**（服务文件和睡眠钩子），改完执行 `sudo systemctl daemon-reload && sudo systemctl restart battery-charge-threshold.service`。
 - 华硕只有截止阈值（停止充电），没有起始阈值。如果改用 TLP，需要补一个占位的 `START_CHARGE_THRESH_BAT0=0`。
 
+## Alt+Tab 弹出任务切换器延迟数秒
+
+按住 Alt+Tab 后，切换器列表要等好几秒才出现；把可视化方案换成“只显示图标和名称”没有用，布局不影响问题来源。原因是`显示选定的窗口`选项（kwin 的 highlightwindow 特效）：切换器弹出时会把选中的窗口临时高亮并提到最前面，等待发生在这一步，与显卡和显示协议关系不大，且会话运行越久越明显（[KDE 论坛讨论帖](https://discuss.kde.org/t/alt-tab-is-very-slow-1s-and-freezes-up-the-desktop/19756)）。
+
+修复方式一（图形界面，本次实际使用）：`系统设置` `窗口管理` `任务切换器`中取消勾选`显示选定的窗口`，立即生效，不需要注销。
+
+修复方式二（命令行，与图形界面等价）：
+
+```shell
+# 关闭「显示选定的窗口」并让 kwin 重新加载配置
+kwriteconfig6 --file kwinrc --group TabBox --key HighlightWindows false
+qdbus org.kde.KWin /KWin reconfigure
+
+# 恢复
+# kwriteconfig6 --file kwinrc --group TabBox --key HighlightWindows true
+# qdbus org.kde.KWin /KWin reconfigure
+```
+
+如果关闭后还有一两百毫秒延迟，那是刻意设计的弹出延迟，可用 `kwriteconfig6 --file kwinrc --group TabBox --key DelayTime 0` 去掉。不改配置的话，注销重登或 `kwin_x11 --replace` 重启窗口管理器只能临时恢复，问题会随运行时间再次出现。
+
 ## 创建虚拟屏（远程必看）
 
 远程连接时，如果本地没有连接显示器或显示器未开启，会导致无法连接或黑屏。开源驱动可以通过内核参数强制创建虚拟接口；NVIDIA 闭源驱动建议保留真实输出并加载真实 EDID，不再额外创建第二个假输出。
