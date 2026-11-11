@@ -1381,6 +1381,116 @@ $ ldconfig -p | grep libxdo
 $ sudo ln -s /usr/lib/libxdo.so.4 /usr/lib/libxdo.so.3
 ```
 
+## uu-remote-linux
+
+An unofficial Linux client for NetEase UU Remote, with both host and viewer: after signing in, the machine shows up in the official Mac / Windows / mobile clients for remote control; `uuremote-viewer` can also remote into other Windows / Mac / Linux devices (still marked experimental), with desktop, file transfer, terminal, port mapping and remote assistance. Written in Rust, no Wine; includes a virtual-desktop setup for headless machines.
+
+![](https://raw.githubusercontent.com/VallierDev/uu-remote-linux/main/docs/images/main-window.png)
+
+[VallierDev/uu-remote-linux](https://github.com/VallierDev/uu-remote-linux)
+
+```shell
+# install (AUR prebuilt package, Wayland backends included)
+paru -S uu-remote-linux-bin
+
+# start the host service and enable it with the graphical session
+systemctl --user enable --now uuremote-native.service
+
+# open the host main window and sign in by QR code, or scan in the terminal
+uuremote-server show
+uuremote-server login --no-gui
+
+# open the Linux viewer to control other devices
+uuremote-viewer ui
+
+# diagnose: prints only session, backend, plugins, permissions and encoder state, no account or tokens, safe to paste into an issue
+uuremote-server doctor
+```
+
+The package installs two launcher entries: `UU Remote Linux Host` (host) and `UU Remote Linux Viewer` (viewer).
+
+Notes:
+- X11 gets the full feature set; GNOME / KDE Wayland goes through xdg-desktop-portal and is experimental, with fixed resolution and an on-device screen-sharing prompt on first connect.
+- Desktops that do not start `graphical-session.target` (Xfce, i3) need `WantedBy=default.target` and a `DISPLAY` environment variable on the service, otherwise it will not start at boot.
+- For a headless server that only needs terminal, file transfer and port mapping, set `UU_DESKTOP_BACKEND=none`, change `WantedBy` to `default.target`, and run `loginctl enable-linger $USER`; use `uu-virtual-desktop.service` (Xvfb + Xfce) with the virtual-display drop-in when a full desktop is needed.
+
+### System service (control the lock / login screen)
+
+The user service only starts after signing in, so the lock screen and the SDDM greeter cannot be captured. For RustDesk-like behavior (controllable from boot, including the login screen), run `uuremote-server` as a root system service. Verified on Manjaro KDE (X11 + SDDM): connecting works while locked and at the login screen before sign-in.
+
+`/usr/local/bin/uuremote-x11-wrap` picks the X auth cookie of whatever currently owns display `:0` (greeter or user session) before starting the server:
+
+```bash
+#!/usr/bin/env bash
+# uuremote-server system service wrapper: find the X auth file of the current
+# :0 session (greeter or user session) before starting the server.
+# The greeter and the user session each own a /tmp/xauth_* cookie; once the X
+# connection is established, cookie rotation does not drop it, so picking the
+# right file at start is enough.
+set -u
+export DISPLAY=:0
+
+pick=""
+for env_file in /proc/[0-9]*/environ; do
+  auth="$(tr '\0' '\n' < "${env_file}" 2>/dev/null | sed -n 's/^XAUTHORITY=//p')"
+  disp="$(tr '\0' '\n' < "${env_file}" 2>/dev/null | sed -n 's/^DISPLAY=//p')"
+  if [[ "${disp}" == ":0" && -n "${auth}" && -r "${auth}" ]]; then
+    pick="${auth}"
+    break
+  fi
+done
+
+if [[ -z "${pick}" ]]; then
+  pick="$(ls -t /tmp/xauth_* 2>/dev/null | head -1)"
+fi
+
+if [[ -n "${pick}" && -r "${pick}" ]]; then
+  export XAUTHORITY="${pick}"
+  echo "uuremote-x11-wrap: XAUTHORITY=${pick}" >&2
+else
+  echo "uuremote-x11-wrap: no readable X auth file found, capture may fail" >&2
+fi
+
+exec /usr/bin/uuremote-server
+```
+
+`/etc/systemd/system/uuremote.service`:
+
+```ini
+[Unit]
+Description=UU Remote Linux host (system service, root)
+After=display-manager.service
+Wants=display-manager.service
+
+[Service]
+Type=simple
+Environment=RUST_LOG=info
+ExecStart=/usr/local/bin/uuremote-x11-wrap
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Save the two blocks as files, then install:
+
+```bash
+sudo install -Dm755 uuremote-x11-wrap /usr/local/bin/uuremote-x11-wrap
+sudo install -Dm644 uuremote.service /etc/systemd/system/uuremote.service
+# sign in the UU account as root (QR code in the terminal)
+sudo uuremote-server login --no-gui
+sudo systemctl daemon-reload
+sudo systemctl enable --now uuremote.service
+# stop the user service so two hosts do not share one account
+systemctl --user disable --now uuremote-native.service
+```
+
+Notes:
+- A root daemon means a compromised daemon compromises the whole machine — the same trade-off as RustDesk.
+- The wrapper assumes a single display `:0`; adjust it for multi-seat or another display number.
+- Unsupported by upstream; if a release changes X auth handling, the wrapper may need updating.
+
 ## TeamViewer
 
 ![](https://teamviewer.scene7.com/is/image/teamviewergmbh/product-teamviewer-remote-support-banner?fmt=png-alpha&dpr=off)

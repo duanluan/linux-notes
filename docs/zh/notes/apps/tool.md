@@ -1417,6 +1417,114 @@ $ ldconfig -p | grep libxdo
 $ sudo ln -s /usr/lib/libxdo.so.4 /usr/lib/libxdo.so.3
 ```
 
+## uu-remote-linux：非官方 UU 远程 Linux 客户端
+
+网易 UU 远程的非官方 Linux 客户端，被控端和控制端都包含在内：扫码登录后，这台电脑会出现在官方 Mac / Windows / 手机客户端的设备列表里，可以被远程控制；在 Linux 上也能用 `uuremote-viewer` 远控其他 Windows / Mac / Linux 设备（控制端仍标注为实验性），支持桌面、文件传输、终端、端口映射和远程协助。程序用 Rust 编写，不依赖 Wine；没有显示器时还有虚拟桌面方案。
+
+![](https://raw.githubusercontent.com/VallierDev/uu-remote-linux/main/docs/images/main-window.png)
+
+[VallierDev/uu-remote-linux](https://github.com/VallierDev/uu-remote-linux)
+
+```shell
+# 安装（AUR 预编译包，已包含 Wayland 后端）
+paru -S uu-remote-linux-bin
+
+# 启动被控端服务并随图形会话自启
+systemctl --user enable --now uuremote-native.service
+
+# 打开被控端主窗口扫码登录，或在终端里扫码
+uuremote-server show
+uuremote-server login --no-gui
+
+# 打开 Linux 控制端，远控其他设备
+uuremote-viewer ui
+
+# 排查问题，输出只有会话、后端、插件、权限和编码器状态，不含账号和令牌，可以直接贴到 issue 里
+uuremote-server doctor
+```
+
+安装后开始菜单有两个入口：`UU 远程 Linux 主机`（被控端）和 `UU 远程 Linux 控制端`（控制端）。
+
+注意事项：
+- X11 下功能完整；GNOME / KDE 的 Wayland 走 xdg-desktop-portal，属于实验性支持，分辨率固定，首次连接需要在本机确认屏幕共享。
+- Xfce、i3 等不启动 `graphical-session.target` 的桌面，把服务的 `WantedBy` 改成 `default.target`，并补上 `DISPLAY` 环境变量，否则开机不会自启。
+- 无头服务器只要终端、文件传输和端口映射时，在服务里设 `UU_DESKTOP_BACKEND=none`，把 `WantedBy` 改成 `default.target`，并执行 `loginctl enable-linger $USER`；需要完整桌面时用 `uu-virtual-desktop.service`（Xvfb + Xfce）配合虚拟桌面 drop-in。
+
+### 系统级服务（登录界面也能远程）
+
+用户级服务只在登录进桌面后启动，锁屏和 SDDM 登录界面都抓不到画面。要像 RustDesk 那样开机就能连、登录界面也能控，改成 root 系统服务。Manjaro KDE（X11 + SDDM）实测锁屏和未登录的登录界面都能连。
+
+`/usr/local/bin/uuremote-x11-wrap`，启动前自动找 `:0` 当前会话的 xauth cookie（登录界面和用户会话各有一份）：
+
+```bash
+#!/usr/bin/env bash
+# uuremote-server 系统服务包装脚本：启动前找当前 :0 会话（登录界面或用户会话）的 X 鉴权文件。
+# 登录界面和用户会话各有一份 /tmp/xauth_* cookie；X 连接建立后 cookie 轮换不会断连，
+# 所以启动时选对文件就够了。
+set -u
+export DISPLAY=:0
+
+pick=""
+for env_file in /proc/[0-9]*/environ; do
+  auth="$(tr '\0' '\n' < "${env_file}" 2>/dev/null | sed -n 's/^XAUTHORITY=//p')"
+  disp="$(tr '\0' '\n' < "${env_file}" 2>/dev/null | sed -n 's/^DISPLAY=//p')"
+  if [[ "${disp}" == ":0" && -n "${auth}" && -r "${auth}" ]]; then
+    pick="${auth}"
+    break
+  fi
+done
+
+if [[ -z "${pick}" ]]; then
+  pick="$(ls -t /tmp/xauth_* 2>/dev/null | head -1)"
+fi
+
+if [[ -n "${pick}" && -r "${pick}" ]]; then
+  export XAUTHORITY="${pick}"
+  echo "uuremote-x11-wrap: XAUTHORITY=${pick}" >&2
+else
+  echo "uuremote-x11-wrap: no readable X auth file found, capture may fail" >&2
+fi
+
+exec /usr/bin/uuremote-server
+```
+
+`/etc/systemd/system/uuremote.service`：
+
+```ini
+[Unit]
+Description=UU Remote Linux host (system service, root)
+After=display-manager.service
+Wants=display-manager.service
+
+[Service]
+Type=simple
+Environment=RUST_LOG=info
+ExecStart=/usr/local/bin/uuremote-x11-wrap
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+
+把两段内容分别保存成文件后安装：
+
+```bash
+sudo install -Dm755 uuremote-x11-wrap /usr/local/bin/uuremote-x11-wrap
+sudo install -Dm644 uuremote.service /etc/systemd/system/uuremote.service
+# 以 root 身份扫码登录 UU 账号
+sudo uuremote-server login --no-gui
+sudo systemctl daemon-reload
+sudo systemctl enable --now uuremote.service
+# 停掉用户级服务，避免同一个账号跑两个被控端
+systemctl --user disable --now uuremote-native.service
+```
+
+注意：
+- root 服务一旦被攻破等于整机失守，和 RustDesk 一样的代价。
+- 包装脚本只处理单屏 `:0`，多屏或别的 display 编号要自己改。
+- 上游不支持这种用法，升级改了 X 鉴权方式时脚本要跟着改。
+
 ## TeamViewer
 
 ![](https://teamviewer.scene7.com/is/image/teamviewergmbh/product-teamviewer-remote-support-banner?fmt=png-alpha&dpr=off)
