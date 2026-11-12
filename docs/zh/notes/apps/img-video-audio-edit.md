@@ -175,3 +175,15 @@ Aseprite 是一款用于创建和动画化像素艺术及精灵的软件。它�
 ```shell
 paru -S aseprite
 ```
+
+## Axure RP 10
+
+Axure RP 是网站和应用的原型设计工具，用来画线框图、做交互原型、输出规格文档。
+
+[Axure RP 10 版本历史](https://www.axure.com/release-history/rp10)
+
+```shell
+paru -S axure-rp-10-wine
+```
+
+这是 Windows 版打包后在 Wine 下运行。

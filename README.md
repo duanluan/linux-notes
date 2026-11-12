@@ -46,7 +46,7 @@ The notes favor commands that can be copied directly, plus short explanations fo
 * **Input methods**: oh-my-rime / Rime Ice / Wanxiang Pinyin and models
 * **Terminal and productivity**: tmux / Nushell / fzf / zoxide
 * **Wine ecosystem**: deepin-wine8/10-stable + spark-dwine-helper
-* **Fonts and browsers**: Fonts / Microsoft Edge / Google Chrome / Tor Browser
+* **Fonts and browsers**: Fonts / Microsoft Edge / Google Chrome / Thorium / Tor Browser
 
 #### 🔧 [Tools and Productivity](docs/notes/apps/tool.md)
 * **Networking and proxy**: FlClash / Clash Verge / Clash Party / Stelliberty / Clash Mi / Koala Clash / Brook / proxychains / EasyTier / cpolar / ngrok
@@ -66,7 +66,7 @@ The notes favor commands that can be copied directly, plus short explanations fo
 * **Data and analytics**: Superset
 
 #### 👨‍💻 [Full-Stack Development Environment](docs/notes/apps/development.md)
-* **General tools**: Git (SSH keys / identity / useful defaults) / `act` for local GitHub Actions runs / Rebased
+* **General tools**: Git (SSH keys / identity / useful defaults) / GitHub CLI / `act` for local GitHub Actions runs / Rebased
 * **Frontend and mobile**: mise + Node.js + pnpm + nrm / FVM + Flutter Mirrors + Dart / Android Studio / Visual Studio Code / WeChat Dev Tools
 * **JetBrains tools**: Toolbox App / IntelliJ IDEA / WebStorm / PyCharm
 * **Backend and system-level tooling**: JDK / Maven and Maven Daemon / Gradle / Apache JMeter / Python + pipx + cnpip + Miniforge + uv / Rust + Cargo Mirrors
@@ -75,7 +75,7 @@ The notes favor commands that can be copied directly, plus short explanations fo
 * **Design collaboration**: MasterGo
 
 #### 🎨 [Image, Video, and Audio Editing](docs/notes/apps/img-video-audio-edit.md)
-* **Image and design**: GIMP + PhotoGIMP / Paint.NET / Krita / Blender / Figma Linux / Aseprite
+* **Image and design**: GIMP + PhotoGIMP / Paint.NET / Krita / Blender / Figma Linux / Aseprite / Axure RP 10
 * **Video post-production**: DaVinci Resolve Studio / Kdenlive / HandBrake
 * **Audio editing**: Audacity
 

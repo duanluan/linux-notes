@@ -27,6 +27,20 @@ git config --global core.autocrlf input
 git config --global core.fileMode false
 ```
 
+## GitHub CLI
+
+`gh` is GitHub's official command line tool: handle repositories, pull requests, issues, releases, and Actions without leaving the terminal.
+
+```shell
+sudo pacman -S github-cli
+```
+
+Log in once before the first use:
+
+```shell
+gh auth login
+```
+
 ## act
 
 Run GitHub Actions locally.

@@ -27,6 +27,20 @@ git config --global core.autocrlf input
 git config --global core.fileMode false
 ```
 
+## GitHub CLI
+
+`gh` 是 GitHub 官方命令行工具，在终端里操作仓库、Pull Request、Issue、Release 和 Actions。
+
+```shell
+sudo pacman -S github-cli
+```
+
+首次使用先登录：
+
+```shell
+gh auth login
+```
+
 ## act
 
 本地运行 GitHub Actions。

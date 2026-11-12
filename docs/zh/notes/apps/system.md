@@ -420,6 +420,34 @@ patch:
   punctuator/digit_separators: ""
 ```
 
+## ⌨️ WowType 输入法（fcitx5）
+
+[WowType](https://github.com/Gloridust/WowType) 是微信输入法风格的拼音输入法，以 fcitx5 插件的形式运行，词库和语言模型都打包在安装包里。上游 `install.sh` 在 Manjaro 上会退出（Manjaro 用自己的软件源），要求在本机打包，所以改用 AUR：
+
+```shell
+paru -S wowtype-bin
+```
+
+这个包安装的是 Ubuntu 24.04 的预编译包。如果打包停在 `Unicode-3.0.txt` 哈希校验失败，是 paru 下载这个文件时被截断了（只有 1063 字节，完整文件 1995 字节）。手动下载后重新打包：
+
+```shell
+rm ~/.cache/paru/clone/wowtype-bin/Unicode-3.0.txt
+curl -fsSL -o ~/.cache/paru/clone/wowtype-bin/Unicode-3.0.txt https://www.unicode.org/license.txt
+paru -S wowtype-bin
+```
+
+包只安装插件，不会把 WowType 加进 fcitx5 的输入法列表，装完手动执行一次（fcitx5 在运行时会自动重启）：
+
+```shell
+wowtype-config --add-to-group --restart
+```
+
+设置界面在应用菜单的“WowType 设置”，也可以运行 `wowtype-config`。设置界面需要 `python-gobject`、`gtk4`、`libadwaita`，这三个在包里只是可选依赖。如果某次系统更新后预编译插件加载失败，改用源码包，源码包会用本机的 fcitx5 编译：
+
+```shell
+paru -S wowtype
+```
+
 ## 🔤 字体
 
 - [LXGW WenKai / 霞鹜文楷](https://github.com/lxgw/LxgwWenKai)
@@ -703,6 +731,16 @@ paru -S microsoft-edge-stable-bin
 
 ```shell
 paru -S google-chrome
+```
+
+## ⚡ Thorium
+
+Thorium 是基于 Chromium 的浏览器，在代码库上打了大量性能优化补丁，主打渲染速度和能效。
+
+[Releases · Alex313031/Thorium](https://github.com/Alex313031/Thorium)
+
+```shell
+paru -S thorium-browser-bin
 ```
 
 ## 🧅 Tor Browser

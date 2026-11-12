@@ -178,3 +178,15 @@ Aseprite is a pixel-art and sprite animation tool. It includes layers, frames, t
 ```shell
 paru -S aseprite
 ```
+
+## Axure RP 10
+
+Axure RP is a prototyping tool for web and app design: wireframes, interactive prototypes, and specification documents.
+
+[Axure RP 10 Release History](https://www.axure.com/release-history/rp10)
+
+```shell
+paru -S axure-rp-10-wine
+```
+
+This is the Windows build packaged to run under Wine.

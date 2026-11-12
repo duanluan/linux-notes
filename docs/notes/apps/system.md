@@ -424,6 +424,34 @@ patch:
   punctuator/digit_separators: ""
 ```
 
+## WowType Input Method (fcitx5)
+
+[WowType](https://github.com/Gloridust/WowType) is a WeType-style pinyin input method that runs as an fcitx5 addon, with a bundled dictionary and language model. Its `install.sh` refuses to run on Manjaro (Manjaro keeps its own repositories) and asks for a local build, so install the AUR package instead:
+
+```shell
+paru -S wowtype-bin
+```
+
+This package installs the prebuilt Ubuntu 24.04 build. If the build stops with a hash mismatch for `Unicode-3.0.txt`, paru's download was cut short (about 1 KB instead of 1995 bytes). Download the file by hand, then build again:
+
+```shell
+rm ~/.cache/paru/clone/wowtype-bin/Unicode-3.0.txt
+curl -fsSL -o ~/.cache/paru/clone/wowtype-bin/Unicode-3.0.txt https://www.unicode.org/license.txt
+paru -S wowtype-bin
+```
+
+The package installs the addon but does not add it to the fcitx5 input method list; do that once after installation (a running fcitx5 is restarted automatically):
+
+```shell
+wowtype-config --add-to-group --restart
+```
+
+The settings window is **WowType Settings** in the application menu, or run `wowtype-config`. It needs `python-gobject`, `gtk4`, and `libadwaita`, which the package only lists as optional dependencies. If the prebuilt addon stops loading after a system update, use the source package, which compiles against the local fcitx5:
+
+```shell
+paru -S wowtype
+```
+
 ## Fonts
 
 - [LXGW WenKai](https://github.com/lxgw/LxgwWenKai)
@@ -708,6 +736,16 @@ Search for `Default Applications` in the launcher if you want to change the defa
 
 ```shell
 paru -S google-chrome
+```
+
+## Thorium
+
+Thorium is a Chromium-based browser with a large set of performance patches applied to the codebase, focused on rendering speed and efficiency.
+
+[Releases · Alex313031/Thorium](https://github.com/Alex313031/Thorium)
+
+```shell
+paru -S thorium-browser-bin
 ```
 
 ## Tor Browser

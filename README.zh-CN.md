@@ -46,7 +46,7 @@
 * **输入法方案**：oh-my-rime / 雾凇拼音 / 万象拼音和模型
 * **终端与效率**：Tmux / Nushell / fzf / zoxide
 * **Wine 生态**：deepin-wine8/10-stable + spark-dwine-helper
-* **字体 & 浏览器**：字体 / Microsoft Edge / Google Chrome / Tor Browser
+* **字体 & 浏览器**：字体 / Microsoft Edge / Google Chrome / Thorium / Tor Browser
 
 #### 🔧 [工具与生产力](docs/zh/notes/apps/tool.md)
 * **网络与代理**：FlClash / Clash Verge / Clash Party / Stelliberty / Clash Mi / Koala Clash / Brook / proxychains / EasyTier / cpolar / ngrok
@@ -66,7 +66,7 @@
 * **数据分析**：Superset
 
 #### 👨‍💻 [全栈开发环境](docs/zh/notes/apps/development.md)
-* **通用**：Git（SSH Key / 用户信息 / 常用配置）/ act（本地跑 GitHub Actions）/ Rebased
+* **通用**：Git（SSH Key / 用户信息 / 常用配置）/ GitHub CLI / act（本地跑 GitHub Actions）/ Rebased
 * **前端与移动端**：mise + Node.js + pnpm + nrm / FVM + Flutter 换源 + Dart / Android Studio / Visual Studio Code / 微信开发者工具
 * **JetBrains 系**：Toolbox App / IntelliJ IDEA / WebStorm / PyCharm
 * **后端与系统级**：JDK / Maven (Daemon) / Gradle / Apache JMeter / Python + pipx + cnpip 切换最快 pip 镜像源 + Miniforge + uv / Rust + Cargo 换源
@@ -75,7 +75,7 @@
 * **设计协作**：MasterGo
 
 #### 🎨 [图影音编辑](docs/zh/notes/apps/img-video-audio-edit.md)
-* **图像/设计**：GIMP + PhotoGIMP / Paint.NET / Krita / Blender / Figma Linux / Aseprite
+* **图像/设计**：GIMP + PhotoGIMP / Paint.NET / Krita / Blender / Figma Linux / Aseprite / Axure RP 10
 * **视频后期**：DaVinci Resolve Studio / Kdenlive / HandBrake
 * **音频处理**：Audacity
 
